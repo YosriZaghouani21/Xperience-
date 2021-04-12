@@ -9,10 +9,10 @@ import "./Assets/plugins/nucleo/css/nucleo.css";
 import "./Assets/css/argon-dashboard-react.css";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById("root")
 );
