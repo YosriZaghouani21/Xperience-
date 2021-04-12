@@ -21,10 +21,18 @@ import ExperiencesList from "./Component/createdExperience/ExperiencesList";
 import CreatedExperienceListAd from "./Component/Admin/CreatedExperienceListAd";
 import Home from "./Component/Home";
 
+// optional configuration
+const options = {
+  // you can also just use 'bottom center'
+  position: positions.BOTTOM_CENTER,
+  timeout: 5000,
+  offset: "30px",
+};
+
 function App() {
   return (
     <BrowserRouter>
-      <AlertProvider template={AlertTemplate}>
+      <AlertProvider template={AlertTemplate} {...options}>
         <Route exact path="/" component={Home} />
 
         <Route exact path="/register" component={Signup} />
@@ -33,14 +41,14 @@ function App() {
         {/* <Route exact path="/admin" component={Admin} /> */}
         <Route exact path="/preferences" component={Preferences} />
         <Route exact path="/first" component={FirstStep} />
-        <Route path="/first/:id" component={FirstStep2} />
-        <Route path="/second/:id" component={SecondStep} />
-        <Route path="/third/:id" component={ThirdStep} />
-        <Route path="/fourth/:id" component={FourthStep} />
-        <Route path="/fifth/:id" component={FifthStep} />
-        <Route path="/experience/:id" component={ExperienceDetails} />
-        <Route path="/experiences" component={ExperiencesList} exact />
-        <Route path="/admin" component={CreatedExperienceListAd} />
+        <Route exact path="/first/:id" component={FirstStep2} />
+        <Route exact path="/second/:id" component={SecondStep} />
+        <Route exact path="/third/:id" component={ThirdStep} />
+        <Route exact path="/fourth/:id" component={FourthStep} />
+        <Route exact path="/fifth/:id" component={FifthStep} />
+        <Route exact path="/experience/:id" component={ExperienceDetails} />
+        <Route exact path="/experiences" component={ExperiencesList} />
+        <Route exact path="/admin" component={CreatedExperienceListAd} />
       </AlertProvider>
     </BrowserRouter>
   );

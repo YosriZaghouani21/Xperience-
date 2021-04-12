@@ -83,7 +83,6 @@ const Profile = () => {
     }
     return age;
   }
-
   return (
     <div className="main-content">
       {loading ? (
@@ -92,7 +91,6 @@ const Profile = () => {
         <Redirect to="/login" />
       ) : (
         <div className="header bg-white py-7 py-lg-6">
-          <AuthNavbar />
           <Container fluid className="mt-6">
             <Row>
               <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
@@ -100,7 +98,7 @@ const Profile = () => {
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
-                        <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                        <a href="#pablo">
                           <img
                             alt="..."
                             className="rounded-circle"
@@ -113,18 +111,7 @@ const Profile = () => {
                       </div>
                     </Col>
                   </Row>
-                  {/* <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-              <div className="d-flex justify-content-between">
-                <Link
-                  to="/"
-                  className="float-right btn"
-                  color="danger"
-                  size="sm"
-                >
-                  Logout
-                </Link>
-              </div>
-            </CardHeader> */}
+
                   <CardBody className="mt-8 pt-md-4">
                     <Row>
                       <div className="col"></div>
@@ -132,6 +119,7 @@ const Profile = () => {
                     <div className="text-center">
                       <h3>{name}</h3>
                       <span className="font-weight-light">
+                        <strong>Age :</strong>
                         {user ? (
                           user.birthday ? (
                             getAge(birthday)

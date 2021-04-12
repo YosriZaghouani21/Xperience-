@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getExperiences } from "../../JS/actions/index";
+import { getExperiences, getProfile } from "../../JS/actions/index";
 import Loader from "../layout/Loader";
 import ExperienceModel from "./ExperienceModel";
 import { Container, Col, Row, Button } from "reactstrap";
@@ -12,7 +12,7 @@ const ExperiencesList = () => {
   const experiences = useSelector(
     (state) => state.experiencesReducers.experiences
   );
-
+  const user = useSelector((state) => state.userReducer.user);
   const isLoading = useSelector((state) => state.experiencesReducers.isLoading);
   const error = useSelector((state) => state.experiences);
   useEffect(() => {
@@ -20,11 +20,12 @@ const ExperiencesList = () => {
       console.log(error);
     }
     dispatch(getExperiences());
+    dispatch(getProfile());
   }, [dispatch, error]);
 
   return isLoading ? (
     <Loader />
-  ) : experiences ? (
+  ) : experiences && user ? (
     <>
       <AuthNavbar />
       <Container fluid>
@@ -111,12 +112,16 @@ const ExperiencesList = () => {
           >
             <div style={{ backgroundColor: "#f8f9fe" }}>
               {experiences &&
-                experiences.map((experience) => (
-                  <ExperienceModel
-                    key={experience._id}
-                    experience={experience}
-                  />
-                ))}
+                experiences.map((experience) =>
+                  experience.userID === user._id ? (
+                    <ExperienceModel
+                      key={experience._id}
+                      experience={experience}
+                    />
+                  ) : (
+                    <p></p>
+                  )
+                )}
             </div>
           </div>
         </div>
