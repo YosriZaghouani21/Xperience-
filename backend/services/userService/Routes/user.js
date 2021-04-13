@@ -52,7 +52,7 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({ storage, fileFilter });
 
-router.route("/profile/:id").post(upload.single("photo"), (req, res) => {
+router.route("/add").put(upload.single("photo"), (req, res) => {
   const photo = req.file.filename;
 
   const newUserData = {

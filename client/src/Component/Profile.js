@@ -63,6 +63,7 @@ const Profile = () => {
         aboutMe,
         postalCode,
         adress,
+        photo,
       })
     );
     setEditDone(true);
@@ -75,7 +76,7 @@ const Profile = () => {
     formData.append("photo", user.photo);
 
     axios
-      .post("http://localhost:5000/profile/:id", formData)
+      .put(`http://localhost:5000/profile/${user._id}`, formData)
       .then((res) => {
         console.log(res);
       })
@@ -119,16 +120,11 @@ const Profile = () => {
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
-                        <a href="#pablo">
-                          <img
-                            alt="..."
-                            className="rounded-circle"
-                            src={
-                              require(".././Assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
-                          />
-                        </a>
+                        <img
+                          className="rounded-circle"
+                          src={user.photo}
+                          alt="images"
+                        />
                       </div>
                     </Col>
                   </Row>
@@ -355,7 +351,22 @@ const Profile = () => {
                               onChange={(e) => setAboutme(e.target.value)}
                             />
                           </FormGroup>
+                          {/* //////////////////////////////////// */}
+                          <FormGroup
+                            onSubmit={handleSubmit1}
+                            encType="multipart/form-data"
+                          >
+                            <input
+                              type="file"
+                              accept=".png, .jpg, .jpeg"
+                              name="photo"
+                              onChange={handlePhoto}
+                              onChange={(e) => setphoto(e.target.value)}
+                            />
+                          </FormGroup>
+                          {/* //////////////////////////////////// */}
                           <Button
+                            type="submit"
                             variant="info"
                             style={{ marginLeft: "85%" }}
                             onClick={(e) => {
@@ -368,20 +379,6 @@ const Profile = () => {
                           </Button>
                         </div>
                       </Form>
-                      {/* //////////////////////////////////// */}
-                      <form
-                        onSubmit={handleSubmit1}
-                        encType="multipart/form-data"
-                      >
-                        <input
-                          type="file"
-                          accept=".png, .jpg, .jpeg"
-                          name="photo"
-                          onChange={handlePhoto}
-                        />
-                        <input type="submit" />
-                      </form>
-                      {/* //////////////////////////////////// */}
                     </CardBody>
                   ) : (
                     <CardBody>
