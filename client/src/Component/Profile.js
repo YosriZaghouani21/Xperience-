@@ -5,6 +5,7 @@ import { Link, Redirect } from "react-router-dom";
 import { getProfile, logout, updateProfile } from "../JS/actions";
 import { useAlert } from "react-alert";
 import FileUpload from "./FileUpload";
+import axios from "axios";
 import {
   Container,
   Card,
@@ -17,8 +18,6 @@ import {
   Col,
 } from "reactstrap";
 import Loader from "./layout/Loader";
-import AuthNavbar from "./layout/AuthNavbar";
-import UpdateAlert from "./layout/UpdateAlert";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -33,6 +32,7 @@ const Profile = () => {
   const [adress, setAdress] = useState("");
   const [aboutMe, setAboutme] = useState("");
   const [postalCode, setPostalcode] = useState("");
+  const [photo, setphoto] = useState("");
 
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [editDone, setEditDone] = useState(false);
@@ -47,6 +47,7 @@ const Profile = () => {
       setAboutme(user.aboutMe);
       setAdress(user.adress);
       setPostalcode(user.postalCode);
+      setphoto(user.photo);
     }
   }, [user]);
   const handleSubmit = (e) => {
@@ -65,6 +66,26 @@ const Profile = () => {
       })
     );
     setEditDone(true);
+  };
+
+  //////////////////////////////////////////
+  const handleSubmit1 = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("photo", user.photo);
+
+    axios
+      .post("http://localhost:5000/profile/:id", formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handlePhoto = (e) => {
+    setphoto({ ...user, photo: e.target.files[0] });
   };
 
   useEffect(() => {
@@ -347,6 +368,20 @@ const Profile = () => {
                           </Button>
                         </div>
                       </Form>
+                      {/* //////////////////////////////////// */}
+                      <form
+                        onSubmit={handleSubmit1}
+                        encType="multipart/form-data"
+                      >
+                        <input
+                          type="file"
+                          accept=".png, .jpg, .jpeg"
+                          name="photo"
+                          onChange={handlePhoto}
+                        />
+                        <input type="submit" />
+                      </form>
+                      {/* //////////////////////////////////// */}
                     </CardBody>
                   ) : (
                     <CardBody>

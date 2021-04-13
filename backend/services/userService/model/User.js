@@ -33,6 +33,9 @@ const userSchema = mongoose.Schema({
   aboutMe: {
     type: String,
   },
+  photo: {
+    type: String,
+  },
   myPreferences: [
     {
       type: ObjectId,

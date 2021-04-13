@@ -91,10 +91,10 @@ const AuthNavbar = () => {
                       </Media>
                     </DropdownToggle>
                     <DropdownMenu className="dropdown-menu-arrow" right>
-                      {/* <DropdownItem to="/profile" tag={Link}>
+                      <DropdownItem to="/profile" tag={Link}>
                         <i className="ni ni-single-02" />
                         <span>Mon profile</span>
-                      </DropdownItem> */}
+                      </DropdownItem>
                       <DropdownItem to="/experiences" tag={Link}>
                         <i className="ni ni-settings-gear-65" />
                         <span>Gérer les expériences</span>

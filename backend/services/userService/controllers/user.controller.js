@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const Preferences = require("../model/Preferences");
 const secretOrkey = config.get("secretOrkey");
+const multer = require("multer");
 
 //Register User
 exports.register = async (req, res) => {
@@ -99,35 +100,6 @@ exports.updateUser = async (req, res) => {
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
-
-  // // after the basic validation, now check the data from the database
-  // try {
-  //     const userEmail = await User.findOne({ email });
-  //     if (!_.isEmpty(userEmail)) {
-  //         return res.status(401).json({
-  //             status: "error",
-  //             message: "Email already in use"
-  //         });
-  //     }
-
-  //     const userNameExist = await User.findOne({ name });
-  //     if (!_.isEmpty(userNameExist)) {
-  //         return res.status(401).json({
-  //             status: "error",
-  //             message: "Username is already taken."
-  //         })
-  //     }
-
-  //     // update the database
-  //     await User.updateOne({ _id: req.params.id } , { req.body});
-  //     res.status(201).json({
-  //         status: "ok",
-  //         message: "Fields updated successfully!",
-  //     })
-  // } catch (e) {
-  //     console.log(e)
-  // }
-  // }
 };
 
 //Handle user roles
@@ -179,16 +151,6 @@ exports.addPreferences = async (req, res) => {
     res.status(500).json({ errors: error });
   }
 };
-
-// exports.seeMyPreferences = async (req, res) => {
-//   try {
-//     const preferences = await Themes.find();
-//     res.send(preferences);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ errors: error.message });
-//   }
-// };
 
 //Add Preferences to a User (Themes)
 exports.addMyPreferences = async (req, res) => {
