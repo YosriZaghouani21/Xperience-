@@ -25,9 +25,6 @@ import { Redirect } from "react-router-dom";
 
 const AuthNavbar = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.userReducer.isAuth);
-  const user = useSelector((state) => state.userReducer.user);
-  const loading = useSelector((state) => state.userReducer.loading);
 
   return (
     <>
@@ -50,15 +47,12 @@ const AuthNavbar = () => {
             <div className="navbar-collapse-header d-md-none">
               <Row>
                 <Col className="collapse-brand" xs="6">
-                  <Link to="/">
-                    <img
-                      alt="..."
-                      src={
-                        require("../../Assets/img/brand/argon-react.png")
-                          .default
-                      }
-                    />
-                  </Link>
+                  <img
+                    alt="..."
+                    src={
+                      require("../../Assets/img/brand/argon-react.png").default
+                    }
+                  />
                 </Col>
                 <Col className="collapse-close" xs="6">
                   <button className="navbar-toggler" id="navbar-collapse-main">
@@ -91,10 +85,10 @@ const AuthNavbar = () => {
                       </Media>
                     </DropdownToggle>
                     <DropdownMenu className="dropdown-menu-arrow" right>
-                      {/* <DropdownItem to="/profile" tag={Link}>
+                      <DropdownItem to="/profile" tag={Link}>
                         <i className="ni ni-single-02" />
                         <span>Mon profile</span>
-                      </DropdownItem> */}
+                      </DropdownItem>
                       <DropdownItem to="/experiences" tag={Link}>
                         <i className="ni ni-settings-gear-65" />
                         <span>Gérer les expériences</span>
@@ -109,13 +103,13 @@ const AuthNavbar = () => {
                       </DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem
-                        to="/"
                         tag={Link}
                         href="#pablo"
                         onClick={(e) => {
                           e.preventDefault();
                           dispatch(logout());
                         }}
+                        to="/login"
                       >
                         <i className="ni ni-user-run" />
                         <span>Logout</span>

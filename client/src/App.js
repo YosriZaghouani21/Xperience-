@@ -1,9 +1,15 @@
-import { BrowserRouter, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom";
 import Profile from "./Component/Profile";
 import Signin from "./Component/Signin";
 import Signup from "./Component/signup";
 import Admin from "./Component/Admin";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { useSelector } from "react-redux";
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
@@ -31,26 +37,32 @@ const options = {
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <AlertProvider template={AlertTemplate} {...options}>
-        <Route exact path="/" component={Home} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/register" component={Signup} />
+          <Route path="/login" component={Signin} />
 
-        <Route exact path="/register" component={Signup} />
-        <Route exact path="/login" component={Signin} />
-        <Route exact path="/profile" component={Profile} />
-        {/* <Route exact path="/admin" component={Admin} /> */}
-        <Route exact path="/preferences" component={Preferences} />
-        <Route exact path="/first" component={FirstStep} />
-        <Route exact path="/first/:id" component={FirstStep2} />
-        <Route exact path="/second/:id" component={SecondStep} />
-        <Route exact path="/third/:id" component={ThirdStep} />
-        <Route exact path="/fourth/:id" component={FourthStep} />
-        <Route exact path="/fifth/:id" component={FifthStep} />
-        <Route exact path="/experience/:id" component={ExperienceDetails} />
-        <Route exact path="/experiences" component={ExperiencesList} />
-        <Route exact path="/admin" component={CreatedExperienceListAd} />
+          <Route path="/profile" component={Profile} />
+          {/* <Route path="/admin" component={Admin} /> */}
+          <Route path="/preferences" component={Preferences} />
+          <Route path="/create" component={FirstStep} />
+          <Route path="/first/:id" component={FirstStep2} />
+          <Route path="/second/:id" component={SecondStep} />
+          <Route path="/third/:id" component={ThirdStep} />
+          <Route path="/fourth/:id" component={FourthStep} />
+          <Route path="/fifth/:id" component={FifthStep} />
+          <Route path="/experience/:id" component={ExperienceDetails} />
+          <Route path="/experiences" component={ExperiencesList} />
+          {localStorage.getItem("token") ? (
+            <Route path="/admin" component={CreatedExperienceListAd} />
+          ) : (
+            <Redirect to="/login" />
+          )}
+        </Switch>
       </AlertProvider>
-    </BrowserRouter>
+    </Router>
   );
 }
 

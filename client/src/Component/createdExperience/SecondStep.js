@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import {
   Button,
@@ -82,7 +82,7 @@ const SecondStep = ({
     }
   }, [experience]);
 
-  return isLoading ? (
+  return localStorage.getItem("token") && isLoading ? (
     <Loader />
   ) : experience ? (
     <>
@@ -420,7 +420,7 @@ const SecondStep = ({
       </div>
     </>
   ) : (
-    <p></p>
+    <Redirect to="/login" />
   );
 };
 

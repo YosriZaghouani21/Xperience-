@@ -9,6 +9,6 @@ router
   .put(experienceController.updateExperience)
   .get(experienceController.getSingleExperience);
 
-router.route("/experience/:id").post(experienceController.createExperience);
+router.route("/experience").post(experienceController.createExperience);
 
 module.exports = router;

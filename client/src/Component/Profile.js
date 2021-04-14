@@ -87,10 +87,9 @@ const Profile = () => {
     <div className="main-content">
       {loading ? (
         <Loader />
-      ) : !isAuth ? (
-        <Redirect to="/login" />
-      ) : (
+      ) : localStorage.getItem("token") ? (
         <div className="header bg-white py-7 py-lg-6">
+          <AuthNavbar />
           <Container fluid className="mt-6">
             <Row>
               <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
@@ -119,16 +118,18 @@ const Profile = () => {
                     <div className="text-center">
                       <h3>{name}</h3>
                       <span className="font-weight-light">
-                        <strong>Age :</strong>
-                        {user ? (
-                          user.birthday ? (
-                            getAge(birthday)
+                        <strong>Age</strong> <br />
+                        <strong>
+                          {user ? (
+                            user.birthday ? (
+                              getAge(birthday)
+                            ) : (
+                              <p></p>
+                            )
                           ) : (
                             <p></p>
-                          )
-                        ) : (
-                          <p></p>
-                        )}
+                          )}
+                        </strong>
                       </span>
                       <div className="h5 font-weight-300">
                         <i className="ni location_pin mr-2" />
@@ -535,6 +536,8 @@ const Profile = () => {
             </Row>
           </Container>
         </div>
+      ) : (
+        <Redirect to="/login" />
       )}
     </div>
   );

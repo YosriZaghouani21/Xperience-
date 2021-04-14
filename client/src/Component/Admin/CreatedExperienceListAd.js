@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getExperiences } from "../../JS/actions/index";
+import { getExperiences, getProfile } from "../../JS/actions/index";
 import CreatedExperienceAd from "./CreatedExperienceAd";
 import Loader from "../layout/Loader";
 import { useAlert } from "react-alert";
@@ -14,26 +14,28 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { Redirect } from "react-router";
 const CreatedExperienceListAd = () => {
   const alert = useAlert();
-
   const dispatch = useDispatch();
   const experiences = useSelector(
     (state) => state.experiencesReducers.experiences
   );
-
   const isLoading = useSelector((state) => state.experiencesReducers.isLoading);
   const error = useSelector((state) => state.experiences);
+  const user = useSelector((state) => state.userReducer.user);
+  const loading = useSelector((state) => state.userReducer.loading);
 
   useEffect(() => {
     if (error) {
       return alert.error(error);
     }
     dispatch(getExperiences());
+    dispatch(getProfile());
   }, [dispatch, alert, error]);
-  return isLoading ? (
+  return isLoading && loading ? (
     <Loader />
-  ) : (
+  ) : user && user.role === "admin" ? (
     <>
       <Container fluid>
         <Row className="mt-5">
@@ -73,6 +75,8 @@ const CreatedExperienceListAd = () => {
         </Row>
       </Container>
     </>
+  ) : (
+    <p>404 not found</p>
   );
 };
 

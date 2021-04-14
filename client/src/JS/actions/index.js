@@ -185,7 +185,7 @@ export const addExperience = (newExperience) => async (dispatch) => {
     type: ADD_EXPERIENCE,
   });
   try {
-    const addRes = await axios.post("api/experience", newExperience);
+    const addRes = await axios.post(`api/experience`, newExperience);
     dispatch({
       type: ADD_EXPERIENCE_SUCCESS,
       payload: addRes.data,
@@ -208,7 +208,7 @@ export const getExperiences = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: FETCH_ALL_EXPERIENCES_FAIL,
-      payload: error.response.data.message,
+      payload: error.response.data,
     });
   }
 };

@@ -58,7 +58,7 @@ const FirstStep2 = ({
   }, [experience]);
   return isLoading ? (
     <Loader />
-  ) : experience ? (
+  ) : localStorage.getItem("token") && experience ? (
     <>
       <div style={{ backgroundColor: "#f8f9fe" }}>
         <SideBar />
@@ -356,7 +356,7 @@ const FirstStep2 = ({
       </div>
     </>
   ) : (
-    <small></small>
+    <Redirect to="/login" />
   );
 };
 

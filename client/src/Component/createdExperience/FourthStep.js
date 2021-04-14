@@ -21,7 +21,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Loader from "../layout/Loader";
 import {
   deleteExperience,
@@ -92,7 +92,7 @@ const FourthStep = ({
     }
   }, [experience]);
 
-  return isLoading ? (
+  return localStorage.getItem("token") && isLoading ? (
     <Loader />
   ) : experience ? (
     <>
@@ -426,7 +426,7 @@ const FourthStep = ({
       </div>
     </>
   ) : (
-    <p></p>
+    <Redirect to="/login" />
   );
 };
 

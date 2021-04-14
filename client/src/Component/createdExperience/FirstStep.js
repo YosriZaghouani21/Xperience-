@@ -21,6 +21,7 @@ import {
   deleteExperience,
   getExperienceDetails,
   getExperiences,
+  getProfile,
   updateExperience,
 } from "../../JS/actions/index";
 import { Link, Redirect } from "react-router-dom";
@@ -35,12 +36,16 @@ const FirstStep = () => {
     (state) => state.experiencesReducers.experience
   );
   const isLoading = useSelector((state) => state.experiencesReducers.isLoading);
+  const user = useSelector((state) => state.userReducer.user);
+  const loading = useSelector((state) => state.userReducer.loading);
 
   console.log(experience);
   useEffect(() => {
+    dispatch(getProfile());
+
     dispatch(addExperience({ type: { title: type } }));
   }, [dispatch]);
-  return isLoading ? (
+  return localStorage.getItem("token") && isLoading ? (
     <Loader />
   ) : experience ? (
     <>
@@ -295,13 +300,16 @@ const FirstStep = () => {
                   className="btn btn-primary"
                   onClick={() => {
                     console.log(experience);
+                    if (loading === false && user) {
+                      dispatch(
+                        updateExperience(experience.experience._id, {
+                          ...experience,
+                          type: { title: type },
+                          userID: user._id,
+                        })
+                      );
+                    }
 
-                    dispatch(
-                      updateExperience(experience.experience._id, {
-                        ...experience,
-                        type: { title: type },
-                      })
-                    );
                     console.log(experience);
                   }}
                 >
@@ -316,7 +324,7 @@ const FirstStep = () => {
       </div>
     </>
   ) : (
-    <small></small>
+    <p></p>
   );
 };
 

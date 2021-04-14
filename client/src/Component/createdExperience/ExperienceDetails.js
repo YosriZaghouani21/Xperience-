@@ -21,7 +21,7 @@ import {
   ModalFooter,
   Alert,
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Carrousel from "../layout/Carrousel";
 import AuthNavbar from "../layout/AuthNavbar";
 
@@ -47,7 +47,7 @@ const ExperienceDetails = ({
     "🚀 ~ file: ExperienceDetails.js ~ line 38 ~ ExperienceDetails ~ experience.langue",
     experience
   );
-  return isLoading ? (
+  return localStorage.getItem("token") && isLoading ? (
     <Loader />
   ) : experience ? (
     <>
@@ -323,7 +323,7 @@ const ExperienceDetails = ({
       </div>
     </>
   ) : (
-    <small>...</small>
+    <Redirect to="/login" />
   );
 };
 export default ExperienceDetails;

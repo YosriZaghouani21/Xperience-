@@ -42,14 +42,10 @@ exports.login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user)
-      return res
-        .status(404)
-        .json({ msg: `Votre email ou mot de passe est faux ` });
+      return res.status(404).json({ msg: `Email ou mot de passe incorrect` });
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
-      return res
-        .status(401)
-        .json({ msg: `Votre email ou mot de passe est faux` });
+      return res.status(401).json({ msg: `Email ou mot de passe incorrect` });
 
     const payload = {
       id: user._id,

@@ -25,7 +25,7 @@ import {
   ModalFooter,
 } from "reactstrap";
 import SideBar from "../layout/SideBar";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Loader from "../layout/Loader";
 const FifthStep = ({
   match: {
@@ -39,6 +39,7 @@ const FifthStep = ({
   const experience = useSelector(
     (state) => state.experiencesReducers.experience
   );
+
   const [program, setProgram] = useState({});
   const [excludedEq, setExcludedEq] = useState({});
   const [includedEq, setIncludedEq] = useState({});
@@ -58,7 +59,7 @@ const FifthStep = ({
       }
     }
   }, [experience]);
-  return isLoading ? (
+  return localStorage.getItem("token") && isLoading ? (
     <Loader />
   ) : experience ? (
     <>
@@ -532,8 +533,8 @@ const FifthStep = ({
                 </Link>
                 {program !== {} ? (
                   <Link
+                    to="/experiences"
                     className="btn btn-primary"
-                    to={`/experiences`}
                     onClick={() => {
                       dispatch(
                         updateExperience(id, {
@@ -564,7 +565,7 @@ const FifthStep = ({
       </div>
     </>
   ) : (
-    <p></p>
+    <Redirect to="/login" />
   );
 };
 
