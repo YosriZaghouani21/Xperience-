@@ -23,7 +23,6 @@ import Loader from "./layout/Loader";
 
 const Signin = () => {
   const dispatch = useDispatch();
-  const [showError, setShowError] = useState(true);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const loading = useSelector((state) => state.userReducer.loading);
@@ -58,12 +57,6 @@ const Signin = () => {
 
             <CardBody className="px-lg-5 py-lg-5">
               <Form role="form" onSubmit={handleSubmit(onSubmit)}>
-                {showError && error && (
-                  <span className="mr-2 text-sm" style={{ color: "#dd3a4a" }}>
-                    {error.msg}
-                  </span>
-                )}
-
                 <FormGroup className="mb-3">
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
@@ -77,7 +70,6 @@ const Signin = () => {
                       placeholder="Email"
                       onChange={(e) => {
                         setEmail(e.target.value);
-                        setShowError(false);
                       }}
                       invalid={errors["email"]}
                       innerRef={register({
@@ -104,7 +96,6 @@ const Signin = () => {
                       placeholder="Password"
                       onChange={(e) => {
                         setPassword(e.target.value);
-                        setShowError(false);
                       }}
                       invalid={errors["password"]}
                       innerRef={register({
@@ -122,6 +113,11 @@ const Signin = () => {
                       </span>{" "}
                       <br />
                     </>
+                  )}
+                  {error && (
+                    <span className="mr-2 text-sm" style={{ color: "#dd3a4a" }}>
+                      {error.msg}
+                    </span>
                   )}
                 </FormGroup>
 

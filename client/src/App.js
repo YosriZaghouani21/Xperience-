@@ -26,6 +26,7 @@ import ExperienceDetails from "./Component/createdExperience/ExperienceDetails";
 import ExperiencesList from "./Component/createdExperience/ExperiencesList";
 import CreatedExperienceListAd from "./Component/Admin/CreatedExperienceListAd";
 import Home from "./Component/Home";
+import Index from "./Component/Admin/Index";
 
 // optional configuration
 const options = {
@@ -45,7 +46,6 @@ function App() {
           <Route path="/login" component={Signin} />
 
           <Route path="/profile" component={Profile} />
-          {/* <Route path="/admin" component={Admin} /> */}
           <Route path="/preferences" component={Preferences} />
           <Route path="/create" component={FirstStep} />
           <Route path="/first/:id" component={FirstStep2} />
@@ -55,8 +55,9 @@ function App() {
           <Route path="/fifth/:id" component={FifthStep} />
           <Route path="/experience/:id" component={ExperienceDetails} />
           <Route path="/experiences" component={ExperiencesList} />
+
           {localStorage.getItem("token") ? (
-            <Route path="/admin" component={CreatedExperienceListAd} />
+            <Route path="/admin/index" component={Index} />
           ) : (
             <Redirect to="/login" />
           )}

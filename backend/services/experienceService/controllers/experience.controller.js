@@ -231,6 +231,7 @@ const experienceController = {
         isValidated,
         isCreated,
         limitParticipants,
+        userID,
       } = req.body;
       await Experiences.findByIdAndUpdate(
         { _id: req.params.id },
@@ -256,6 +257,7 @@ const experienceController = {
           isValidated,
           isCreated,
           limitParticipants,
+          userID,
         }
       );
       res.json({ msg: "L'expérience a été modifié avec succès" });

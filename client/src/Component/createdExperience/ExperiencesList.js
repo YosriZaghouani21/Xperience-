@@ -115,8 +115,6 @@ const ExperiencesList = () => {
               <div style={{ backgroundColor: "#f8f9fe" }}>
                 {experiences &&
                   experiences.map((experience) =>
-                    loading === false &&
-                    user &&
                     experience.userID === user._id ? (
                       <ExperienceModel
                         key={experience._id}

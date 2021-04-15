@@ -59,7 +59,6 @@ exports.login = async (req, res) => {
   } catch (error) {
     console.log(Error);
     res.status(500).json({ errors: error });
-    p;
   }
 };
 //Update User
@@ -175,18 +174,6 @@ exports.addPreferences = async (req, res) => {
     res.status(500).json({ errors: error });
   }
 };
-
-// exports.seeMyPreferences = async (req, res) => {
-//   try {
-//     const preferences = await Themes.find();
-//     res.send(preferences);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ errors: error.message });
-//   }
-// };
-
-//Add Preferences to a User (Themes)
 exports.addMyPreferences = async (req, res) => {
   const userId = req.params.id;
   const { preferenceId, preferenceName } = req.body;
