@@ -7,23 +7,23 @@ import {
   Row,
   Col,
   Button,
-  Form,
   Progress,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
 } from "reactstrap";
-import SideBar from "../layout/SideBar";
+import Advice from "../layout/Advice";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   addExperience,
   deleteExperience,
-  getExperienceDetails,
   getExperiences,
+  getProfile,
   updateExperience,
 } from "../../JS/actions/index";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loader from "../layout/Loader";
 
 const FirstStep = () => {
@@ -35,26 +35,32 @@ const FirstStep = () => {
     (state) => state.experiencesReducers.experience
   );
   const isLoading = useSelector((state) => state.experiencesReducers.isLoading);
+  const user = useSelector((state) => state.userReducer.user);
+  const loading = useSelector((state) => state.userReducer.loading);
 
   console.log(experience);
   useEffect(() => {
+    dispatch(getProfile());
+
     dispatch(addExperience({ type: { title: type } }));
-  }, [dispatch]);
-  return isLoading ? (
+  }, [dispatch, type]);
+  return localStorage.getItem("token") && isLoading ? (
     <Loader />
   ) : experience ? (
     <>
       <div style={{ backgroundColor: "#f8f9fe" }}>
-        <SideBar />
+        <Advice />
+
         <div className="main-content">
           <Container fluid>
-            <div className="text-center">1 de 4</div>
-            <Progress style={{ height: "21px" }} value="15">
-              20%
-            </Progress>
-
+            <div>
+              <div className="text-center">1 de 4</div>
+              <Progress style={{ height: "21px" }} value="15">
+                20%
+              </Progress>
+            </div>
             <div
-              className="header-body border"
+              className="header-body border-0"
               style={{ padding: "2%", margin: "1%" }}
             >
               <Button
@@ -104,12 +110,12 @@ const FirstStep = () => {
                     <CardBody>
                       <Row>
                         <div className="col">
-                          <CardTitle className="h4 font-weight-bold mb-0 text-muted">
+                          <CardTitle className="h4  mb-0 ">
                             Les personnes participent en ligne à travers Zoom
                           </CardTitle>
                         </div>
                         <Col className="col-auto">
-                          <div className="icon icon-shape bg-info text-white rounded-circle shadow">
+                          <div className="icon icon-shape bg-secondary text-black rounded-circle shadow">
                             <i className="ni ni-laptop" />
                           </div>
                         </Col>
@@ -164,7 +170,7 @@ const FirstStep = () => {
                                 <CardTitle className="mb-0 text-sm">
                                   <span
                                     className="mr-2 font-weight-bold"
-                                    style={{ color: "rgb(17 205 239)" }}
+                                    style={{ color: "rgb(50, 50, 93)" }}
                                   >
                                     De quoi as-tu besoin ?
                                   </span>
@@ -198,12 +204,12 @@ const FirstStep = () => {
                     <CardBody>
                       <Row>
                         <div className="col">
-                          <CardTitle className="h4 font-weight-bold mb-0 text-muted">
+                          <CardTitle className="h4 mb-0">
                             Les personnes participent en présentiel
                           </CardTitle>
                         </div>
                         <Col className="col-auto">
-                          <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                          <div className="icon icon-shape bg-secondary text-black rounded-circle shadow">
                             <i className="fas fa-users" />
                           </div>
                         </Col>
@@ -257,7 +263,7 @@ const FirstStep = () => {
                                 <CardTitle className="mb-0 text-sm">
                                   <span
                                     className="mr-2 font-weight-bold"
-                                    style={{ color: "#ffd600" }}
+                                    style={{ color: "rgb(50, 50, 93)" }}
                                   >
                                     De quoi as-tu besoin ?
                                   </span>
@@ -287,36 +293,39 @@ const FirstStep = () => {
                   </Card>
                 </Col>
               </Row>
-            </div>
-            <div>
-              {experience ? (
-                <Link
-                  to={`/second/${experience.experience._id}`}
-                  className="btn btn-primary"
-                  onClick={() => {
-                    console.log(experience);
+              <div>
+                {experience ? (
+                  <Link
+                    to={`/second/${experience.experience._id}`}
+                    className="btn btn-primary mt-4"
+                    onClick={() => {
+                      console.log(experience);
+                      if (loading === false && user) {
+                        dispatch(
+                          updateExperience(experience.experience._id, {
+                            ...experience,
+                            type: { title: type },
+                            userID: user._id,
+                          })
+                        );
+                      }
 
-                    dispatch(
-                      updateExperience(experience.experience._id, {
-                        ...experience,
-                        type: { title: type },
-                      })
-                    );
-                    console.log(experience);
-                  }}
-                >
-                  Suivant
-                </Link>
-              ) : (
-                <p>undefined</p>
-              )}
+                      console.log(experience);
+                    }}
+                  >
+                    Suivant
+                  </Link>
+                ) : (
+                  <p></p>
+                )}
+              </div>
             </div>
           </Container>
         </div>
       </div>
     </>
   ) : (
-    <small></small>
+    <p></p>
   );
 };
 

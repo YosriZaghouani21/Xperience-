@@ -4,9 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import addUser from "../JS/actions/index";
 //Bootstrap
 import "bootstrap/dist/css/bootstrap.css";
-import { useAlert } from "react-alert";
 import {
-  Container,
   Button,
   Card,
   CardHeader,
@@ -44,10 +42,6 @@ const Signup = () => {
         phoneNumber,
       })
     );
-  };
-
-  const showAlert = () => {
-    alert(error.msg);
   };
   return (
     <div className="main-content">

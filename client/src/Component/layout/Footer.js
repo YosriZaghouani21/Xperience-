@@ -10,12 +10,14 @@ const Footer = () => {
               <div className="col-12 col-md">
                 <img
                   className="mb-2"
-                  src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
+                  src={
+                    require("../../Assets/img/brand/argon-react.png").default
+                  }
                   alt=""
-                  width={24}
+                  width={70}
                   height={24}
                 />
-                <small className="d-block mb-3 text-muted">© 2017-2018</small>
+                <small className="d-block mb-3 text-muted">© 2020-2021</small>
               </div>
             </div>
           </footer>

@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
 import { login } from "../JS/actions";
-//Boostrap
-import "bootstrap/dist/css/bootstrap.css";
+import { useForm } from "react-hook-form";
 import {
-  Container,
   Button,
   Card,
   CardHeader,
@@ -28,8 +26,10 @@ const Signin = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const loading = useSelector((state) => state.userReducer.loading);
-  const loginUser = (e) => {
-    e.preventDefault();
+  const error = useSelector((state) => state.userReducer.errors);
+
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = () => {
     dispatch(
       login({
         email,
@@ -56,7 +56,7 @@ const Signin = () => {
             </CardHeader>
 
             <CardBody className="px-lg-5 py-lg-5">
-              <Form role="form">
+              <Form role="form" onSubmit={handleSubmit(onSubmit)}>
                 <FormGroup className="mb-3">
                   <InputGroup className="input-group-alternative">
                     <InputGroupAddon addonType="prepend">
@@ -65,11 +65,23 @@ const Signin = () => {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
+                      name="email"
                       type="email"
                       placeholder="Email"
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                      invalid={errors["email"]}
+                      innerRef={register({
+                        required: "Le champ email est obligatoire.",
+                      })}
                     />
                   </InputGroup>
+                  {errors.email && (
+                    <span className="mr-2 text-sm" style={{ color: "#dd3a4a" }}>
+                      {errors.email.message}
+                    </span>
+                  )}
                 </FormGroup>
                 <FormGroup>
                   <InputGroup className="input-group-alternative">
@@ -79,12 +91,36 @@ const Signin = () => {
                       </InputGroupText>
                     </InputGroupAddon>
                     <Input
+                      name="password"
                       type="password"
                       placeholder="Password"
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                      invalid={errors["password"]}
+                      innerRef={register({
+                        required: "Veuillez saisir votre mot de passe",
+                      })}
                     />
                   </InputGroup>
+                  {errors.password && (
+                    <>
+                      <span
+                        className="mr-2 text-sm"
+                        style={{ color: "#dd3a4a" }}
+                      >
+                        {errors.password.message}
+                      </span>{" "}
+                      <br />
+                    </>
+                  )}
+                  {error && (
+                    <span className="mr-2 text-sm" style={{ color: "#dd3a4a" }}>
+                      {error.msg}
+                    </span>
+                  )}
                 </FormGroup>
+
                 <Row>
                   <Col>
                     <Link to="/register">
@@ -95,7 +131,7 @@ const Signin = () => {
                   </Col>
                   <Col>
                     <div className="text-center">
-                      <Button color="primary" type="button" onClick={loginUser}>
+                      <Button color="primary" type="submit">
                         Se connecter
                       </Button>
                     </div>
