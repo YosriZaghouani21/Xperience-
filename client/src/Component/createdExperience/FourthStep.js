@@ -30,6 +30,7 @@ import {
   updateExperience,
 } from "../../JS/actions/index";
 import SideBar from "../layout/SideBar";
+import Advice4 from "../layout/Advice4";
 const FourthStep = ({
   match: {
     params: { id },
@@ -97,7 +98,7 @@ const FourthStep = ({
       <Loader />
     ) : experience ? (
       <>
-        <SideBar />
+        <Advice4 />
         <div className="main-content">
           <Container fluid>
             {/* progress */}

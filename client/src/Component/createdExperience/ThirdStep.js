@@ -50,7 +50,7 @@ const ThirdStep = ({
   const [phobia, setPhobia] = useState([]);
   const [limitParticipants, setLimitParticipants] = useState(0);
   const defaultTarget = ["enfant", "adulte"];
-  const defaultPhobia = ["claustrophobie", "Agoraphobie", "Acrophobie"];
+  const defaultPhobia = ["Claustrophobie", "Acrophobie"];
   const defaultDifficulty = ["Léger", "Modéré", "Intense", "Extreme"];
   const addPhobia = (e) => {
     if (e.target.checked) {
@@ -254,7 +254,7 @@ const ThirdStep = ({
                                   className="custom-control-label"
                                   htmlFor={tar}
                                 >
-                                  <span className="text-muted">{tar}</span>
+                                  <span>{tar}</span>
                                 </label>
                               </div>
                             </Col>
@@ -265,7 +265,7 @@ const ThirdStep = ({
                           style={{ color: "#2dce89" }}
                         >
                           <i className="ni ni-bulb-61" />
-                          Les enfants doivent etre accompagnés par leur tuteur
+                          Les enfants doivent être accompagnés par leur tuteur
                           légal
                         </span>
                       </FormGroup>
@@ -314,14 +314,6 @@ const ThirdStep = ({
                             </Col>
                           ))}
                         </Row>
-                        <span
-                          className="mr-2 text-sm"
-                          style={{ color: "#2dce89" }}
-                        >
-                          <i className="ni ni-bulb-61" />
-                          Les enfants doivent etre accompagnés par le tuteur
-                          légal
-                        </span>
                       </FormGroup>
                       {/* phobia part */}
                       <FormGroup
@@ -368,7 +360,7 @@ const ThirdStep = ({
                                   className="custom-control-label"
                                   htmlFor={ph}
                                 >
-                                  <span className="text-muted">{ph}</span>
+                                  <span>{ph}</span>
                                 </label>
                               </div>
                             </Col>

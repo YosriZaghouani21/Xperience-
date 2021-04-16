@@ -3,6 +3,10 @@ const connectDB = require("./config/dbConnect");
 const user = require("../backend/services/userService/Routes/user");
 const experienceRouter = require("../backend/services/experienceService/Routes/experienceRouter");
 const fileUpload = require("express-fileupload");
+// const cloudinary = require("cloudinary");
+const {
+  updateUser,
+} = require("./services/userService/controllers/user.controller");
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
@@ -12,29 +16,27 @@ app.use("/user", user);
 app.use("/api", experienceRouter);
 app.use(fileUpload());
 
+// cloudinary.config({
+//   cloud_name: process.env.CLOUDINARY_NAME,
+//   api_key: process.env.CLOUDINARY_API_KEY,
+//   api_secret: process.env.CLOUDINARY_API_SECRET,
+// });
+
+// app.put("/profile/:id", async (req, res) => {
+//   try {
+//     const fileStr = req.body.data;
+//     const uploadResponse = await cloudinary.uploader.upload(fileStr);
+//     console.log(uploadResponse);
+//     res.json({ msg: "yaya" });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ err: "Something went wrong" });
+//   }
+// });
+
 connectDB();
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, (err) =>
   err ? console.log(err) : console.log(`server is running on PORT ${PORT}`)
 );
-
-// // Upload Endpoint
-// app.post("/upload", (req, res) => {
-//   if (req.files === null) {
-//     return res.status(400).json({ msg: "No file uploaded" });
-//   }
-
-//   const file = req.files.file;
-
-//   file.mv(`${__dirname}../../client/public/uploads/${file.name}`, (err) => {
-//     if (err) {
-//       console.error(err);
-//       return res.status(500).send(err);
-//     }
-
-//     res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
-//   });
-// });
-
-// app.listen(5001, () => console.log("Server Started..."));

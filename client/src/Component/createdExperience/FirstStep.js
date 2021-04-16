@@ -41,7 +41,6 @@ const FirstStep = () => {
   console.log(experience);
   useEffect(() => {
     dispatch(getProfile());
-
     dispatch(addExperience({ type: { title: type } }));
   }, [dispatch, type]);
   return localStorage.getItem("token") && isLoading ? (

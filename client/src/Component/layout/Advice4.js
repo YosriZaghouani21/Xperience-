@@ -54,7 +54,7 @@ import {
 
 var ps;
 
-const Advice3 = (props) => {
+const Advice4 = (props) => {
   const [collapseOpen, setCollapseOpen] = useState();
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
@@ -122,89 +122,9 @@ const Advice3 = (props) => {
         <Collapse navbar isOpen={collapseOpen}>
           {/* Collapse header */}
           <small>
-            <b>
-              <span className="text-info">Infos : </span>
-              Langues parlées par <br />
-              les tunisiens
-            </b>
-          </small>{" "}
-          <Table className="align-items-center table-flush" responsive>
-            <thead></thead>
-            <tbody>
-              <tr>
-                <td>
-                  <span className="mr-2">Arabe</span>
-                  <br />
-
-                  <div className="d-flex align-items-center">
-                    <span className="mr-2">88%</span>
-                    <div>
-                      <Progress
-                        max="100"
-                        value="88"
-                        barClassName="bg-gradient-danger"
-                      />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span className="mr-2">Français</span>
-                  <br />
-                  <div className="d-flex align-items-center">
-                    <span className="mr-2">40%</span>
-                    <div>
-                      <Progress
-                        max="100"
-                        value="40"
-                        barClassName="bg-gradient-success"
-                      />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span className="mr-2">Anglais</span>
-                  <br />
-                  <div className="d-flex align-items-center">
-                    <span className="mr-2">20%</span>
-                    <div>
-                      <Progress max="100" value="20" />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <span className="mr-2">Autres</span>
-                  <br />
-                  <div className="d-flex align-items-center">
-                    <span className="mr-2">5%</span>
-                    <div>
-                      <Progress
-                        max="100"
-                        value="5"
-                        barClassName="bg-gradient-warning"
-                      />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-          <small>
-            <b>
-              <span className="text-info">Infos : </span> <br />
-              La claustrophobie :
-            </b>
-            une panique de l’enfermement, des espaces clos : pièces petites ou
-            sans fenêtre
+            <b className="text-info">Conseils: </b>
             <br />
-            <b>L'acrophobie :</b> une panique irrationnelle lorsque la personne
-            se retrouve en hauteur ou face au vide.
+            Fixez des heures claires tels ques HH:00 ou HH:15 ou HH:30
           </small>{" "}
           <div className="navbar-collapse-header d-md-none">
             <Row>
@@ -232,14 +152,12 @@ const Advice3 = (props) => {
             </NavItem>
             <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/colors?ref=adr-admin-sidebar">
-                <i className="ni ni-palette  text-danger" />
-                Tarification
+                <i className="fas fa-money-check text-danger" /> Tarification
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
-                <i className="ni ni-ui-04  text-info" />
-                Remboursement
+                <i className="fas fa-balance-scale text-info" /> Remboursement
               </NavLink>
             </NavItem>
           </Nav>
@@ -249,11 +167,11 @@ const Advice3 = (props) => {
   );
 };
 
-Advice3.defaultProps = {
+Advice4.defaultProps = {
   routes: [{}],
 };
 
-Advice3.propTypes = {
+Advice4.propTypes = {
   // links that will be displayed inside the component
   routes: PropTypes.arrayOf(PropTypes.object),
   logo: PropTypes.shape({
@@ -270,4 +188,4 @@ Advice3.propTypes = {
   }),
 };
 
-export default Advice3;
+export default Advice4;

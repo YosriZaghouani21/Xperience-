@@ -358,7 +358,8 @@ const SecondStep = ({
                     >
                       <div>
                         <small className="font-weight-bold">
-                          Fixez un prix à votre expérience
+                          Fixez un prix par personne à votre expérience ( en
+                          dinar tunisien)
                         </small>
                       </div>
                       <InputGroup className="input-group-alternative">
@@ -388,7 +389,12 @@ const SecondStep = ({
                         style={{ color: "#2dce89" }}
                       >
                         <i className="ni ni-bulb-61" />
-                        Un conseil sur le prix
+                        {price - (price * 5) / 100} est votre gain net par
+                        personne{" "}
+                        <small>
+                          <Link className="text-muted">en savoir plus</Link>
+                        </small>
+                        .
                       </span>
                       <br />
                       {/* {errors.price && (

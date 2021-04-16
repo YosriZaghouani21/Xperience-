@@ -23,30 +23,11 @@ import { PropTypes } from "prop-types";
 
 // reactstrap components
 import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
   Collapse,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Media,
-  NavbarBrand,
   Navbar,
   NavItem,
   NavLink,
   Nav,
-  Progress,
-  Table,
   Container,
   Row,
   Col,
@@ -121,81 +102,17 @@ const Advice2 = (props) => {
         {/* Collapse */}
         <Collapse navbar isOpen={collapseOpen}>
           {/* Collapse header */}
-
-          <Table className="align-items-center table-flush" responsive>
-            <thead className="thead-light">
-              <tr>
-                <th scope="col">
-                  Langues parlées <br /> par les tunisiens
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <span className="mr-2">Arabe</span>
-                  <br />
-
-                  <div className="d-flex align-items-center">
-                    <span className="mr-2">88%</span>
-                    <div>
-                      <Progress
-                        max="100"
-                        value="88"
-                        barClassName="bg-gradient-danger"
-                      />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span className="mr-2">Français</span>
-                  <br />
-                  <div className="d-flex align-items-center">
-                    <span className="mr-2">40%</span>
-                    <div>
-                      <Progress
-                        max="100"
-                        value="40"
-                        barClassName="bg-gradient-success"
-                      />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <span className="mr-2">Anglais</span>
-                  <br />
-                  <div className="d-flex align-items-center">
-                    <span className="mr-2">20%</span>
-                    <div>
-                      <Progress max="100" value="20" />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <span className="mr-2">Autres</span>
-                  <br />
-                  <div className="d-flex align-items-center">
-                    <span className="mr-2">5%</span>
-                    <div>
-                      <Progress
-                        max="100"
-                        value="5"
-                        barClassName="bg-gradient-warning"
-                      />
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-
+          <small>
+            <b className="text-info">Conseils : </b>
+            Si vous n'arrivez pas à choisir un titre à votre expérience voici
+            quelques examples qui peuvent vous aider :
+            <br />
+            <ul>
+              <li>Expérience dans " le lieu de l'expérience"</li>
+              <li>Expérience avec " votre surnom"</li>
+              <li>Vivre " l'activité de l'expérience"</li>
+            </ul>
+          </small>{" "}
           <div className="navbar-collapse-header d-md-none">
             <Row>
               <Col className="collapse-close" xs="6">
@@ -207,13 +124,11 @@ const Advice2 = (props) => {
               </Col>
             </Row>
           </div>
-
           {/* Navigation */}
           <Nav navbar>{createLinks(routes)}</Nav>
           {/* Divider */}
           <hr className="my-3" />
           {/* Heading */}
-
           {/* Navigation */}
           <Nav className="mb-md-3" navbar>
             <NavItem>
@@ -224,14 +139,12 @@ const Advice2 = (props) => {
             </NavItem>
             <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/colors?ref=adr-admin-sidebar">
-                <i className="ni ni-palette  text-danger" />
-                Tarification
+                <i className="fas fa-money-check text-danger" /> Tarification
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
-                <i className="ni ni-ui-04  text-info" />
-                Remboursement
+                <i className="fas fa-balance-scale text-info" /> Remboursement
               </NavLink>
             </NavItem>
           </Nav>

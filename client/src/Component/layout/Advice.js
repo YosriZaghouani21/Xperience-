@@ -122,7 +122,11 @@ const Advice = (props) => {
         <Collapse navbar isOpen={collapseOpen}>
           {/* Collapse header */}
           <small>
-            <b> Différence entre les expériences en ligne et en personne</b>{" "}
+            <b className="text-info">Infos : </b>
+            <b>
+              {" "}
+              Différence entre les expériences en ligne et en personne
+            </b>{" "}
             <br />
             Les expériences en ligne sont organisées sur Zoom. Zoom est une
             plate-forme cloud tierce de visioconférence. Elle peut être utilisée
@@ -156,14 +160,12 @@ const Advice = (props) => {
             </NavItem>
             <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/colors?ref=adr-admin-sidebar">
-                <i className="ni ni-palette  text-danger" />
-                Tarification
+                <i className="fas fa-money-check text-danger" /> Tarification
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
-                <i className="ni ni-ui-04  text-info" />
-                Remboursement
+                <i className="fas fa-balance-scale text-info" /> Remboursement
               </NavLink>
             </NavItem>
           </Nav>

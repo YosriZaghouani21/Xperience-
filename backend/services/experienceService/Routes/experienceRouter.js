@@ -10,6 +10,7 @@ router
   .get(experienceController.getSingleExperience);
 
 router.route("/experience").post(experienceController.createExperience);
-router.route("/upload").post(experienceController.uploadImage);
+// router.route("/upload").post(experienceController.uploadImage);
+// router.route("/images").get(experienceController.getUploadImage);
 
 module.exports = router;

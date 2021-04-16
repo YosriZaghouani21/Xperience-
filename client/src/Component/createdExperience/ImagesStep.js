@@ -26,7 +26,6 @@ const ImagesStep = ({
     uploadImage(previewSource);
   };
   const uploadImage = async (base64EncodedImage) => {
-    console.log(base64EncodedImage);
     try {
       await fetch("/api/upload", {
         method: "POST",
