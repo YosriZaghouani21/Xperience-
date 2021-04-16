@@ -65,12 +65,9 @@ exports.login = async (req, res) => {
 };
 //Update User
 exports.updateUser = async (req, res) => {
-  // const result = await cloudinary.v2.uploader.upload(req.body.photo, {
-  //   folder: "avatars",
-  //   width: 150,
-  //   crop: "scale",
-  // });
-
+  const fileStr = req.body.photo;
+  const uploadResponse = await cloudinary.uploader.upload(fileStr);
+  console.log(uploadResponse);
   try {
     const {
       name,

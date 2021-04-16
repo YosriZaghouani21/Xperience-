@@ -87,6 +87,7 @@ const Profile = () => {
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
+
     previewFile(file);
   };
 
@@ -106,7 +107,7 @@ const Profile = () => {
   };
 
   const uploadImage = async (base64EncodedImage) => {
-    const id = user.id;
+    const id = user._id;
     // console.log(base64EncodedImage);
     try {
       await fetch(`/profile/${id}`, {

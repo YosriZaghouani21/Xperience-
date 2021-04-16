@@ -25,17 +25,17 @@ app.use(fileUpload());
 //   api_secret: process.env.CLOUDINARY_API_SECRET,
 // });
 
-app.put("/profile/:id", async (req, res) => {
-  try {
-    const fileStr = req.body.data;
-    const uploadResponse = await cloudinary.uploader.upload(fileStr);
-    console.log(uploadResponse);
-    res.json({ msg: "yaya" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ err: "Something went wrong" });
-  }
-});
+// app.put("/profile/:id", async (req, res) => {
+//   try {
+//     const fileStr = req.body.data;
+//     const uploadResponse = await cloudinary.uploader.upload(fileStr);
+//     console.log(uploadResponse);
+//     res.json({ msg: "yaya" });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ err: "Something went wrong" });
+//   }
+// });
 
 connectDB();
 const PORT = process.env.PORT || 5000;
