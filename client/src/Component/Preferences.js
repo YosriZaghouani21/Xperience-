@@ -12,27 +12,19 @@ import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // reactstrap components
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Container,
-  Row,
-  Col,
-  UncontrolledTooltip,
-} from "reactstrap";
+import { Card, CardHeader, CardBody, Container, Row, Col } from "reactstrap";
 
 const Preferences = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.userReducer.isAuth);
+  // const isAuth = useSelector((state) => state.userReducer.isAuth);
   const user = useSelector((state) => state.userReducer.user);
   const loading = useSelector((state) => state.userReducer.loading);
-  const themes = useSelector((state) => state.userReducer.themes);
-  const difficulties = useSelector((state) => state.userReducer.difficulties);
-  const phobies = useSelector((state) => state.userReducer.phobies);
+  // const themes = useSelector((state) => state.userReducer.themes);
+  // const difficulties = useSelector((state) => state.userReducer.difficulties);
+  // const phobies = useSelector((state) => state.userReducer.phobies);
   const preferences = useSelector((state) => state.userReducer.preferences);
   const [localPref, setlocalPref] = useState([]);
-  let arr = [];
+  // let arr = [];
   useEffect(() => {
     dispatch(getProfile());
     dispatch(seePreferences());
@@ -43,8 +35,8 @@ const Preferences = () => {
   }, [user]);
 
   //Filter the preferences user table if it includes Duplicated items
-  let chars = [];
-  let uniqueChars = [];
+  // let chars = [];
+  // let uniqueChars = [];
   // console.log(uniqueChars);
 
   return loading ? (
@@ -106,7 +98,7 @@ const Preferences = () => {
                               type="button"
                             >
                               <div>
-                                <img src={theme.icon} width="30" />
+                                <img src={theme.icon} width="30" alt="..." />
                                 <span>{theme.name}</span>
                               </div>
                             </button>
@@ -137,7 +129,11 @@ const Preferences = () => {
                             type="button"
                           >
                             <div>
-                              <img src={difficulties.icon} width="30" />
+                              <img
+                                src={difficulties.icon}
+                                width="30"
+                                alt="..."
+                              />
                               <span>{difficulties.name}</span>
                             </div>
                           </button>
@@ -163,7 +159,7 @@ const Preferences = () => {
                         >
                           <button className="btn-icon-clipboard" type="button">
                             <div>
-                              <img src={phobies.icon} width="30" />
+                              <img src={phobies.icon} width="30" alt="..." />
                               <span>{phobies.name}</span>
                             </div>
                           </button>

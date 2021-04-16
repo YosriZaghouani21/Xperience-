@@ -19,7 +19,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Alert,
 } from "reactstrap";
 import { Link, Redirect } from "react-router-dom";
 import Carrousel from "../layout/Carrousel";

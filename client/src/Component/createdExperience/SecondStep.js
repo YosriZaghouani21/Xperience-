@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardBody,
   FormGroup,
-  Form,
   Input,
   InputGroupAddon,
   InputGroupText,
@@ -30,7 +29,6 @@ import {
 } from "../../JS/actions/index";
 import Advice2 from "../layout/Advice2";
 import Loader from "../layout/Loader";
-import SideBar from "../layout/SideBar";
 
 const SecondStep = ({
   match: {
@@ -53,7 +51,7 @@ const SecondStep = ({
       setTheme(arr);
     }
   };
-  const [defaultThemes, setDefaultThemes] = useState([
+  const defaultThemes = [
     "Nature",
     "Bien-etre",
     "Art et culture",
@@ -62,7 +60,7 @@ const SecondStep = ({
     "Etude",
     "Animaux",
     "Autres",
-  ]);
+  ];
   const [title, setTitle] = useState(" ");
   const [theme, setTheme] = useState([]);
   const [activity, setActivity] = useState(" ");

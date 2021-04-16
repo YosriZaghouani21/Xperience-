@@ -7,18 +7,15 @@ import {
   Row,
   Col,
   Button,
-  Form,
   Progress,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Alert,
 } from "reactstrap";
 import Advice from "../layout/Advice";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addExperience,
   getExperienceDetails,
   updateExperience,
   deleteExperience,
@@ -26,7 +23,6 @@ import {
 } from "../../JS/actions/index";
 import { Link, Redirect } from "react-router-dom";
 import Loader from "../layout/Loader";
-import UpdateAlert from "../layout/UpdateAlert";
 import { useAlert } from "react-alert";
 
 const FirstStep2 = ({

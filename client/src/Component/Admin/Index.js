@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getExperiences, getProfile, getUsers } from "../../JS/actions/index";
 import CreatedExperienceAd from "./CreatedExperienceAd";
 import Loader from "../layout/Loader";
-import { useAlert } from "react-alert";
 import { Redirect } from "react-router";
 
 import {

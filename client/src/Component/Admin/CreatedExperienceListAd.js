@@ -3,20 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getExperiences, getProfile, getUsers } from "../../JS/actions/index";
 import CreatedExperienceAd from "./CreatedExperienceAd";
 import Loader from "../layout/Loader";
-import { useAlert } from "react-alert";
 import { Redirect } from "react-router";
 
-import {
-  Button,
-  Card,
-  CardHeader,
-  Table,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
-import SideBar from "../layout/SideBar";
-import User from "../User";
+import { Button, Card, CardHeader, Table, Row, Col } from "reactstrap";
 
 // core components
 
@@ -28,7 +17,6 @@ const CreatedExperienceListAd = () => {
   const isLoading = useSelector((state) => state.experiencesReducers.isLoading);
   const user = useSelector((state) => state.userReducer.user);
   const loading = useSelector((state) => state.userReducer.loading);
-  const users = useSelector((state) => state.userReducer.users);
 
   useEffect(() => {
     dispatch(getExperiences());

@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Media, Progress, UncontrolledTooltip } from "reactstrap";
+import { Badge, Media } from "reactstrap";
 
 const User = ({ user }) => {
   return (

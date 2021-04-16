@@ -2,15 +2,7 @@ import React from "react";
 import AuthNavbar from "./layout/AuthNavbar";
 import Footer from "./layout/Footer";
 
-import {
-  Col,
-  Row,
-  Card,
-  CardBody,
-  CardTitle,
-  Button,
-  UncontrolledTooltip,
-} from "reactstrap";
+import { Col, Row, Card, CardBody, CardTitle } from "reactstrap";
 const CreatorHome = () => {
   return (
     <div className="main-content">

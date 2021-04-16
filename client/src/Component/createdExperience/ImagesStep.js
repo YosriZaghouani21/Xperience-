@@ -1,14 +1,5 @@
-import React, { useState, useEffect } from "react";
-import Advice3 from "../layout/Advice3";
-import Loader from "../layout/Loader";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import {
-  deleteExperience,
-  getExperienceDetails,
-  getExperiences,
-  updateExperience,
-} from "../../JS/actions/index";
+import React, { useState } from "react";
+
 import { Form, Input, Button } from "reactstrap";
 const ImagesStep = ({
   match: {
