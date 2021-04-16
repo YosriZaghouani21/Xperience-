@@ -1,22 +1,21 @@
-const User = require("../model/User");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const config = require("config");
-const Preferences = require("../model/Preferences");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('config');
+const cloudinary = require('cloudinary');
+const Preferences = require('../model/Preferences');
 // const { cloudinary } = require("../../../config/cloudinary");
-const cloudinary = require("cloudinary");
-const secretOrkey = config.get("secretOrkey");
+const User = require('../model/User');
 
-//Register User
+const secretOrkey = config.get('secretOrkey');
+
+// Register User
 exports.register = async (req, res) => {
-  const { name, email, password, phoneNumber } = req.body;
+  const {name, email, password, phoneNumber} = req.body;
 
   try {
-    const searchRes = await User.findOne({ email });
+    const searchRes = await User.findOne({email});
     if (searchRes)
-      return res
-        .status(401)
-        .json({ msg: `Utilisateur existant , utiliser un autre E-mail` });
+      return res.status(401).json({msg: `Utilisateur existant , utiliser un autre E-mail`});
 
     const newUser = new User({
       name,
@@ -33,21 +32,19 @@ exports.register = async (req, res) => {
     res.status(201).json(newUser);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ errors: error });
+    res.status(500).json({errors: error});
   }
 };
 
-//Login User
+// Login User
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const {email, password} = req.body;
   try {
-    const user = await User.findOne({ email });
-    if (!user)
-      return res.status(404).json({ msg: `Email ou mot de passe incorrect` });
+    const user = await User.findOne({email});
+    if (!user) return res.status(404).json({msg: `Email ou mot de passe incorrect`});
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
-      return res.status(401).json({ msg: `Email ou mot de passe incorrect` });
+    if (!isMatch) return res.status(401).json({msg: `Email ou mot de passe incorrect`});
 
     const payload = {
       id: user._id,
@@ -57,13 +54,13 @@ exports.login = async (req, res) => {
     };
 
     const token = await jwt.sign(payload, secretOrkey);
-    return res.status(200).json({ token: `Bearer ${token}`, user });
+    return res.status(200).json({token: `Bearer ${token}`, user});
   } catch (error) {
     console.log(Error);
-    res.status(500).json({ errors: error });
+    res.status(500).json({errors: error});
   }
 };
-//Update User
+// Update User
 exports.updateUser = async (req, res) => {
   const fileStr = req.body.photo;
   const uploadResponse = await cloudinary.uploader.upload(fileStr);
@@ -82,7 +79,7 @@ exports.updateUser = async (req, res) => {
       photo,
     } = req.body;
 
-    await User.findByIdAndUpdate(req.params.id, {
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, {
       name,
       email,
       phoneNumber,
@@ -96,14 +93,14 @@ exports.updateUser = async (req, res) => {
     });
     return res.status(201).json({
       msg: "L'utilisateur a été modifié avec succès",
-      user: updateUser,
+      user: updatedUser,
     });
   } catch (err) {
-    return res.status(500).json({ msg: err.message });
+    return res.status(500).json({msg: err.message});
   }
 };
 
-//Handle user roles
+// Handle user roles
 exports.authorizeRoles = (...roles) => {
   return (req, res, next) => {
     const user = User.findById(req.params.id);
@@ -117,16 +114,16 @@ exports.authorizeRoles = (...roles) => {
   };
 };
 
-//Get all users
+// Get all users
 exports.allUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.status(200).json({
       succes: true,
-      users: users,
+      users,
     });
   } catch (err) {
-    return res.status(500).json({ msg: err.message });
+    return res.status(500).json({msg: err.message});
   }
 };
 
@@ -136,12 +133,12 @@ exports.seePreferences = async (req, res) => {
     res.send(allPreferences);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ errors: error.message });
+    res.status(500).json({errors: error.message});
   }
 };
 
 exports.addPreferences = async (req, res) => {
-  const { themes, difficulties, phobies } = req.body;
+  const {themes, difficulties, phobies} = req.body;
   try {
     const newPref = new Preferences({
       themes,
@@ -153,24 +150,24 @@ exports.addPreferences = async (req, res) => {
     res.status(201).json(newPref);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ errors: error });
+    res.status(500).json({errors: error});
   }
 };
 exports.addMyPreferences = async (req, res) => {
   const userId = req.params.id;
-  const { preferenceId, preferenceName } = req.body;
+  const {preferenceId, preferenceName} = req.body;
 
   try {
-    const searchedUser = await User.findOne({ _id: userId });
+    const searchedUser = await User.findOne({_id: userId});
     searchedUser.myPreferences.push(preferenceId);
     const user = await User.findByIdAndUpdate(userId, searchedUser, {
       new: true,
       useFindAndModify: false,
-    }).populate("preferences", "themes");
+    }).populate('preferences', 'themes');
 
     return res.status(200).json(user);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ errors: error });
+    res.status(500).json({errors: error});
   }
 };
