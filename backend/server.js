@@ -3,7 +3,7 @@ const connectDB = require("./config/dbConnect");
 const user = require("../backend/services/userService/Routes/user");
 const experienceRouter = require("../backend/services/experienceService/Routes/experienceRouter");
 const fileUpload = require("express-fileupload");
-// const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary");
 const {
   updateUser,
 } = require("./services/userService/controllers/user.controller");
