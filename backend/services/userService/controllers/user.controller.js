@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const Preferences = require("../model/Preferences");
+// const { cloudinary } = require("../../../config/cloudinary");
+const cloudinary = require("cloudinary");
 const secretOrkey = config.get("secretOrkey");
 
 //Register User
@@ -63,6 +65,9 @@ exports.login = async (req, res) => {
 };
 //Update User
 exports.updateUser = async (req, res) => {
+  const fileStr = req.body.photo;
+  const uploadResponse = await cloudinary.uploader.upload(fileStr);
+  console.log(uploadResponse);
   try {
     const {
       name,
@@ -74,6 +79,7 @@ exports.updateUser = async (req, res) => {
       aboutMe,
       postalCode,
       myPreferences,
+      photo,
     } = req.body;
 
     await User.findByIdAndUpdate(req.params.id, {
@@ -86,6 +92,7 @@ exports.updateUser = async (req, res) => {
       aboutMe,
       postalCode,
       myPreferences,
+      photo,
     });
     return res.status(201).json({
       msg: "L'utilisateur a été modifié avec succès",
@@ -94,35 +101,6 @@ exports.updateUser = async (req, res) => {
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
-
-  // // after the basic validation, now check the data from the database
-  // try {
-  //     const userEmail = await User.findOne({ email });
-  //     if (!_.isEmpty(userEmail)) {
-  //         return res.status(401).json({
-  //             status: "error",
-  //             message: "Email already in use"
-  //         });
-  //     }
-
-  //     const userNameExist = await User.findOne({ name });
-  //     if (!_.isEmpty(userNameExist)) {
-  //         return res.status(401).json({
-  //             status: "error",
-  //             message: "Username is already taken."
-  //         })
-  //     }
-
-  //     // update the database
-  //     await User.updateOne({ _id: req.params.id } , { req.body});
-  //     res.status(201).json({
-  //         status: "ok",
-  //         message: "Fields updated successfully!",
-  //     })
-  // } catch (e) {
-  //     console.log(e)
-  // }
-  // }
 };
 
 //Handle user roles
