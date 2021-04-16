@@ -10,5 +10,6 @@ router
   .get(experienceController.getSingleExperience);
 
 router.route("/experience").post(experienceController.createExperience);
+router.route("/upload").post(experienceController.uploadImage);
 
 module.exports = router;

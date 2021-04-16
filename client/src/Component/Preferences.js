@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 // react component that copies the given text inside your clipboard
 import { CopyToClipboard } from "react-copy-to-clipboard";
-// import PetsIcon from "@material-ui/icons/Pets";
-// import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-// import AddIcon from "@material-ui/icons/Add";
-// import Battery20Icon from "@material-ui/icons/Battery20";
-// import Battery30Icon from "@material-ui/icons/Battery30";
-// import Battery80Icon from "@material-ui/icons/Battery80";
-// import BatteryChargingFullIcon from "@material-ui/icons/BatteryChargingFull";
-// import FastfoodIcon from "@material-ui/icons/Fastfood";
+
 import {
   getProfile,
   seePreferences,
@@ -46,7 +39,7 @@ const Preferences = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (user) setlocalPref(user.myPreferences);
+    if (user) setlocalPref(user.preferences);
   }, [user]);
 
   //Filter the preferences user table if it includes Duplicated items

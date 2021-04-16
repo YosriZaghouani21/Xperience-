@@ -27,6 +27,8 @@ import ExperiencesList from "./Component/createdExperience/ExperiencesList";
 import CreatedExperienceListAd from "./Component/Admin/CreatedExperienceListAd";
 import Home from "./Component/Home";
 import Index from "./Component/Admin/Index";
+import CreatorHome from "./Component/CreatorHome";
+import ImagesStep from "./Component/createdExperience/ImagesStep";
 
 // optional configuration
 const options = {
@@ -42,9 +44,9 @@ function App() {
       <AlertProvider template={AlertTemplate} {...options}>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/creator" component={CreatorHome} />
           <Route path="/register" component={Signup} />
           <Route path="/login" component={Signin} />
-
           <Route path="/profile" component={Profile} />
           <Route path="/preferences" component={Preferences} />
           <Route path="/create" component={FirstStep} />
@@ -55,6 +57,7 @@ function App() {
           <Route path="/fifth/:id" component={FifthStep} />
           <Route path="/experience/:id" component={ExperienceDetails} />
           <Route path="/experiences" component={ExperiencesList} />
+          <Route path="/image" component={ImagesStep} />
 
           {localStorage.getItem("token") ? (
             <Route path="/admin/index" component={Index} />

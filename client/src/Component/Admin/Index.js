@@ -21,24 +21,21 @@ import User from "../User";
 // core components
 
 const Index = () => {
-  const alert = useAlert();
   const dispatch = useDispatch();
   const experiences = useSelector(
     (state) => state.experiencesReducers.experiences
   );
   const isLoading = useSelector((state) => state.experiencesReducers.isLoading);
-  const error = useSelector((state) => state.experiences);
   const user = useSelector((state) => state.userReducer.user);
   const loading = useSelector((state) => state.userReducer.loading);
   const users = useSelector((state) => state.userReducer.users);
 
   useEffect(() => {
-    if (error) {
-      return alert.error(error);
-    }
     dispatch(getExperiences());
+    dispatch(getUsers());
     dispatch(getProfile());
-  }, [dispatch, alert, error]);
+  }, [dispatch]);
+
   return localStorage.getItem("token") ? (
     isLoading && loading ? (
       <Loader />
@@ -49,23 +46,6 @@ const Index = () => {
         <div className="main-content">
           <Container className="mt--7" fluid>
             <Row>
-              <Col className="mb-5 mb-xl-0" xl="8">
-                <Card className="bg-gradient-default shadow">
-                  <CardHeader className="bg-transparent">
-                    <Row className="align-items-center">
-                      <div className="col">
-                        <h6 className="text-uppercase text-light ls-1 mb-1">
-                          Overview
-                        </h6>
-                        <h2 className="text-white mb-0">
-                          Les expériences créées
-                        </h2>
-                      </div>
-                      <div className="col"></div>
-                    </Row>
-                  </CardHeader>
-                </Card>
-              </Col>
               <Col xl="4">
                 <Card className="shadow">
                   <CardHeader className="bg-transparent">
@@ -104,7 +84,6 @@ const Index = () => {
                   <Table className="align-items-center table-flush" responsive>
                     <thead className="thead-light">
                       <tr>
-                        <th scope="col">Id</th>
                         <th scope="col">Date</th>
 
                         <th scope="col">Titre</th>
@@ -125,15 +104,18 @@ const Index = () => {
                   </Table>
                 </Card>
               </Col>
-              {/* <Col>
+            </Row>
+
+            <Row className="mt-4">
+              <div className="col">
                 <Card className="shadow">
                   <CardHeader className="border-0">
-                    <h3 className="mb-0">Card tables</h3>
+                    <h3 className="mb-0">Les utilisateurs</h3>
                   </CardHeader>
                   <Table className="align-items-center table-flush" responsive>
                     <thead className="thead-light">
                       <tr>
-                        <th scope="col">Id</th>
+                        <th></th>
                         <th scope="col">Utilisateur</th>
                         <th scope="col">Status</th>
                         <th scope="col">Téléphone</th>
@@ -146,8 +128,7 @@ const Index = () => {
                       users.map((user) => <User key={User._id} user={user} />)}
                   </Table>
                 </Card>
-              </Col>
-           */}
+              </div>
             </Row>
           </Container>
         </div>

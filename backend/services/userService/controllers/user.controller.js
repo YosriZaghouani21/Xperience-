@@ -141,11 +141,15 @@ exports.authorizeRoles = (...roles) => {
 
 //Get all users
 exports.allUsers = async (req, res) => {
-  const users = await User.find();
-  res.status(200).json({
-    succes: true,
-    users,
-  });
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      succes: true,
+      users: users,
+    });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
 };
 
 exports.seePreferences = async (req, res) => {

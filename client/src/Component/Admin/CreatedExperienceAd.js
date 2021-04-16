@@ -35,7 +35,6 @@ const CreatedExperienceAd = ({ experience }) => {
       {/* endModal */}
       {experience.isCreated === true ? (
         <tr>
-          <th scope="row">{experience._id}</th>
           <td>{experience.createdAt.substr(0, 10)} </td>
 
           <td>{experience.title} </td>

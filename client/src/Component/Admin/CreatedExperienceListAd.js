@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getExperiences, getProfile } from "../../JS/actions/index";
+import { getExperiences, getProfile, getUsers } from "../../JS/actions/index";
 import CreatedExperienceAd from "./CreatedExperienceAd";
 import Loader from "../layout/Loader";
 import { useAlert } from "react-alert";
+import { Redirect } from "react-router";
 
 import {
   Button,
@@ -14,44 +15,72 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { Redirect } from "react-router";
+import SideBar from "../layout/SideBar";
+import User from "../User";
+
+// core components
+
 const CreatedExperienceListAd = () => {
-  const alert = useAlert();
   const dispatch = useDispatch();
   const experiences = useSelector(
     (state) => state.experiencesReducers.experiences
   );
   const isLoading = useSelector((state) => state.experiencesReducers.isLoading);
-  const error = useSelector((state) => state.experiences);
   const user = useSelector((state) => state.userReducer.user);
   const loading = useSelector((state) => state.userReducer.loading);
+  const users = useSelector((state) => state.userReducer.users);
 
   useEffect(() => {
-    if (error) {
-      return alert.error(error);
-    }
     dispatch(getExperiences());
+    dispatch(getUsers());
     dispatch(getProfile());
-  }, [dispatch, alert, error]);
-  return isLoading && loading ? (
-    <Loader />
-  ) : user && user.role === "admin" ? (
-    <>
-      <Container fluid>
+  }, [dispatch]);
+
+  return localStorage.getItem("token") ? (
+    isLoading && loading ? (
+      <Loader />
+    ) : user && user.role === "admin" ? (
+      <>
+        {/* Page content */}
+        <Row>
+          <Col xl="4">
+            <Card className="shadow">
+              <CardHeader className="bg-transparent">
+                <Row className="align-items-center">
+                  <div className="col">
+                    <h6 className="text-uppercase text-muted ls-1 mb-1">
+                      Performance
+                    </h6>
+                    <h2 className="mb-0">Total orders</h2>
+                  </div>
+                </Row>
+              </CardHeader>
+            </Card>
+          </Col>
+        </Row>
         <Row className="mt-5">
-          <Col className="mb-5 mb-xl-0" xl="11">
+          <Col className="mb-5 mb-xl-0" xl="12">
             <Card className="shadow">
               <CardHeader className="border-0">
                 <Row className="align-items-center">
                   <div className="col">
                     <h3 className="mb-0">Les expériences créées</h3>
                   </div>
+                  <div className="col text-right">
+                    <Button
+                      color="primary"
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                      size="sm"
+                    >
+                      See all
+                    </Button>
+                  </div>
                 </Row>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Id</th>
                     <th scope="col">Date</th>
 
                     <th scope="col">Titre</th>
@@ -73,10 +102,12 @@ const CreatedExperienceListAd = () => {
             </Card>
           </Col>
         </Row>
-      </Container>
-    </>
+      </>
+    ) : (
+      <p></p>
+    )
   ) : (
-    <p>404 not found</p>
+    <Redirect to="/login" />
   );
 };
 

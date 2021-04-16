@@ -23,7 +23,7 @@ Router.get("/current", isAuth(), (req, res) => {
 
 Router.put("/profile/:id", updateUser);
 
-Router.get("/users/:id", authorizeRoles(`admin`), allUsers);
+Router.get("/users", allUsers);
 Router.get("/preferences", seePreferences);
 Router.post("/preferences/add", addPreferences);
 Router.put("/mypreferences/:id", addMyPreferences);
