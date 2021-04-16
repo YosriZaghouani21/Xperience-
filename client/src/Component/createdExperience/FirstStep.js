@@ -7,7 +7,6 @@ import {
   Row,
   Col,
   Button,
-  Form,
   Progress,
   Modal,
   ModalHeader,
@@ -15,18 +14,16 @@ import {
   ModalFooter,
 } from "reactstrap";
 import Advice from "../layout/Advice";
-import AuthNavbar from "../layout/AuthNavbar";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
   addExperience,
   deleteExperience,
-  getExperienceDetails,
   getExperiences,
   getProfile,
   updateExperience,
 } from "../../JS/actions/index";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loader from "../layout/Loader";
 
 const FirstStep = () => {
@@ -46,7 +43,7 @@ const FirstStep = () => {
     dispatch(getProfile());
 
     dispatch(addExperience({ type: { title: type } }));
-  }, [dispatch]);
+  }, [dispatch, type]);
   return localStorage.getItem("token") && isLoading ? (
     <Loader />
   ) : experience ? (

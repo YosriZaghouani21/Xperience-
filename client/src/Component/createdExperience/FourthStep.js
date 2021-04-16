@@ -48,7 +48,7 @@ const FourthStep = ({
   const [assemblyPoint, setAssemblyPoint] = useState(" ");
   const [startHour, setStartHour] = useState(0);
   const [endHour, setEndHour] = useState(0);
-  const [defaultCities, setDefaultCities] = useState([
+  const defaultCities = [
     "Ariana",
     "Béja",
     "Ben Arous",
@@ -74,7 +74,7 @@ const FourthStep = ({
     "Tozeur",
     "Tunis",
     "Zaghouan",
-  ]);
+  ];
   useEffect(() => {
     dispatch(getExperienceDetails(id));
   }, [dispatch, id]);

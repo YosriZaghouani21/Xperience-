@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
 // react component that copies the given text inside your clipboard
 import { CopyToClipboard } from "react-copy-to-clipboard";
-// import PetsIcon from "@material-ui/icons/Pets";
-// import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-// import AddIcon from "@material-ui/icons/Add";
-// import Battery20Icon from "@material-ui/icons/Battery20";
-// import Battery30Icon from "@material-ui/icons/Battery30";
-// import Battery80Icon from "@material-ui/icons/Battery80";
-// import BatteryChargingFullIcon from "@material-ui/icons/BatteryChargingFull";
-// import FastfoodIcon from "@material-ui/icons/Fastfood";
+
 import {
   getProfile,
   seePreferences,
@@ -19,39 +12,31 @@ import { Redirect } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // reactstrap components
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Container,
-  Row,
-  Col,
-  UncontrolledTooltip,
-} from "reactstrap";
+import { Card, CardHeader, CardBody, Container, Row, Col } from "reactstrap";
 
 const Preferences = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.userReducer.isAuth);
+  // const isAuth = useSelector((state) => state.userReducer.isAuth);
   const user = useSelector((state) => state.userReducer.user);
   const loading = useSelector((state) => state.userReducer.loading);
-  const themes = useSelector((state) => state.userReducer.themes);
-  const difficulties = useSelector((state) => state.userReducer.difficulties);
-  const phobies = useSelector((state) => state.userReducer.phobies);
+  // const themes = useSelector((state) => state.userReducer.themes);
+  // const difficulties = useSelector((state) => state.userReducer.difficulties);
+  // const phobies = useSelector((state) => state.userReducer.phobies);
   const preferences = useSelector((state) => state.userReducer.preferences);
   const [localPref, setlocalPref] = useState([]);
-  let arr = [];
+  // let arr = [];
   useEffect(() => {
     dispatch(getProfile());
     dispatch(seePreferences());
   }, [dispatch]);
 
   useEffect(() => {
-    if (user) setlocalPref(user.myPreferences);
+    if (user) setlocalPref(user.preferences);
   }, [user]);
 
   //Filter the preferences user table if it includes Duplicated items
-  let chars = [];
-  let uniqueChars = [];
+  // let chars = [];
+  // let uniqueChars = [];
   // console.log(uniqueChars);
 
   return loading ? (
@@ -113,7 +98,7 @@ const Preferences = () => {
                               type="button"
                             >
                               <div>
-                                <img src={theme.icon} width="30" />
+                                <img src={theme.icon} width="30" alt="..." />
                                 <span>{theme.name}</span>
                               </div>
                             </button>
@@ -144,7 +129,11 @@ const Preferences = () => {
                             type="button"
                           >
                             <div>
-                              <img src={difficulties.icon} width="30" />
+                              <img
+                                src={difficulties.icon}
+                                width="30"
+                                alt="..."
+                              />
                               <span>{difficulties.name}</span>
                             </div>
                           </button>
@@ -170,7 +159,7 @@ const Preferences = () => {
                         >
                           <button className="btn-icon-clipboard" type="button">
                             <div>
-                              <img src={phobies.icon} width="30" />
+                              <img src={phobies.icon} width="30" alt="..." />
                               <span>{phobies.name}</span>
                             </div>
                           </button>

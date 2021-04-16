@@ -18,7 +18,6 @@ import {
 } from "reactstrap";
 import Loader from "./layout/Loader";
 import AuthNavbar from "./layout/AuthNavbar";
-import UpdateAlert from "./layout/UpdateAlert";
 
 const Profile = () => {
   const dispatch = useDispatch();

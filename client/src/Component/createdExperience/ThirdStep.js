@@ -49,18 +49,9 @@ const ThirdStep = ({
   const [language, setLanguage] = useState("Arabe");
   const [phobia, setPhobia] = useState([]);
   const [limitParticipants, setLimitParticipants] = useState(0);
-  const [defaultTarget, setDefaultTarget] = useState(["enfant", "adulte"]);
-  const [defaultPhobia, setDefaultPhobia] = useState([
-    "claustrophobie",
-    "Agoraphobie",
-    "Acrophobie",
-  ]);
-  const [defaultDifficulty, setDefaultDifficulty] = useState([
-    "Léger",
-    "Modéré",
-    "Intense",
-    "Extreme",
-  ]);
+  const defaultTarget = ["enfant", "adulte"];
+  const defaultPhobia = ["claustrophobie", "Agoraphobie", "Acrophobie"];
+  const defaultDifficulty = ["Léger", "Modéré", "Intense", "Extreme"];
   const addPhobia = (e) => {
     if (e.target.checked) {
       setPhobia([...new Set([...phobia, e.target.name])]);

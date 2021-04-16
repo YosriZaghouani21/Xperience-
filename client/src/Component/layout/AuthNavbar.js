@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Loader from "./Loader";
 
 // reactstrap components
 import {
@@ -20,8 +19,7 @@ import {
   Nav,
   Media,
 } from "reactstrap";
-import { logout, getProfile } from "../../JS/actions";
-import { Redirect } from "react-router-dom";
+import { logout } from "../../JS/actions";
 
 const AuthNavbar = () => {
   const dispatch = useDispatch();

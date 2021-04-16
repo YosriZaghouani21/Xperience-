@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../JS/actions";
 // import { Redirect } from 'react-router-dom'
 import User from "./User";
 // reactstrap components
 import { Card, CardHeader, Table, Row } from "reactstrap";
-
 const Admin = ({ match }) => {
   // const isAuth = useSelector(state => state.userReducer.isAuth)
   const users = useSelector((state) => state.userReducer.users);

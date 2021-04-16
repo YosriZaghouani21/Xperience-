@@ -1,5 +1,5 @@
 const User = require("../../userService/model/User");
-const Experience = require("../models/Experience");
+// const Experience = require("../models/Experience");
 const Experiences = require("../models/Experience");
 //Filter, sorting and paginating jjsdhjqhdq
 class APIfeatures {
@@ -273,5 +273,14 @@ const experienceController = {
       return res.status(500).json({ msg: err.message });
     }
   },
+  uploadImage: async (req, res) => {
+    try {
+      const fileStr = req.body.data;
+      console.log(fileStr);
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };
+
 module.exports = experienceController;

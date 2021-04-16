@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getExperiences, getProfile } from "../../JS/actions/index";
 import Loader from "../layout/Loader";
 import ExperienceModel from "./ExperienceModel";
-import { Container, Col, Row, Button } from "reactstrap";
-import Menu from "../layout/Menu";
+import { Container, Col, Row } from "reactstrap";
 import { Link, Redirect } from "react-router-dom";
 import AuthNavbar from "../layout/AuthNavbar";
 const ExperiencesList = () => {
