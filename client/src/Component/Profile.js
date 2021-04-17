@@ -4,7 +4,6 @@ import {Button} from 'react-bootstrap';
 import {Link, Redirect} from 'react-router-dom';
 import {getProfile, logout, updateProfile} from '../JS/actions';
 import {useAlert} from 'react-alert';
-import FileUpload from './FileUpload';
 import {Container, Card, CardHeader, CardBody, FormGroup, Form, Input, Row, Col} from 'reactstrap';
 import Loader from './layout/Loader';
 import AuthNavbar from './layout/AuthNavbar';

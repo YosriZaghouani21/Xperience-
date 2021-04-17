@@ -19,6 +19,7 @@ import {
   ADD_PREFERENCES,
   ADD_PREFERENCES_SUCCESS,
   ADD_PREFERENCES_FAIL,
+  ADD_IMAGE_TO_PROFILE,
 } from '../constants/action-types';
 
 const initialState = {
@@ -30,7 +31,7 @@ const initialState = {
 
 const userReducer = (state = initialState, {type, payload}) => {
   switch (type) {
-    case 'ADD_IMAGE_TO_PROFILE':
+    case ADD_IMAGE_TO_PROFILE:
       return {
         ...state,
         user: {

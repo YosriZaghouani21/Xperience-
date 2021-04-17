@@ -21,6 +21,7 @@ import {
   ADD_PREFERENCES,
   ADD_PREFERENCES_SUCCESS,
   ADD_PREFERENCES_FAIL,
+  ADD_IMAGE_TO_PROFILE,
 } from '../constants/action-types';
 import {
   FETCH_ALL_EXPERIENCES,
@@ -285,6 +286,6 @@ export const clearErrors = () => async dispatch => {
 };
 
 export const addImageToProfile = image => ({
-  type: 'ADD_IMAGE_TO_PROFILE',
+  type: ADD_IMAGE_TO_PROFILE,
   payload: image,
 });
