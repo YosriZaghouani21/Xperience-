@@ -8,6 +8,7 @@ import FileUpload from './FileUpload';
 import {Container, Card, CardHeader, CardBody, FormGroup, Form, Input, Row, Col} from 'reactstrap';
 import Loader from './layout/Loader';
 import AuthNavbar from './layout/AuthNavbar';
+import ImageUploader from './ImageUploader';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -22,8 +23,8 @@ const Profile = () => {
   const [adress, setAdress] = useState('');
   const [aboutMe, setAboutme] = useState('');
   const [postalCode, setPostalcode] = useState('');
-  const [photo, setphoto] = useState('');
-  const [previewSource, setPreviewSource] = useState('../../public/images/1.jpg');
+  const [photo, setphoto] = useState();
+  // const [previewSource, setPreviewSource] = useState('../../public/images/1.jpg');
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [editDone, setEditDone] = useState(false);
   const alert = useAlert();
@@ -38,10 +39,9 @@ const Profile = () => {
       setAboutme(user.aboutMe);
       setAdress(user.adress);
       setPostalcode(user.postalCode);
-      setphoto(user.setphoto);
+      setphoto(user.photo);
     }
   }, [user]);
-  console.log('🚀 ~ file: Profile.js ~ line 56 ~ Profile ~ user', user);
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -59,54 +59,6 @@ const Profile = () => {
       })
     );
     setEditDone(true);
-  };
-
-  // const onChange = (e) => {
-  //   if (e.target.name === "photo") {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       if (reader.readyState === 2) {
-  //         setPreviewSource(reader.result);
-  //         setphoto(reader.result);
-  //       }
-  //     };
-  //     reader.readAsDataURL(e.target.files[0]);
-  //   }
-  // };
-
-  const handleFileInputChange = e => {
-    const file = e.target.files[0];
-
-    previewFile(file);
-  };
-
-  const previewFile = file => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    };
-  };
-
-  const handleSubmitFile = e => {
-    console.log('submitiing');
-    e.preventDefault();
-    if (!previewSource) return;
-    uploadImage(previewSource);
-  };
-
-  const uploadImage = async base64EncodedImage => {
-    const id = user._id;
-    // console.log(base64EncodedImage);
-    try {
-      await fetch(`/profile/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify({data: base64EncodedImage}),
-        headers: {'Content-type': 'application/json'},
-      });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   useEffect(() => {
@@ -139,14 +91,12 @@ const Profile = () => {
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
-                        <a href="#pablo">
-                          <img
-                            alt="chosen"
-                            className="rounded-circle"
-                            src={previewSource}
-                            style={{height: '200px', width: '200px'}}
-                          />
-                        </a>
+                        <img
+                          alt="chosen"
+                          className="rounded-circle"
+                          src={photo}
+                          style={{height: '200px', width: '200px'}}
+                        />
                       </div>
                     </Col>
                   </Row>
@@ -340,18 +290,7 @@ const Profile = () => {
                               onChange={e => setAboutme(e.target.value)}
                             />
                           </FormGroup>
-                          {/* /////////////////////////////////// */}
-                          {/* <FormGroup>
-                            <input
-                              id="fileInput"
-                              type="file"
-                              name="image"
-                              onChange={handleFileInputChange}
-                              value={photo}
-                              className="form-input"
-                            ></input>
-                          </FormGroup> */}
-                          {/* /////////////////////////////////// */}
+
                           <Button
                             type="submit"
                             variant="info"
@@ -366,23 +305,7 @@ const Profile = () => {
                           </Button>
                         </div>
                       </Form>
-                      <Form
-                        onSubmit={handleSubmitFile}
-                        className="form"
-                        encType="multipart/form-data"
-                      >
-                        <input
-                          id="fileInput"
-                          type="file"
-                          name="image"
-                          onChange={handleFileInputChange}
-                          value={photo}
-                          accept="images/*"
-                        />
-                        <button className="btn" type="submit">
-                          Submit
-                        </button>
-                      </Form>
+                      <ImageUploader image={photo} setImage={setphoto} />
                     </CardBody>
                   ) : (
                     <CardBody>

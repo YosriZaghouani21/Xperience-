@@ -130,6 +130,7 @@ export const updateProfile = (id, updatedProfile) => async dispatch => {
       payload: data,
     });
   } catch (error) {
+    console.log('🚀 ~ file: index.js ~ line 134 ~ error', error);
     dispatch({
       type: UPDATE_FAIL,
     });
@@ -282,3 +283,8 @@ export const clearErrors = () => async dispatch => {
     type: CLEAR_ERRORS,
   });
 };
+
+export const addImageToProfile = image => ({
+  type: 'ADD_IMAGE_TO_PROFILE',
+  payload: image,
+});

@@ -28,8 +28,16 @@ const initialState = {
   preferences: [],
 };
 
-const userReducer = (state = initialState, { type, payload }) => {
+const userReducer = (state = initialState, {type, payload}) => {
   switch (type) {
+    case 'ADD_IMAGE_TO_PROFILE':
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          photo: payload,
+        },
+      };
     case REGISTER_USER:
       return {
         ...state,

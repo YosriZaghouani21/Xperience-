@@ -31,7 +31,7 @@ exports.register = async (req, res) => {
     await newUser.save();
     res.status(201).json(newUser);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({errors: error});
   }
 };
@@ -56,15 +56,19 @@ exports.login = async (req, res) => {
     const token = await jwt.sign(payload, secretOrkey);
     return res.status(200).json({token: `Bearer ${token}`, user});
   } catch (error) {
-    console.log(Error);
+    // console.log(Error);
     res.status(500).json({errors: error});
   }
 };
 // Update User
 exports.updateUser = async (req, res) => {
-  const fileStr = req.body.photo;
-  const uploadResponse = await cloudinary.uploader.upload(fileStr);
-  console.log(uploadResponse);
+  // const fileStr = req.body.photo;
+  // try {
+  //   const uploadResponse = await cloudinary.uploader.upload(fileStr);
+  // } catch (error) {
+  //   console.error(`error`, error);
+  // }
+  // // console.log(uploadResponse);
   try {
     const {
       name,
@@ -78,6 +82,7 @@ exports.updateUser = async (req, res) => {
       myPreferences,
       photo,
     } = req.body;
+    console.log('🚀 ~ file: user.controller.js ~ line 85 ~ exports.updateUser= ~ photo', photo);
 
     const updatedUser = await User.findByIdAndUpdate(req.params.id, {
       name,
@@ -91,6 +96,10 @@ exports.updateUser = async (req, res) => {
       myPreferences,
       photo,
     });
+    console.log(
+      '🚀 ~ file: user.controller.js ~ line 94 ~ exports.updateUser= ~ updatedUser',
+      updatedUser
+    );
     return res.status(201).json({
       msg: "L'utilisateur a été modifié avec succès",
       user: updatedUser,
@@ -167,7 +176,7 @@ exports.addMyPreferences = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({errors: error});
   }
 };
