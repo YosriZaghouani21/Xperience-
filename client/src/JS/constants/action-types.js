@@ -1,10 +1,10 @@
-export const REGISTER_USER = "REGISTER_USER";
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAIL = "REGISTER_FAIL";
+export const REGISTER_USER = 'REGISTER_USER';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAIL = 'REGISTER_FAIL';
 
-export const UPDATE_USER = "UPDATE_USER";
-export const UPDATE_SUCCESS = "UPDATE_SUCCESS";
-export const UPDATE_FAIL = "UPDATE_FAIL";
+export const UPDATE_USER = 'UPDATE_USER';
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
+export const UPDATE_FAIL = 'UPDATE_FAIL';
 
 export const LOGIN_USER = `LOGIN_USER`;
 export const LOGIN_SUCCESS = `LOGIN_SUCCESS`;
@@ -13,6 +13,7 @@ export const LOGIN_FAIL = `LOGIN_FAIL`;
 export const GET_PROFILE = `GET_PROFILE`;
 export const GET_PROFILE_SUCCESS = `GET_PROFILE_SUCCESS`;
 export const GET_PROFILE_FAIL = `GET_PROFILE_FAIL`;
+export const ADD_IMAGE_TO_PROFILE = `ADD_IMAGE_TO_PROFILE`;
 export const LOGOUT = `LOGOUT`;
 
 export const FETCH_ALL_USERS = ` FETCH_ALL_USERS`;

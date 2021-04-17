@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const cloudinary = require('cloudinary');
 const Preferences = require('../model/Preferences');
-// const { cloudinary } = require("../../../config/cloudinary");
 const User = require('../model/User');
 
 const secretOrkey = config.get('secretOrkey');
@@ -31,7 +30,6 @@ exports.register = async (req, res) => {
     await newUser.save();
     res.status(201).json(newUser);
   } catch (error) {
-    console.log(error);
     res.status(500).json({errors: error});
   }
 };
@@ -56,15 +54,11 @@ exports.login = async (req, res) => {
     const token = await jwt.sign(payload, secretOrkey);
     return res.status(200).json({token: `Bearer ${token}`, user});
   } catch (error) {
-    console.log(Error);
     res.status(500).json({errors: error});
   }
 };
 // Update User
 exports.updateUser = async (req, res) => {
-  const fileStr = req.body.photo;
-  const uploadResponse = await cloudinary.uploader.upload(fileStr);
-  console.log(uploadResponse);
   try {
     const {
       name,
@@ -91,6 +85,7 @@ exports.updateUser = async (req, res) => {
       myPreferences,
       photo,
     });
+
     return res.status(201).json({
       msg: "L'utilisateur a été modifié avec succès",
       user: updatedUser,
@@ -132,7 +127,6 @@ exports.seePreferences = async (req, res) => {
     const allPreferences = await Preferences.find();
     res.send(allPreferences);
   } catch (error) {
-    console.error(error);
     res.status(500).json({errors: error.message});
   }
 };
@@ -149,7 +143,6 @@ exports.addPreferences = async (req, res) => {
     await newPref.save();
     res.status(201).json(newPref);
   } catch (error) {
-    console.error(error);
     res.status(500).json({errors: error});
   }
 };
@@ -167,7 +160,6 @@ exports.addMyPreferences = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (error) {
-    console.log(error);
     res.status(500).json({errors: error});
   }
 };

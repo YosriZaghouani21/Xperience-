@@ -1,6 +1,6 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React from 'react';
+import {useDispatch} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 // reactstrap components
 import {
@@ -18,25 +18,18 @@ import {
   Navbar,
   Nav,
   Media,
-} from "reactstrap";
-import { logout } from "../../JS/actions";
+} from 'reactstrap';
+import {logout} from '../../JS/actions';
 
 const AuthNavbar = () => {
   const dispatch = useDispatch();
 
   return (
     <>
-      <Navbar
-        className="navbar-top navbar-horizontal border "
-        expand="md"
-        style={{ padding: "0%" }}
-      >
+      <Navbar className="navbar-top navbar-horizontal border " expand="md" style={{padding: '0%'}}>
         <Container className="px-4">
           <NavbarBrand to="/" tag={Link}>
-            <img
-              alt="..."
-              src={require("../../Assets/img/brand/argon-react.png").default}
-            />
+            <img alt="..." src={require('../../Assets/img/brand/argon-react.png').default} />
           </NavbarBrand>
           <button className="navbar-toggler" id="navbar-collapse-main">
             <span className="navbar-toggler-icon" />
@@ -45,12 +38,7 @@ const AuthNavbar = () => {
             <div className="navbar-collapse-header d-md-none">
               <Row>
                 <Col className="collapse-brand" xs="6">
-                  <img
-                    alt="..."
-                    src={
-                      require("../../Assets/img/brand/argon-react.png").default
-                    }
-                  />
+                  <img alt="..." src={require('../../Assets/img/brand/argon-react.png').default} />
                 </Col>
                 <Col className="collapse-close" xs="6">
                   <button className="navbar-toggler" id="navbar-collapse-main">
@@ -61,7 +49,7 @@ const AuthNavbar = () => {
               </Row>
             </div>
             <Nav className="ml-auto" navbar>
-              {localStorage.getItem("token") ? (
+              {localStorage.getItem('token') ? (
                 <>
                   <UncontrolledDropdown nav>
                     <DropdownToggle className="pr-0" nav>
@@ -69,10 +57,7 @@ const AuthNavbar = () => {
                         <span className="avatar avatar-sm rounded-circle">
                           <img
                             alt="..."
-                            src={
-                              require("../../Assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../Assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </span>
                         <Media className="ml-2 d-none d-lg-block">
@@ -103,7 +88,7 @@ const AuthNavbar = () => {
                       <DropdownItem
                         tag={Link}
                         href="#pablo"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           dispatch(logout());
                         }}
@@ -124,11 +109,7 @@ const AuthNavbar = () => {
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink
-                      className="nav-link-icon"
-                      to="/register"
-                      tag={Link}
-                    >
+                    <NavLink className="nav-link-icon" to="/register" tag={Link}>
                       <i className="ni ni-circle-08" />
                       <span className="nav-link-inner--text">Register</span>
                     </NavLink>

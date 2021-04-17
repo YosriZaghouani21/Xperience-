@@ -17,6 +17,7 @@
     "bootstrap": "^4.6.0",
     "classnames": "^2.2.6",
     "cloudinary": "^1.25.1",
+    "cloudinary-react": "^1.7.0",
     "i": "^0.3.6",
     "mdbreact": "^5.0.1",
     "node-sass": "^5.0.0",
@@ -64,6 +65,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://localhost:5000"
+  }
 }
