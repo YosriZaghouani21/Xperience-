@@ -57,7 +57,7 @@ function App() {
           <Route path="/image" component={ImagesStep} />
 
           {localStorage.getItem("token") ? (
-            <Route path="/admin/index" component={Index} />
+            <Route path="/admin" component={Index} />
           ) : (
             <Redirect to="/login" />
           )}

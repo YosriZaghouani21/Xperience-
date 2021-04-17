@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../JS/actions";
+import Loader from "./layout/Loader";
+
 // import { Redirect } from 'react-router-dom'
 import User from "./User";
 // reactstrap components
@@ -18,7 +20,7 @@ const Admin = ({ match }) => {
   }, [dispatch]);
 
   return loading ? (
-    <h1>Loading ...</h1>
+    <Loader />
   ) : (
     <Row>
       <div className="col">

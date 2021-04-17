@@ -19,7 +19,7 @@ import {
   ADD_PREFERENCES,
   ADD_PREFERENCES_SUCCESS,
   ADD_PREFERENCES_FAIL,
-} from '../constants/action-types';
+} from "../constants/action-types";
 
 const initialState = {
   loading: false,
@@ -120,17 +120,17 @@ const userReducer = (state = initialState, { type, payload }) => {
 
     case FETCH_ALL_USERS:
       return {
-        isLoading: true,
+        loading: true,
         users: [],
       };
     case FETCH_ALL_USERS_SUCCESS:
       return {
-        isLoading: false,
+        loading: false,
         users: payload.users,
       };
     case FETCH_ALL_USERS_FAIL:
       return {
-        isLoading: false,
+        loading: false,
         error: payload,
       };
 

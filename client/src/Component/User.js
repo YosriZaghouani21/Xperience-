@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge, Media } from "reactstrap";
+import { Badge, Media, Button } from "reactstrap";
 
 const User = ({ user }) => {
   return (
@@ -12,22 +12,21 @@ const User = ({ user }) => {
                 className="avatar rounded-circle mr-3"
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
-              >
-                {/* <img
-                                                alt="..."
-                                                src={
-                                                    require("../../assets/img/theme/bootstrap.jpg")
-                                                        .default
-                                                }
-                                            /> */}
-              </a>
+              ></a>
             </Media>
           </th>
           <td>{user.name}</td>
           <td>
-            <Badge color="" className="badge-dot mr-3">
-              <i className="bg-warning" />
-            </Badge>
+            {user.role === "admin" ? (
+              <Badge className="badge-dot mr-3">
+                <i className="bg-warning" />
+              </Badge>
+            ) : (
+              <Badge className="badge-dot mr-3">
+                <i className="bg-success" />
+              </Badge>
+            )}
+
             {user.role}
           </td>
           <td>
@@ -38,6 +37,16 @@ const User = ({ user }) => {
             <div className="d-flex align-items-center">
               <span className="mr-20">{user.email}</span>
             </div>
+          </td>
+          <td>
+            <Button
+              color="primary"
+              href="#pablo"
+              onClick={(e) => e.preventDefault()}
+              size="sm"
+            >
+              Voir tout
+            </Button>
           </td>
         </tr>
       </tbody>
