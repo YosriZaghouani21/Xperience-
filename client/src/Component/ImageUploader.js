@@ -16,7 +16,6 @@ export default function ImageUploader({image, setImage}) {
 
   function handleFiles(files) {
     for (let i = 0; i < files.length; i++) {
-      console.log(files[i]);
       uploadFile(files[i]);
     }
   }
@@ -31,7 +30,6 @@ export default function ImageUploader({image, setImage}) {
     // Update progress (can be used to show progress indicator)
     xhr.upload.addEventListener('progress', e => {
       setProgress(Math.round((e.loaded * 100.0) / e.total));
-      console.log(Math.round((e.loaded * 100.0) / e.total));
     });
 
     xhr.onreadystatechange = e => {
@@ -55,7 +53,7 @@ export default function ImageUploader({image, setImage}) {
 
   function handleSave() {
     setImage(image);
-    // dispatch(addImageToProfile(image));
+    dispatch(addImageToProfile(image));
   }
   return (
     <>
@@ -64,7 +62,7 @@ export default function ImageUploader({image, setImage}) {
           <img
             className="object-contain rounded-lg"
             src={image.replace('upload/', 'upload/w_600/')}
-            style={{height: 400, width: 600}}
+            style={{height: 600, width: 800}}
             alt="..."
           />
           <div className="flex justify-between items-center mt-2">
