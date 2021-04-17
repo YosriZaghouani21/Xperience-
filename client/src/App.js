@@ -24,6 +24,8 @@ import ExperienceDetails from "./Component/createdExperience/ExperienceDetails";
 import ExperiencesList from "./Component/createdExperience/ExperiencesList";
 import Home from "./Component/Home";
 import Index from "./Component/Admin/Index";
+import UserDetails from "./Component/Admin/UserDetails";
+
 import CreatorHome from "./Component/CreatorHome";
 import ImagesStep from "./Component/createdExperience/ImagesStep";
 
@@ -55,6 +57,7 @@ function App() {
           <Route path="/experience/:id" component={ExperienceDetails} />
           <Route path="/experiences" component={ExperiencesList} />
           <Route path="/image" component={ImagesStep} />
+          <Route path="/user/:id" component={UserDetails} />
 
           {localStorage.getItem("token") ? (
             <Route path="/admin" component={Index} />

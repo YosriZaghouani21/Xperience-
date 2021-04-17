@@ -19,6 +19,9 @@ import {
   ADD_PREFERENCES,
   ADD_PREFERENCES_SUCCESS,
   ADD_PREFERENCES_FAIL,
+  FETCH_USER_DETAILS,
+  FETCH_USER_DETAILS_SUCCESS,
+  FETCH_USER_DETAILS_FAIL,
 } from "../constants/action-types";
 
 const initialState = {
@@ -163,6 +166,21 @@ const userReducer = (state = initialState, { type, payload }) => {
         ...state,
         loading: false,
         errors: payload,
+      };
+    case FETCH_USER_DETAILS:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_USER_DETAILS_SUCCESS:
+      return {
+        loading: false,
+        user: payload,
+      };
+    case FETCH_USER_DETAILS_FAIL:
+      return {
+        ...state,
+        error: payload,
       };
 
     default:

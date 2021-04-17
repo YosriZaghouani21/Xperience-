@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Badge, Media, Button } from "reactstrap";
 
 const User = ({ user }) => {
@@ -39,14 +40,9 @@ const User = ({ user }) => {
             </div>
           </td>
           <td>
-            <Button
-              color="primary"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-              size="sm"
-            >
+            <Link to={`/user/${user._id}`} className=" btn btn-info">
               Voir tout
-            </Button>
+            </Link>
           </td>
         </tr>
       </tbody>

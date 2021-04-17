@@ -174,3 +174,12 @@ exports.addMyPreferences = async (req, res) => {
     res.status(500).json({ errors: error });
   }
 };
+//getUserById
+exports.getSingleUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.json({ status: "success", user: user });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};

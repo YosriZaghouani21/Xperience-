@@ -8,6 +8,7 @@ const {
   seePreferences,
   addPreferences,
   addMyPreferences,
+  getSingleUser,
 } = require("../controllers/user.controller");
 const { registerRules, validator } = require("../middleware/validator");
 const isAuth = require("../middleware/passport-setup");
@@ -27,5 +28,6 @@ Router.get("/users", allUsers);
 Router.get("/preferences", seePreferences);
 Router.post("/preferences/add", addPreferences);
 Router.put("/mypreferences/:id", addMyPreferences);
+Router.get("/user/:id", getSingleUser);
 
 module.exports = Router;

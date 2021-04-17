@@ -21,6 +21,9 @@ import {
   ADD_PREFERENCES,
   ADD_PREFERENCES_SUCCESS,
   ADD_PREFERENCES_FAIL,
+  FETCH_USER_DETAILS,
+  FETCH_USER_DETAILS_SUCCESS,
+  FETCH_USER_DETAILS_FAIL,
 } from "../constants/action-types";
 import {
   FETCH_ALL_EXPERIENCES,
@@ -179,7 +182,25 @@ export const addPreferences = (userId, preferenceId) => async (dispatch) => {
     });
   }
 };
-
+export const getUserDetails = (id) => async (dispatch) => {
+  dispatch({ type: FETCH_USER_DETAILS });
+  try {
+    const { data } = await axios.get(`/user/user/${id}`);
+    dispatch({
+      type: FETCH_USER_DETAILS_SUCCESS,
+      payload: data.user,
+    });
+  } catch (error) {
+    console.log(
+      "🚀 ~ file: experienceActions.js ~ line 38 ~ getExperienceDetails ~ error",
+      error
+    );
+    dispatch({
+      type: FETCH_USER_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 export const addExperience = (newExperience) => async (dispatch) => {
   dispatch({
     type: ADD_EXPERIENCE,
