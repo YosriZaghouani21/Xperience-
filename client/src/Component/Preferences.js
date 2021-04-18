@@ -29,11 +29,6 @@ const Preferences = () => {
     if (user) setlocalPref(preferences);
   }, [user]);
 
-  //Filter the preferences user table if it includes Duplicated items
-  // let chars = [];
-  // let uniqueChars = [];
-  // console.log(uniqueChars);
-
   return loading ? (
     <h1>Loading ...</h1>
   ) : !localStorage.getItem('token') ? (
