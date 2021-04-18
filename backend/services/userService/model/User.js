@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema.Types;
+const mongoose = require('mongoose');
+const {ObjectId} = mongoose.Schema.Types;
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
   },
   role: {
     type: String,
-    default: "user",
+    default: 'user',
   },
   birthday: {
     type: Date,
@@ -39,15 +39,15 @@ const userSchema = mongoose.Schema({
   myPreferences: [
     {
       type: ObjectId,
-      ref: "preferences",
+      ref: 'preferences',
     },
   ],
   myExperiences: [
     {
       type: ObjectId,
-      ref: "Experience",
+      ref: 'Experience',
     },
   ],
 });
 
-module.exports = User = mongoose.model("user", userSchema);
+module.exports = User = mongoose.model('user', userSchema);

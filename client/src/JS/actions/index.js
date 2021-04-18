@@ -183,7 +183,7 @@ export const addPreferences = (userId, preferenceId) => async dispatch => {
       payload: data,
     });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     dispatch({
       type: ADD_PREFERENCES_FAIL,
       payload: error.response,
