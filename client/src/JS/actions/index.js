@@ -40,6 +40,10 @@ import {
   DELETE_EXPERIENCE,
   DELETE_EXPERIENCE_SUCCESS,
   DELETE_EXPERIENCE_FAIL,
+  ADD_IMAGE_TO_EXPERIENCE,
+  ADD_IMAGE_TO_EXPERIENCE2,
+  ADD_IMAGE_TO_EXPERIENCE3,
+  ADD_IMAGE_TO_EXPERIENCE4,
 } from '../constants/experienceConstants';
 
 const addUser = newUser => async dispatch => {
@@ -193,7 +197,7 @@ export const addExperience = newExperience => async dispatch => {
   });
   try {
     const addRes = await axios.post(
-      `${process.env.REACT_APP_BASE_URL}api/experience`,
+      `${process.env.REACT_APP_BASE_URL}/api/experience`,
       newExperience
     );
     dispatch({
@@ -203,7 +207,7 @@ export const addExperience = newExperience => async dispatch => {
   } catch (error) {
     dispatch({
       type: ADD_EXPERIENCE_FAIL,
-      payload: error.response.data,
+      payload: error,
     });
   }
 };
@@ -286,3 +290,9 @@ export const addImageToProfile = image => ({
   type: ADD_IMAGE_TO_PROFILE,
   payload: image,
 });
+export const addImageToExperience = image => ({
+  type: ADD_IMAGE_TO_EXPERIENCE,
+  payload:image,
+});
+
+

@@ -12,6 +12,9 @@ import {
   UPDATE_EXPERIENCE_FAIL,
   UPDATE_EXPERIENCE_SUCCESS,
   UPDATE_EXPERIENCE,
+  ADD_IMAGE_TO_EXPERIENCE,
+ADD_IMAGE_TO_EXPERIENCE2
+
 } from "../constants/experienceConstants";
 
 const initialState = {
@@ -24,6 +27,7 @@ export const experiencesReducers = (
   { type, payload }
 ) => {
   switch (type) {
+       
     case FETCH_ALL_EXPERIENCES:
       return {
         isLoading: true,
@@ -96,7 +100,15 @@ export const experiencesReducers = (
         isLoading: false,
         errors: payload,
       };
-
+ case ADD_IMAGE_TO_EXPERIENCE:
+      return {
+        ...state,
+        experience: {
+          ...state.experience,
+          photo: payload,
+        },
+      };
+      
     default:
       return state;
   }

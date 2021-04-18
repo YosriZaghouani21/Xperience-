@@ -315,7 +315,13 @@ const ExperienceDetails = ({
                 ""
               )}
               <div style={{ padding: "2%" }}>
-                <Carrousel />
+
+  <img
+      alt=""
+      className="border rounded mt-5"
+      src={experience.photo}
+      style={{height: '200px', width: '200px'}}
+        />
               </div>
               <div></div>
             </Card>

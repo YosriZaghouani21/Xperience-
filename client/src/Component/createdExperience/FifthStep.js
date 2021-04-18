@@ -68,10 +68,10 @@ const FifthStep = ({
         <div className="main-content">
           <Container fluid>
             {/* progress */}
-            <div className="text-center">3 de 4</div>
+            <div className="text-center">5 de 6</div>
             <Progress multi style={{ height: "21px" }}>
-              <Progress bar value="70">
-                100%
+              <Progress bar value="90">
+                90%
               </Progress>
             </Progress>
             <Col lg="12" md="12">
@@ -534,7 +534,7 @@ const FifthStep = ({
                     </Link>
                     {program !== {} ? (
                       <Link
-                        to="/experiences"
+                    to={`/image/${id}`}
                         className="btn btn-primary"
                         onClick={() => {
                           dispatch(
@@ -549,10 +549,9 @@ const FifthStep = ({
                               isCreated: true,
                             })
                           );
-                          dispatch(getExperiences());
                         }}
                       >
-                        enregistrer
+                        suivant
                       </Link>
                     ) : (
                       <Button
