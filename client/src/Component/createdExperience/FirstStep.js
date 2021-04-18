@@ -43,6 +43,10 @@ const FirstStep = () => {
     dispatch(getProfile());
     dispatch(addExperience({ type: { title: type } }));
   }, [dispatch, type]);
+  
+    useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
   return localStorage.getItem("token") && isLoading ? (
     <Loader />
   ) : experience ? (
@@ -53,7 +57,7 @@ const FirstStep = () => {
         <div className="main-content">
           <Container fluid>
             <div>
-              <div className="text-center">1 de 4</div>
+              <div className="text-center">1 de 6</div>
               <Progress style={{ height: "21px" }} value="15">
                 20%
               </Progress>

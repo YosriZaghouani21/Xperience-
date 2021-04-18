@@ -56,8 +56,8 @@ function App() {
           <Route path="/fifth/:id" component={FifthStep} />
           <Route path="/experience/:id" component={ExperienceDetails} />
           <Route path="/experiences" component={ExperiencesList} />
-          <Route path="/image" component={ImagesStep} />
           <Route path="/user/:id" component={UserDetails} />
+          <Route path="/image/:id" component={ImagesStep} />
 
           {localStorage.getItem("token") ? (
             <Route path="/admin" component={Index} />

@@ -22,7 +22,8 @@ import {
   FETCH_USER_DETAILS,
   FETCH_USER_DETAILS_SUCCESS,
   FETCH_USER_DETAILS_FAIL,
-} from "../constants/action-types";
+  ADD_IMAGE_TO_PROFILE,
+} from '../constants/action-types';
 
 const initialState = {
   loading: false,
@@ -31,8 +32,16 @@ const initialState = {
   preferences: [],
 };
 
-const userReducer = (state = initialState, { type, payload }) => {
+const userReducer = (state = initialState, {type, payload}) => {
   switch (type) {
+    case ADD_IMAGE_TO_PROFILE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          photo: payload,
+        },
+      };
     case REGISTER_USER:
       return {
         ...state,
@@ -182,7 +191,6 @@ const userReducer = (state = initialState, { type, payload }) => {
         ...state,
         error: payload,
       };
-
     default:
       return state;
   }

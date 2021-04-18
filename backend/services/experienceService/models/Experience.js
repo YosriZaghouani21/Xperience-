@@ -91,7 +91,18 @@ const experienceSchema = new Schema(
       type: ObjectId,
       ref: "user",
     },
-    images: [{ public_id: String, url: String }],
+    photo: {
+    type: String,
+  },
+   photo2: {
+    type: String,
+  },
+   photo3: {
+    type: String,
+  },
+   photo4: {
+    type: String,
+  },
   },
   {
     timestamps: true,

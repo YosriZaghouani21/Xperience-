@@ -1,41 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
-import { getProfile, logout, updateProfile } from "../JS/actions";
-import { useAlert } from "react-alert";
-import FileUpload from "./FileUpload";
-import {
-  Container,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Form,
-  Input,
-  Row,
-  Col,
-} from "reactstrap";
-import Loader from "./layout/Loader";
-import AuthNavbar from "./layout/AuthNavbar";
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Button} from 'react-bootstrap';
+import {Link, Redirect} from 'react-router-dom';
+import {getProfile, logout, updateProfile} from '../JS/actions';
+import {useAlert} from 'react-alert';
+import {Container, Card, CardHeader, CardBody, FormGroup, Form, Input, Row, Col} from 'reactstrap';
+import Loader from './layout/Loader';
+import AuthNavbar from './layout/AuthNavbar';
+import ImageUploader from './ImageUploader';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector((state) => state.userReducer.isAuth);
-  const user = useSelector((state) => state.userReducer.user);
-  const loading = useSelector((state) => state.userReducer.loading);
+  const isAuth = useSelector(state => state.userReducer.isAuth);
+  const user = useSelector(state => state.userReducer.user);
+  const loading = useSelector(state => state.userReducer.loading);
   const [edit, setEdit] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [city, setCity] = useState("");
-  const [adress, setAdress] = useState("");
-  const [aboutMe, setAboutme] = useState("");
-  const [postalCode, setPostalcode] = useState("");
-  const [photo, setphoto] = useState("");
-  const [previewSource, setPreviewSource] = useState(
-    "../../public/images/1.jpg"
-  );
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
+  const [city, setCity] = useState('');
+  const [adress, setAdress] = useState('');
+  const [aboutMe, setAboutme] = useState('');
+  const [postalCode, setPostalcode] = useState('');
+  const [photo, setphoto] = useState();
+  // const [previewSource, setPreviewSource] = useState('../../public/images/1.jpg');
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [editDone, setEditDone] = useState(false);
   const alert = useAlert();
@@ -50,10 +38,10 @@ const Profile = () => {
       setAboutme(user.aboutMe);
       setAdress(user.adress);
       setPostalcode(user.postalCode);
-      setphoto(user.setphoto);
+      setphoto(user.photo);
     }
   }, [user]);
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     dispatch(
@@ -70,54 +58,6 @@ const Profile = () => {
       })
     );
     setEditDone(true);
-  };
-
-  // const onChange = (e) => {
-  //   if (e.target.name === "photo") {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       if (reader.readyState === 2) {
-  //         setPreviewSource(reader.result);
-  //         setphoto(reader.result);
-  //       }
-  //     };
-  //     reader.readAsDataURL(e.target.files[0]);
-  //   }
-  // };
-
-  const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-
-    previewFile(file);
-  };
-
-  const previewFile = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    };
-  };
-
-  const handleSubmitFile = (e) => {
-    console.log("submitiing");
-    e.preventDefault();
-    if (!previewSource) return;
-    uploadImage(previewSource);
-  };
-
-  const uploadImage = async (base64EncodedImage) => {
-    const id = user._id;
-    // console.log(base64EncodedImage);
-    try {
-      await fetch(`/profile/${id}`, {
-        method: "PUT",
-        body: JSON.stringify({ data: base64EncodedImage }),
-        headers: { "Content-type": "application/json" },
-      });
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   useEffect(() => {
@@ -140,7 +80,7 @@ const Profile = () => {
     <div className="main-content">
       {loading ? (
         <Loader />
-      ) : localStorage.getItem("token") ? (
+      ) : localStorage.getItem('token') ? (
         <div className="header bg-white py-7 py-lg-6">
           <AuthNavbar />
           <Container fluid className="mt-6">
@@ -150,14 +90,12 @@ const Profile = () => {
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
-                        <a href="#pablo">
-                          <img
-                            alt="chosen"
-                            className="rounded-circle"
-                            src={previewSource}
-                            style={{ height: "200px", width: "200px" }}
-                          />
-                        </a>
+                        <img
+                          alt="chosen"
+                          className="rounded-circle"
+                          src={photo}
+                          style={{height: '200px', width: '200px'}}
+                        />
                       </div>
                     </Col>
                   </Row>
@@ -171,15 +109,7 @@ const Profile = () => {
                       <span className="font-weight-light">
                         <strong>Age</strong> <br />
                         <strong>
-                          {user ? (
-                            user.birthday ? (
-                              getAge(birthday)
-                            ) : (
-                              <p></p>
-                            )
-                          ) : (
-                            <p></p>
-                          )}
+                          {user ? user.birthday ? getAge(birthday) : <p></p> : <p></p>}
                         </strong>
                       </span>
                       <div className="h5 font-weight-300">
@@ -227,10 +157,7 @@ const Profile = () => {
                           <Row>
                             <Col lg="6">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-username"
-                                >
+                                <label className="form-control-label" htmlFor="input-username">
                                   Nom et prénom
                                 </label>
                                 <Input
@@ -239,16 +166,13 @@ const Profile = () => {
                                   name="text"
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={name}
-                                  onChange={(e) => setName(e.target.value)}
+                                  onChange={e => setName(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
                             <Col lg="6">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-email"
-                                >
+                                <label className="form-control-label" htmlFor="input-email">
                                   Email
                                 </label>
                                 <Input
@@ -257,7 +181,7 @@ const Profile = () => {
                                   name="email"
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={email}
-                                  onChange={(e) => setEmail(e.target.value)}
+                                  onChange={e => setEmail(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
@@ -265,10 +189,7 @@ const Profile = () => {
                           <Row>
                             <Col lg="6">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-first-name"
-                                >
+                                <label className="form-control-label" htmlFor="input-first-name">
                                   Téléphone
                                 </label>
                                 <Input
@@ -277,18 +198,13 @@ const Profile = () => {
                                   name="phoneNumber"
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={phoneNumber}
-                                  onChange={(e) =>
-                                    setPhoneNumber(e.target.value)
-                                  }
+                                  onChange={e => setPhoneNumber(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
                             <Col lg="6">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-last-name"
-                                >
+                                <label className="form-control-label" htmlFor="input-last-name">
                                   Date de naissance
                                 </label>
                                 <Input
@@ -297,7 +213,7 @@ const Profile = () => {
                                   name="birthday"
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={birthday}
-                                  onChange={(e) => setBirthday(e.target.value)}
+                                  onChange={e => setBirthday(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
@@ -310,10 +226,7 @@ const Profile = () => {
                           <Row>
                             <Col md="12">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-address"
-                                >
+                                <label className="form-control-label" htmlFor="input-address">
                                   Addresse
                                 </label>
                                 <Input
@@ -323,7 +236,7 @@ const Profile = () => {
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={adress}
                                   defaultValue={adress}
-                                  onChange={(e) => setAdress(e.target.value)}
+                                  onChange={e => setAdress(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
@@ -331,10 +244,7 @@ const Profile = () => {
                           <Row>
                             <Col lg="4">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-city"
-                                >
+                                <label className="form-control-label" htmlFor="input-city">
                                   Ville
                                 </label>
                                 <Input
@@ -343,16 +253,13 @@ const Profile = () => {
                                   name="city"
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={city}
-                                  onChange={(e) => setCity(e.target.value)}
+                                  onChange={e => setCity(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
                             <Col lg="4">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-country"
-                                >
+                                <label className="form-control-label" htmlFor="input-country">
                                   Code postal
                                 </label>
                                 <Input
@@ -362,18 +269,14 @@ const Profile = () => {
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={postalCode}
                                   defaultValue={postalCode}
-                                  onChange={(e) =>
-                                    setPostalcode(e.target.value)
-                                  }
+                                  onChange={e => setPostalcode(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
                           </Row>
                         </div>
                         <hr className="my-4" />
-                        <h6 className="heading-small text-muted mb-4">
-                          A propos moi
-                        </h6>
+                        <h6 className="heading-small text-muted mb-4">A propos moi</h6>
                         <div className="pl-lg-4">
                           <FormGroup>
                             <Input
@@ -383,52 +286,25 @@ const Profile = () => {
                               defaultValue={aboutMe}
                               type="textarea"
                               value={aboutMe}
-                              onChange={(e) => setAboutme(e.target.value)}
+                              onChange={e => setAboutme(e.target.value)}
                             />
                           </FormGroup>
-                          {/* /////////////////////////////////// */}
-                          {/* <FormGroup>
-                            <input
-                              id="fileInput"
-                              type="file"
-                              name="image"
-                              onChange={handleFileInputChange}
-                              value={photo}
-                              className="form-input"
-                            ></input>
-                          </FormGroup> */}
-                          {/* /////////////////////////////////// */}
+
                           <Button
                             type="submit"
                             variant="info"
-                            style={{ marginLeft: "85%" }}
-                            onClick={(e) => {
+                            style={{marginLeft: '85%'}}
+                            onClick={e => {
                               handleSubmit(e);
                               setEdit(false);
-                              alert.show("Votre profil a été mis à jour");
+                              alert.show('Votre profil a été mis à jour');
                             }}
                           >
                             Enregistrer
                           </Button>
                         </div>
                       </Form>
-                      <Form
-                        onSubmit={handleSubmitFile}
-                        className="form"
-                        encType="multipart/form-data"
-                      >
-                        <input
-                          id="fileInput"
-                          type="file"
-                          name="image"
-                          onChange={handleFileInputChange}
-                          value={photo}
-                          accept="images/*"
-                        />
-                        <button className="btn" type="submit">
-                          Submit
-                        </button>
-                      </Form>
+                      <ImageUploader image={photo} setImage={setphoto} />
                     </CardBody>
                   ) : (
                     <CardBody>
@@ -437,10 +313,7 @@ const Profile = () => {
                           <Row>
                             <Col lg="6">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-username"
-                                >
+                                <label className="form-control-label" htmlFor="input-username">
                                   Nom et prénom
                                 </label>
                                 <Input
@@ -449,17 +322,14 @@ const Profile = () => {
                                   name="text"
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={name}
-                                  onChange={(e) => setName(e.target.value)}
+                                  onChange={e => setName(e.target.value)}
                                   disabled
                                 />
                               </FormGroup>
                             </Col>
                             <Col lg="6">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-email"
-                                >
+                                <label className="form-control-label" htmlFor="input-email">
                                   Email
                                 </label>
                                 <Input
@@ -468,7 +338,7 @@ const Profile = () => {
                                   name="email"
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={email}
-                                  onChange={(e) => setEmail(e.target.value)}
+                                  onChange={e => setEmail(e.target.value)}
                                   disabled
                                 />
                               </FormGroup>
@@ -477,10 +347,7 @@ const Profile = () => {
                           <Row>
                             <Col lg="6">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-first-name"
-                                >
+                                <label className="form-control-label" htmlFor="input-first-name">
                                   Téléphone
                                 </label>
                                 <Input
@@ -489,19 +356,14 @@ const Profile = () => {
                                   name="phoneNumber"
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={phoneNumber}
-                                  onChange={(e) =>
-                                    setPhoneNumber(e.target.value)
-                                  }
+                                  onChange={e => setPhoneNumber(e.target.value)}
                                   disabled
                                 />
                               </FormGroup>
                             </Col>
                             <Col lg="6">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-last-name"
-                                >
+                                <label className="form-control-label" htmlFor="input-last-name">
                                   Date de naissance
                                 </label>
                                 <Input
@@ -511,7 +373,7 @@ const Profile = () => {
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={birthday}
                                   defaultValue={birthday}
-                                  onChange={(e) => setBirthday(e.target.value)}
+                                  onChange={e => setBirthday(e.target.value)}
                                   disabled
                                 />
                               </FormGroup>
@@ -526,10 +388,7 @@ const Profile = () => {
                           <Row>
                             <Col md="12">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-address"
-                                >
+                                <label className="form-control-label" htmlFor="input-address">
                                   Addresse
                                 </label>
                                 <Input
@@ -539,7 +398,7 @@ const Profile = () => {
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={adress}
                                   defaultValue={adress}
-                                  onChange={(e) => setAdress(e.target.value)}
+                                  onChange={e => setAdress(e.target.value)}
                                   disabled
                                 />
                               </FormGroup>
@@ -548,10 +407,7 @@ const Profile = () => {
                           <Row>
                             <Col lg="4">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-city"
-                                >
+                                <label className="form-control-label" htmlFor="input-city">
                                   Ville
                                 </label>
                                 <Input
@@ -561,17 +417,14 @@ const Profile = () => {
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={city}
                                   defaultValue={city}
-                                  onChange={(e) => setCity(e.target.value)}
+                                  onChange={e => setCity(e.target.value)}
                                   disabled
                                 />
                               </FormGroup>
                             </Col>
                             <Col lg="4">
                               <FormGroup>
-                                <label
-                                  className="form-control-label"
-                                  htmlFor="input-country"
-                                >
+                                <label className="form-control-label" htmlFor="input-country">
                                   Code postal
                                 </label>
                                 <Input
@@ -581,9 +434,7 @@ const Profile = () => {
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={postalCode}
                                   defaultValue={postalCode}
-                                  onChange={(e) =>
-                                    setPostalcode(e.target.value)
-                                  }
+                                  onChange={e => setPostalcode(e.target.value)}
                                   disabled
                                 />
                               </FormGroup>
@@ -591,9 +442,7 @@ const Profile = () => {
                           </Row>
                         </div>
                         <hr className="my-4" />
-                        <h6 className="heading-small text-muted mb-4">
-                          A propos
-                        </h6>
+                        <h6 className="heading-small text-muted mb-4">A propos</h6>
 
                         <div className="pl-lg-4">
                           <FormGroup>
@@ -604,7 +453,7 @@ const Profile = () => {
                               defaultValue={aboutMe}
                               type="textarea"
                               value={aboutMe}
-                              onChange={(e) => setAboutme(e.target.value)}
+                              onChange={e => setAboutme(e.target.value)}
                               disabled
                             />
                           </FormGroup>

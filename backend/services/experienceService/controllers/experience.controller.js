@@ -232,6 +232,10 @@ const experienceController = {
         isCreated,
         limitParticipants,
         userID,
+        photo,
+         photo2,
+          photo3,
+          photo4
       } = req.body;
       await Experiences.findByIdAndUpdate(
         { _id: req.params.id },
@@ -258,6 +262,10 @@ const experienceController = {
           isCreated,
           limitParticipants,
           userID,
+          photo,
+          photo2,
+          photo3,
+          photo4
         }
       );
       res.json({ msg: "L'expérience a été modifié avec succès" });
