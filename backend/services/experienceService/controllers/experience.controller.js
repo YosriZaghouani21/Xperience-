@@ -268,7 +268,7 @@ const experienceController = {
           photo4
         }
       );
-      res.json({ msg: "L'expérience a été modifié avec succès" });
+      res.json({ msg: "L'expérience a été modifié avec succès"});
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }

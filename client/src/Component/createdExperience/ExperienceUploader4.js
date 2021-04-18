@@ -1,9 +1,9 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {addImageToExperience, updateExperience,getExperienceDetails} from '../../JS/actions/index';
+import {addImageToExperience4, updateExperience,getExperienceDetails} from '../../JS/actions/index';
 import {Button} from 'react-bootstrap';
 
-export default function ExperienceUploader({image, setImage,id, exp}) {
+export default function ExperienceUploader4({image4, setImage4,id}) {
   const dispatch = useDispatch();
   const fileSelect = useRef(null);
    const [show, setShow] = useState(false);
@@ -39,7 +39,7 @@ export default function ExperienceUploader({image, setImage,id, exp}) {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const response = JSON.parse(xhr.responseText);
 
-        setImage(response.secure_url);
+        setImage4(response.secure_url);
             setShow(true)
 
         console.log(response.secure_url);
@@ -50,32 +50,28 @@ export default function ExperienceUploader({image, setImage,id, exp}) {
     fd.append('tags', 'browser_upload');
     fd.append('file', file);
     xhr.send(fd);
-    console.log(experience)
 
   }
 
   function handleCancel() {
-      if(experience && experience.photo){
-          setImage(experience.photo)
+      if(experience && experience.photo4){
+          setImage4(experience.photo4)
       }
-      else {setImage(null);}
+      else {setImage4(null);}
       setShow(false)
-    
   }
 
   function handleSave() {
-    setImage(image);
-    console.log(experience)
-    dispatch(addImageToExperience(image));
-    console.log(experience)
-    dispatch(getExperienceDetails(id))
+    setImage4(image4);
+    dispatch(addImageToExperience4(image4));
+           dispatch(getExperienceDetails(id))
 
-    dispatch(updateExperience(id,{...experience,photo:image}))
+    dispatch(updateExperience(id,{...experience,photo4 :image4}))
     setShow(false)
   }
   return (
     <>
-      {image && show ? (
+      {image4 && show ? (
         <>
           <div className="flex justify-between items-center mt-2">
             <Button

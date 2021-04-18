@@ -1,14 +1,13 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {addImageToExperience, updateExperience,getExperienceDetails} from '../../JS/actions/index';
+import {addImageToExperience3, updateExperience,getExperienceDetails} from '../../JS/actions/index';
 import {Button} from 'react-bootstrap';
 
-export default function ExperienceUploader({image, setImage,id, exp}) {
+export default function ExperienceUploader3({image3, setImage3,id, exp}) {
   const dispatch = useDispatch();
   const fileSelect = useRef(null);
    const [show, setShow] = useState(false);
   const [progress, setProgress] = useState(0);
-
  const experience = useSelector(
     (state) => state.experiencesReducers.experience
   );
@@ -39,7 +38,7 @@ export default function ExperienceUploader({image, setImage,id, exp}) {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const response = JSON.parse(xhr.responseText);
 
-        setImage(response.secure_url);
+        setImage3(response.secure_url);
             setShow(true)
 
         console.log(response.secure_url);
@@ -50,32 +49,29 @@ export default function ExperienceUploader({image, setImage,id, exp}) {
     fd.append('tags', 'browser_upload');
     fd.append('file', file);
     xhr.send(fd);
-    console.log(experience)
 
   }
 
   function handleCancel() {
-      if(experience && experience.photo){
-          setImage(experience.photo)
+      if(experience && experience.photo3){
+          setImage3(experience.photo3)
       }
-      else {setImage(null);}
+      else {setImage3(null);}
       setShow(false)
-    
   }
 
   function handleSave() {
-    setImage(image);
-    console.log(experience)
-    dispatch(addImageToExperience(image));
-    console.log(experience)
-    dispatch(getExperienceDetails(id))
+    setImage3(image3);
+    dispatch(addImageToExperience3(image3));
+       dispatch(getExperienceDetails(id))
+    dispatch(updateExperience(id,{...experience,photo3 :image3}))
 
-    dispatch(updateExperience(id,{...experience,photo:image}))
     setShow(false)
+
   }
   return (
     <>
-      {image && show ? (
+      {image3 && show ? (
         <>
           <div className="flex justify-between items-center mt-2">
             <Button

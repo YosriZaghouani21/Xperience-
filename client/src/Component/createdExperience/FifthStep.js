@@ -570,8 +570,7 @@ const FifthStep = ({
         </div>
       </>
     ) : (
-      <p></p>
-    )
+<p></p> )
   ) : (
     <Redirect to="/login" />
   );

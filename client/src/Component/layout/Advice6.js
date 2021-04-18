@@ -123,11 +123,21 @@ const Advice6
         <Collapse navbar isOpen={collapseOpen}>
           {/* Collapse header */}
           <small>
-            <b> Différence entre les expériences en ligne et en personne</b>{" "}
+            <b> Conseils : </b>{" "}
             <br />
-            Les expériences en ligne sont organisées sur Zoom. Zoom est une
-            plate-forme cloud tierce de visioconférence. Elle peut être utilisée
-            sur ordinateur, tablette et appareil mobile.
+          <ul>
+            <li>Ajoutez des images qui vous appartient : n'utilisez pas d'oeuvres protégées par le droit d'auteur.  </li>
+        <br/>
+         <li>Ajoutez des images claires, nettes et en couleur</li>
+         <br/>
+        <li>N'ajoutez pas de filtres à vos images</li>
+        <br/>
+        <li>N'ajoutez pas d'images sombres</li>
+        <br/>
+        <li>N'ajoutez pas d'images floues</li>
+        <br/>
+        <li>Evitez les selfies</li>
+          </ul>
           </small>
           <div className="navbar-collapse-header d-md-none">
             <Row>

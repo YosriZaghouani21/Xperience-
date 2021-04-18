@@ -27,6 +27,9 @@ import Advice6 from '../layout/Advice6';
 
 
 import { Link, Redirect } from "react-router-dom";
+import ExperienceUploader2 from './ExperienceUploader2';
+import ExperienceUploader3 from './ExperienceUploader3';
+import ExperienceUploader4 from './ExperienceUploader4';
 
 const ImagesStep = ({
   match: {
@@ -53,11 +56,17 @@ const ImagesStep = ({
     
 if(experience){
  setphoto(experience.photo)
+  setphoto2(experience.photo2)
+    setphoto3(experience.photo3)
+        setphoto4(experience.photo4)
+
+
+
 console.log(experience)
 }   
   }, [experience]);
  
-  return(
+  return isLoading ? <Loader/> : (
     <>
      <div style={{ backgroundColor: "#f8f9fe" }}>
         <Advice6 />
@@ -124,16 +133,49 @@ Les photos de l'expérience                  </h2>
               style={{ padding: "2%", margin: "1%" }}
             >
 <Row>
-  <Col >
+ 
+ <Col >
+      <img
+      alt=""
+      className="border rounded mt-5"
+      src={photo2}
+      style={{height: '350px', width: '350px'}}
+        />
+     <div className="mt-1">
+     <ExperienceUploader2 exp={experience} image2={photo2} setImage2={setphoto2} id={id} />
+</div>
+     <p>Montrez vous en pleine activité.</p>
+
+</Col>
+ <Col >
+      <img
+      alt=""
+      className="border rounded mt-5"
+      src={photo3}
+      style={{height: '350px', width: '350px'}}
+        />
+     <div className="mt-1">
+     <ExperienceUploader3 exp={experience} image3={photo3} setImage3={setphoto3} id={id} />
+</div>
+     <p>Mettez l'activité en avant.</p>
+
+</Col>
+ <Col  >
       <img
       alt=""
       className="border rounded mt-5"
       src={photo}
-      style={{height: '200px', width: '200px'}}
+      style={{height: '300px', width: '230px'}}
         />
      <div className="mt-1">
-     <ExperienceUploader experience={experience} image={photo} setImage={setphoto} id={id} />
+     <ExperienceUploader exp={experience} image={photo} setImage={setphoto} id={id} />
 </div>
+     <p>Choisissez une photo qui représente l'expérience dans son ensemble.</p>
+
+</Col>
+<Col >
+     <p className="mt-8"> <i className="fas fa-arrow-left"/> C'est la photo de couverture de votre expérience. Veillez à ce qu'elle soit claire et bien cadré.</p>
+
 </Col>
 
 </Row>
@@ -145,14 +187,14 @@ Les photos de l'expérience                  </h2>
                   >
                     Précédent
                   </Link>
-                
-                    <Link
+                  <Link
                       to={`/experiences`}
                       className="btn btn-primary"
                      
                     >
                       Enregistrer
-                    </Link>
+                    </Link> 
+                  
                  
                 </div>
             </div>

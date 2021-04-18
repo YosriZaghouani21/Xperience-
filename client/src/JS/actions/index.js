@@ -317,5 +317,17 @@ export const addImageToExperience = image => ({
   type: ADD_IMAGE_TO_EXPERIENCE,
   payload:image,
 });
+export const addImageToExperience2 = image2 => ({
+  type: ADD_IMAGE_TO_EXPERIENCE2,
+  payload:image2,
+});
+export const addImageToExperience3 = image3=> ({
+  type: ADD_IMAGE_TO_EXPERIENCE3,
+  payload:image3,
+});
+export const addImageToExperience4 = image4=> ({
+  type: ADD_IMAGE_TO_EXPERIENCE4,
+  payload:image4,
+});
 
 

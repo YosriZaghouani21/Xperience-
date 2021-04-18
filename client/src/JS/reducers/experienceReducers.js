@@ -13,7 +13,10 @@ import {
   UPDATE_EXPERIENCE_SUCCESS,
   UPDATE_EXPERIENCE,
   ADD_IMAGE_TO_EXPERIENCE,
-ADD_IMAGE_TO_EXPERIENCE2
+ADD_IMAGE_TO_EXPERIENCE2,
+ADD_IMAGE_TO_EXPERIENCE3,
+ADD_IMAGE_TO_EXPERIENCE4
+
 
 } from "../constants/experienceConstants";
 
@@ -108,7 +111,30 @@ export const experiencesReducers = (
           photo: payload,
         },
       };
-      
+       case ADD_IMAGE_TO_EXPERIENCE2:
+      return {
+        ...state,
+        experience: {
+          ...state.experience,
+          photo2: payload,
+        },
+      };
+        case ADD_IMAGE_TO_EXPERIENCE3:
+      return {
+        ...state,
+        experience: {
+          ...state.experience,
+          photo3: payload,
+        },
+      };
+         case ADD_IMAGE_TO_EXPERIENCE4:
+      return {
+        ...state,
+        experience: {
+          ...state.experience,
+          photo4: payload,
+        },
+      };
     default:
       return state;
   }

@@ -13,7 +13,7 @@ const User = ({ user }) => {
                 className="avatar rounded-circle mr-3"
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
-              ></a>
+              ><img src={user.photo} alt=".."/></a>
             </Media>
           </th>
           <td>{user.name}</td>

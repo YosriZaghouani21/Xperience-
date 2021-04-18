@@ -314,13 +314,14 @@ const ExperienceDetails = ({
               ) : (
                 ""
               )}
-              <div style={{ padding: "2%" }}>
+              <div class="px-lg-5" style={{ padding: "2%" }}>
+                <h4>Les photos</h4>
 
   <img
       alt=""
-      className="border rounded mt-5"
+      className="border rounded"
       src={experience.photo}
-      style={{height: '200px', width: '200px'}}
+      style={{height: '300px', width: '300px'}}
         />
               </div>
               <div></div>

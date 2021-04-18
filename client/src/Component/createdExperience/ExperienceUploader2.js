@@ -1,9 +1,9 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {addImageToExperience, updateExperience,getExperienceDetails} from '../../JS/actions/index';
+import {addImageToExperience2, updateExperience,getExperienceDetails} from '../../JS/actions/index';
 import {Button} from 'react-bootstrap';
 
-export default function ExperienceUploader({image, setImage,id, exp}) {
+export default function ExperienceUploader2({image2, setImage2,id, exp}) {
   const dispatch = useDispatch();
   const fileSelect = useRef(null);
    const [show, setShow] = useState(false);
@@ -39,7 +39,7 @@ export default function ExperienceUploader({image, setImage,id, exp}) {
       if (xhr.readyState == 4 && xhr.status == 200) {
         const response = JSON.parse(xhr.responseText);
 
-        setImage(response.secure_url);
+        setImage2(response.secure_url);
             setShow(true)
 
         console.log(response.secure_url);
@@ -50,32 +50,31 @@ export default function ExperienceUploader({image, setImage,id, exp}) {
     fd.append('tags', 'browser_upload');
     fd.append('file', file);
     xhr.send(fd);
-    console.log(experience)
 
   }
 
   function handleCancel() {
-      if(experience && experience.photo){
-          setImage(experience.photo)
+      if(experience && experience.photo2){
+          setImage2(experience.photo2)
       }
-      else {setImage(null);}
+      else {setImage2(null);}
       setShow(false)
-    
   }
 
+  
   function handleSave() {
-    setImage(image);
+    setImage2(image2);
     console.log(experience)
-    dispatch(addImageToExperience(image));
+    dispatch(addImageToExperience2(image2));
     console.log(experience)
     dispatch(getExperienceDetails(id))
 
-    dispatch(updateExperience(id,{...experience,photo:image}))
+    dispatch(updateExperience(id,{...experience,photo2:image2}))
     setShow(false)
   }
   return (
     <>
-      {image && show ? (
+      {image2 && show ? (
         <>
           <div className="flex justify-between items-center mt-2">
             <Button
