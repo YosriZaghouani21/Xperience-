@@ -146,9 +146,14 @@ exports.addPreferences = async (req, res) => {
     res.status(500).json({errors: error});
   }
 };
+//Add Preferences to a User (Themes)
 exports.addMyPreferences = async (req, res) => {
   const userId = req.params.id;
   const {preferenceId, preferenceName} = req.body;
+  console.log(
+    '🚀 ~ file: user.controller.js ~ line 181 ~ exports.addMyPreferences= ~ preferenceId',
+    preferenceId
+  );
 
   try {
     const searchedUser = await User.findOne({_id: userId});
@@ -160,6 +165,7 @@ exports.addMyPreferences = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (error) {
+    console.log(error);
     res.status(500).json({errors: error});
   }
 };
