@@ -171,18 +171,15 @@ export const addPreferences = (userId, preferenceId) => async dispatch => {
     type: ADD_PREFERENCES,
   });
   try {
-    const {data} = await axios.put(
-      `${process.env.REACT_APP_BASE_URL}/user/mypreferences/${userId}`,
-      {
-        preferenceId,
-      }
-    );
+    const {data} = await axios.put(`/user/mypreferences/${userId}`, {
+      preferenceId,
+    });
     dispatch({
       type: ADD_PREFERENCES_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     dispatch({
       type: ADD_PREFERENCES_FAIL,
       payload: error.response,
