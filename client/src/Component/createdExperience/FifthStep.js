@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   deleteExperience,
   getExperienceDetails,
   getExperiences,
   updateExperience,
-} from "../../JS/actions/index";
+} from '../../JS/actions/index';
 import {
   Button,
   Card,
@@ -23,22 +23,20 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from "reactstrap";
-import Advice5 from "../layout/Advice5";
-import { Link, Redirect } from "react-router-dom";
-import Loader from "../layout/Loader";
+} from 'reactstrap';
+import Advice5 from '../layout/Advice5';
+import {Link, Redirect} from 'react-router-dom';
+import Loader from '../layout/Loader';
 const FifthStep = ({
   match: {
-    params: { id },
+    params: {id},
   },
 }) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  const isLoading = useSelector((state) => state.experiencesReducers.isLoading);
-  const experience = useSelector(
-    (state) => state.experiencesReducers.experience
-  );
+  const isLoading = useSelector(state => state.experiencesReducers.isLoading);
+  const experience = useSelector(state => state.experiencesReducers.experience);
 
   const [program, setProgram] = useState({});
   const [excludedEq, setExcludedEq] = useState({});
@@ -59,7 +57,7 @@ const FifthStep = ({
       }
     }
   }, [experience]);
-  return localStorage.getItem("token") ? (
+  return localStorage.getItem('token') ? (
     isLoading ? (
       <Loader />
     ) : experience ? (
@@ -69,16 +67,13 @@ const FifthStep = ({
           <Container fluid>
             {/* progress */}
             <div className="text-center">5 de 6</div>
-            <Progress multi style={{ height: "21px" }}>
+            <Progress multi style={{height: '21px'}}>
               <Progress bar value="90">
                 90%
               </Progress>
             </Progress>
             <Col lg="12" md="12">
-              <div
-                className="header-body border-0"
-                style={{ padding: "2%", margin: "1%" }}
-              >
+              <div className="header-body border-0" style={{padding: '2%', margin: '1%'}}>
                 {/* button exit */}
                 {experience.type &&
                 experience.title &&
@@ -86,15 +81,15 @@ const FifthStep = ({
                 experience.program ? (
                   <Link
                     to="/experiences"
-                    style={{ float: "right" }}
+                    style={{float: 'right'}}
                     className=" btn btn-sm"
                     onClick={() => {
                       dispatch(
                         updateExperience(id, {
                           ...experience,
-                          program: { generalDesc: program.generalDesc },
-                          excludedEq: { ...excludedEq },
-                          includedEq: { ...includedEq },
+                          program: {generalDesc: program.generalDesc},
+                          excludedEq: {...excludedEq},
+                          includedEq: {...includedEq},
                           isValidated: false,
                           isBeingValidated: false,
                           isPublished: false,
@@ -109,8 +104,8 @@ const FifthStep = ({
                   <Button
                     onClick={toggle}
                     style={{
-                      padding: "0.5% 0.5% 0%",
-                      float: "right",
+                      padding: '0.5% 0.5% 0%',
+                      float: 'right',
                     }}
                   >
                     <i className="ni ni-fat-remove" />
@@ -119,20 +114,17 @@ const FifthStep = ({
 
                 {/* modal */}
                 <Modal isOpen={modal} toggle={toggle}>
-                  <ModalHeader toggle={toggle}>
-                    Abandonner la création ?
-                  </ModalHeader>
+                  <ModalHeader toggle={toggle}>Abandonner la création ?</ModalHeader>
                   <ModalBody>
-                    Si vous abandonner la création, vous perderz toutes les
-                    informations saisies.
+                    Si vous abandonner la création, vous perderz toutes les informations saisies.
                   </ModalBody>
                   <ModalFooter>
                     <Button color="primary" onClick={toggle}>
                       Continuer
-                    </Button>{" "}
+                    </Button>{' '}
                     <Link
                       className="btn"
-                      to={"/experiences"}
+                      to={'/experiences'}
                       color="secondary"
                       onClick={() => {
                         dispatch(deleteExperience(experience._id));
@@ -146,8 +138,8 @@ const FifthStep = ({
                 </Modal>
                 {/* step title */}
                 <Col lg="7" md="10">
-                  <h2 style={{ color: "#32325d" }}>
-                    <i class="far fa-file-alt" style={{ padding: "2%" }} />
+                  <h2 style={{color: '#32325d'}}>
+                    <i class="far fa-file-alt" style={{padding: '2%'}} />
                     Le programme de l'expérience
                   </h2>
                 </Col>
@@ -156,7 +148,7 @@ const FifthStep = ({
                   <Card className=" shadow border-0">
                     <CardHeader className="bg-transparent">
                       {/* experience type */}
-                      {experience.type.title === "en ligne" ? (
+                      {experience.type.title === 'en ligne' ? (
                         <div className="icon icon-shape bg-secondary text-black rounded-circle shadow">
                           <i className="ni ni-laptop" />
                         </div>
@@ -173,12 +165,9 @@ const FifthStep = ({
                         <p
                           for="exampleText"
                           className="h3 font-weight-bold mb-0"
-                          style={{ paddingTop: "2%" }}
+                          style={{paddingTop: '2%'}}
                         >
-                          <i
-                            className="fas fa-align-justify"
-                            style={{ paddingRight: "1%" }}
-                          />
+                          <i className="fas fa-align-justify" style={{paddingRight: '1%'}} />
                           Description générale
                         </p>
                         <FormGroup>
@@ -192,7 +181,7 @@ const FifthStep = ({
                                 ? experience.program.generalDesc
                                 : program.generalDesc
                             }
-                            onChange={(e) =>
+                            onChange={e =>
                               setProgram({
                                 ...program,
                                 generalDesc: e.target.value,
@@ -200,35 +189,24 @@ const FifthStep = ({
                             }
                             placeholder="Rédiger ici.."
                           />
-                          <span
-                            className="mr-2 text-sm"
-                            style={{ color: "#2dce89" }}
-                          >
+                          <span className="mr-2 text-sm" style={{color: '#2dce89'}}>
                             <i className="ni ni-bulb-61" />
-                            Votre description doit donner envie de participer à
-                            votre expérience. Imaginez qu'elle raconte une
-                            histoire, avec un début, un milieu et une fin.{" "}
+                            Votre description doit donner envie de participer à votre expérience.
+                            Imaginez qu'elle raconte une histoire, avec un début, un milieu et une
+                            fin.{' '}
                           </span>
                         </FormGroup>
                       </Col>
-                      <h3
-                        className="font-weight-bold mb-0"
-                        style={{ padding: "2%" }}
-                      >
+                      <h3 className="font-weight-bold mb-0" style={{padding: '2%'}}>
                         Les équipements inclus
                       </h3>
                       <Row>
                         <Col lg="6" xl="4">
                           <Card className="card-stats mb-4 mb-xl-0">
-                            <CardBody style={{ padding: "5%" }}>
+                            <CardBody style={{padding: '5%'}}>
                               <Row>
-                                <div
-                                  className="col"
-                                  style={{ paddingTop: "5%" }}
-                                >
-                                  <CardTitle className=" mb-0">
-                                    A manger
-                                  </CardTitle>
+                                <div className="col" style={{paddingTop: '5%'}}>
+                                  <CardTitle className=" mb-0">A manger</CardTitle>
                                 </div>
 
                                 <Col className="col-auto">
@@ -238,10 +216,10 @@ const FifthStep = ({
                                 </Col>
                               </Row>
 
-                              <div style={{ paddingTop: "3%" }}>
+                              <div style={{paddingTop: '3%'}}>
                                 <FormGroup>
                                   <Input
-                                    onChange={(e) =>
+                                    onChange={e =>
                                       setIncludedEq({
                                         ...includedEq,
                                         food: e.target.value,
@@ -256,6 +234,7 @@ const FifthStep = ({
                                     }
                                     placeholder="Entrez ici la nourriture"
                                     type="textarea"
+                                    maxlength="150"
                                     name="nourriture"
                                   />
                                 </FormGroup>
@@ -265,26 +244,21 @@ const FifthStep = ({
                         </Col>
                         <Col lg="6" xl="4">
                           <Card className="card-stats mb-4 mb-xl-0">
-                            <CardBody style={{ padding: "5%" }}>
+                            <CardBody style={{padding: '5%'}}>
                               <Row>
-                                <div
-                                  className="col"
-                                  style={{ paddingTop: "5%" }}
-                                >
-                                  <CardTitle className="mb-0">
-                                    A boire
-                                  </CardTitle>
+                                <div className="col" style={{paddingTop: '5%'}}>
+                                  <CardTitle className="mb-0">A boire</CardTitle>
                                 </div>
                                 <Col className="col-auto">
                                   <div className="icon icon-shape rounded-circle shadow">
-                                    <i className="fas fa-wine-bottle" />{" "}
+                                    <i className="fas fa-wine-bottle" />{' '}
                                   </div>
                                 </Col>
                               </Row>
-                              <div style={{ paddingTop: "3%" }}>
+                              <div style={{paddingTop: '3%'}}>
                                 <FormGroup>
                                   <Input
-                                    onChange={(e) =>
+                                    onChange={e =>
                                       setIncludedEq({
                                         ...includedEq,
                                         drink: e.target.value,
@@ -308,26 +282,21 @@ const FifthStep = ({
                         </Col>
                         <Col lg="6" xl="4">
                           <Card className="card-stats mb-4 mb-xl-0">
-                            <CardBody style={{ padding: "5%" }}>
+                            <CardBody style={{padding: '5%'}}>
                               <Row>
-                                <div
-                                  className="col"
-                                  style={{ paddingTop: "5%" }}
-                                >
-                                  <CardTitle className=" mb-0">
-                                    Matériels
-                                  </CardTitle>
+                                <div className="col" style={{paddingTop: '5%'}}>
+                                  <CardTitle className=" mb-0">Matériels</CardTitle>
                                 </div>
                                 <Col className="col-auto">
                                   <div className="icon icon-shape rounded-circle shadow">
-                                    <i className="fas fa-archive" />{" "}
+                                    <i className="fas fa-archive" />{' '}
                                   </div>
                                 </Col>
                               </Row>
-                              <div style={{ paddingTop: "3%" }}>
+                              <div style={{paddingTop: '3%'}}>
                                 <FormGroup>
                                   <Input
-                                    onChange={(e) =>
+                                    onChange={e =>
                                       setIncludedEq({
                                         ...includedEq,
                                         material: e.target.value,
@@ -350,41 +319,27 @@ const FifthStep = ({
                           </Card>
                         </Col>
                       </Row>
-                      <span
-                        className="mr-2 text-sm"
-                        style={{ color: "#2dce89" }}
-                      >
+                      <span className="mr-2 text-sm" style={{color: '#2dce89'}}>
                         <i className="ni ni-bulb-61" />
-                        Si les participants ont besoins de quoique ce soit pour
-                        profiter de l'expérience précisez le ici{" "}
+                        Si les participants ont besoins de quoique ce soit pour profiter de
+                        l'expérience précisez le ici{' '}
                       </span>
                       <br />
-                      <small className="mr-2 " style={{ color: "grey" }}>
-                        <i
-                          className="fas fa-info-circle"
-                          style={{ paddingRight: "1%" }}
-                        />
-                        Cette partie est facultative{" "}
+                      <small className="mr-2 " style={{color: 'grey'}}>
+                        <i className="fas fa-info-circle" style={{paddingRight: '1%'}} />
+                        Cette partie est facultative{' '}
                       </small>
 
-                      <h3
-                        className="font-weight-bold mb-0"
-                        style={{ padding: "2%" }}
-                      >
+                      <h3 className="font-weight-bold mb-0" style={{padding: '2%'}}>
                         Les équipements exclus
                       </h3>
                       <Row>
                         <Col lg="6" xl="4">
                           <Card className="card-stats mb-4 mb-xl-0">
-                            <CardBody style={{ padding: "5%" }}>
+                            <CardBody style={{padding: '5%'}}>
                               <Row>
-                                <div
-                                  className="col"
-                                  style={{ paddingTop: "5%" }}
-                                >
-                                  <CardTitle className=" mb-0">
-                                    A manger
-                                  </CardTitle>
+                                <div className="col" style={{paddingTop: '5%'}}>
+                                  <CardTitle className=" mb-0">A manger</CardTitle>
                                 </div>
 
                                 <Col className="col-auto">
@@ -394,10 +349,10 @@ const FifthStep = ({
                                 </Col>
                               </Row>
 
-                              <div style={{ paddingTop: "3%" }}>
+                              <div style={{paddingTop: '3%'}}>
                                 <FormGroup>
                                   <Input
-                                    onChange={(e) =>
+                                    onChange={e =>
                                       setExcludedEq({
                                         ...excludedEq,
                                         food: e.target.value,
@@ -421,26 +376,21 @@ const FifthStep = ({
                         </Col>
                         <Col lg="6" xl="4">
                           <Card className="card-stats mb-4 mb-xl-0">
-                            <CardBody style={{ padding: "5%" }}>
+                            <CardBody style={{padding: '5%'}}>
                               <Row>
-                                <div
-                                  className="col"
-                                  style={{ paddingTop: "5%" }}
-                                >
-                                  <CardTitle className="mb-0">
-                                    A boire
-                                  </CardTitle>
+                                <div className="col" style={{paddingTop: '5%'}}>
+                                  <CardTitle className="mb-0">A boire</CardTitle>
                                 </div>
                                 <Col className="col-auto">
                                   <div className="icon icon-shape rounded-circle shadow">
-                                    <i className="fas fa-wine-bottle" />{" "}
+                                    <i className="fas fa-wine-bottle" />{' '}
                                   </div>
                                 </Col>
                               </Row>
-                              <div style={{ paddingTop: "3%" }}>
+                              <div style={{paddingTop: '3%'}}>
                                 <FormGroup>
                                   <Input
-                                    onChange={(e) =>
+                                    onChange={e =>
                                       setExcludedEq({
                                         ...excludedEq,
                                         drink: e.target.value,
@@ -464,26 +414,21 @@ const FifthStep = ({
                         </Col>
                         <Col lg="6" xl="4">
                           <Card className="card-stats mb-4 mb-xl-0">
-                            <CardBody style={{ padding: "5%" }}>
+                            <CardBody style={{padding: '5%'}}>
                               <Row>
-                                <div
-                                  className="col"
-                                  style={{ paddingTop: "5%" }}
-                                >
-                                  <CardTitle className=" mb-0">
-                                    Matériels
-                                  </CardTitle>
+                                <div className="col" style={{paddingTop: '5%'}}>
+                                  <CardTitle className=" mb-0">Matériels</CardTitle>
                                 </div>
                                 <Col className="col-auto">
                                   <div className="icon icon-shape rounded-circle shadow">
-                                    <i className="fas fa-archive" />{" "}
+                                    <i className="fas fa-archive" />{' '}
                                   </div>
                                 </Col>
                               </Row>
-                              <div style={{ paddingTop: "3%" }}>
+                              <div style={{paddingTop: '3%'}}>
                                 <FormGroup>
                                   <Input
-                                    onChange={(e) =>
+                                    onChange={e =>
                                       setExcludedEq({
                                         ...excludedEq,
                                         material: e.target.value,
@@ -506,21 +451,14 @@ const FifthStep = ({
                           </Card>
                         </Col>
                       </Row>
-                      <span
-                        className="mr-2 text-sm"
-                        style={{ color: "#2dce89" }}
-                      >
+                      <span className="mr-2 text-sm" style={{color: '#2dce89'}}>
                         <i className="ni ni-bulb-61" />
-                        Si vous allez offrir quoique ce soit aux participants
-                        précisez le ici{" "}
+                        Si vous allez offrir quoique ce soit aux participants précisez le ici{' '}
                       </span>
                       <br />
-                      <small className="mr-2 " style={{ color: "grey" }}>
-                        <i
-                          className="fas fa-info-circle"
-                          style={{ paddingRight: "1%" }}
-                        />
-                        Cette partie est facultative{" "}
+                      <small className="mr-2 " style={{color: 'grey'}}>
+                        <i className="fas fa-info-circle" style={{paddingRight: '1%'}} />
+                        Cette partie est facultative{' '}
                       </small>
                     </CardBody>
                   </Card>
@@ -528,21 +466,21 @@ const FifthStep = ({
                     <Link
                       to={`/fourth/${experience._id}`}
                       className="btn"
-                      style={{ color: "#5e72e4", backgroundColor: "#fff" }}
+                      style={{color: '#5e72e4', backgroundColor: '#fff'}}
                     >
                       Précédent
                     </Link>
                     {program !== {} ? (
                       <Link
-                    to={`/image/${id}`}
+                        to={`/image/${id}`}
                         className="btn btn-primary"
                         onClick={() => {
                           dispatch(
                             updateExperience(id, {
                               ...experience,
-                              program: { generalDesc: program.generalDesc },
-                              excludedEq: { ...excludedEq },
-                              includedEq: { ...includedEq },
+                              program: {generalDesc: program.generalDesc},
+                              excludedEq: {...excludedEq},
+                              includedEq: {...includedEq},
                               isValidated: false,
                               isBeingValidated: false,
                               isPublished: false,
@@ -554,11 +492,7 @@ const FifthStep = ({
                         suivant
                       </Link>
                     ) : (
-                      <Button
-                        className="btn btn-primary"
-                        color="primary"
-                        disabled
-                      >
+                      <Button className="btn btn-primary" color="primary" disabled>
                         Enregistrer
                       </Button>
                     )}
@@ -570,7 +504,8 @@ const FifthStep = ({
         </div>
       </>
     ) : (
-<p></p> )
+      <p></p>
+    )
   ) : (
     <Redirect to="/login" />
   );

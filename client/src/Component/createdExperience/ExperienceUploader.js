@@ -6,7 +6,7 @@ import {Button} from 'react-bootstrap';
 export default function ExperienceUploader({image, setImage, id, exp}) {
   const dispatch = useDispatch();
   const fileSelect = useRef(null);
-   const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const experience = useSelector(state => state.experiencesReducers.experience);
@@ -63,11 +63,10 @@ export default function ExperienceUploader({image, setImage, id, exp}) {
   function handleSave() {
     setImage(image);
     console.log(experience);
+    dispatch(getExperienceDetails(id));
     dispatch(addImageToExperience(image));
     console.log(experience);
-    dispatch(getExperienceDetails(id));
 
-    dispatch(updateExperience(id, {...experience, photo: image}));
     setShow(false);
   }
   return (

@@ -91,8 +91,8 @@ const Profile = () => {
                     <Col className="order-lg-2" lg="5">
                       <div>
                         <img
-                          alt="chosen"
-                          className="rounded-circle"
+                          alt=""
+                          className="avatar  rounded-circle"
                           src={photo}
                           style={{height: '200px', width: '200px'}}
                         />
@@ -189,6 +189,7 @@ const Profile = () => {
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={email}
                                   onChange={e => setEmail(e.target.value)}
+                                  disabled
                                 />
                               </FormGroup>
                             </Col>
@@ -206,6 +207,7 @@ const Profile = () => {
                                   aria-describedby="inputGroup-sizing-sm"
                                   value={phoneNumber}
                                   onChange={e => setPhoneNumber(e.target.value)}
+                                  disabled
                                 />
                               </FormGroup>
                             </Col>

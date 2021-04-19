@@ -63,9 +63,7 @@ const ImagesStep = ({
     }
   }, [experience]);
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  return (
     <>
       <div style={{backgroundColor: '#f8f9fe'}}>
         <Advice6 />
@@ -190,9 +188,22 @@ const ImagesStep = ({
                   >
                     Précédent
                   </Link>
-                  <Link to={`/experiences`} className="btn btn-primary">
+                  <Button
+                    onClick={() => {
+                      dispatch(getExperienceDetails(id));
+                      dispatch(
+                        updateExperience(id, {
+                          ...experience,
+                          photo: photo,
+                          photo2: photo2,
+                          photo3: photo3,
+                        })
+                      );
+                    }}
+                    className="btn btn-primary"
+                  >
                     Enregistrer
-                  </Link>
+                  </Button>
                 </div>
               </div>
             </Col>
