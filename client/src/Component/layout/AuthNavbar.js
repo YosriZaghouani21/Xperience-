@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 
@@ -19,7 +19,7 @@ import {
   Nav,
   Media,
 } from 'reactstrap';
-import {logout} from '../../JS/actions';
+import {getProfile, logout} from '../../JS/actions';
 
 const AuthNavbar = () => {
   const dispatch = useDispatch();
@@ -54,9 +54,9 @@ const AuthNavbar = () => {
                   <UncontrolledDropdown nav>
                     <DropdownToggle className="pr-0" nav>
                       <Media className="align-items-center">
-                        <span className="avatar avatar-sm rounded-circle">
-                          <img alt="" />
-                        </span>
+                        <span className="  rounded-circle">
+                        <h2>                      <i className="ni ni-circle-08" />
+</h2>                    </span>
                         <Media className="ml-2 d-none d-lg-block">
                           <span className="mb-0 text-sm font-weight-bold">
                             <i className="fas fa-chevron-down" />

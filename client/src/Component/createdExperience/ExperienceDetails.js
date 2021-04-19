@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import '../../App.css';
 import Loader from '../layout/Loader';
 import {useDispatch, useSelector} from 'react-redux';
-import {getExperienceDetails, updateExperience, getExperiences} from '../../JS/actions/index';
+import {getExperienceDetails, updateExperience, getExperiences, getProfile} from '../../JS/actions/index';
 import {
   Button,
   Card,
@@ -32,16 +32,20 @@ const ExperienceDetails = ({
     console.log(`object`);
     dispatch(getExperienceDetails(id));
   }, [dispatch, id]);
-
+  useEffect(()=>{
+    dispatch(getProfile())
+  }, [dispatch]);
   const isLoading = useSelector(state => state.experiencesReducers.isLoading);
   const experience = useSelector(state => state.experiencesReducers.experience);
+  const user = useSelector(state => state.userReducer.user);
+  const loading = useSelector(state => state.userReducer.loading);
 
   console.log(
     '🚀 ~ file: ExperienceDetails.js ~ line 38 ~ ExperienceDetails ~ experience.langue',
     experience
   );
   return localStorage.getItem('token') ? (
-    isLoading ? (
+    isLoading && loading? (
       <Loader />
     ) : experience ? (
       <>
@@ -119,7 +123,7 @@ const ExperienceDetails = ({
                   <Row>
                     <Col lg="10" md="8">
                       <h3 style={{paddingTop: '2%'}}>
-                        Expérience {experience.type.title} organisée par Molka Allani
+                        Expérience {experience.type.title} organisée par  {user.name}
                       </h3>
                     </Col>
                     <Col>
@@ -127,7 +131,7 @@ const ExperienceDetails = ({
                         <span className="avatar avatar-sm rounded-circle">
                           <img
                             alt="..."
-                            src={require('../../Assets/img/theme/team-3-800x800.jpg').default}
+                            src={user.photo}
                           />
                         </span>
                       </Media>
