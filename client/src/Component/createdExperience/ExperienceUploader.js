@@ -1,17 +1,15 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {addImageToExperience, updateExperience,getExperienceDetails} from '../../JS/actions/index';
+import {addImageToExperience, updateExperience, getExperienceDetails} from '../../JS/actions/index';
 import {Button} from 'react-bootstrap';
 
-export default function ExperienceUploader({image, setImage,id, exp}) {
+export default function ExperienceUploader({image, setImage, id, exp}) {
   const dispatch = useDispatch();
   const fileSelect = useRef(null);
    const [show, setShow] = useState(false);
   const [progress, setProgress] = useState(0);
 
- const experience = useSelector(
-    (state) => state.experiencesReducers.experience
-  );
+  const experience = useSelector(state => state.experiencesReducers.experience);
   async function handleImageUpload() {
     if (fileSelect) {
       fileSelect.current.click();
@@ -40,7 +38,7 @@ export default function ExperienceUploader({image, setImage,id, exp}) {
         const response = JSON.parse(xhr.responseText);
 
         setImage(response.secure_url);
-            setShow(true)
+        setShow(true);
 
         console.log(response.secure_url);
       }
@@ -50,66 +48,48 @@ export default function ExperienceUploader({image, setImage,id, exp}) {
     fd.append('tags', 'browser_upload');
     fd.append('file', file);
     xhr.send(fd);
-    console.log(experience)
-
+    console.log(experience);
   }
 
   function handleCancel() {
-      if(experience && experience.photo){
-          setImage(experience.photo)
-      }
-      else {setImage(null);}
-      setShow(false)
-    
+    if (experience && experience.photo) {
+      setImage(experience.photo);
+    } else {
+      setImage(null);
+    }
+    setShow(false);
   }
 
   function handleSave() {
     setImage(image);
-    console.log(experience)
+    console.log(experience);
     dispatch(addImageToExperience(image));
-    console.log(experience)
-    dispatch(getExperienceDetails(id))
+    console.log(experience);
+    dispatch(getExperienceDetails(id));
 
-    dispatch(updateExperience(id,{...experience,photo:image}))
-    setShow(false)
+    dispatch(updateExperience(id, {...experience, photo: image}));
+    setShow(false);
   }
   return (
     <>
       {image && show ? (
         <>
           <div className="flex justify-between items-center mt-2">
-            <Button
-              className="btn-danger"
-              onClick={handleCancel}
-              size="sm"
-            >
+            <Button className="btn-danger" onClick={handleCancel} size="sm">
               Annuler
             </Button>
-            <Button
-              className="btn-success"
-              onClick={handleSave}
-              type="button"
-              size="sm"
-            >
+            <Button className="btn-success" onClick={handleSave} type="button" size="sm">
               Enregistrer
             </Button>
           </div>
         </>
       ) : (
-        <div
-          className="bg-gray-200 border-4 border-dashed border-gray-400 rounded-lg"
-        >
+        <div className="bg-gray-200 border-4 border-dashed border-gray-400 rounded-lg">
           <form className="flex justify-center items-center h-full">
-           
-                <Button
-                  className="btn-info "
-                  onClick={handleImageUpload}
-                    size="sm" >
-                  Changer
-                </Button>
-                      {progress !== 0 ? (
-              <span className="text-gray-700">{progress}%</span>):<p></p>
-      }              
+            <Button className="btn-info " onClick={handleImageUpload} size="sm">
+              Changer
+            </Button>
+            {progress !== 0 ? <span className="text-gray-700">{progress}%</span> : <p></p>}
 
             <input
               ref={fileSelect}

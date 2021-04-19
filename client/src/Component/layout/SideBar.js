@@ -16,10 +16,12 @@
 
 */
 /*eslint-disable*/
-import React, { useState } from "react";
-import { NavLink as NavLinkRRD, Link } from "react-router-dom";
+import React, {useState} from 'react';
+import {NavLink as NavLinkRRD, Link} from 'react-router-dom';
 // nodejs library to set properties for components
-import { PropTypes } from "prop-types";
+import {PropTypes} from 'prop-types';
+import {useDispatch, useSelector} from 'react-redux';
+import {logout} from '../../JS/actions';
 
 // reactstrap components
 import {
@@ -50,27 +52,27 @@ import {
   Container,
   Row,
   Col,
-} from "reactstrap";
+} from 'reactstrap';
 
 var ps;
 
-const SideBar = (props) => {
+const SideBar = props => {
   const [collapseOpen, setCollapseOpen] = useState();
 
   // verifies if routeName is the one active (in browser input)
-  const activeRoute = (routeName) => {
-    return props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
+  const activeRoute = routeName => {
+    return props.location.pathname.indexOf(routeName) > -1 ? 'active' : '';
   };
   // toggles collapse between opened and closed (true/false)
   const toggleCollapse = () => {
-    setCollapseOpen((data) => !data);
+    setCollapseOpen(data => !data);
   };
   // closes the collapse
   const closeCollapse = () => {
     setCollapseOpen(false);
   };
   // creates the links that appear in the left menu / Sidebar
-  const createLinks = (routes) => {
+  const createLinks = routes => {
     return routes.map((prop, key) => {
       return (
         <NavItem key={key}>
@@ -88,7 +90,7 @@ const SideBar = (props) => {
     });
   };
 
-  const { bgColor, routes, logo } = props;
+  const {bgColor, routes, logo} = props;
   let navbarBrandProps;
   if (logo && logo.innerLink) {
     navbarBrandProps = {
@@ -98,9 +100,10 @@ const SideBar = (props) => {
   } else if (logo && logo.outterLink) {
     navbarBrandProps = {
       href: logo.outterLink,
-      target: "_blank",
+      target: '_blank',
     };
   }
+  const dispatch = useDispatch();
 
   return (
     <Navbar
@@ -110,21 +113,13 @@ const SideBar = (props) => {
     >
       <Container fluid>
         {/* Toggler */}
-        <button
-          className="navbar-toggler"
-          type="button"
-          onClick={toggleCollapse}
-        >
+        <button className="navbar-toggler" type="button" onClick={toggleCollapse}>
           <span className="navbar-toggler-icon" />
         </button>
         {/* Brand */}
         {logo ? (
           <NavbarBrand className="pt-0" {...navbarBrandProps}>
-            <img
-              alt={logo.imgAlt}
-              className="navbar-brand-img"
-              src={logo.imgSrc}
-            />
+            <img alt={logo.imgAlt} className="navbar-brand-img" src={logo.imgSrc} />
           </NavbarBrand>
         ) : null}
         {/* User */}
@@ -150,10 +145,7 @@ const SideBar = (props) => {
                 <span className="avatar avatar-sm rounded-circle">
                   <img
                     alt="..."
-                    src={
-                      require("../../Assets/img/theme/team-1-800x800.jpg")
-                        .default
-                    }
+                    src={require('../../Assets/img/theme/team-1-800x800.jpg').default}
                   />
                 </span>
               </Media>
@@ -179,7 +171,7 @@ const SideBar = (props) => {
                 <span>Support</span>
               </DropdownItem>
               <DropdownItem divider />
-              <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+              <DropdownItem href="#pablo" onClick={e => e.preventDefault()}>
                 <i className="ni ni-user-run" />
                 <span>Logout</span>
               </DropdownItem>
@@ -205,11 +197,7 @@ const SideBar = (props) => {
                 </Col>
               ) : null}
               <Col className="collapse-close" xs="6">
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  onClick={toggleCollapse}
-                >
+                <button className="navbar-toggler" type="button" onClick={toggleCollapse}>
                   <span />
                   <span />
                 </button>
@@ -240,21 +228,22 @@ const SideBar = (props) => {
           {/* Navigation */}
           <Nav className="mb-md-3" navbar>
             <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=adr-admin-sidebar">
-                <i className="ni ni-spaceship" />
-                Getting started
+              <NavLink to="/profile" tag={Link}>
+                <i className="ni ni-single-02" />
+                <span>Mon profile</span>
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/colors?ref=adr-admin-sidebar">
-                <i className="ni ni-palette" />
-                Foundation
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
-                <i className="ni ni-ui-04" />
-                Components
+              <NavLink
+                tag={Link}
+                onClick={e => {
+                  e.preventDefault();
+                  dispatch(logout());
+                }}
+                to="/login"
+              >
+                <i className="ni ni-user-run" />
+                <span>Logout</span>
               </NavLink>
             </NavItem>
           </Nav>

@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserDetails, getExperiences } from "../../JS/actions/index";
-import { Card, CardBody, Row, CardTitle, Col, Button } from "reactstrap";
-import Loader from "../layout/Loader";
-import { Link } from "react-router-dom";
-import UserExperienceModel from "./UserExperienceModel";
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {getUserDetails, getExperiences} from '../../JS/actions/index';
+import {Card, CardBody, Row, CardTitle, Col, Button} from 'reactstrap';
+import Loader from '../layout/Loader';
+import {Link} from 'react-router-dom';
+import UserExperienceModel from './UserExperienceModel';
 
 const UserDetails = ({
   match: {
-    params: { id },
+    params: {id},
   },
 }) => {
   const dispatch = useDispatch();
@@ -16,30 +16,23 @@ const UserDetails = ({
     dispatch(getUserDetails(id));
     dispatch(getExperiences());
   }, [dispatch, id]);
-  const user = useSelector((state) => state.userReducer.user);
-  const loading = useSelector((state) => state.userReducer.loading);
-  const experiences = useSelector(
-    (state) => state.experiencesReducers.experiences
-  );
+  const user = useSelector(state => state.userReducer.user);
+  const loading = useSelector(state => state.userReducer.loading);
+  const experiences = useSelector(state => state.experiencesReducers.experiences);
   const profile = [
-    { label: "Nom et prénom", value: user.name },
+    {label: 'Nom et prénom', value: user.name},
     {
-      label: "Date de naissance",
+      label: 'Date de naissance',
       value: user.birthday ? user.birthday.substr(0, 10) : <small>-</small>,
     },
-    { label: "Téléphone", value: user.phoneNumber },
-    { label: "Adresse email", value: user.email },
+    {label: 'Téléphone', value: user.phoneNumber},
+    {label: 'Adresse email', value: user.email},
     {
-      label: "Adresse postale",
-      value:
-        user.city && user.adress ? (
-          user.city + ", " + user.adress
-        ) : (
-          <small>-</small>
-        ),
+      label: 'Adresse postale',
+      value: user.city && user.adress ? user.city + ', ' + user.adress : <small>-</small>,
     },
     {
-      label: "Description",
+      label: 'Description',
       value: user.aboutMe ? user.aboutMe : <small>-</small>,
     },
   ];
@@ -53,13 +46,13 @@ const UserDetails = ({
           <CardBody className="mb-0">
             <Row>
               <div className="col">
-                <Button size="sm" className="btn-info">
+                <Button size="sm" className="btn-info" tag={Link} to="/admin">
                   Retourner
                 </Button>
               </div>
               <div className="col">
                 <Button size="sm" className="btn-info">
-                  Contacter l'utilisateur{" "}
+                  Contacter l'utilisateur{' '}
                 </Button>
               </div>
               <div className="col">
@@ -75,10 +68,10 @@ const UserDetails = ({
             <Row>
               <div>
                 <Row>
-                  {profile.map((el) => (
+                  {profile.map(el => (
                     <>
                       <Col xl="4">
-                        <small style={{ color: "#32325d" }}>
+                        <small style={{color: '#32325d'}}>
                           <b>{el.label}</b>
                         </small>
                       </Col>
@@ -96,12 +89,9 @@ const UserDetails = ({
             <h4>L'activité de l'utilisateur</h4>
 
             {experiences &&
-              experiences.map((experience) =>
+              experiences.map(experience =>
                 experience.userID === id ? (
-                  <UserExperienceModel
-                    key={experience._id}
-                    experience={experience}
-                  />
+                  <UserExperienceModel key={experience._id} experience={experience} />
                 ) : (
                   <p></p>
                 )

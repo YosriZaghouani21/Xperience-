@@ -23,10 +23,10 @@ const Profile = () => {
   const [aboutMe, setAboutme] = useState('');
   const [postalCode, setPostalcode] = useState('');
   const [photo, setphoto] = useState();
-  // const [previewSource, setPreviewSource] = useState('../../public/images/1.jpg');
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [editDone, setEditDone] = useState(false);
   const alert = useAlert();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -88,8 +88,8 @@ const Profile = () => {
               <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
                 <Card className="card-profile shadow">
                   <Row className="justify-content-center">
-                    <Col className="order-lg-2" lg="3">
-                      <div className="card-profile-image">
+                    <Col className="order-lg-2" lg="5">
+                      <div>
                         <img
                           alt="chosen"
                           className="rounded-circle"
@@ -97,10 +97,17 @@ const Profile = () => {
                           style={{height: '200px', width: '200px'}}
                         />
                       </div>
+                      {edit ? (
+                        <div style={{marginLeft: '31%', marginTop: '10%'}}>
+                          <ImageUploader image={photo} setImage={setphoto} />
+                        </div>
+                      ) : (
+                        <p></p>
+                      )}
                     </Col>
                   </Row>
 
-                  <CardBody className="mt-8 pt-md-4">
+                  <CardBody className="mt-4 pt-md-4">
                     <Row>
                       <div className="col"></div>
                     </Row>
@@ -304,7 +311,6 @@ const Profile = () => {
                           </Button>
                         </div>
                       </Form>
-                      <ImageUploader image={photo} setImage={setphoto} />
                     </CardBody>
                   ) : (
                     <CardBody>

@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "../../App.css";
-import Loader from "../layout/Loader";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getExperienceDetails,
-  updateExperience,
-  getExperiences,
-} from "../../JS/actions/index";
+import React, {useEffect, useState} from 'react';
+import '../../App.css';
+import Loader from '../layout/Loader';
+import {useDispatch, useSelector} from 'react-redux';
+import {getExperienceDetails, updateExperience, getExperiences} from '../../JS/actions/index';
 import {
   Button,
   Card,
@@ -19,14 +15,14 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from "reactstrap";
-import { Link, Redirect } from "react-router-dom";
-import Carrousel from "../layout/Carrousel";
-import AuthNavbar from "../layout/AuthNavbar";
+} from 'reactstrap';
+import {Link, Redirect} from 'react-router-dom';
+import Carrousel from '../layout/Carrousel';
+import AuthNavbar from '../layout/AuthNavbar';
 
 const ExperienceDetails = ({
   match: {
-    params: { id },
+    params: {id},
   },
 }) => {
   const dispatch = useDispatch();
@@ -37,16 +33,14 @@ const ExperienceDetails = ({
     dispatch(getExperienceDetails(id));
   }, [dispatch, id]);
 
-  const isLoading = useSelector((state) => state.experiencesReducers.isLoading);
-  const experience = useSelector(
-    (state) => state.experiencesReducers.experience
-  );
+  const isLoading = useSelector(state => state.experiencesReducers.isLoading);
+  const experience = useSelector(state => state.experiencesReducers.experience);
 
   console.log(
-    "🚀 ~ file: ExperienceDetails.js ~ line 38 ~ ExperienceDetails ~ experience.langue",
+    '🚀 ~ file: ExperienceDetails.js ~ line 38 ~ ExperienceDetails ~ experience.langue',
     experience
   );
-  return localStorage.getItem("token") ? (
+  return localStorage.getItem('token') ? (
     isLoading ? (
       <Loader />
     ) : experience ? (
@@ -55,14 +49,14 @@ const ExperienceDetails = ({
         <Modal isOpen={modal} toggle={toggle}>
           <ModalHeader toggle={toggle}>Demander la validation?</ModalHeader>
           <ModalBody>
-            Si vous envoyer votre demande de validation, vous ne pouvez plus ni
-            modifier ni supprimer votre expérience.
+            Si vous envoyer votre demande de validation, vous ne pouvez plus ni modifier ni
+            supprimer votre expérience.
           </ModalBody>
           <ModalFooter>
             <Link
               className="btn btn-success"
               to={`/experiences`}
-              onClick={(e) => {
+              onClick={e => {
                 toggle();
 
                 dispatch(
@@ -91,17 +85,17 @@ const ExperienceDetails = ({
               <CardHeader className="bg-white">
                 {experience.isBeingValidated === true ? (
                   <Link
-                    style={{ float: "right" }}
+                    style={{float: 'right'}}
                     className="btn btn-sm btn-info"
                     to={`/experiences`}
                   >
                     Retour
                   </Link>
                 ) : (
-                  <Row style={{ float: "right" }}>
+                  <Row style={{float: 'right'}}>
                     <Col>
                       <Button className=" btn-sm btn-success" onClick={toggle}>
-                        Envoyer{" "}
+                        Envoyer{' '}
                       </Button>
                     </Col>
                     <Col>
@@ -113,20 +107,19 @@ const ExperienceDetails = ({
                 )}
                 <div className="text-muted mt-2 mb-4">
                   <small>
-                    {experience.type.title === "en ligne" ? (
+                    {experience.type.title === 'en ligne' ? (
                       <i className="ni ni-laptop" />
                     ) : (
                       <i className="fas fa-users" />
-                    )}{" "}
+                    )}{' '}
                     Expérience {experience.type.title}
                   </small>
-                  <h1 style={{ margin: "0%" }}>{experience.title}</h1>
+                  <h1 style={{margin: '0%'}}>{experience.title}</h1>
                   <small>{experience.city}, Tunisie</small>
                   <Row>
                     <Col lg="10" md="8">
-                      <h3 style={{ paddingTop: "2%" }}>
-                        Expérience {experience.type.title} organisée par Molka
-                        Allani
+                      <h3 style={{paddingTop: '2%'}}>
+                        Expérience {experience.type.title} organisée par Molka Allani
                       </h3>
                     </Col>
                     <Col>
@@ -134,10 +127,7 @@ const ExperienceDetails = ({
                         <span className="avatar avatar-sm rounded-circle">
                           <img
                             alt="..."
-                            src={
-                              require("../../Assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../Assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </span>
                       </Media>
@@ -149,86 +139,61 @@ const ExperienceDetails = ({
                     <Row className="icon-examples">
                       <Col lg="6" md="6">
                         <p>
-                          {" "}
-                          <i
-                            className="far fa-clock"
-                            style={{ paddingRight: "3%" }}
-                          />
+                          {' '}
+                          <i className="far fa-clock" style={{paddingRight: '3%'}} />
                           {experience.startHour} - {experience.endHour}
                         </p>
                       </Col>
                       <Col lg="6" md="6">
                         <p>
-                          {" "}
-                          <i
-                            className="fas fa-users"
-                            style={{ paddingRight: "3%" }}
-                          />{" "}
-                          Jusqu'à {experience.limitParticipants} personnes
+                          {' '}
+                          <i className="fas fa-users" style={{paddingRight: '3%'}} /> Jusqu'à{' '}
+                          {experience.limitParticipants} personnes
                         </p>
                       </Col>
                       <Col lg="6" md="6">
                         <p>
-                          <i
-                            style={{ paddingRight: "3%" }}
-                            className="far fa-comments"
-                          />{" "}
-                          Proposé en {experience.language}
+                          <i style={{paddingRight: '3%'}} className="far fa-comments" /> Proposé en{' '}
+                          {experience.language}
                         </p>
                       </Col>
                       <Col lg="6" md="6">
                         <p>
-                          <i
-                            style={{ paddingRight: "3%" }}
-                            className="fas fa-wallet"
-                          />{" "}
+                          <i style={{paddingRight: '3%'}} className="fas fa-wallet" />{' '}
                           {experience.price}TND
                         </p>
                       </Col>
                       <Col lg="6" md="6">
                         <p>
-                          {" "}
-                          <i
-                            className="fas fa-street-view"
-                            style={{ paddingRight: "4%" }}
-                          />
-                          {experience.target[0]} {"  "}
-                          {experience.target[1] ? (
-                            <span> et {experience.target[1]}</span>
-                          ) : (
-                            ""
-                          )}
+                          {' '}
+                          <i className="fas fa-street-view" style={{paddingRight: '4%'}} />
+                          {experience.target[0]} {'  '}
+                          {experience.target[1] ? <span> et {experience.target[1]}</span> : ''}
                         </p>
                       </Col>
                       <Col lg="6" md="6">
                         <p>
-                          {" "}
-                          <i
-                            className="fas fa-bolt"
-                            style={{ paddingRight: "3%" }}
-                          />
-                          niveau {experience.difficulty}{" "}
+                          {' '}
+                          <i className="fas fa-bolt" style={{paddingRight: '3%'}} />
+                          niveau {experience.difficulty}{' '}
                         </p>
                       </Col>
                       {experience.phobia.length !== 0 ? (
                         <Col lg="6" md="6">
                           <p>
-                            <i
-                              className="fas fa-users-slash"
-                              style={{ paddingRight: "3%" }}
-                            />
-                            {experience.phobia}{" "}
+                            <i className="fas fa-users-slash" style={{paddingRight: '3%'}} />
+                            {experience.phobia}{' '}
                           </p>
                         </Col>
                       ) : (
                         <></>
                       )}
-                    </Row>{" "}
+                    </Row>{' '}
                   </CardHeader>
                 </Card>
                 <Card className="bg-white border-0">
-                  <CardBody style={{ paddingBottom: "0%" }}>
-                    <h4 style={{ marginBottom: "0%" }}>L'activité</h4>
+                  <CardBody style={{paddingBottom: '0%'}}>
+                    <h4 style={{marginBottom: '0%'}}>L'activité</h4>
                     <small>{experience.themes}</small> <br />
                   </CardBody>
                 </Card>
@@ -247,7 +212,7 @@ const ExperienceDetails = ({
                             <h4>Les équipements inclus</h4>
                             {experience.includedEq.drink ? (
                               <p>
-                                {"   "} <i className="fas fa-wine-bottle" />{" "}
+                                {'   '} <i className="fas fa-wine-bottle" />{' '}
                                 {experience.includedEq.drink}
                               </p>
                             ) : (
@@ -255,7 +220,7 @@ const ExperienceDetails = ({
                             )}
                             {experience.includedEq.food ? (
                               <p>
-                                {"   "} <i className="fas fa-utensils" />{" "}
+                                {'   '} <i className="fas fa-utensils" />{' '}
                                 {experience.includedEq.food}
                               </p>
                             ) : (
@@ -264,7 +229,7 @@ const ExperienceDetails = ({
                             {experience.includedEq.material ? (
                               <p>
                                 <i className="fas fa-archive" />
-                                {"   "}
+                                {'   '}
                                 {experience.includedEq.material}
                               </p>
                             ) : (
@@ -280,7 +245,7 @@ const ExperienceDetails = ({
                             <h4>Les équipements exclus</h4>
                             {experience.excludedEq.drink ? (
                               <p>
-                                {"   "} <i className="fas fa-wine-bottle" />{" "}
+                                {'   '} <i className="fas fa-wine-bottle" />{' '}
                                 {experience.excludedEq.drink}
                               </p>
                             ) : (
@@ -288,7 +253,7 @@ const ExperienceDetails = ({
                             )}
                             {experience.excludedEq.food ? (
                               <p>
-                                {"   "} <i className="fas fa-utensils" />{" "}
+                                {'   '} <i className="fas fa-utensils" />{' '}
                                 {experience.excludedEq.food}
                               </p>
                             ) : (
@@ -297,7 +262,7 @@ const ExperienceDetails = ({
                             {experience.excludedEq.material ? (
                               <p>
                                 <i className="fas fa-archive" />
-                                {"   "}
+                                {'   '}
                                 {experience.excludedEq.material}
                               </p>
                             ) : (
@@ -312,17 +277,29 @@ const ExperienceDetails = ({
                   </Card>
                 </CardBody>
               ) : (
-                ""
+                ''
               )}
-              <div class="px-lg-5" style={{ padding: "2%" }}>
+              <div class="px-lg-5" style={{padding: '2%'}}>
                 <h4>Les photos</h4>
 
-  <img
-      alt=""
-      className="border rounded"
-      src={experience.photo}
-      style={{height: '300px', width: '300px'}}
-        />
+                <img
+                  alt=""
+                  className="border rounded"
+                  src={experience.photo}
+                  style={{height: '300px', width: '300px'}}
+                />
+                <img
+                  alt=""
+                  className="border rounded"
+                  src={experience.photo2}
+                  style={{height: '300px', width: '300px'}}
+                />
+                <img
+                  alt=""
+                  className="border rounded"
+                  src={experience.photo3}
+                  style={{height: '300px', width: '300px'}}
+                />
               </div>
               <div></div>
             </Card>

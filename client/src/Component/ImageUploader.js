@@ -1,11 +1,14 @@
 import React, {useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {addImageToProfile} from '../JS/actions';
+import {Button} from 'react-bootstrap';
 
 export default function ImageUploader({image, setImage}) {
   const dispatch = useDispatch();
   const fileSelect = useRef(null);
   //   const [image, setImage] = useState('');
+  const [show, setShow] = useState(false);
+
   const [progress, setProgress] = useState(0);
 
   async function handleImageUpload() {
@@ -37,6 +40,7 @@ export default function ImageUploader({image, setImage}) {
         const response = JSON.parse(xhr.responseText);
 
         setImage(response.secure_url);
+        setShow(true);
         console.log(response.secure_url);
       }
     };
@@ -54,53 +58,34 @@ export default function ImageUploader({image, setImage}) {
   function handleSave() {
     setImage(image);
     dispatch(addImageToProfile(image));
+    setShow(false);
   }
   return (
     <>
-      {image ? (
+      {image && show ? (
         <>
-          <img
-            className="object-contain rounded-lg"
-            src={image.replace('upload/', 'upload/w_600/')}
-            style={{height: 600, width: 800}}
-            alt="..."
-          />
-          <div className="flex justify-between items-center mt-2">
-            <button
-              className="text-gray-700 hover:text-gray-500 border-2 border-gray-300 px-4 py-2 rounded w-1/2"
+          <div className="flex justify-between items-center mt-2 ">
+            <Button
+              style={{width: '88%'}}
+              className="btn-danger mb-2"
+              size="sm"
               onClick={handleCancel}
               type="button"
             >
-              Cancel
-            </button>
-            <button
-              className="bg-blue-600 hover:bg-blue-800 border-2 border-blue-600 text-white px-4 py-2 rounded ml-2 w-1/2"
-              onClick={handleSave}
-              type="button"
-            >
-              Save
-            </button>
+              Annuler
+            </Button>
+            <Button className="btn-success" size="sm" onClick={handleSave} type="button">
+              Enregistrer
+            </Button>
           </div>
         </>
       ) : (
-        <div
-          className="bg-gray-200 border-4 border-dashed border-gray-400 rounded-lg"
-          style={{height: 400, width: 600}}
-        >
+        <div className="bg-gray-200 border-4 border-dashed border-gray-400 rounded-lg">
           <form className="flex justify-center items-center h-full">
-            {progress === 0 ? (
-              <div className="text-gray-700 text-center">
-                <button
-                  className="bg-blue-600 hover:bg-blue-800 text-white font-bold px-4 py-2 rounded block m-auto"
-                  onClick={handleImageUpload}
-                  type="button"
-                >
-                  Browse
-                </button>
-              </div>
-            ) : (
-              <span className="text-gray-700">{progress}%</span>
-            )}
+            <Button className="btn-info " onClick={handleImageUpload} size="sm">
+              Changer
+            </Button>
+            {progress !== 0 ? <span className="text-gray-700">{progress}%</span> : <p></p>}
 
             <input
               ref={fileSelect}

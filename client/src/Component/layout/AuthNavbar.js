@@ -55,10 +55,7 @@ const AuthNavbar = () => {
                     <DropdownToggle className="pr-0" nav>
                       <Media className="align-items-center">
                         <span className="avatar avatar-sm rounded-circle">
-                          <img
-                            alt="..."
-                            src={require('../../Assets/img/theme/team-3-800x800.jpg').default}
-                          />
+                          <img alt="" />
                         </span>
                         <Media className="ml-2 d-none d-lg-block">
                           <span className="mb-0 text-sm font-weight-bold">
@@ -87,7 +84,6 @@ const AuthNavbar = () => {
                       <DropdownItem divider />
                       <DropdownItem
                         tag={Link}
-                        href="#pablo"
                         onClick={e => {
                           e.preventDefault();
                           dispatch(logout());
