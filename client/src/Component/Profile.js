@@ -43,7 +43,6 @@ const Profile = () => {
   }, [user]);
   const handleSubmit = e => {
     e.preventDefault();
-
     dispatch(
       updateProfile(user._id, {
         name,
@@ -141,10 +140,18 @@ const Profile = () => {
                 <Card className="bg-secondary shadow">
                   <CardHeader className="bg-white border-0">
                     <Row className="align-items-center">
-                      <Col xs="8">
+                      <Col xs="6">
                         <h3 className="mb-0">Mon Profil</h3>
                       </Col>
-                      <Col className="text-right" xs="4">
+                      <Col xs="3">
+                        <Link
+                        to="/preferences"
+                          className="btn btn-primary"
+                          style={{padding:"1.5%"}}
+                        >
+<small> <b>Ajouter mes préférences </b> </small>                      </Link>
+                      </Col>
+                      <Col text-right>
                         <Button
                           color="primary"
                           onClick={() => {
@@ -152,7 +159,7 @@ const Profile = () => {
                           }}
                           size="sm"
                         >
-                          Modifier le profile
+                          Modifier mon profile
                         </Button>
                       </Col>
                     </Row>

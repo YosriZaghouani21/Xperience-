@@ -57,9 +57,6 @@ const ImagesStep = ({
       setphoto(experience.photo);
       setphoto2(experience.photo2);
       setphoto3(experience.photo3);
-      setphoto4(experience.photo4);
-
-      console.log(experience);
     }
   }, [experience]);
 
@@ -188,22 +185,19 @@ const ImagesStep = ({
                   >
                     Précédent
                   </Link>
-                  <Button
+                  <Link
+                  to="/experiences"
                     onClick={() => {
-                      dispatch(getExperienceDetails(id));
                       dispatch(
                         updateExperience(id, {
-                          ...experience,
-                          photo: photo,
-                          photo2: photo2,
-                          photo3: photo3,
+                          ...experience
                         })
                       );
                     }}
                     className="btn btn-primary"
                   >
                     Enregistrer
-                  </Button>
+                  </Link>
                 </div>
               </div>
             </Col>

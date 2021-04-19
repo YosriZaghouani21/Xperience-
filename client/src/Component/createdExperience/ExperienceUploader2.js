@@ -12,8 +12,6 @@ export default function ExperienceUploader2({image2, setImage2, id, exp}) {
   const fileSelect = useRef(null);
   const [show, setShow] = useState(false);
   const [progress, setProgress] = useState(0);
-
-  const experience = useSelector(state => state.experiencesReducers.experience);
   async function handleImageUpload() {
     if (fileSelect) {
       fileSelect.current.click();
@@ -55,8 +53,8 @@ export default function ExperienceUploader2({image2, setImage2, id, exp}) {
   }
 
   function handleCancel() {
-    if (experience && experience.photo2) {
-      setImage2(experience.photo2);
+    if (exp && exp.photo2) {
+      setImage2(exp.photo2);
     } else {
       setImage2(null);
     }
@@ -65,12 +63,7 @@ export default function ExperienceUploader2({image2, setImage2, id, exp}) {
 
   function handleSave() {
     setImage2(image2);
-    console.log(experience);
-    dispatch(getExperienceDetails(id));
-
     dispatch(addImageToExperience2(image2));
-    console.log(experience);
-
     setShow(false);
   }
   return (

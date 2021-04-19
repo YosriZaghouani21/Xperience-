@@ -99,12 +99,12 @@ const CreatorHome = () => {
                       {localStorage.getItem('token') ? (
                         <Link to="/experiences" className="btn btn-secondary">
                           {' '}
-                          D'accord allez-y
+                          Oui allez-y
                         </Link>
                       ) : (
                         <Link to="/login" className="btn btn-secondary">
                           {' '}
-                          D'accord allez-y
+                          Oui allez-y
                         </Link>
                       )}
                     </div>

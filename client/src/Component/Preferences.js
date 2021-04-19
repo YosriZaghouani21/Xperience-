@@ -8,6 +8,9 @@ import {useDispatch, useSelector} from 'react-redux';
 
 // reactstrap components
 import {Card, CardHeader, CardBody, Container, Row, Col} from 'reactstrap';
+import Loader from './layout/Loader';
+import AuthNavbar from './layout/AuthNavbar';
+
 
 const Preferences = () => {
   const dispatch = useDispatch();
@@ -30,23 +33,23 @@ const Preferences = () => {
   }, [user]);
 
   return loading ? (
-    <h1>Loading ...</h1>
-  ) : !localStorage.getItem('token') ? (
+<Loader/>  ) : !localStorage.getItem('token') ? (
     <Redirect to="/login" />
   ) : (
     <div>
-      <Container className="mt-7" fluid>
+      <AuthNavbar/>
+      <Container className="mt-2 col-xl-7" fluid>
         {/* Table */}
-        <h1 className="mb-3">Dites nous ce que vous préférez </h1>
-        <p>
+        <h1 className="mb-3 text-info">Optimisez vos recherches et dites nous ce que vous préférez</h1>
+        <b>
           Appuez sur les caractéristiques d'expériences que vous voulez voir plus que les autres
-        </p>
+        </b>
         <hr />
         <Row>
           <div className="col">
             <Card className="shadow">
               <CardHeader className="bg-transparent">
-                <h3 className="mb-0">les thémes</h3>
+                <h3 className="mb-0">Les thémes</h3>
               </CardHeader>
               <CardBody>
                 <Row className="icon-examples">
@@ -55,10 +58,9 @@ const Preferences = () => {
                       return (
                         <Col lg="3" md="6">
                           {console.log(localPref)}
-                          <CopyToClipboard text={'ni ni-active-40'}>
                             <button
                               className={`${
-                                localPref.includes(theme._id) ? 'Clicked' : 'notClicked'
+                                localPref.includes(theme._id) ? 'text-danger' : 'notClicked'
                               } btn-icon-clipboard `}
                               onClick={() =>
                                 `${
@@ -75,11 +77,10 @@ const Preferences = () => {
                               type="button"
                             >
                               <div>
-                                <img src={theme.icon} width="30" alt="..." />
+                                <i className={theme.icon} />
                                 <span>{theme.name}</span>
                               </div>
                             </button>
-                          </CopyToClipboard>
                         </Col>
                       );
                     })
@@ -87,9 +88,9 @@ const Preferences = () => {
                 </Row>
               </CardBody>
             </Card>
-            <Card className="shadow">
+            <Card className="shadow mt-1">
               <CardHeader className="bg-transparent">
-                <h3 className="mb-0">les difficultés</h3>
+                <h3 className="mb-0">les niveaux de difficultés</h3>
               </CardHeader>
               <CardBody>
                 <Row className="icon-examples">
@@ -102,7 +103,7 @@ const Preferences = () => {
                         >
                           <button className="btn-icon-clipboard" id="Sport" type="button">
                             <div>
-                              <img src={difficulties.icon} width="30" alt="..." />
+                              <i className={difficulties.icon}/>
                               <span>{difficulties.name}</span>
                             </div>
                           </button>
@@ -113,9 +114,9 @@ const Preferences = () => {
                 </Row>
               </CardBody>
             </Card>
-            <Card className="shadow">
+            <Card className="shadow mt-1">
               <CardHeader className="bg-transparent">
-                <h3 className="mb-0">les phobies</h3>
+                <h3 className="mb-0">Si vous présentez des phobies, précisez les ici.</h3>
               </CardHeader>
               <CardBody>
                 <Row className="icon-examples">
@@ -128,7 +129,6 @@ const Preferences = () => {
                         >
                           <button className="btn-icon-clipboard" type="button">
                             <div>
-                              <img src={phobies.icon} width="30" alt="..." />
                               <span>{phobies.name}</span>
                             </div>
                           </button>

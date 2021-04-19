@@ -168,14 +168,12 @@ const Advice5 = (props) => {
             </NavItem>
             <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/colors?ref=adr-admin-sidebar">
-                <i className="ni ni-palette  text-danger" />
-                Tarification
+                <i className="fas fa-money-check text-danger" /> Tarification
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
-                <i className="ni ni-ui-04  text-info" />
-                Remboursement
+                <i className="fas fa-balance-scale text-info" /> Remboursement
               </NavLink>
             </NavItem>
           </Nav>

@@ -195,6 +195,7 @@ const ExperienceDetails = ({
                   <CardBody style={{paddingBottom: '0%'}}>
                     <h4 style={{marginBottom: '0%'}}>L'activité</h4>
                     <small>{experience.themes}</small> <br />
+                    <small>{experience.activity}</small>
                   </CardBody>
                 </Card>
               </CardHeader>

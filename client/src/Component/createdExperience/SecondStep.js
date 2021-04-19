@@ -90,7 +90,7 @@ const SecondStep = ({
         <div className="main-content">
           <Container fluid>
             {/* Progress bar */}
-            <div className="text-center">2 de 4</div>
+            <div className="text-center">2 de 6</div>
             <Progress multi style={{ height: "21px" }}>
               <Progress bar value="20">
                 40%

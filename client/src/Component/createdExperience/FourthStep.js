@@ -102,7 +102,7 @@ const FourthStep = ({
         <div className="main-content">
           <Container fluid>
             {/* progress */}
-            <div className="text-center">2 de 4</div>
+            <div className="text-center">4 de 6</div>
             <Progress multi style={{ height: "21px" }}>
               <Progress bar value="50">
                 80%

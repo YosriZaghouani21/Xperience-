@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getUserDetails, getExperiences} from '../../JS/actions/index';
 import {Card, CardBody, Row, CardTitle, Col, Button} from 'reactstrap';
 import Loader from '../layout/Loader';
+import AuthNavbar from '../layout/AuthNavbar';
+
 import {Link} from 'react-router-dom';
 import UserExperienceModel from './UserExperienceModel';
 
@@ -41,7 +43,8 @@ const UserDetails = ({
     <Loader />
   ) : (
     <>
-      <Col lg="10" md="8" className="center mt-2">
+    <AuthNavbar/>
+      <Col lg="7" md="8" className="center mt-2">
         <Card className="card-stats mb-4 mb-xl-0">
           <CardBody className="mb-0">
             <Row>

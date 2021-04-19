@@ -21,6 +21,7 @@ import {
 import AuthNavbar from "./layout/AuthNavbar";
 import Loader from "./layout/Loader";
 import { useForm } from "react-hook-form";
+import Footer from "./layout/Footer";
 
 const Signup = () => {
   const loading = useSelector((state) => state.userReducer.loading);
@@ -47,9 +48,7 @@ const Signup = () => {
     <div className="main-content">
       {loading ? (
         <Loader />
-      ) : user ? (
-        <Redirect to="/login" />
-      ) : (
+      )  : (
         <div className="header bg-white py-7 py-lg-6">
           <AuthNavbar />
           <Col
@@ -221,6 +220,7 @@ const Signup = () => {
           </Col>
         </div>
       )}
+      <Footer/>
     </div>
   );
 };

@@ -9,7 +9,6 @@ export default function ExperienceUploader({image, setImage, id, exp}) {
   const [show, setShow] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  const experience = useSelector(state => state.experiencesReducers.experience);
   async function handleImageUpload() {
     if (fileSelect) {
       fileSelect.current.click();
@@ -48,12 +47,11 @@ export default function ExperienceUploader({image, setImage, id, exp}) {
     fd.append('tags', 'browser_upload');
     fd.append('file', file);
     xhr.send(fd);
-    console.log(experience);
   }
 
   function handleCancel() {
-    if (experience && experience.photo) {
-      setImage(experience.photo);
+    if (exp && exp.photo) {
+      setImage(exp.photo);
     } else {
       setImage(null);
     }
@@ -62,11 +60,7 @@ export default function ExperienceUploader({image, setImage, id, exp}) {
 
   function handleSave() {
     setImage(image);
-    console.log(experience);
-    dispatch(getExperienceDetails(id));
     dispatch(addImageToExperience(image));
-    console.log(experience);
-
     setShow(false);
   }
   return (

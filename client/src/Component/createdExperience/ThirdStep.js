@@ -83,7 +83,7 @@ const ThirdStep = ({
         <div className="main-content">
           <Container fluid>
             {/* progress */}
-            <div className="text-center">3 de 4</div>
+            <div className="text-center">3 de 6</div>
             <Progress multi style={{ height: "21px" }}>
               <Progress bar value="30">
                 60%

@@ -183,8 +183,7 @@ const FifthStep = ({
                             }
                             onChange={e =>
                               setProgram({
-                                ...program,
-                                generalDesc: e.target.value,
+                                generalDesc: e.target.value
                               })
                             }
                             placeholder="Rédiger ici.."

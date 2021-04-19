@@ -66,7 +66,7 @@ export default function ImageUploader({image, setImage}) {
         <>
           <div className="flex justify-between items-center mt-2 ">
             <Button
-              style={{width: '88%'}}
+              style={{width: '75%'}}
               className="btn-danger mb-2"
               size="sm"
               onClick={handleCancel}
