@@ -71,6 +71,7 @@ exports.updateUser = async (req, res) => {
       postalCode,
       myPreferences,
       photo,
+      verif,
     } = req.body;
 
     const updatedUser = await User.findByIdAndUpdate(req.params.id, {
@@ -84,6 +85,7 @@ exports.updateUser = async (req, res) => {
       postalCode,
       myPreferences,
       photo,
+      verif,
     });
 
     return res.status(201).json({
@@ -146,7 +148,7 @@ exports.addPreferences = async (req, res) => {
     res.status(500).json({errors: error});
   }
 };
-//Add Preferences to a User (Themes)
+// Add Preferences to a User (Themes)
 exports.addMyPreferences = async (req, res) => {
   const userId = req.params.id;
   const {preferenceId, preferenceName} = req.body;
@@ -168,12 +170,12 @@ exports.addMyPreferences = async (req, res) => {
     res.status(500).json({errors: error.message});
   }
 };
-//getUserById
+// getUserById
 exports.getSingleUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    res.json({ status: "success", user: user });
+    res.json({status: 'success', user});
   } catch (err) {
-    return res.status(500).json({ msg: err.message });
+    return res.status(500).json({msg: err.message});
   }
 };

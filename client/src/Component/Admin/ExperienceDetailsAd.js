@@ -1,4 +1,6 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import emailjs from 'emailjs-com';
+
 import '../../App.css';
 import Loader from '../layout/Loader';
 import {useDispatch, useSelector} from 'react-redux';
@@ -6,7 +8,7 @@ import {
   getExperienceDetails,
   updateExperience,
   getExperiences,
-  getProfile,
+  getUserDetails,
 } from '../../JS/actions/index';
 import {
   Button,
@@ -22,33 +24,28 @@ import {
   ModalFooter,
 } from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
-import Carrousel from '../layout/Carrousel';
 import AuthNavbar from '../layout/AuthNavbar';
 
-const ExperienceDetails = ({
+const ExperienceDetailsAd = ({
   match: {
     params: {id},
   },
 }) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
+  const [modalRefuse, setModalRefuse] = useState(false);
+
   const toggle = () => setModal(!modal);
-  useEffect(() => {
-    console.log(`object`);
-    dispatch(getExperienceDetails(id));
-  }, [dispatch, id]);
-  useEffect(() => {
-    dispatch(getProfile());
-  }, [dispatch]);
+  const toggleRefuse = () => setModalRefuse(!modalRefuse);
+
   const isLoading = useSelector(state => state.experiencesReducers.isLoading);
   const experience = useSelector(state => state.experiencesReducers.experience);
-  const user = useSelector(state => state.userReducer.user);
   const loading = useSelector(state => state.userReducer.loading);
 
-  console.log(
-    '🚀 ~ file: ExperienceDetails.js ~ line 38 ~ ExperienceDetails ~ experience.langue',
-    experience
-  );
+  useEffect(() => {
+    dispatch(getExperienceDetails(id));
+  }, [dispatch, id]);
+
   return localStorage.getItem('token') ? (
     isLoading && loading ? (
       <Loader />
@@ -56,32 +53,80 @@ const ExperienceDetails = ({
       <>
         {/* Modal */}
         <Modal isOpen={modal} toggle={toggle}>
-          <ModalHeader toggle={toggle}>Demander la validation?</ModalHeader>
-          <ModalBody>
-            Si vous envoyer votre demande de validation, vous ne pouvez plus ni modifier ni
-            supprimer votre expérience.
-          </ModalBody>
+          <ModalBody toggle={toggle}>Etes vous sûr d'accepter le contenu ?</ModalBody>
           <ModalFooter>
             <Link
               className="btn btn-success"
-              to={`/experiences`}
+              to={`/admin`}
               onClick={e => {
                 toggle();
+                emailjs
+                  .send(
+                    'service_0ec1exm',
+                    'template_gtm0fyd',
+                    {
+                      to_name: experience.user.name,
+                      experience_title: experience.title,
+                      user_email: experience.user.email,
+                    },
+                    'user_6Wz2MmUhVdIRToUwyPWvZ'
+                  )
+                  .then(
+                    result => {
+                      console.log(result.text);
+                    },
+                    error => {
+                      console.log(error.text);
+                    }
+                  );
+                experience.user.verif_profile
+                  ? dispatch(
+                      updateExperience(experience._id, {
+                        ...experience,
+                        status: 'accepted',
+                      })
+                    )
+                  : dispatch(
+                      updateExperience(experience._id, {
+                        ...experience,
+                        status: 'contentValidated',
+                      })
+                    );
+              }}
+            >
+              Oui
+            </Link>
+
+            <Button color="secondary" onClick={toggle}>
+              Annuler
+            </Button>
+          </ModalFooter>
+        </Modal>
+        {/* endModal */}
+        {/* Modal */}
+        <Modal isOpen={modalRefuse} toggleRefuse={toggleRefuse}>
+          <ModalBody toggleRefuse={toggleRefuse}>Etes vous sûr de refuser le contenu ?</ModalBody>
+          <ModalFooter>
+            <Link
+              className="btn btn-success"
+              to={`/admin`}
+              onClick={e => {
+                toggleRefuse();
 
                 dispatch(
                   updateExperience(experience._id, {
                     ...experience,
-                    status: 'beingValidated',
+                    status: 'refused',
                   })
                 );
                 dispatch(getExperiences());
               }}
             >
-              Envoyer
+              Oui
             </Link>
 
-            <Button color="secondary" onClick={toggle}>
-              Abandonner
+            <Button color="secondary" onClick={toggleRefuse}>
+              Annuler
             </Button>
           </ModalFooter>
         </Modal>
@@ -92,34 +137,49 @@ const ExperienceDetails = ({
             <Card className="bg-white shadow border-">
               <CardHeader className="bg-white">
                 {experience.status === 'beingValidated' ? (
-                  <Link
-                    style={{float: 'right'}}
-                    className="btn btn-sm btn-info"
-                    to={`/experiences`}
-                  >
-                    Retour
-                  </Link>
+                  <>
+                    <Link style={{float: 'left'}} className="btn btn-sm btn-info" to={`/admin`}>
+                      Retour
+                    </Link>
+                    <Row className="col-xl-5 float-right">
+                      <Col>
+                        <Button className="btn btn-sm btn-success" onClick={toggle}>
+                          Accepter le contenu
+                        </Button>
+                      </Col>
+                      <Col>
+                        <Button className="btn btn-sm btn-danger" onClick={toggleRefuse}>
+                          Refuser le contenu
+                        </Button>
+                      </Col>
+                    </Row>
+                  </>
+                ) : experience.status === 'contentValidated' ? (
+                  <>
+                    <Row style={{float: 'right'}}>
+                      <Col>
+                        <Link to={`/first/${id}`} className="btn btn-sm btn-success">
+                          Confirmer l'identité de l'utilisateur
+                        </Link>
+                      </Col>
+                      <Col>
+                        <Link to={`/first/${id}`} className="btn btn-sm btn-danger">
+                          Identité erronée
+                        </Link>
+                      </Col>
+                    </Row>
+                  </>
                 ) : (
-                  <Row style={{float: 'right'}}>
-                    <Col>
-                      <Button className=" btn-sm btn-success" onClick={toggle}>
-                        Envoyer{' '}
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Link to={`/first/${id}`} className="btn btn-sm btn-info">
-                        Modifier
-                      </Link>
-                    </Col>
-                  </Row>
+                  <></>
                 )}
+                <br />
                 <div className="text-muted mt-2 mb-4">
                   <small>
                     {experience.type.title === 'en ligne' ? (
                       <i className="ni ni-laptop" />
                     ) : (
                       <i className="fas fa-users" />
-                    )}{' '}
+                    )}
                     Expérience {experience.type.title}
                   </small>
                   <h1 style={{margin: '0%'}}>{experience.title}</h1>
@@ -127,13 +187,13 @@ const ExperienceDetails = ({
                   <Row>
                     <Col lg="10" md="8">
                       <h3 style={{paddingTop: '2%'}}>
-                        Expérience {experience.type.title} organisée par {user.name}
+                        Expérience {experience.type.title} organisée par
                       </h3>
                     </Col>
                     <Col>
                       <Media className="align-items-center">
                         <span className="avatar avatar-sm rounded-circle">
-                          <img alt="..." src={user.photo} />
+                          {/* <img alt="..." src={user.photo} /> */}
                         </span>
                       </Media>
                     </Col>
@@ -218,14 +278,16 @@ const ExperienceDetails = ({
                             <h4>Les équipements inclus</h4>
                             {experience.includedEq.drink ? (
                               <p>
-                                <i className="fas fa-wine-bottle" /> {experience.includedEq.drink}
+                                {'   '} <i className="fas fa-wine-bottle" />{' '}
+                                {experience.includedEq.drink}
                               </p>
                             ) : (
                               <></>
                             )}
                             {experience.includedEq.food ? (
                               <p>
-                                <i className="fas fa-utensils" /> {experience.includedEq.food}
+                                {'   '} <i className="fas fa-utensils" />{' '}
+                                {experience.includedEq.food}
                               </p>
                             ) : (
                               <></>
@@ -317,4 +379,4 @@ const ExperienceDetails = ({
     <Redirect to="/login" />
   );
 };
-export default ExperienceDetails;
+export default ExperienceDetailsAd;
