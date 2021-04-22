@@ -63,7 +63,7 @@ const ExperienceDetailsAd = ({
                 emailjs
                   .send(
                     'service_0ec1exm',
-                    'template_gtm0fyd',
+                    'template_qj3xs22',
                     {
                       to_name: experience.user.name,
                       experience_title: experience.title,
@@ -79,7 +79,7 @@ const ExperienceDetailsAd = ({
                       console.log(error.text);
                     }
                   );
-                experience.user.verif_profile
+                experience.user.profile_verif
                   ? dispatch(
                       updateExperience(experience._id, {
                         ...experience,
@@ -112,6 +112,25 @@ const ExperienceDetailsAd = ({
               to={`/admin`}
               onClick={e => {
                 toggleRefuse();
+                emailjs
+                  .send(
+                    'service_0ec1exm',
+                    'template_gtm0fyd',
+                    {
+                      to_name: experience.user.name,
+                      experience_title: experience.title,
+                      user_email: experience.user.email,
+                    },
+                    'user_6Wz2MmUhVdIRToUwyPWvZ'
+                  )
+                  .then(
+                    result => {
+                      console.log(result.text);
+                    },
+                    error => {
+                      console.log(error.text);
+                    }
+                  );
 
                 dispatch(
                   updateExperience(experience._id, {
@@ -138,6 +157,8 @@ const ExperienceDetailsAd = ({
               <CardHeader className="bg-white">
                 {experience.status === 'beingValidated' ? (
                   <>
+                    <h2>La première étape de validation</h2>
+
                     <Link style={{float: 'left'}} className="btn btn-sm btn-info" to={`/admin`}>
                       Retour
                     </Link>
@@ -158,12 +179,38 @@ const ExperienceDetailsAd = ({
                   <>
                     <Row style={{float: 'right'}}>
                       <Col>
-                        <Link to={`/first/${id}`} className="btn btn-sm btn-success">
+                        <Link
+                          to={`/admin`}
+                          className="btn btn-sm btn-success"
+                          onClick={() => {
+                            dispatch(
+                              updateExperience(experience._id, {
+                                ...experience,
+                                status: 'accepted',
+                                user: {...experience.user, profile_verif: true},
+                              })
+                            );
+                            dispatch(getExperiences());
+                          }}
+                        >
                           Confirmer l'identité de l'utilisateur
                         </Link>
                       </Col>
                       <Col>
-                        <Link to={`/first/${id}`} className="btn btn-sm btn-danger">
+                        <Link
+                          to={`/admin`}
+                          className="btn btn-sm btn-danger"
+                          onClick={() => {
+                            dispatch(
+                              updateExperience(experience._id, {
+                                ...experience,
+                                status: 'refused',
+                                user: {...experience.user, falseIdentity: true},
+                              })
+                            );
+                            dispatch(getExperiences());
+                          }}
+                        >
                           Identité erronée
                         </Link>
                       </Col>

@@ -104,7 +104,6 @@ const ExperienceModel = ({experience}) => {
                       </Col>
                     </Row>
                     <hr style={{margin: '1%'}} />
-                    <Row>
                       <Link
                         to={`/experiences`}
                         className="btn btn-sm btn-outline-secondary"
@@ -120,7 +119,6 @@ const ExperienceModel = ({experience}) => {
                           Consulter des outils pour vous aider à créer efficacement votre expérience
                         </small>
                       </Link>
-                    </Row>
                   </>
                 ) : experience.status === 'beingValidated' ? (
                   <>
