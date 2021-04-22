@@ -8,22 +8,24 @@ import 'react-nice-dates/build/style.css';
 import {Button} from 'reactstrap';
 const Session = () => {
   const [date, setDate] = useState();
+  //date d'aujourd'hui
   const [nowDate, setNowDate] = useState(new Date());
 
-  //I used availableDate and dateAfter7Days to initialize the 7th day
-  const availableDate = new Date();
-  const dateAfter7Days = new Date(availableDate.setDate(availableDate.getDate() + 7));
+  //I used dateAfter7Days to initialize the 7th day
+  const dateAfter7Days = new Date();
+  new Date(dateAfter7Days.setDate(dateAfter7Days.getDate() + 7));
+
   //initialize an empty array to push on it the days between
   var dateArray = [];
-  var arrayobject = {};
 
   const daysBetween = () => {
     while (nowDate <= dateAfter7Days) {
       dateArray.push(new Date(nowDate));
+      //update the value of nowDate
       new Date(nowDate.setDate(nowDate.getDate() + 1));
     }
 
-    console.log(arrayobject);
+    console.log(dateArray);
   };
   const modifiers = {disabled: date => getDay(date) === 6};
   return (
@@ -33,7 +35,7 @@ const Session = () => {
           console.log(dateAfter7Days);
         }}
       >
-        show available date
+        show date after 7 days
       </Button>
 
       <Button
@@ -41,7 +43,7 @@ const Session = () => {
           daysBetween();
         }}
       >
-        days between{' '}
+        days between
       </Button>
       <p>Selected date: {date ? format(date, 'dd MMM yyyy', {locale: enGB}) : 'none'}.</p>
       <DatePickerCalendar date={date} onDateChange={setDate} locale={enGB} modifiers={modifiers} />
