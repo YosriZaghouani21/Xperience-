@@ -24,6 +24,7 @@ import UserDetails from './Component/Admin/UserDetails';
 import CreatorHome from './Component/CreatorHome';
 import ImagesStep from './Component/createdExperience/ImagesStep';
 import DateRangePickerExample from './Component/Sessions/DateRangePickerExample';
+import Session from './Component/Sessions/Session';
 
 // optional configuration
 const options = {
@@ -55,7 +56,7 @@ function App() {
           <Route path="/user/:id" component={UserDetails} />
           <Route path="/image/:id" component={ImagesStep} />
           <Route path="/Calender" component={DateRangePickerExample} />
-
+          <Route path="/session" component={Session} />;
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
           ) : (
