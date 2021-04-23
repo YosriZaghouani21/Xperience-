@@ -25,6 +25,7 @@ import CreatorHome from './Component/CreatorHome';
 import ImagesStep from './Component/createdExperience/ImagesStep';
 import ExperienceDetailsAd from './Component/Admin/ExperienceDetailsAd';
 import Form from './Component/Form';
+import PublishIndex from './Component/publishedExperience/PublishIndex';
 
 // optional configuration
 const options = {
@@ -57,7 +58,7 @@ function App() {
           <Route path="/user/:id" component={UserDetails} />
           <Route path="/image/:id" component={ImagesStep} />
           <Route path="/form" component={Form} />
-
+          <Route path="/publish/:id" component={PublishIndex} />;
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
           ) : (

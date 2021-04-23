@@ -72,6 +72,7 @@ exports.updateUser = async (req, res) => {
       myPreferences,
       photo,
       verif,
+      falseIdentity,
     } = req.body;
 
     const updatedUser = await User.findByIdAndUpdate(req.params.id, {
@@ -86,6 +87,7 @@ exports.updateUser = async (req, res) => {
       myPreferences,
       photo,
       verif,
+      falseIdentity,
     });
 
     return res.status(201).json({

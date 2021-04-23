@@ -44,6 +44,7 @@ const userSchema = mongoose.Schema({
     },
   ],
   verif: {type: Boolean, default: false},
+  falseIdentity: {type: Boolean, default: true},
   myExperiences: [
     {
       type: ObjectId,

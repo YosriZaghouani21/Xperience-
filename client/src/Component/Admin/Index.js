@@ -25,6 +25,7 @@ const Index = props => {
     dispatch(getExperiences());
     dispatch(getUsers());
     dispatch(getProfile());
+    console.log(props.created);
   }, [dispatch]);
 
   return localStorage.getItem('token') ? (

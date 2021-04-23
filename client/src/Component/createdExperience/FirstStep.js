@@ -19,6 +19,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
   addExperience,
   deleteExperience,
+  getExperienceDetails,
   getExperiences,
   getProfile,
   updateExperience,
@@ -39,12 +40,9 @@ const FirstStep = () => {
   console.log(experience);
   useEffect(() => {
     dispatch(getProfile());
-    dispatch(addExperience({type: {title: type}}));
-  }, [dispatch, type]);
-
-  useEffect(() => {
-    dispatch(getProfile());
+    if (user) dispatch(addExperience({type: {title: type}, userID: user._id}));
   }, [dispatch]);
+
   return localStorage.getItem('token') && isLoading ? (
     <Loader />
   ) : experience ? (
@@ -284,12 +282,11 @@ const FirstStep = () => {
                     onClick={() => {
                       console.log(experience);
                       if (loading === false && user) {
+                        dispatch(getExperienceDetails(experience.experience._id));
                         dispatch(
                           updateExperience(experience.experience._id, {
                             ...experience,
                             type: {title: type},
-                            userID: user._id,
-                            user: {name: user.name, email: user.email, profile_verif: user.verif},
                           })
                         );
                       }

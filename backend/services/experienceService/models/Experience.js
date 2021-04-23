@@ -52,10 +52,8 @@ const experienceSchema = new Schema(
     difficulty: String,
     // description du programme
     program: {
-      type: {
-        generalDesc: String,
-        activityDesc: String,
-      },
+      generalDesc: String,
+      activityDesc: String,
     },
     // cibles
     target: {type: [String]},
@@ -84,17 +82,8 @@ const experienceSchema = new Schema(
     },
     status: String,
     limitParticipants: {type: Number},
-
-    userID: {
-      type: ObjectId,
-      ref: 'user',
-    },
-    user: {
-      name: String,
-      email: String,
-      profile_verif: Boolean,
-      falseIdentity: {type: Boolean, default: false},
-    },
+    userID: ObjectId,
+    user: {},
     photo: {
       type: String,
     },

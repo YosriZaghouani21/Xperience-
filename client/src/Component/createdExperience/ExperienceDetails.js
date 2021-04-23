@@ -22,7 +22,6 @@ import {
   ModalFooter,
 } from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
-import Carrousel from '../layout/Carrousel';
 import AuthNavbar from '../layout/AuthNavbar';
 
 const ExperienceDetails = ({
@@ -34,23 +33,18 @@ const ExperienceDetails = ({
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   useEffect(() => {
-    console.log(`object`);
     dispatch(getExperienceDetails(id));
   }, [dispatch, id]);
-  useEffect(() => {
-    dispatch(getProfile());
-  }, [dispatch]);
+
   const isLoading = useSelector(state => state.experiencesReducers.isLoading);
   const experience = useSelector(state => state.experiencesReducers.experience);
-  const user = useSelector(state => state.userReducer.user);
-  const loading = useSelector(state => state.userReducer.loading);
 
   console.log(
     '🚀 ~ file: ExperienceDetails.js ~ line 38 ~ ExperienceDetails ~ experience.langue',
     experience
   );
   return localStorage.getItem('token') ? (
-    isLoading && loading ? (
+    isLoading ? (
       <Loader />
     ) : experience ? (
       <>
@@ -127,13 +121,13 @@ const ExperienceDetails = ({
                   <Row>
                     <Col lg="10" md="8">
                       <h3 style={{paddingTop: '2%'}}>
-                        Expérience {experience.type.title} organisée par {user.name}
+                        Expérience {experience.type.title} organisée par {experience.user.name}
                       </h3>
                     </Col>
                     <Col>
                       <Media className="align-items-center">
                         <span className="avatar avatar-sm rounded-circle">
-                          <img alt="..." src={user.photo} />
+                          <img alt="..." src={experience.user.photo} />
                         </span>
                       </Media>
                     </Col>
@@ -144,14 +138,12 @@ const ExperienceDetails = ({
                     <Row className="icon-examples">
                       <Col lg="6" md="6">
                         <p>
-                          {' '}
                           <i className="far fa-clock" style={{paddingRight: '3%'}} />
                           {experience.startHour} - {experience.endHour}
                         </p>
                       </Col>
                       <Col lg="6" md="6">
                         <p>
-                          {' '}
                           <i className="fas fa-users" style={{paddingRight: '3%'}} /> Jusqu'à{' '}
                           {experience.limitParticipants} personnes
                         </p>
@@ -170,7 +162,6 @@ const ExperienceDetails = ({
                       </Col>
                       <Col lg="6" md="6">
                         <p>
-                          {' '}
                           <i className="fas fa-street-view" style={{paddingRight: '4%'}} />
                           {experience.target[0]} {'  '}
                           {experience.target[1] ? <span> et {experience.target[1]}</span> : ''}
@@ -178,7 +169,6 @@ const ExperienceDetails = ({
                       </Col>
                       <Col lg="6" md="6">
                         <p>
-                          {' '}
                           <i className="fas fa-bolt" style={{paddingRight: '3%'}} />
                           niveau {experience.difficulty}{' '}
                         </p>

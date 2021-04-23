@@ -8,7 +8,7 @@ import {
   getExperienceDetails,
   updateExperience,
   getExperiences,
-  getUserDetails,
+  updateProfile,
 } from '../../JS/actions/index';
 import {
   Button,
@@ -79,7 +79,7 @@ const ExperienceDetailsAd = ({
                       console.log(error.text);
                     }
                   );
-                experience.user.profile_verif
+                experience.user.verif
                   ? dispatch(
                       updateExperience(experience._id, {
                         ...experience,
@@ -187,10 +187,36 @@ const ExperienceDetailsAd = ({
                               updateExperience(experience._id, {
                                 ...experience,
                                 status: 'accepted',
-                                user: {...experience.user, profile_verif: true},
+                                user: {...experience.user, verif: true, falseIdentity: false},
+                              })
+                            );
+                            dispatch(
+                              updateProfile(experience.user._id, {
+                                ...experience.user,
+                                verif: true,
+                                falseIdentity: false,
                               })
                             );
                             dispatch(getExperiences());
+                            emailjs
+                              .send(
+                                'service_bsjla9l',
+                                'template_zto2j4k',
+                                {
+                                  to_name: experience.user.name,
+                                  experience_title: experience.title,
+                                  user_email: experience.user.email,
+                                },
+                                'user_IDL4u3gVEUJR2PbmpPSjH'
+                              )
+                              .then(
+                                result => {
+                                  console.log(result.text);
+                                },
+                                error => {
+                                  console.log(error.text);
+                                }
+                              );
                           }}
                         >
                           Confirmer l'identité de l'utilisateur
@@ -205,10 +231,37 @@ const ExperienceDetailsAd = ({
                               updateExperience(experience._id, {
                                 ...experience,
                                 status: 'refused',
-                                user: {...experience.user, falseIdentity: true},
+                                user: {...experience.user, falseIdentity: true, verif: false},
                               })
                             );
+                            dispatch(
+                              updateProfile(experience.user._id, {
+                                ...experience.user,
+                                verif: false,
+                                falseIdentity: true,
+                              })
+                            );
+
                             dispatch(getExperiences());
+                            emailjs
+                              .send(
+                                'service_bsjla9l',
+                                'template_l8uxip3',
+                                {
+                                  to_name: experience.user.name,
+                                  experience_title: experience.title,
+                                  user_email: experience.user.email,
+                                },
+                                'user_IDL4u3gVEUJR2PbmpPSjH'
+                              )
+                              .then(
+                                result => {
+                                  console.log(result.text);
+                                },
+                                error => {
+                                  console.log(error.text);
+                                }
+                              );
                           }}
                         >
                           Identité erronée
@@ -234,13 +287,13 @@ const ExperienceDetailsAd = ({
                   <Row>
                     <Col lg="10" md="8">
                       <h3 style={{paddingTop: '2%'}}>
-                        Expérience {experience.type.title} organisée par
+                        Expérience {experience.type.title} organisée par {experience.user.name}
                       </h3>
                     </Col>
                     <Col>
                       <Media className="align-items-center">
                         <span className="avatar avatar-sm rounded-circle">
-                          {/* <img alt="..." src={user.photo} /> */}
+                          <img alt="..." src={experience.user.photo} />
                         </span>
                       </Media>
                     </Col>

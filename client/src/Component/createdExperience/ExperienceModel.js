@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {deleteExperience, getExperiences} from '../../JS/actions/index';
+import {deleteExperience, getExperiences, updateExperience} from '../../JS/actions/index';
 const ExperienceModel = ({experience}) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
@@ -51,7 +51,6 @@ const ExperienceModel = ({experience}) => {
                 {experience.status === 'created' ? (
                   <>
                     <small>
-                      {' '}
                       <i className="fas fa-circle" style={{paddingRight: '2%'}} />
                       Créée
                     </small>
@@ -104,21 +103,21 @@ const ExperienceModel = ({experience}) => {
                       </Col>
                     </Row>
                     <hr style={{margin: '1%'}} />
-                      <Link
-                        to={`/experiences`}
-                        className="btn btn-sm btn-outline-secondary"
-                        style={{
-                          color: '#525f7f',
-                          backgroundColor: 'white',
-                          boxShadow: '0 4px 6px white, 0 0px 0px rgb(0 0 0 / 0%)',
-                          border: '0px white',
-                        }}
-                      >
-                        <i className="fas fa-mouse-pointer" />
-                        <small>
-                          Consulter des outils pour vous aider à créer efficacement votre expérience
-                        </small>
-                      </Link>
+                    <Link
+                      to={`/experiences`}
+                      className="btn btn-sm btn-outline-secondary"
+                      style={{
+                        color: '#525f7f',
+                        backgroundColor: 'white',
+                        boxShadow: '0 4px 6px white, 0 0px 0px rgb(0 0 0 / 0%)',
+                        border: '0px white',
+                      }}
+                    >
+                      <i className="fas fa-mouse-pointer" />
+                      <small>
+                        Consulter des outils pour vous aider à créer efficacement votre expérience
+                      </small>
+                    </Link>
                   </>
                 ) : experience.status === 'beingValidated' ? (
                   <>
@@ -160,20 +159,7 @@ const ExperienceModel = ({experience}) => {
                     <CardText>{experience.title}</CardText>
                     <CardLink href="#" style={{color: '#f5365c '}}>
                       <Link
-                        to={`/experience/${experience._id}`}
-                        className="btn btn-sm btn-outline-secondary"
-                        style={{
-                          backgroundColor: 'white',
-                          boxShadow: '0 4px 6px white, 0 0px 0px rgb(0 0 0 / 0%)',
-                          border: '0px white',
-                        }}
-                      >
-                        <small>Modifier</small>
-                      </Link>
-                    </CardLink>
-                    <CardLink href="#" style={{color: '#f5365c '}}>
-                      <Link
-                        to={`/experience/${experience._id}`}
+                        to={`/publish/${experience._id}`}
                         className="btn btn-sm btn-outline-secondary"
                         style={{
                           backgroundColor: 'white',
@@ -200,6 +186,20 @@ const ExperienceModel = ({experience}) => {
                         <small>Supprimer</small>
                       </Link>
                     </CardLink>
+                    <hr style={{margin: '1%'}} />
+                    <Link
+                      to={`/experience/${experience._id}`}
+                      className="btn btn-sm btn-outline-secondary"
+                      style={{
+                        color: '#525f7f',
+                        backgroundColor: 'white',
+                        boxShadow: '0 4px 6px white, 0 0px 0px rgb(0 0 0 / 0%)',
+                        border: '0px white',
+                      }}
+                    >
+                      <i className="fas fa-mouse-pointer" />
+                      <small>Demander une modification </small>
+                    </Link>
                   </>
                 ) : experience.status === 'contentValidated' ? (
                   <>
@@ -240,7 +240,7 @@ const ExperienceModel = ({experience}) => {
                     ​<CardText>{experience.title}</CardText>
                     <CardLink href="#" style={{color: '#f5365c '}}>
                       <Link
-                        to={`/experience/${experience._id}`}
+                        to={`/first/${experience._id}`}
                         className="btn btn-sm btn-outline-secondary"
                         style={{
                           backgroundColor: 'white',

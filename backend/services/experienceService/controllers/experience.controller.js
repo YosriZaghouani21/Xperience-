@@ -67,69 +67,9 @@ const experienceController = {
       return res.status(500).json({msg: err.message});
     }
   },
-  createExperience: async (req, res) => {
-    try {
-      // admin and user can create, delete and update "experiences créées"
-      const {
-        type,
-        sessions,
-        title,
-        activity,
-        startHour,
-        endHour,
-        language,
-        city,
-        themes,
-        difficulty,
-        program,
-        target,
-        phobia,
-        includedEq,
-        excludedEq,
-        price,
-        status,
-        limitParticipants,
-        userID,
-        user,
-      } = req.body;
-      const newExperience = new Experiences({
-        type,
-        sessions,
-        title,
-        activity,
-        startHour,
-        endHour,
-        language,
-        city,
-        themes,
-        difficulty,
-        program,
-        target,
-        phobia,
-        includedEq,
-        excludedEq,
-        price,
-        status,
-        limitParticipants,
-        userID,
-        user,
-      });
-
-      await newExperience.save();
-      console.log('req.body : ', req.body);
-      res.json({
-        msg: 'expérience créée avec succes',
-        experience: newExperience,
-      });
-    } catch (err) {
-      return res.status(500).json({msg: err.message});
-    }
-  },
   // createExperience: async (req, res) => {
-  //   const userId = req.params.id;
-  //   console.log("hello its me !", userId);
   //   try {
-  //     //admin and user can create, delete and update "experiences créées"
+  //     // admin and user can create, delete and update "experiences créées"
   //     const {
   //       type,
   //       sessions,
@@ -147,14 +87,12 @@ const experienceController = {
   //       includedEq,
   //       excludedEq,
   //       price,
-  //       isPublished,
-  //       isBeingValidated,
-  //       isValidated,
-  //       isCreated,
+  //       status,
   //       limitParticipants,
+  //       userID,
+  //       user,
   //     } = req.body;
-
-  //     const newExperience = new Experience({
+  //     const newExperience = new Experiences({
   //       type,
   //       sessions,
   //       title,
@@ -171,29 +109,86 @@ const experienceController = {
   //       includedEq,
   //       excludedEq,
   //       price,
-  //       isPublished,
-  //       isBeingValidated,
-  //       isValidated,
-  //       isCreated,
+  //       status,
   //       limitParticipants,
+  //       userID,
+  //       user,
   //     });
 
   //     await newExperience.save();
-  //     const searchedUser = await User.findByIdAndUpdate(
-  //       userId,
-  //       { $push: { myExperiences: newExperience._id } },
-  //       { new: true, useFindAndModify: false }
-  //     );
-  //     const experience = await Experience.findByIdAndUpdate(
-  //       newExperience._id,
-  //       { $push: { userID: userId } },
-  //       { new: true, useFindAndModify: false }
-  //     );
-  //     return res.json({ user: searchedUser, experience: experience });
+  //     console.log('req.body : ', req.body);
+  //     res.json({
+  //       msg: 'expérience créée avec succes',
+  //       experience: newExperience,
+  //     });
   //   } catch (err) {
-  //     return res.status(500).json({ msg: err.message });
+  //     return res.status(500).json({msg: err.message});
   //   }
   // },
+  //
+  createExperience: async (req, res) => {
+    try {
+      // admin and user can create, delete and update "experiences créées"
+      const {
+        userID,
+        type,
+        sessions,
+        title,
+        activity,
+        startHour,
+        endHour,
+        language,
+        city,
+        themes,
+        difficulty,
+        program,
+        target,
+        phobia,
+        includedEq,
+        excludedEq,
+        price,
+        status,
+        limitParticipants,
+      } = req.body;
+
+      const newExperience = new Experiences({
+        userID,
+        type,
+        sessions,
+        title,
+        activity,
+        startHour,
+        endHour,
+        language,
+        city,
+        themes,
+        difficulty,
+        program,
+        target,
+        phobia,
+        includedEq,
+        excludedEq,
+        price,
+        status,
+        limitParticipants,
+      });
+
+      await newExperience.save();
+      const searchedUser = await User.findByIdAndUpdate(
+        req.body.userID,
+        {$push: {myExperiences: newExperience}},
+        {new: true, useFindAndModify: false}
+      );
+      const experience = await Experiences.findByIdAndUpdate(
+        newExperience._id,
+        {user: searchedUser},
+        {new: true, useFindAndModify: false}
+      );
+      return res.json({experience, searchedUser});
+    } catch (err) {
+      return res.status(500).json({msg: err.message});
+    }
+  },
   // Delete experience => /api/experience/:id
   deleteExperience: async (req, res) => {
     try {
@@ -224,12 +219,11 @@ const experienceController = {
         price,
         status,
         limitParticipants,
-        userID,
-        user,
         photo,
         photo2,
         photo3,
         photo4,
+        user,
       } = req.body;
       await Experiences.findByIdAndUpdate(
         {_id: req.params.id},
@@ -252,12 +246,11 @@ const experienceController = {
           price,
           status,
           limitParticipants,
-          userID,
-          user,
           photo,
           photo2,
           photo3,
           photo4,
+          user,
         }
       );
       res.json({msg: "L'expérience a été modifié avec succès"});
