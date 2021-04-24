@@ -2,23 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {format} from 'date-fns';
 import {enGB} from 'date-fns/locale';
 import {DatePickerCalendar} from 'react-nice-dates';
-import {DateRangePickerCalendar, START_DATE} from 'react-nice-dates';
 
 import {getDay} from 'date-fns';
 import 'react-nice-dates/build/style.css';
 import {Button} from 'reactstrap';
 const Session = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState();
   const [today, setToday] = useState(new Date());
   const [todayCopy, setTodayCopy] = useState(new Date());
-
-  //date range
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
-  const [focus, setFocus] = useState(START_DATE);
-  const handleFocusChange = newFocus => {
-    setFocus(newFocus || START_DATE);
-  };
+  const [todayCopy1, setTodayCopy1] = useState(new Date());
 
   // sevenDays is created to be mapped in modifiers object
   const [sevenDays, setSevenDays] = useState([]);
@@ -26,6 +18,10 @@ const Session = () => {
   const [firstSession, setFirstSession] = useState([]);
   // two days is created to be mapped in modfiers object
   const [twoDays, setTwoDays] = useState(new Date());
+  // second session is created to be mapped in modifers object
+  const [secondSession, setSecondSession] = useState([]);
+  // two days is created to be mapped in modfiers object
+  const [twoDays2, setTwoDays2] = useState(new Date());
 
   //dateAfter7Days is created to disable the 7 days of promotion
   const dateAfter7Days = new Date();
@@ -34,20 +30,25 @@ const Session = () => {
   //we created a copy of dateAfter7days to use it in the first session
   const daySeven = new Date(dateAfter7Days);
 
-  //startDayOfSessionOne is created to define the start day which is the fourth day of session one (today + 10)
-  const startDayOfSessionOne = new Date();
-  new Date(startDayOfSessionOne.setDate(todayCopy.getDate() + 10));
+  //********session 1 */
+  // start day of session one ( today +11)
+  const sessionOneDay = new Date();
+  new Date(sessionOneDay.setDate(todayCopy.getDate() + 11));
 
-  // two days between the first and the second session
-  const sessionOneDay = new Date(startDayOfSessionOne);
-  new Date(sessionOneDay.setDate(startDayOfSessionOne.getDate() + 1));
+  //******session 2 */
+  //start day of session two
+  const sessionTwoDay = new Date();
+  new Date(sessionTwoDay.setDate(todayCopy1.getDate() + 13));
 
   //initialize an empty array to push on it the days between
   const dateArray = [];
   //initialize an empty array to push on it the 4 days of the first session
   const session1 = [];
-  //initialize an empty array to push on it the 2 days between 2 sessions
+  //initialize an empty array to push on it the 2 days between 2 sessions (first and second session)
   const daysBetween = [];
+  const session2 = [];
+  //initialize an empty array to push on it the 2 days between 2 sessions(second and thirs session)
+  const daysBetween2 = [];
 
   //create the 7 days of promotion
   useEffect(() => {
@@ -73,20 +74,43 @@ const Session = () => {
     }
     setTwoDays([...daysBetween]);
   }, []);
+  //create the second session
+  useEffect(() => {
+    for (var i = 0; i < 4; i++) {
+      session2.push(new Date(sessionTwoDay).toDateString().toString());
+      new Date(sessionTwoDay.setDate(sessionTwoDay.getDate() + 1));
+    }
+    setSecondSession([...session2]);
+  }, []);
+
+  //create the two days between the second and the third session
+  useEffect(() => {
+    for (var i = 0; i < 2; i++) {
+      daysBetween2.push(new Date(sessionTwoDay).toDateString().toString());
+      new Date(sessionTwoDay.setDate(sessionTwoDay.getDate() + 1));
+    }
+    setTwoDays2([...daysBetween2]);
+  }, []);
 
   const modifiers = {
     disabled: date =>
       sevenDays.includes(date.toDateString().toString()) ||
       date.toDateString() === twoDays[0] ||
-      date.toDateString() === twoDays[1],
-    highlight: date =>
+      date.toDateString() === twoDays[1] ||
+      date.toDateString() === twoDays2[0] ||
+      date.toDateString() === twoDays2[1],
+    selected: date =>
       date.toDateString() === firstSession[0] ||
       date.toDateString() === firstSession[1] ||
       date.toDateString() === firstSession[2] ||
-      date.toDateString() === firstSession[3],
+      date.toDateString() === firstSession[3] ||
+      date.toDateString() === secondSession[0] ||
+      date.toDateString() === secondSession[1] ||
+      date.toDateString() === secondSession[2] ||
+      date.toDateString() === secondSession[3],
   };
   const modifiersClassNames = {
-    highlight: '-highlight',
+    selected: '-selected',
   };
   return (
     <div className="col-xl-6">
@@ -94,7 +118,6 @@ const Session = () => {
       <DatePickerCalendar
         date={date}
         onDateChange={setDate}
-        focus={focus}
         locale={enGB}
         modifiers={modifiers}
         modifiersClassNames={modifiersClassNames}
