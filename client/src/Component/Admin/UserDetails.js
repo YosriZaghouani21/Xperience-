@@ -28,10 +28,10 @@ const UserDetails = ({
       value: user.birthday ? user.birthday.substr(0, 10) : <small>-</small>,
     },
     {label: 'Téléphone', value: user.phoneNumber},
-    {label: 'Adresse email', value: user.email},
+    {label: 'addresse email', value: user.email},
     {
-      label: 'Adresse postale',
-      value: user.city && user.adress ? user.city + ', ' + user.adress : <small>-</small>,
+      label: 'addresse postale',
+      value: user.city && user.address ? user.city + ', ' + user.address : <small>-</small>,
     },
     {
       label: 'Description',

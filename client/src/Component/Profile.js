@@ -19,7 +19,7 @@ const Profile = () => {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
   const [city, setCity] = useState('');
-  const [adress, setAdress] = useState('');
+  const [address, setaddress] = useState('');
   const [aboutMe, setAboutme] = useState('');
   const [postalCode, setPostalcode] = useState('');
   const [photo, setphoto] = useState();
@@ -36,7 +36,7 @@ const Profile = () => {
       setBirthday(user.birthday);
       setCity(user.city);
       setAboutme(user.aboutMe);
-      setAdress(user.adress);
+      setaddress(user.address);
       setPostalcode(user.postalCode);
       setphoto(user.photo);
     }
@@ -52,7 +52,7 @@ const Profile = () => {
         city,
         aboutMe,
         postalCode,
-        adress,
+        address,
         photo,
       })
     );
@@ -145,11 +145,15 @@ const Profile = () => {
                       </Col>
                       <Col xs="3">
                         <Link
-                        to="/preferences"
+                          to="/preferences"
                           className="btn btn-primary"
-                          style={{padding:"1.5%"}}
+                          style={{padding: '1.5%'}}
                         >
-<small> <b>Ajouter mes préférences </b> </small>                      </Link>
+                          <small>
+                            {' '}
+                            <b>Ajouter mes préférences </b>{' '}
+                          </small>{' '}
+                        </Link>
                       </Col>
                       <Col text-right>
                         <Button
@@ -248,11 +252,11 @@ const Profile = () => {
                                 <Input
                                   aria-label="Small"
                                   type="text"
-                                  name="adress"
+                                  name="address"
                                   aria-describedby="inputGroup-sizing-sm"
-                                  value={adress}
-                                  defaultValue={adress}
-                                  onChange={e => setAdress(e.target.value)}
+                                  value={address}
+                                  defaultValue={address}
+                                  onChange={e => setaddress(e.target.value)}
                                 />
                               </FormGroup>
                             </Col>
@@ -409,11 +413,11 @@ const Profile = () => {
                                 <Input
                                   aria-label="Small"
                                   type="text"
-                                  name="adress"
+                                  name="address"
                                   aria-describedby="inputGroup-sizing-sm"
-                                  value={adress}
-                                  defaultValue={adress}
-                                  onChange={e => setAdress(e.target.value)}
+                                  value={address}
+                                  defaultValue={address}
+                                  onChange={e => setaddress(e.target.value)}
                                   disabled
                                 />
                               </FormGroup>

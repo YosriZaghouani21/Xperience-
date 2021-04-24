@@ -4,6 +4,7 @@
   "description": "mern app using passport auth",
   "main": "server.js",
   "scripts": {
+    "install": "cd backend && yarn && cd .. && cd client && yarn ",
     "server": "cd backend && npm run dev",
     "client": "cd client && npm start",
     "start": "concurrently \"yarn  client\" \"yarn  server\" ",
