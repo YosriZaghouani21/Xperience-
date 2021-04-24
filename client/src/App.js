@@ -28,6 +28,7 @@ import Form from './Component/Form';
 import PublishIndex from './Component/publishedExperience/PublishIndex';
 import Intro from './Component/sessions/Intro';
 import Session from './Component/sessions/Session';
+import ExperienceSession from './Component/sessions/ExperienceSession';
 
 // optional configuration
 const options = {
@@ -62,7 +63,7 @@ function App() {
           <Route path="/form" component={Form} />
           <Route path="/publish/:id" component={PublishIndex} />
           <Route path="/intro/:id" component={Intro} />
-          <Route path="/session/:id" component={Session} />
+          <Route path="/session/:id" component={ExperienceSession} />
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
           ) : (

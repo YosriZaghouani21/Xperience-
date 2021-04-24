@@ -2,26 +2,27 @@ import React, {useEffect, useState} from 'react';
 import {format} from 'date-fns';
 import {enGB} from 'date-fns/locale';
 import {DatePickerCalendar} from 'react-nice-dates';
-
+import {isSameDay} from 'date-fns';
 import {getDay} from 'date-fns';
 import 'react-nice-dates/build/style.css';
+import './session.css';
 import {Button} from 'reactstrap';
 const Session = () => {
   const [date, setDate] = useState();
   const [today, setToday] = useState(new Date());
   const [todayCopy, setTodayCopy] = useState(new Date());
   const [todayCopy1, setTodayCopy1] = useState(new Date());
-
+  const todayCopy2 = new Date();
   // sevenDays is created to be mapped in modifiers object
   const [sevenDays, setSevenDays] = useState([]);
   // first session is created to be mapped in modifers object
   const [firstSession, setFirstSession] = useState([]);
   // two days is created to be mapped in modfiers object
-  const [twoDays, setTwoDays] = useState(new Date());
+  const [twoDays, setTwoDays] = useState([]);
   // second session is created to be mapped in modifers object
   const [secondSession, setSecondSession] = useState([]);
   // two days is created to be mapped in modfiers object
-  const [twoDays2, setTwoDays2] = useState(new Date());
+  const [twoDays2, setTwoDays2] = useState([]);
 
   //dateAfter7Days is created to disable the 7 days of promotion
   const dateAfter7Days = new Date();
@@ -53,7 +54,7 @@ const Session = () => {
   //create the 7 days of promotion
   useEffect(() => {
     while (today < dateAfter7Days) {
-      dateArray.push(new Date(today).toDateString());
+      dateArray.push(new Date(today));
       new Date(today.setDate(today.getDate() + 1));
     }
     setSevenDays([...dateArray]);
@@ -61,7 +62,7 @@ const Session = () => {
   //create the first session
   useEffect(() => {
     for (var i = 0; i < 4; i++) {
-      session1.push(new Date(daySeven).toDateString().toString());
+      session1.push(new Date(daySeven));
       new Date(daySeven.setDate(daySeven.getDate() + 1));
     }
     setFirstSession([...session1]);
@@ -69,7 +70,7 @@ const Session = () => {
   //create the two days between the first and the second session
   useEffect(() => {
     for (var i = 0; i < 2; i++) {
-      daysBetween.push(new Date(sessionOneDay).toDateString().toString());
+      daysBetween.push(new Date(sessionOneDay));
       new Date(sessionOneDay.setDate(sessionOneDay.getDate() + 1));
     }
     setTwoDays([...daysBetween]);
@@ -77,7 +78,7 @@ const Session = () => {
   //create the second session
   useEffect(() => {
     for (var i = 0; i < 4; i++) {
-      session2.push(new Date(sessionTwoDay).toDateString().toString());
+      session2.push(new Date(sessionTwoDay));
       new Date(sessionTwoDay.setDate(sessionTwoDay.getDate() + 1));
     }
     setSecondSession([...session2]);
@@ -86,7 +87,7 @@ const Session = () => {
   //create the two days between the second and the third session
   useEffect(() => {
     for (var i = 0; i < 2; i++) {
-      daysBetween2.push(new Date(sessionTwoDay).toDateString().toString());
+      daysBetween2.push(new Date(sessionTwoDay));
       new Date(sessionTwoDay.setDate(sessionTwoDay.getDate() + 1));
     }
     setTwoDays2([...daysBetween2]);
@@ -94,27 +95,20 @@ const Session = () => {
 
   const modifiers = {
     disabled: date =>
-      sevenDays.includes(date.toDateString().toString()) ||
-      date.toDateString() === twoDays[0] ||
-      date.toDateString() === twoDays[1] ||
-      date.toDateString() === twoDays2[0] ||
-      date.toDateString() === twoDays2[1],
+      sevenDays.some(sevenDays => isSameDay(sevenDays, date)) ||
+      twoDays.some(twoDays => isSameDay(twoDays, date)) ||
+      twoDays2.some(twoDays2 => isSameDay(twoDays2, date)) ||
+      date < todayCopy2,
     selected: date =>
-      date.toDateString() === firstSession[0] ||
-      date.toDateString() === firstSession[1] ||
-      date.toDateString() === firstSession[2] ||
-      date.toDateString() === firstSession[3] ||
-      date.toDateString() === secondSession[0] ||
-      date.toDateString() === secondSession[1] ||
-      date.toDateString() === secondSession[2] ||
-      date.toDateString() === secondSession[3],
+      firstSession.some(firstSession => isSameDay(firstSession, date)) ||
+      secondSession.some(secondSession => isSameDay(secondSession, date)),
   };
   const modifiersClassNames = {
     selected: '-selected',
   };
   return (
-    <div className="col-xl-6">
-      <p>Selected date: {date ? format(date, 'dd MMM yyyy', {locale: enGB}) : 'none'}.</p>
+    <div>
+      {/* <p>Selected date: {date ? format(date, 'dd MMM yyyy', {locale: enGB}) : 'none'}.</p> */}
       <DatePickerCalendar
         date={date}
         onDateChange={setDate}
