@@ -26,6 +26,8 @@ import {
 } from '../../JS/actions/index';
 import {Link} from 'react-router-dom';
 import Loader from '../layout/Loader';
+import {createNewExperience} from '../../JS/actions/experienceActions';
+import CardBase from '../SharedComponent/CardBase/CardBase';
 
 const FirstStep = () => {
   const [type, setType] = useState('en ligne');
@@ -68,210 +70,111 @@ const FirstStep = () => {
               >
                 <i className="ni ni-fat-remove" />
               </Button>
-              <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Abandonner la création ?</ModalHeader>
-                <ModalBody>
-                  Si vous abandonner la création, vous perderz toutes les informations saisies.
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="primary" onClick={toggle}>
-                    Continuer
-                  </Button>{' '}
-                  <Link
-                    className="btn"
-                    to={'/experiences'}
-                    color="secondary"
-                    onClick={() => {
-                      dispatch(deleteExperience(experience._id));
-                      toggle();
-                      dispatch(getExperiences());
-                    }}
-                  >
-                    Abandonner
-                  </Link>
-                </ModalFooter>
-              </Modal>
+
               <Col lg="5" md="10">
                 <h2 style={{color: '#32325d'}}>
                   <i className="fas fa-users-cog" style={{padding: '2%'}} />
                   Le type de l'expérience
                 </h2>
               </Col>
-              <Row>
-                <Col lg="6" xl="5">
-                  <Card className="card-stats mb-4 mb-xl-0">
-                    <CardBody>
-                      <Row>
-                        <div className="col">
-                          <CardTitle className="h4  mb-0 ">
-                            Les personnes participent en ligne à travers Zoom
-                          </CardTitle>
-                        </div>
-                        <Col className="col-auto">
-                          <div className="icon icon-shape bg-secondary text-black rounded-circle shadow">
-                            <i className="ni ni-laptop" />
-                          </div>
-                        </Col>
-                      </Row>
-                      <div className="mt-3 mb-0 text-muted text-sm">
-                        {type === 'en ligne' ? (
-                          <button
-                            className="btn-icon-clipboard"
-                            style={{
-                              backgroundColor: 'white',
-                              boxShadow:
-                                'rgb(0 0 0 / 10%) 0px 0px 0px 1px, rgb(0 0 0 / 10%) 0px 4px 16px',
-                            }}
-                            id="tooltip982655500"
-                            type="button"
-                            onClick={() => setType('en ligne')}
-                          >
-                            <div>
-                              <i className="ni ni-active-40" />
-                              <span className="font-weight-bold" style={{color: '#32325d'}}>
-                                En ligne
-                              </span>
-                            </div>
-                          </button>
-                        ) : (
-                          <button
-                            className="btn-icon-clipboard"
-                            id="tooltip982655500"
-                            type="button"
-                            onClick={e => {
-                              setType('en ligne');
-                            }}
-                          >
-                            <div>
-                              <i className="ni ni-active-40" />
-                              <span className="font-weight-bold" style={{color: '#32325d'}}>
-                                En ligne
-                              </span>
-                            </div>
-                          </button>
-                        )}
-                        <Card className="card-stats mb-4 mb-xl-0">
-                          <CardBody>
-                            <Row>
-                              <div className="col">
-                                <CardTitle className="mb-0 text-sm">
-                                  <span
-                                    className="mr-2 font-weight-bold"
-                                    style={{color: 'rgb(50, 50, 93)'}}
-                                  >
-                                    De quoi as-tu besoin ?
-                                  </span>
-                                </CardTitle>
-                              </div>
-                            </Row>
-                            <div className="mt-3 mb-0 text-muted text-sm font-weight-bold">
-                              <span className="text-nowrap">
-                                <i className="ni ni-bold-right" />
-                                Un bon éclairage
-                              </span>
-                              <br />
-                              <span className="text-nowrap">
-                                <i className="ni ni-bold-right" />
-                                Une connexion internet
-                              </span>
-                              <br />
-                              <span className="text-nowrap">
-                                <i className="ni ni-bold-right" />
-                                Un son clair
-                              </span>
-                            </div>
-                          </CardBody>
-                        </Card>
-                      </div>
-                    </CardBody>
-                  </Card>
-                </Col>
-                <Col lg="6" xl="5">
-                  <Card className="card-stats mb-4 mb-xl-0">
-                    <CardBody>
-                      <Row>
-                        <div className="col">
-                          <CardTitle className="h4 mb-0">
-                            Les personnes participent en présentiel
-                          </CardTitle>
-                        </div>
-                        <Col className="col-auto">
-                          <div className="icon icon-shape bg-secondary text-black rounded-circle shadow">
-                            <i className="fas fa-users" />
-                          </div>
-                        </Col>
-                      </Row>
-                      <div className="mt-3 mb-0 text-muted text-sm">
-                        {type === 'en personne' ? (
-                          <button
-                            className="btn-icon-clipboard"
-                            id="tooltip982655500"
-                            type="button"
-                            onClick={() => setType('en personne')}
-                            style={{
-                              backgroundColor: 'white',
-                              boxShadow:
-                                'rgb(0 0 0 / 10%) 0px 0px 0px 1px, rgb(0 0 0 / 10%) 0px 4px 16px',
-                            }}
-                          >
-                            <div>
-                              <i className="ni ni-active-40" />
-                              <span className="font-weight-bold" style={{color: '#32325d'}}>
-                                En personne
-                              </span>
-                            </div>
-                          </button>
-                        ) : (
-                          <button
-                            className="btn-icon-clipboard"
-                            id="tooltip982655500"
-                            type="button"
-                            onClick={() => setType('en personne')}
-                          >
-                            <div>
-                              <i className="ni ni-active-40" />
-                              <span className="font-weight-bold" style={{color: '#32325d'}}>
-                                En personne
-                              </span>
-                            </div>
-                          </button>
-                        )}
 
-                        <Card className="card-stats mb-4 mb-xl-0">
-                          <CardBody>
-                            <Row>
-                              <div className="col">
-                                <CardTitle className="mb-0 text-sm">
-                                  <span
-                                    className="mr-2 font-weight-bold"
-                                    style={{color: 'rgb(50, 50, 93)'}}
-                                  >
-                                    De quoi as-tu besoin ?
-                                  </span>
-                                </CardTitle>
-                              </div>
-                            </Row>
-                            <div className="mt-3 mb-0 text-muted text-sm font-weight-bold">
-                              <span className="text-nowrap">
-                                <i className="ni ni-bold-right" />
-                                Savoir établir des liens
-                              </span>
-                              <br />
-                              <span className="text-nowrap">
-                                <i className="ni ni-bold-right" />
-                                Un accueil de qualité
-                              </span>
-                              <br />
-                              <span className="text-nowrap">
-                                <i className="ni ni-bold-right" />
-                                Un sens d'organisation
-                              </span>
-                            </div>
-                          </CardBody>
-                        </Card>
-                      </div>
-                    </CardBody>
-                  </Card>
+              <Row>
+                {/* first card online experience */}
+                <Col lg="6" xl="5">
+                  <CardBase
+                    title="Les personnes participent en ligne à travers Zoom"
+                    cardIcon="ni ni-laptop"
+                  >
+                    <Row>
+                      <button
+                        className="btn-icon-clipboard"
+                        style={
+                          type === 'en ligne'
+                            ? {
+                                backgroundColor: 'white',
+                                boxShadow:
+                                  'rgb(0 0 0 / 10%) 0px 0px 0px 1px, rgb(0 0 0 / 10%) 0px 4px 16px',
+                              }
+                            : {}
+                        }
+                        id="tooltip982655500"
+                        type="button"
+                        onClick={() => setType('en ligne')}
+                      >
+                        <div>
+                          <i className="ni ni-active-40" />
+                          <span className="font-weight-bold" style={{color: '#32325d'}}>
+                            En ligne
+                          </span>
+                        </div>
+                      </button>
+                    </Row>
+                    <Row>
+                      <CardBase title="De quoi as-tu besoin ?">
+                        <span className="text-nowrap">
+                          <i className="ni ni-bold-right" />
+                          Un bon éclairage
+                        </span>
+                        <br />
+                        <span className="text-nowrap">
+                          <i className="ni ni-bold-right" />
+                          Une connexion internet
+                        </span>
+                        <br />
+                        <span className="text-nowrap">
+                          <i className="ni ni-bold-right" />
+                          Un son clair
+                        </span>
+                      </CardBase>
+                    </Row>
+                  </CardBase>
+                </Col>
+                {/* second onsite experience */}
+                <Col lg="6" xl="5">
+                  <CardBase title="Les personnes participent en présentiel" cardIcon="fas fa-users">
+                    <Row>
+                      <button
+                        className="btn-icon-clipboard"
+                        style={
+                          type === 'en personne'
+                            ? {
+                                backgroundColor: 'white',
+                                boxShadow:
+                                  'rgb(0 0 0 / 10%) 0px 0px 0px 1px, rgb(0 0 0 / 10%) 0px 4px 16px',
+                              }
+                            : {}
+                        }
+                        id="tooltip982655500"
+                        type="button"
+                        onClick={() => setType('en personne')}
+                      >
+                        <div>
+                          <i className="ni ni-active-40" />
+                          <span className="font-weight-bold" style={{color: '#32325d'}}>
+                            En personne
+                          </span>
+                        </div>
+                      </button>
+                    </Row>
+                    <Row>
+                      <CardBase title="De quoi as-tu besoin ?">
+                        <span className="text-nowrap">
+                          <i className="ni ni-bold-right" />
+                          Savoir établir des liens
+                        </span>
+                        <br />
+                        <span className="text-nowrap">
+                          <i className="ni ni-bold-right" />
+                          Un accueil de qualité
+                        </span>
+                        <br />
+                        <span className="text-nowrap">
+                          <i className="ni ni-bold-right" />
+                          Un sens d'organisation
+                        </span>
+                      </CardBase>
+                    </Row>
+                  </CardBase>
                 </Col>
               </Row>
               <div>
@@ -280,6 +183,7 @@ const FirstStep = () => {
                     to={`/second/${experience.experience._id}`}
                     className="btn btn-primary mt-4"
                     onClick={() => {
+                      dispatch(createNewExperience({type}));
                       console.log(experience);
                       if (loading === false && user) {
                         dispatch(getExperienceDetails(experience.experience._id));
