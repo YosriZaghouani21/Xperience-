@@ -1,20 +1,33 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import AuthNavbar from './layout/AuthNavbar';
-import {getProfile} from '../JS/actions/index';
-import Footer from './layout/Footer';
+import {getExperiences} from '../../JS/actions/index';
 import {Col, Row, Card, CardBody, CardTitle} from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
+import Loader from '../layout/Loader';
+import AuthNavbar from '../layout/AuthNavbar';
+import Publication from './Publication';
 
-const Publication = () => {
+const Publications = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProfile());
+    dispatch(getExperiences());
   }, [dispatch]);
-  const user = useSelector(state => state.userReducer.user);
-  const loading = useSelector(state => state.userReducer.loading);
+  const isLoading = useSelector(state => state.experiencesReducers.isLoading);
+  const experiences = useSelector(state => state.experiencesReducers.experiences);
 
-  return <></>;
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <>
+      <AuthNavbar />
+      <Row className="col-xl-12 justify-content-center">
+        {experiences &&
+          experiences.map(experience => (
+            <Publication experience={experience} key={experience._id} />
+          ))}
+      </Row>
+    </>
+  );
 };
 
-export default Publication;
+export default Publications;

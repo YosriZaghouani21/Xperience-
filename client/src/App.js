@@ -29,6 +29,7 @@ import PublishIndex from './Component/publishedExperience/PublishIndex';
 import Intro from './Component/sessions/Intro';
 import Session from './Component/sessions/Session';
 import Publish from './Component/sessions/Publish';
+import Publications from './Component/publishedExperience/Publications';
 
 // optional configuration
 const options = {
@@ -65,6 +66,7 @@ function App() {
           <Route path="/intro/:id" component={Intro} />
           <Route path="/session/:id" component={Session} />
           <Route path="/publication/:id" component={Publish} />
+          <Route path="/explore" component={Publications} />
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
           ) : (
