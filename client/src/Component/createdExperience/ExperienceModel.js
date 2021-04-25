@@ -231,6 +231,30 @@ const ExperienceModel = ({experience}) => {
                       </Link>
                     </CardLink>
                   </>
+                ) : experience.status === 'published' ? (
+                  <>
+                    <small>
+                      <i className="far fa-calendar-check text-info" style={{paddingRight: '2%'}} />
+                      Publiée
+                    </small>
+                    <CardText>{experience.title}</CardText>
+                    <hr style={{margin: '1%'}} />
+                    <CardLink href="#" style={{color: '#f5365c '}}>
+                      <Link
+                        to={`/publish/${experience._id}`}
+                        className="btn btn-sm btn-outline-secondary"
+                        style={{
+                          color: '#525f7f',
+                          backgroundColor: 'white',
+                          boxShadow: '0 4px 6px white, 0 0px 0px rgb(0 0 0 / 0%)',
+                          border: '0px white',
+                        }}
+                      >
+                        <i className="fas fa-mouse-pointer" />
+                        <small>Consulter</small>
+                      </Link>
+                    </CardLink>
+                  </>
                 ) : (
                   <>
                     <small>

@@ -53,9 +53,11 @@ const PublishIndex = ({
           <p>3. Publier l'expérience et accueillir vos premiers participants.</p>
         </Col>
       </Row>
-      <Link to={`/intro/${id}`} className="btn btn-success center">
-        Commencer le processus
-      </Link>
+      <div className="d-flex justify-content-center">
+        <Link to={`/intro/${id}`} className="btn btn-success">
+          Commencer le processus
+        </Link>
+      </div>
     </>
   );
 };

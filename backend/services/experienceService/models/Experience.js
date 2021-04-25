@@ -12,18 +12,16 @@ const experienceSchema = new Schema(
       assemblyPoint: String, // si type de l'expérience est en personne
       zoom: String, // si type de l'expérience est en ligne
     },
-    sessions: {
-      type: [
-        {
-          paymentLimit: Date,
-          reservationlimit: Date,
-          restDate: Date,
-          launchDate: Date,
-          sessionDate: Date,
-          islunched: {Boolean, default: false},
-        },
-      ],
-    },
+    sessions: [
+      {
+        paymentLimit: String,
+        lunchLimit: String,
+        restDate: String,
+        launchDate: String,
+        sessionDate: String,
+        islunched: {Boolean, default: false},
+      },
+    ],
 
     // titre
     title: {

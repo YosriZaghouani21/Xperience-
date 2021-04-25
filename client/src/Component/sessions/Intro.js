@@ -51,16 +51,18 @@ const Intro = ({
       </Col>
       <div className="col-xl-9 center text-center">
         <h1>Exemple d'un calendrier de sessions</h1>
-        <i className="fas fa-arrow-down" />
         <img
-          style={{width: '100%'}}
+          className="border rounded"
+          style={{width: '80%'}}
           alt="..."
           src={require('../../Assets/img/brand/session.png').default}
         />
       </div>
-      <Link to={`/session/${id}`} className="btn btn-success float-right mb-4 mr-5">
-        J'ai compris, je veux commencer
-      </Link>
+      <div className="d-flex justify-content-center">
+        <Link to={`/session/${id}`} className="btn btn-success float-right mt-3 mb-5">
+          J'ai compris, je veux commencer
+        </Link>
+      </div>
     </>
   );
 };

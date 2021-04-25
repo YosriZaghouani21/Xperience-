@@ -290,7 +290,7 @@ export const updateExperience = (id, updatedExperience) => async dispatch => {
     );
     dispatch({
       type: UPDATE_EXPERIENCE_SUCCESS,
-      payload: data.experience,
+      payload: data,
     });
   } catch (error) {
     dispatch({
@@ -298,6 +298,7 @@ export const updateExperience = (id, updatedExperience) => async dispatch => {
     });
   }
 };
+
 //clear Errors
 export const clearErrors = () => async dispatch => {
   dispatch({
