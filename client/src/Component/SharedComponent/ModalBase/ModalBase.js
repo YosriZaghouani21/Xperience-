@@ -1,7 +1,6 @@
 import React from 'react';
-import {Button, Modal} from 'bootstrap';
 import PropTypes from 'prop-types';
-import {ModalBody, ModalFooter} from 'react-bootstrap';
+import {ModalBody, ModalFooter, Button, Modal} from 'react-bootstrap';
 import ModalHeader from 'react-bootstrap/esm/ModalHeader';
 import {Link} from 'react-router-dom';
 

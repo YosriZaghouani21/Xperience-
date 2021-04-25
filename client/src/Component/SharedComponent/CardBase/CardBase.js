@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Card, Col, Row} from 'react-bootstrap';
-import {CardBody, CardTitle} from 'reactstrap';
+import {CardBody, CardTitle, Card, Col, Row} from 'reactstrap';
 
 const CardBase = props => {
   const {title, cardIcon, children} = props;
