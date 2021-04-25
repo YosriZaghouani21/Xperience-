@@ -1,14 +1,12 @@
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
-import Profile from './Component/Profile';
 import Signin from './Component/Signin';
-import Signup from './Component/signup';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import {Home, CreatorHome, Signup, Profile, Preferences} from './Pages';
 
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import {positions, Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
-import Preferences from './Component/Preferences';
 import FirstStep from './Component/createdExperience/FirstStep';
 import FirstStep2 from './Component/createdExperience/FirstStep2';
 import SecondStep from './Component/createdExperience/SecondStep';
@@ -17,11 +15,9 @@ import FourthStep from './Component/createdExperience/FourthStep';
 import FifthStep from './Component/createdExperience/FifthStep';
 import ExperienceDetails from './Component/createdExperience/ExperienceDetails';
 import ExperiencesList from './Component/createdExperience/ExperiencesList';
-import Home from './Component/Home';
 import Index from './Component/Admin/Index';
 import UserDetails from './Component/Admin/UserDetails';
 
-import CreatorHome from './Component/CreatorHome';
 import ImagesStep from './Component/createdExperience/ImagesStep';
 import ExperienceDetailsAd from './Component/Admin/ExperienceDetailsAd';
 import Form from './Component/Form';
@@ -45,11 +41,11 @@ function App() {
       <AlertProvider template={AlertTemplate} {...options}>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/creator" component={CreatorHome} />
+          <PrivateRoute exact path="/creator" component={CreatorHome} />
           <Route path="/register" component={Signup} />
           <Route path="/login" component={Signin} />
           <PrivateRoute exact path="/profile" component={Profile} />
-          <Route path="/preferences" component={Preferences} />
+          <PrivateRoute path="/preferences" component={Preferences} />
           <Route path="/create" component={FirstStep} />
           <Route path="/first/:id" component={FirstStep2} />
           <Route path="/second/:id" component={SecondStep} />

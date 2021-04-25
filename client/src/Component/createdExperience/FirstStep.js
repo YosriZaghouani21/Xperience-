@@ -26,7 +26,7 @@ import {
 } from '../../JS/actions/index';
 import {Link} from 'react-router-dom';
 import Loader from '../layout/Loader';
-import {createNewExperience} from '../../JS/actions/experienceActions';
+import {createNewExperience} from '../../JS/actions';
 import CardBase from '../SharedComponent/CardBase/CardBase';
 import ModalBase from '../SharedComponent/ModalBase/ModalBase';
 

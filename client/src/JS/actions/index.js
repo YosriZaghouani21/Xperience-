@@ -47,6 +47,7 @@ import {
   ADD_IMAGE_TO_EXPERIENCE2,
   ADD_IMAGE_TO_EXPERIENCE3,
   ADD_IMAGE_TO_EXPERIENCE4,
+  CREATE_EXPERIENCE,
 } from '../constants/experienceConstants';
 
 const addUser = newUser => async dispatch => {
@@ -324,4 +325,9 @@ export const addImageToExperience3 = image3 => ({
 export const addImageToExperience4 = image4 => ({
   type: ADD_IMAGE_TO_EXPERIENCE4,
   payload: image4,
+});
+
+export const createNewExperience = newExperience => ({
+  type: CREATE_EXPERIENCE,
+  payload: newExperience,
 });
