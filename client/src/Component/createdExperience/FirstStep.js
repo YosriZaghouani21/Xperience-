@@ -28,6 +28,7 @@ import {Link} from 'react-router-dom';
 import Loader from '../layout/Loader';
 import {createNewExperience} from '../../JS/actions/experienceActions';
 import CardBase from '../SharedComponent/CardBase/CardBase';
+import ModalBase from '../SharedComponent/ModalBase/ModalBase';
 
 const FirstStep = () => {
   const [type, setType] = useState('en ligne');
@@ -70,7 +71,14 @@ const FirstStep = () => {
               >
                 <i className="ni ni-fat-remove" />
               </Button>
-
+              <ModalBase
+                isOpen={modal}
+                toggle={toggle}
+                title="Abandonner la création ?"
+                linkedAddress="/experience"
+              >
+                Si vous abandonner la création, vous perderz toutes les informations saisies.
+              </ModalBase>
               <Col lg="5" md="10">
                 <h2 style={{color: '#32325d'}}>
                   <i className="fas fa-users-cog" style={{padding: '2%'}} />
