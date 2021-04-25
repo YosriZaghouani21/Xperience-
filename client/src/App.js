@@ -29,6 +29,7 @@ import PublishIndex from './Component/publishedExperience/PublishIndex';
 import Intro from './Component/sessions/Intro';
 import Session from './Component/sessions/Session';
 import ExperienceSession from './Component/sessions/ExperienceSession';
+import PrivateRoute from './Layouts/Components/PrivateRoute';
 
 // optional configuration
 const options = {
@@ -47,7 +48,7 @@ function App() {
           <Route exact path="/creator" component={CreatorHome} />
           <Route path="/register" component={Signup} />
           <Route path="/login" component={Signin} />
-          <Route path="/profile" component={Profile} />
+          <PrivateRoute exact path="/profile" component={Profile} />
           <Route path="/preferences" component={Preferences} />
           <Route path="/create" component={FirstStep} />
           <Route path="/first/:id" component={FirstStep2} />
