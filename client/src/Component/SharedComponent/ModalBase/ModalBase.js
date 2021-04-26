@@ -13,7 +13,7 @@ const ModalBase = props => {
       <ModalFooter>
         <Button color="primary" onClick={toggle}>
           Continuer
-        </Button>{' '}
+        </Button>
         <Link
           className="btn"
           to={linkedAddress}

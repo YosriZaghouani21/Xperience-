@@ -1,31 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Card,
-  CardBody,
-  CardTitle,
-  Container,
-  Row,
-  Col,
-  Button,
-  Progress,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from 'reactstrap';
+import {Container, Row, Col, Button, Progress} from 'reactstrap';
 import Advice from '../layout/Advice';
-
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  addExperience,
-  deleteExperience,
-  getExperienceDetails,
-  getExperiences,
-  getProfile,
-  updateExperience,
-} from '../../JS/actions/index';
 import {Link} from 'react-router-dom';
-import Loader from '../layout/Loader';
 import {createNewExperience} from '../../JS/actions';
 import CardBase from '../SharedComponent/CardBase/CardBase';
 import ModalBase from '../SharedComponent/ModalBase/ModalBase';
@@ -46,7 +23,6 @@ const FirstStep = () => {
     <>
       <div style={{backgroundColor: '#f8f9fe'}}>
         <Advice />
-
         <div className="main-content">
           <Container fluid>
             <div>
@@ -79,7 +55,6 @@ const FirstStep = () => {
                   Le type de l'expérience
                 </h2>
               </Col>
-
               <Row>
                 <Col lg="6" xl="5">
                   <CardBase
@@ -98,15 +73,11 @@ const FirstStep = () => {
                               }
                             : {}
                         }
-                        id="tooltip982655500"
-                        type="button"
                         onClick={() => setType('en ligne')}
                       >
                         <div>
                           <i className="ni ni-active-40" />
-                          <span className="font-weight-bold" style={{color: '#32325d'}}>
-                            En ligne
-                          </span>
+                          <span className="font-weight-bold color-gray-dark">En ligne</span>
                         </div>
                       </button>
                     </Row>
@@ -145,15 +116,11 @@ const FirstStep = () => {
                               }
                             : {}
                         }
-                        id="tooltip982655500"
-                        type="button"
                         onClick={() => setType('en personne')}
                       >
                         <div>
                           <i className="ni ni-active-40" />
-                          <span className="font-weight-bold" style={{color: '#32325d'}}>
-                            En personne
-                          </span>
+                          <span className="font-weight-bold color-gray-dark">En personne</span>
                         </div>
                       </button>
                     </Row>
