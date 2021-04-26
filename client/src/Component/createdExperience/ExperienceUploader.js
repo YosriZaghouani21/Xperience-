@@ -1,9 +1,9 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {addImageToExperience, updateExperience, getExperienceDetails} from '../../JS/actions/index';
+import {addImageToExperience} from '../../JS/actions/index';
 import {Button} from 'react-bootstrap';
 
-export default function ExperienceUploader({image, setImage, id, exp}) {
+export default function ExperienceUploader({image, setImage, exp}) {
   const dispatch = useDispatch();
   const fileSelect = useRef(null);
   const [show, setShow] = useState(false);

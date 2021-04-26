@@ -24,6 +24,8 @@ import {
   updateExperience,
   deleteExperience,
   getExperiences,
+  createNewExperience,
+  addExperience,
 } from '../../JS/actions/index';
 import ExperienceUploader from './ExperienceUploader';
 import Loader from '../layout/Loader';
@@ -34,31 +36,24 @@ import ExperienceUploader2 from './ExperienceUploader2';
 import ExperienceUploader3 from './ExperienceUploader3';
 import ExperienceUploader4 from './ExperienceUploader4';
 
-const ImagesStep = ({
-  match: {
-    params: {id},
-  },
-}) => {
+const ImagesStep = () => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  useEffect(() => {
-    dispatch(getExperienceDetails(id));
-  }, [dispatch, id]);
-  const isLoading = useSelector(state => state.experiencesReducers.isLoading);
-  const experience = useSelector(state => state.experiencesReducers.experience);
+
+  const localExperience = useSelector(state => state.localExperience);
   const [photo, setphoto] = useState();
   const [photo2, setphoto2] = useState();
   const [photo3, setphoto3] = useState();
   const [photo4, setphoto4] = useState();
 
   useEffect(() => {
-    if (experience) {
-      setphoto(experience.photo);
-      setphoto2(experience.photo2);
-      setphoto3(experience.photo3);
+    if (localExperience) {
+      setphoto(localExperience.photo);
+      setphoto2(localExperience.photo2);
+      setphoto3(localExperience.photo3);
     }
-  }, [experience]);
+  }, [localExperience]);
 
   return (
     <>
@@ -73,42 +68,6 @@ const ImagesStep = ({
               </Progress>
             </div>
             <Col lg="12" md="12">
-              <Button
-                onClick={toggle}
-                style={{
-                  padding: '0.5% 0.5% 0%',
-                  float: 'right',
-                }}
-              >
-                <i className="ni ni-fat-remove" />
-              </Button>
-
-              {/* end button exit */}
-              {/* Modal */}
-              <Modal isOpen={modal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Abandonner la création ?</ModalHeader>
-                <ModalBody>
-                  Si vous abandonner la création, vous perderz toutes les informations saisies.
-                </ModalBody>
-                <ModalFooter>
-                  <Button color="primary" onClick={toggle}>
-                    Continuer
-                  </Button>
-                  <Link
-                    className="btn"
-                    to={'/experiences'}
-                    color="secondary"
-                    onClick={() => {
-                      dispatch(deleteExperience(id));
-                      toggle();
-                      dispatch(getExperiences());
-                    }}
-                  >
-                    Abandonner
-                  </Link>
-                </ModalFooter>
-              </Modal>
-              {/* endModal */}
               {/* step title  */}
               <Col lg="6" md="10">
                 <h2 style={{color: '#32325d'}}>
@@ -127,10 +86,9 @@ const ImagesStep = ({
                     />
                     <div className="mt-1">
                       <ExperienceUploader2
-                        exp={experience}
+                        exp={localExperience}
                         image2={photo2}
                         setImage2={setphoto2}
-                        id={id}
                       />
                     </div>
                     <p>Montrez vous en pleine activité.</p>
@@ -144,10 +102,9 @@ const ImagesStep = ({
                     />
                     <div className="mt-1">
                       <ExperienceUploader3
-                        exp={experience}
+                        exp={localExperience}
                         image3={photo3}
                         setImage3={setphoto3}
-                        id={id}
                       />
                     </div>
                     <p>Mettez l'activité en avant.</p>
@@ -160,12 +117,7 @@ const ImagesStep = ({
                       style={{height: '300px', width: '230px'}}
                     />
                     <div className="mt-1">
-                      <ExperienceUploader
-                        exp={experience}
-                        image={photo}
-                        setImage={setphoto}
-                        id={id}
-                      />
+                      <ExperienceUploader exp={localExperience} image={photo} setImage={setphoto} />
                     </div>
                     <p>Choisissez une photo qui représente l'expérience dans son ensemble.</p>
                   </Col>
@@ -179,20 +131,21 @@ const ImagesStep = ({
                 </Row>
                 <div className="mt-4">
                   <Link
-                    to={`/fifth/${id}`}
+                    to={`/fifth`}
                     className="btn"
                     style={{color: '#5e72e4', backgroundColor: '#fff'}}
                   >
                     Précédent
                   </Link>
                   <Link
-                  to="/experiences"
+                    to="/experiences"
                     onClick={() => {
                       dispatch(
-                        updateExperience(id, {
-                          ...experience
+                        createNewExperience({
+                          ...localExperience,
                         })
                       );
+                      dispatch(addExperience(localExperience));
                     }}
                     className="btn btn-primary"
                   >

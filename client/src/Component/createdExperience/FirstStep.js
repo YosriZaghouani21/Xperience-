@@ -35,20 +35,14 @@ const FirstStep = () => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const dispatch = useDispatch();
-  const experience = useSelector(state => state.experiencesReducers.experience);
-  const isLoading = useSelector(state => state.experiencesReducers.isLoading);
-  const user = useSelector(state => state.userReducer.user);
-  const loading = useSelector(state => state.userReducer.loading);
-
-  console.log(experience);
+  const localExperience = useSelector(state => state.localExperience);
   useEffect(() => {
-    dispatch(getProfile());
-    if (user) dispatch(addExperience({type: {title: type}, userID: user._id}));
-  }, [dispatch]);
+    if (localExperience && localExperience.type) {
+      setType(localExperience.type.title);
+    }
+  }, [dispatch, localExperience]);
 
-  return localStorage.getItem('token') && isLoading ? (
-    <Loader />
-  ) : experience ? (
+  return (
     <>
       <div style={{backgroundColor: '#f8f9fe'}}>
         <Advice />
@@ -87,7 +81,6 @@ const FirstStep = () => {
               </Col>
 
               <Row>
-                {/* first card online experience */}
                 <Col lg="6" xl="5">
                   <CardBase
                     title="Les personnes participent en ligne à travers Zoom"
@@ -186,39 +179,21 @@ const FirstStep = () => {
                 </Col>
               </Row>
               <div>
-                {experience ? (
-                  <Link
-                    to={`/second/${experience.experience._id}`}
-                    className="btn btn-primary mt-4"
-                    onClick={() => {
-                      dispatch(createNewExperience({type}));
-                      console.log(experience);
-                      if (loading === false && user) {
-                        dispatch(getExperienceDetails(experience.experience._id));
-                        dispatch(
-                          updateExperience(experience.experience._id, {
-                            ...experience,
-                            type: {title: type},
-                          })
-                        );
-                      }
-
-                      console.log(experience);
-                    }}
-                  >
-                    Suivant
-                  </Link>
-                ) : (
-                  <p></p>
-                )}
+                <Link
+                  to={`/second`}
+                  className="btn btn-primary mt-4"
+                  onClick={() => {
+                    dispatch(createNewExperience({type: {title: type}}));
+                  }}
+                >
+                  Suivant
+                </Link>
               </div>
             </div>
           </Container>
         </div>
       </div>
     </>
-  ) : (
-    <p></p>
   );
 };
 

@@ -48,15 +48,15 @@ function App() {
           <PrivateRoute path="/preferences" component={Preferences} />
           <Route path="/create" component={FirstStep} />
           <Route path="/first/:id" component={FirstStep2} />
-          <Route path="/second/:id" component={SecondStep} />
-          <Route path="/third/:id" component={ThirdStep} />
-          <Route path="/fourth/:id" component={FourthStep} />
-          <Route path="/fifth/:id" component={FifthStep} />
+          <Route path="/second" component={SecondStep} />
+          <Route path="/third" component={ThirdStep} />
+          <Route path="/fourth" component={FourthStep} />
+          <Route path="/fifth" component={FifthStep} />
           <Route path="/experience/:id" component={ExperienceDetails} />
           <Route path="/admin/:id" component={ExperienceDetailsAd} />
           <Route path="/experiences" component={ExperiencesList} />
           <Route path="/user/:id" component={UserDetails} />
-          <Route path="/image/:id" component={ImagesStep} />
+          <Route path="/image" component={ImagesStep} />
           <Route path="/form" component={Form} />
           <Route path="/publish/:id" component={PublishIndex} />
           <Route path="/intro/:id" component={Intro} />
