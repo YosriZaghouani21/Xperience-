@@ -6,6 +6,8 @@ import {Link, Redirect} from 'react-router-dom';
 import Loader from '../layout/Loader';
 import AuthNavbar from '../layout/AuthNavbar';
 import Publication from './Publication';
+import Search from './Search';
+import Header from './Header';
 
 const Publications = () => {
   const dispatch = useDispatch();
@@ -20,11 +22,17 @@ const Publications = () => {
   ) : (
     <>
       <AuthNavbar />
-      <Row className="col-xl-12 justify-content-center">
+      <Search />
+      <Header />
+      <Row className="col-xl-12 justify-content-center m-0 p-0">
         {experiences &&
-          experiences.map(experience => (
-            <Publication experience={experience} key={experience._id} />
-          ))}
+          experiences.map(experience =>
+            experience.status === 'published' ? (
+              <Publication experience={experience} key={experience._id} />
+            ) : (
+              ''
+            )
+          )}
       </Row>
     </>
   );
