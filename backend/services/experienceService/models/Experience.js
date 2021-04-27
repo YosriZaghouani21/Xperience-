@@ -14,12 +14,8 @@ const experienceSchema = new Schema(
     },
     sessions: [
       {
-        paymentLimit: String,
-        lunchLimit: String,
-        restDate: String,
-        launchDate: String,
-        sessionDate: String,
-        islunched: {Boolean, default: false},
+        type: ObjectId,
+        ref: 'Session',
       },
     ],
 

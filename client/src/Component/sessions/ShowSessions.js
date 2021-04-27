@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
+import {updateExperience} from '../../JS/actions';
 
-const ShowSessions = ({experience}) => {
+const ShowSessions = ({experience, text}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-
+  const [showInterest, setShowInterrest] = useState(true);
   return (
     <>
       <Card className="bg-white shadow border mt-2">
@@ -34,6 +35,7 @@ const ShowSessions = ({experience}) => {
                   <br />
                   {new Date(el.sessionDate).toLocaleDateString('fr-EG', options)}
                 </p>
+                {el.isLunched ? <Button>Réserver</Button> : <Button>S'intéresser</Button>}
               </CardBody>
             ))}
           </Card>

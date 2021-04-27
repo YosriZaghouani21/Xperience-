@@ -1,10 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {getExperiences} from '../../JS/actions/index';
-import {Col, Row, Card, CardBody, CardTitle, CardHeader, CardText} from 'reactstrap';
-import {Link, Redirect} from 'react-router-dom';
-import Loader from '../layout/Loader';
-import AuthNavbar from '../layout/AuthNavbar';
+import React, {useState} from 'react';
+import {Card, CardBody} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 const Publication = ({experience}) => {
   const [like, setLike] = useState();
@@ -33,7 +29,7 @@ const Publication = ({experience}) => {
             {experience.price} TND/personne
           </small>
           <br />
-          <Link to={`publication/${experience._id}`} className="text-gray-dark">
+          <Link to={`details/${experience._id}`} className="text-gray-dark">
             <p
               style={{
                 whiteSpace: 'nowrap',

@@ -1,5 +1,8 @@
 const User = require('../../userService/model/User');
+const Experience = require('../models/Experience');
 const Experiences = require('../models/Experience');
+const Session = require('../models/Session');
+const Sessions = require('../models/Session');
 
 // Filter, sorting and paginating jjsdhjqhdq
 class APIfeatures {
@@ -67,65 +70,6 @@ const experienceController = {
       return res.status(500).json({msg: err.message});
     }
   },
-  // createExperience: async (req, res) => {
-  //   try {
-  //     // admin and user can create, delete and update "experiences créées"
-  //     const {
-  //       type,
-  //       sessions,
-  //       title,
-  //       activity,
-  //       startHour,
-  //       endHour,
-  //       language,
-  //       city,
-  //       themes,
-  //       difficulty,
-  //       program,
-  //       target,
-  //       phobia,
-  //       includedEq,
-  //       excludedEq,
-  //       price,
-  //       status,
-  //       limitParticipants,
-  //       userID,
-  //       user,
-  //     } = req.body;
-  //     const newExperience = new Experiences({
-  //       type,
-  //       sessions,
-  //       title,
-  //       activity,
-  //       startHour,
-  //       endHour,
-  //       language,
-  //       city,
-  //       themes,
-  //       difficulty,
-  //       program,
-  //       target,
-  //       phobia,
-  //       includedEq,
-  //       excludedEq,
-  //       price,
-  //       status,
-  //       limitParticipants,
-  //       userID,
-  //       user,
-  //     });
-
-  //     await newExperience.save();
-  //     console.log('req.body : ', req.body);
-  //     res.json({
-  //       msg: 'expérience créée avec succes',
-  //       experience: newExperience,
-  //     });
-  //   } catch (err) {
-  //     return res.status(500).json({msg: err.message});
-  //   }
-  // },
-  //
   createExperience: async (req, res) => {
     try {
       // admin and user can create, delete and update "experiences créées"
@@ -266,7 +210,43 @@ const experienceController = {
       return res.status(500).json({msg: err.message});
     }
   },
-  //
+  addSession: async (req, res) => {
+    try {
+      const {
+        paymentLimit,
+        lunchLimit,
+        restDate,
+        launchDate,
+        sessionDate,
+        islunched,
+        peopleInterrested,
+        experienceId,
+      } = req.body;
+      const newSession = new Session({
+        paymentLimit,
+        lunchLimit,
+        restDate,
+        launchDate,
+        sessionDate,
+        islunched,
+        peopleInterrested,
+        experienceId,
+      });
+      await newSession.save();
+      const searchedExperience = await Experience.findOneAndUpdate(
+        experienceId,
+        {$push: {sessions: Sessions._id}},
+        {new: true, useFindAndModify: false}
+      ).populate('Sessions');
+      res.json({
+        msg: 'La session a été ajouté avec succès',
+        sessions: newSession,
+        experience,
+      });
+    } catch (err) {
+      return res.status(500).json({msg: err.message});
+    }
+  },
 };
 
 module.exports = experienceController;
