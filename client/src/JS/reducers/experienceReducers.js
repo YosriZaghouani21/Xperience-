@@ -16,6 +16,12 @@ import {
   ADD_IMAGE_TO_EXPERIENCE2,
   ADD_IMAGE_TO_EXPERIENCE3,
   ADD_IMAGE_TO_EXPERIENCE4,
+  ADD_SESSION,
+  ADD_SESSION_FAIL,
+  ADD_SESSION_SUCCESS,
+  UPDATE_SESSION_FAIL,
+  UPDATE_SESSION_SUCCESS,
+  UPDATE_SESSION,
 } from '../constants/experienceConstants';
 
 const initialState = {
@@ -128,6 +134,42 @@ export const experiencesReducers = (state = initialState, {type, payload}) => {
           ...state.experience,
           photo4: payload,
         },
+      };
+    case ADD_SESSION:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case ADD_SESSION_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        session: payload,
+      };
+    case ADD_SESSION_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        errors: payload,
+      };
+    case UPDATE_SESSION:
+      return {
+        ...state,
+        isLoading: true,
+      };
+
+    case UPDATE_SESSION_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        session: payload,
+      };
+
+    case UPDATE_SESSION_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        errors: payload,
       };
     default:
       return state;

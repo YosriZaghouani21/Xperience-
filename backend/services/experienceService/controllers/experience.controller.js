@@ -1,8 +1,10 @@
+const mongoose = require('mongoose');
 const User = require('../../userService/model/User');
-const Experience = require('../models/Experience');
 const Experiences = require('../models/Experience');
 const Session = require('../models/Session');
 const Sessions = require('../models/Session');
+
+mongoose.set('useFindAndModify', false);
 
 // Filter, sorting and paginating jjsdhjqhdq
 class APIfeatures {
@@ -195,7 +197,8 @@ const experienceController = {
           photo3,
           photo4,
           user,
-        }
+        },
+        {new: true}
       );
       res.json({msg: "L'expérience a été modifié avec succès"});
     } catch (err) {
@@ -233,16 +236,60 @@ const experienceController = {
         experienceId,
       });
       await newSession.save();
-      const searchedExperience = await Experience.findOneAndUpdate(
-        experienceId,
-        {$push: {sessions: Sessions._id}},
-        {new: true, useFindAndModify: false}
-      ).populate('Sessions');
+      const searchedExperience = await Experiences.findOneAndUpdate(
+        {
+          _id: experienceId,
+        },
+        {$push: {sessions: newSession}},
+        {new: true}
+      ).populate('sessions');
       res.json({
         msg: 'La session a été ajouté avec succès',
-        sessions: newSession,
-        experience,
+        newSession,
+        searchedExperience,
       });
+    } catch (err) {
+      return res.status(500).json({msg: err.message});
+    }
+  },
+  getSingleSession: async (req, res) => {
+    try {
+      const {sessionId} = req.body;
+      const session = await Sessions.findById(sessionId);
+      res.json({status: 'success', session});
+    } catch (err) {
+      return res.status(500).json({msg: err.message});
+    }
+  },
+  updateSession: async (req, res) => {
+    try {
+      const {
+        sessionId,
+        paymentLimit,
+        launchLimit,
+        restDate,
+        launchDate,
+        sessionDate,
+        islaunched,
+        peopleInterrested,
+        experienceId,
+      } = req.body;
+
+      await Sessions.findByIdAndUpdate(
+        {_id: sessionId},
+        {
+          paymentLimit,
+          launchLimit,
+          restDate,
+          launchDate,
+          sessionDate,
+          islaunched,
+          peopleInterrested,
+          experienceId,
+        }
+      );
+
+      res.json({msg: 'La session a été modifié avec succès'});
     } catch (err) {
       return res.status(500).json({msg: err.message});
     }

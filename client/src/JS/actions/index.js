@@ -47,6 +47,15 @@ import {
   ADD_IMAGE_TO_EXPERIENCE2,
   ADD_IMAGE_TO_EXPERIENCE3,
   ADD_IMAGE_TO_EXPERIENCE4,
+  ADD_SESSION,
+  ADD_SESSION_FAIL,
+  ADD_SESSION_SUCCESS,
+  FETCH_SESSION_DETAILS,
+  FETCH_SESSION_DETAILS_SUCCESS,
+  FETCH_SESSION_DETAILS_FAIL,
+  UPDATE_SESSION_FAIL,
+  UPDATE_SESSION_SUCCESS,
+  UPDATE_SESSION,
 } from '../constants/experienceConstants';
 
 const addUser = newUser => async dispatch => {
@@ -66,9 +75,7 @@ const addUser = newUser => async dispatch => {
     });
   }
 };
-
 export default addUser;
-
 export const login = cred => async dispatch => {
   console.log('🚀 ~ file: index.js ~ line 74 ~ process.env.REACT_APP_BASE_URL', process.env);
 
@@ -90,7 +97,6 @@ export const login = cred => async dispatch => {
     });
   }
 };
-
 export const getProfile = () => async dispatch => {
   const token = localStorage.getItem('token');
   const config = {
@@ -114,14 +120,12 @@ export const getProfile = () => async dispatch => {
     });
   }
 };
-
 export const logout = () => dispatch => {
   localStorage.removeItem('token');
   dispatch({
     type: LOGOUT,
   });
 };
-
 //Update User
 export const updateProfile = (id, updatedProfile) => async dispatch => {
   try {
@@ -144,7 +148,6 @@ export const updateProfile = (id, updatedProfile) => async dispatch => {
     });
   }
 };
-
 export const getUsers = () => async dispatch => {
   dispatch({type: FETCH_ALL_USERS});
   try {
@@ -160,7 +163,6 @@ export const getUsers = () => async dispatch => {
     });
   }
 };
-
 export const seePreferences = () => async dispatch => {
   try {
     const preferences = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/preferences`);
@@ -172,7 +174,6 @@ export const seePreferences = () => async dispatch => {
     console.error(error);
   }
 };
-
 export const addPreferences = (userId, preferenceId) => async dispatch => {
   dispatch({
     type: ADD_PREFERENCES,
@@ -209,7 +210,6 @@ export const getUserDetails = id => async dispatch => {
     });
   }
 };
-
 export const addExperience = newExperience => async dispatch => {
   dispatch({
     type: ADD_EXPERIENCE,
@@ -292,20 +292,19 @@ export const updateExperience = (id, updatedExperience) => async dispatch => {
       type: UPDATE_EXPERIENCE_SUCCESS,
       payload: data,
     });
+    dispatch(getExperienceDetails(id));
   } catch (error) {
     dispatch({
       type: UPDATE_EXPERIENCE_FAIL,
     });
   }
 };
-
 //clear Errors
 export const clearErrors = () => async dispatch => {
   dispatch({
     type: CLEAR_ERRORS,
   });
 };
-
 export const addImageToProfile = image => ({
   type: ADD_IMAGE_TO_PROFILE,
   payload: image,
@@ -326,3 +325,52 @@ export const addImageToExperience4 = image4 => ({
   type: ADD_IMAGE_TO_EXPERIENCE4,
   payload: image4,
 });
+export const addSession = newSession => async dispatch => {
+  dispatch({
+    type: ADD_SESSION,
+  });
+  try {
+    const addRes = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/session`, newSession);
+    dispatch({
+      type: ADD_SESSION_SUCCESS,
+      payload: addRes.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_SESSION_FAIL,
+      payload: error,
+    });
+  }
+};
+export const getSessionDetails = id => async dispatch => {
+  dispatch({type: FETCH_SESSION_DETAILS});
+  try {
+    const {data} = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/session`);
+    dispatch({
+      type: FETCH_SESSION_DETAILS_SUCCESS,
+      payload: data.session,
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_SESSION_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+export const updateSession = (id, updatedSession) => async dispatch => {
+  try {
+    dispatch({
+      type: UPDATE_SESSION,
+    });
+
+    const {data} = await axios.put(`${process.env.REACT_APP_BASE_URL}/api/session`, updatedSession);
+    dispatch({
+      type: UPDATE_SESSION_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_SESSION_FAIL,
+    });
+  }
+};

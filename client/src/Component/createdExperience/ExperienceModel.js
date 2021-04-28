@@ -241,7 +241,7 @@ const ExperienceModel = ({experience}) => {
                     <hr style={{margin: '1%'}} />
                     <CardLink href="#" style={{color: '#f5365c '}}>
                       <Link
-                        to={`/publish/${experience._id}`}
+                        to={`/publication/${experience._id}`}
                         className="btn btn-sm btn-outline-secondary"
                         style={{
                           color: '#525f7f',

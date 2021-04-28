@@ -5,19 +5,16 @@ const {Schema} = mongoose;
 
 const sessionSchema = new Schema(
   {
-    session: {
-      id: ObjectId,
-      paymentLimit: String,
-      lunchLimit: String,
-      restDate: String,
-      launchDate: String,
-      sessionDate: String,
-      islunched: {Boolean, default: false},
-      peopleInterrested: [Object],
-      experienceId: {
-        type: ObjectId,
-        ref: 'Experience',
-      },
+    paymentLimit: String,
+    launchLimit: String,
+    restDate: String,
+    launchDate: String,
+    sessionDate: String,
+    islaunched: {Boolean, default: false},
+    peopleInterrested: [Object],
+    experienceId: {
+      type: ObjectId,
+      ref: 'Experience',
     },
   },
   {

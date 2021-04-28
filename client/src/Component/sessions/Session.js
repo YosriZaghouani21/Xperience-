@@ -4,10 +4,10 @@ import {Calendar} from 'react-nice-dates';
 import {isSameDay} from 'date-fns';
 import 'react-nice-dates/build/style.css';
 import './session.css';
-import {Col, Button} from 'reactstrap';
+import {Col} from 'reactstrap';
 import AuthNavbar from '../layout/AuthNavbar';
 import {useDispatch, useSelector} from 'react-redux';
-import {getExperienceDetails, updateExperience} from '../../JS/actions/index';
+import {getExperienceDetails, updateExperience, addSession} from '../../JS/actions/index';
 import {Link} from 'react-router-dom';
 
 const Session = ({
@@ -126,6 +126,7 @@ const Session = ({
       lunchLimit: new Date(lunchLimit.setDate(lunchLimit.getDate() - 3)).toDateString(),
       paymentLimit: new Date(paymentLimit.setDate(paymentLimit.getDate() - 2)).toDateString(),
       restDate: new Date(restDay.setDate(restDay.getDate() - 1)).toDateString(),
+      experienceId: id,
     });
     setSelectedSessions(selectedSessions);
     newSessions = [...new Set([...selectedSessions])];
@@ -152,13 +153,9 @@ const Session = ({
           to={`/publication/${id}`}
           className="btn btn-success m-2"
           onClick={() => {
-            dispatch(
-              updateExperience(id, {
-                ...experience,
-                sessions: [...newSessions],
-              })
-            );
-            dispatch(getExperienceDetails(id));
+            selectedSessions.map(el => {
+              dispatch(addSession(el));
+            });
           }}
         >
           Continuer

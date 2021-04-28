@@ -14,7 +14,7 @@ const experienceSchema = new Schema(
     },
     sessions: [
       {
-        type: ObjectId,
+        type: Object,
         ref: 'Session',
       },
     ],

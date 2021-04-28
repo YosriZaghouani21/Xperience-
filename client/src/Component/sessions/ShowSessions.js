@@ -1,13 +1,30 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
-import {updateExperience} from '../../JS/actions';
+import {
+  getExperienceDetails,
+  getProfile,
+  getSessionDetails,
+  updateExperience,
+  updateSession,
+} from '../../JS/actions';
+import {useDispatch, useSelector} from 'react-redux';
+import Loader from '../layout/Loader';
 
-const ShowSessions = ({experience, text}) => {
+const ShowSessions = ({experience}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
-  const [showInterest, setShowInterrest] = useState(true);
-  return (
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.userReducer.user);
+  const loading = useSelector(state => state.userReducer.loading);
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
+  return loading ? (
+    <Loader />
+  ) : user ? (
     <>
-      <Card className="bg-white shadow border mt-2">
+      <Card className="bg-white shadow border mt-6">
         <CardHeader className="bg-white text-center">
           <b>Les sessions disponibles</b>
         </CardHeader>
@@ -35,13 +52,40 @@ const ShowSessions = ({experience, text}) => {
                   <br />
                   {new Date(el.sessionDate).toLocaleDateString('fr-EG', options)}
                 </p>
-                {el.isLunched ? <Button>Réserver</Button> : <Button>S'intéresser</Button>}
+                {el.isLunched ? (
+                  <Button>Réserver</Button>
+                ) : el.peopleInterrested.includes(user._id) ? (
+                  <Button
+                    className="text-info"
+                    size="sm"
+                    onClick={() => {
+                      const arr = el.peopleInterrested.filter(p => p !== user._id);
+                      el.peopleInterrested = arr;
+                      dispatch(updateExperience(experience._id, {...experience}));
+                    }}
+                  >
+                    Ne plus s'intéresser
+                  </Button>
+                ) : (
+                  <Button
+                    className="btn-info"
+                    size="sm"
+                    onClick={() => {
+                      el.peopleInterrested.push(user._id);
+                      dispatch(updateExperience(experience._id, {...experience}));
+                    }}
+                  >
+                    S'intéresser
+                  </Button>
+                )}
               </CardBody>
             ))}
           </Card>
         </CardBody>
       </Card>
     </>
+  ) : (
+    <></>
   );
 };
 
