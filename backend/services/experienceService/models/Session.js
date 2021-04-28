@@ -10,7 +10,7 @@ const sessionSchema = new Schema(
     restDate: String,
     launchDate: String,
     sessionDate: String,
-    islaunched: {Boolean, default: false},
+    isLaunched: Boolean,
     peopleInterrested: [Object],
     experienceId: {
       type: ObjectId,

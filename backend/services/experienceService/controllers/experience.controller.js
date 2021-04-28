@@ -217,21 +217,21 @@ const experienceController = {
     try {
       const {
         paymentLimit,
-        lunchLimit,
+        launchLimit,
         restDate,
         launchDate,
         sessionDate,
-        islunched,
+        isLaunched,
         peopleInterrested,
         experienceId,
       } = req.body;
       const newSession = new Session({
         paymentLimit,
-        lunchLimit,
+        launchLimit,
         restDate,
         launchDate,
         sessionDate,
-        islunched,
+        isLaunched,
         peopleInterrested,
         experienceId,
       });
@@ -270,7 +270,7 @@ const experienceController = {
         restDate,
         launchDate,
         sessionDate,
-        islaunched,
+        isLaunched,
         peopleInterrested,
         experienceId,
       } = req.body;
@@ -283,7 +283,7 @@ const experienceController = {
           restDate,
           launchDate,
           sessionDate,
-          islaunched,
+          isLaunched,
           peopleInterrested,
           experienceId,
         }

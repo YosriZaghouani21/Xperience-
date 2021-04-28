@@ -10,7 +10,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../layout/Loader';
 
-const ShowSessions = ({experience}) => {
+const ShowSessionsCreator = ({experience}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
   const dispatch = useDispatch();
   const user = useSelector(state => state.userReducer.user);
@@ -37,8 +37,15 @@ const ShowSessions = ({experience}) => {
               <CardBody className="bg-white border rounded mb-1">
                 <Row>
                   <Col>
-                    <p className="text-info" style={{fontWeight: 'bold'}}>
-                      Session {index + 1}
+                    <p>
+                      <span className="text-info" style={{fontWeight: 'bold'}}>
+                        Session {index + 1}
+                      </span>
+                      {el.isLaunched ? (
+                        <span className="float-right"> Lancée</span>
+                      ) : (
+                        <span className="float-right"> Pas encore lancée</span>
+                      )}
                     </p>
                   </Col>
                 </Row>
@@ -52,32 +59,6 @@ const ShowSessions = ({experience}) => {
                   <br />
                   {new Date(el.sessionDate).toLocaleDateString('fr-EG', options)}
                 </p>
-                {el.isLaunched ? (
-                  <Button>Réserver</Button>
-                ) : el.peopleInterrested.includes(user._id) ? (
-                  <Button
-                    className="text-info"
-                    size="sm"
-                    onClick={() => {
-                      const arr = el.peopleInterrested.filter(p => p !== user._id);
-                      el.peopleInterrested = arr;
-                      dispatch(updateExperience(experience._id, {...experience}));
-                    }}
-                  >
-                    Ne plus s'intéresser
-                  </Button>
-                ) : (
-                  <Button
-                    className="btn-info"
-                    size="sm"
-                    onClick={() => {
-                      el.peopleInterrested.push(user._id);
-                      dispatch(updateExperience(experience._id, {...experience}));
-                    }}
-                  >
-                    S'intéresser
-                  </Button>
-                )}
               </CardBody>
             ))}
           </Card>
@@ -89,4 +70,4 @@ const ShowSessions = ({experience}) => {
   );
 };
 
-export default ShowSessions;
+export default ShowSessionsCreator;

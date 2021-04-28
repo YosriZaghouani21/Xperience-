@@ -7,7 +7,7 @@ import './session.css';
 import {Col} from 'reactstrap';
 import AuthNavbar from '../layout/AuthNavbar';
 import {useDispatch, useSelector} from 'react-redux';
-import {getExperienceDetails, updateExperience, addSession} from '../../JS/actions/index';
+import {getExperienceDetails, addSession} from '../../JS/actions/index';
 import {Link} from 'react-router-dom';
 
 const Session = ({
@@ -16,7 +16,6 @@ const Session = ({
   },
 }) => {
   const dispatch = useDispatch();
-  const experience = useSelector(state => state.experiencesReducers.experience);
   const [today, setToday] = useState(new Date());
   const [todayCopy, setTodayCopy] = useState(new Date());
   const [todayCopy1, setTodayCopy1] = useState(new Date());
@@ -91,7 +90,7 @@ const Session = ({
     }
     setTwoDays2([...daysBetween2]);
   }, []);
-  //create the two days between the thirs and the fourth session
+  //create the two days between the third and the fourth session
   useEffect(() => {
     new Date(sessionThreeDay.setDate(sessionThreeDay.getDate() + 1));
     for (var i = 0; i < 2; i++) {
@@ -123,10 +122,11 @@ const Session = ({
 
     selectedSessions.push({
       sessionDate: date.toDateString(),
-      lunchLimit: new Date(lunchLimit.setDate(lunchLimit.getDate() - 3)).toDateString(),
+      launchLimit: new Date(lunchLimit.setDate(lunchLimit.getDate() - 3)).toDateString(),
       paymentLimit: new Date(paymentLimit.setDate(paymentLimit.getDate() - 2)).toDateString(),
       restDate: new Date(restDay.setDate(restDay.getDate() - 1)).toDateString(),
       experienceId: id,
+      isLaunched: false,
     });
     setSelectedSessions(selectedSessions);
     newSessions = [...new Set([...selectedSessions])];
@@ -150,7 +150,7 @@ const Session = ({
           modifiersClassNames={modifiersClassNames}
         />
         <Link
-          to={`/publication/${id}`}
+          to={`/handle/${id}`}
           className="btn btn-success m-2"
           onClick={() => {
             selectedSessions.map(el => {

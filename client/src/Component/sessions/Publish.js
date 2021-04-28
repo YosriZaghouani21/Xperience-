@@ -8,6 +8,7 @@ import AuthNavbar from '../layout/AuthNavbar';
 import {Link, Redirect} from 'react-router-dom';
 import Details from './Details';
 import ShowSessions from './ShowSessions';
+import ShowSessionsCreator from './ShowSessionsCreator';
 const Publish = ({
   match: {
     params: {id},
@@ -32,7 +33,7 @@ const Publish = ({
               <Details experience={experience} />
             </Col>
             <Col xl="3">
-              <ShowSessions experience={experience} />
+              <ShowSessionsCreator experience={experience} />
               <Link
                 to="/experiences"
                 className="mt-2 col-xl-12 btn btn-success"
