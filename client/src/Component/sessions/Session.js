@@ -127,6 +127,7 @@ const Session = ({
       restDate: new Date(restDay.setDate(restDay.getDate() - 1)).toDateString(),
       experienceId: id,
       isLaunched: false,
+      reservationDemand: [],
     });
     setSelectedSessions(selectedSessions);
     newSessions = [...new Set([...selectedSessions])];

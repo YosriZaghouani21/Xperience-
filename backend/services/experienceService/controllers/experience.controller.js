@@ -224,6 +224,7 @@ const experienceController = {
         isLaunched,
         peopleInterrested,
         experienceId,
+        reservationDemand,
       } = req.body;
       const newSession = new Session({
         paymentLimit,
@@ -234,6 +235,7 @@ const experienceController = {
         isLaunched,
         peopleInterrested,
         experienceId,
+        reservationDemand,
       });
       await newSession.save();
       const searchedExperience = await Experiences.findOneAndUpdate(
@@ -273,6 +275,7 @@ const experienceController = {
         isLaunched,
         peopleInterrested,
         experienceId,
+        reservationDemand,
       } = req.body;
 
       await Sessions.findByIdAndUpdate(
@@ -286,6 +289,7 @@ const experienceController = {
           isLaunched,
           peopleInterrested,
           experienceId,
+          reservationDemand,
         }
       );
 

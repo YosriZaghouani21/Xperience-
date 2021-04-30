@@ -38,7 +38,6 @@ const HandleSessions = ({
                 <CardBody className="bg-white border rounded mb-1 ">
                   <p>
                     <span className="text-info" style={{fontWeight: 'bold'}}>
-                      {' '}
                       Session {index + 1}
                     </span>
                     <span>
@@ -57,6 +56,11 @@ const HandleSessions = ({
                       checked={el.isLaunched}
                       onChange={e => {
                         e.target.checked ? (el.isLaunched = true) : (el.isLaunched = false);
+                        {
+                          el.isLaunched
+                            ? (el.launchDate = new Date().toDateString())
+                            : (el.launchDate = null);
+                        }
                         dispatch(updateExperience(id, {...experience}));
                       }}
                     />

@@ -34,7 +34,7 @@ const CreatedExperienceAd = ({experience}) => {
       </Modal>
       {/* endModal */}
       <tr>
-        <td>{experience.createdAt.substr(0, 10)} </td>
+        {/* <td>{experience.createdAt.substr(0, 10)} </td> */}
 
         <td>{experience.title} </td>
         <td>

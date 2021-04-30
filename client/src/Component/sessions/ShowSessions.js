@@ -1,20 +1,29 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 import {
-  getExperienceDetails,
-  getProfile,
-  getSessionDetails,
-  updateExperience,
-  updateSession,
-} from '../../JS/actions';
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  Row,
+  Col,
+  Modal,
+  ModalBody,
+  ModalHeader,
+  ModalFooter,
+} from 'reactstrap';
+import {getProfile, updateExperience} from '../../JS/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../layout/Loader';
+import {Link} from 'react-router-dom';
+import AskForReservation from '../Reservation/AskForReservation';
 
 const ShowSessions = ({experience}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
   const dispatch = useDispatch();
   const user = useSelector(state => state.userReducer.user);
   const loading = useSelector(state => state.userReducer.loading);
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
 
   useEffect(() => {
     dispatch(getProfile());
@@ -53,13 +62,13 @@ const ShowSessions = ({experience}) => {
                   {new Date(el.sessionDate).toLocaleDateString('fr-EG', options)}
                 </p>
                 {el.isLaunched ? (
-                  <Button>Réserver</Button>
-                ) : el.peopleInterrested.includes(user._id) ? (
+                  <AskForReservation experience={experience} el={el} user={user} />
+                ) : el.peopleInterrested.filter(e => e.userId === user._id).length > 0 ? (
                   <Button
                     className="text-info"
                     size="sm"
                     onClick={() => {
-                      const arr = el.peopleInterrested.filter(p => p !== user._id);
+                      const arr = el.peopleInterrested.filter(e => e.userId !== user._id);
                       el.peopleInterrested = arr;
                       dispatch(updateExperience(experience._id, {...experience}));
                     }}
@@ -71,7 +80,12 @@ const ShowSessions = ({experience}) => {
                     className="btn-info"
                     size="sm"
                     onClick={() => {
-                      el.peopleInterrested.push(user._id);
+                      el.peopleInterrested.push({
+                        userId: user._id,
+                        userName: user.name,
+                        userEmail: user.email,
+                        userNumber: user.tel,
+                      });
                       dispatch(updateExperience(experience._id, {...experience}));
                     }}
                   >
