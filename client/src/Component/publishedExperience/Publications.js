@@ -24,7 +24,7 @@ const Publications = () => {
       <AuthNavbar />
       <Search />
       <Header />
-      <Row className="col-xl-12 justify-content-center m-0 p-0">
+      <Row className="col-xl-12 justify-content-center m-0 p-0 mb-5">
         {experiences &&
           experiences.map(experience =>
             experience.status === 'published' ? (

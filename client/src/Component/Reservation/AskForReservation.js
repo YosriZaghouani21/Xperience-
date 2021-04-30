@@ -40,7 +40,9 @@ const AskForReservation = ({experience, el, user}) => {
       {el.reservationDemand.filter(e => e.userId === user._id).length > 0 ? (
         <p className="text-yellow">Demande de réservation envoyée</p>
       ) : (
-        <Button onClick={toggle}>Réserver</Button>
+        <Button className="text-danger" size="sm" onClick={toggle}>
+          Réserver
+        </Button>
       )}
     </>
   );

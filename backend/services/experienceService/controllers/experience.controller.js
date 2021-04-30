@@ -95,10 +95,12 @@ const experienceController = {
         price,
         status,
         limitParticipants,
+        user,
       } = req.body;
 
       const newExperience = new Experiences({
         userID,
+        user,
         type,
         sessions,
         title,

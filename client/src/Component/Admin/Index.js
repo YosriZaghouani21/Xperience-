@@ -78,7 +78,7 @@ const Index = props => {
                 </div>
               </Row>
             ) : (
-              <Row className="mt-5">
+              <Row className="mt-5 mb-5">
                 <StatusCheckbox />
                 <Col className="mb-5 mb-xl-0" xl="12">
                   <Card className="shadow">

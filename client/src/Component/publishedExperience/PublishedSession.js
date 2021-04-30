@@ -27,7 +27,7 @@ const PublishedSession = ({experience, el, index}) => {
     <>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Lancer la session?</ModalHeader>
-        <ModalBody>Vous etes sur de lancer cette session ?</ModalBody>
+        <ModalBody>êtes-vous sûr de vouloir lancer cette session ?</ModalBody>
         <ModalFooter>
           <Button
             className="btn btn-success"
@@ -68,9 +68,10 @@ const PublishedSession = ({experience, el, index}) => {
           </Button>
         </ModalFooter>
       </Modal>
+
       <Modal isOpen={modal2} toggle={toggle2}>
         <ModalHeader toggle={toggle2}>Supprimer la session?</ModalHeader>
-        <ModalBody>Vous etes sur de supprimer cette session ?</ModalBody>
+        <ModalBody>êtes-vous sûr de vouloir supprimer cette session ?</ModalBody>
         <ModalFooter>
           <Button
             className="btn btn-danger"

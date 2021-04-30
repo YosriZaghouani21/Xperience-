@@ -77,7 +77,7 @@ const experienceSchema = new Schema(
     status: String,
     limitParticipants: {type: Number},
     userID: ObjectId,
-    user: {},
+    user: Object,
     photo: {
       type: String,
     },

@@ -54,6 +54,11 @@ const CreatedExperienceAd = ({experience}) => {
               <i className="fas fa-circle text-success pr-1" />
               Acceptée
             </>
+          ) : experience.status === 'published' ? (
+            <>
+              <i className="fas fa-circle text-info pr-1" />
+              Publiée
+            </>
           ) : (
             <>
               <i className="fas fa-circle text-danger pr-1" />

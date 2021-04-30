@@ -40,7 +40,7 @@ const FirstStep = () => {
   console.log(experience);
   useEffect(() => {
     dispatch(getProfile());
-    if (user) dispatch(addExperience({type: {title: type}, userID: user._id}));
+    if (user) dispatch(addExperience({type: {title: type}, userID: user._id, sessions: []}));
   }, [dispatch]);
 
   return localStorage.getItem('token') && isLoading ? (
@@ -287,6 +287,8 @@ const FirstStep = () => {
                           updateExperience(experience.experience._id, {
                             ...experience,
                             type: {title: type},
+                            user: {...user},
+                            sessions: [],
                           })
                         );
                       }

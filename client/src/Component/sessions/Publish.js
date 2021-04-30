@@ -65,7 +65,7 @@ const Publish = ({
         <div>
           <AuthNavbar />
           <Row className="col-xl-12" style={{justifyContent: 'center'}}>
-            <Col xl="8" className="m-2">
+            <Col xl="8">
               <Details experience={experience} />
             </Col>
             <Col xl="3">
