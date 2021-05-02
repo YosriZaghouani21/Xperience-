@@ -34,6 +34,7 @@ import PublicationDetails from './Component/publishedExperience/PublicationDetai
 import HandleSessions from './Component/sessions/HandleSessions';
 import PeopleInterested from './Component/publishedExperience/PeopleInterested';
 import PublishedSessionList from './Component/publishedExperience/PublishedSessionList';
+import Message from './Component/Message';
 
 // optional configuration
 const options = {
@@ -74,6 +75,7 @@ function App() {
           <Route path="/details/:id" component={PublicationDetails} />
           <Route path="/handle/:id" component={HandleSessions} />
           <Route path="/people/:id" component={PublishedSessionList} />
+          <Route path="/message" component={Message} />
 
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
