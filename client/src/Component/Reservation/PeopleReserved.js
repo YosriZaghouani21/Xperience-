@@ -9,7 +9,7 @@ const PeopleReserved = ({experience, el, index}) => {
       <PopOver
         title="Personnes qui ont réservées"
         index={`Popover${index + 1}`}
-        text={el.reservationDemand.map(s => (
+        text={el.reservationDemand && el.reservationDemand.map(s => (
           <>
             <span>{s.userName}</span>
             <br />

@@ -9,12 +9,15 @@ const PeopleInterested = ({experience, el, index}) => {
       <PopOver
         title="Personnes intéressées"
         index={`Popover${index + 1}`}
-        text={el.peopleInterrested.map(s => (
-          <>
-            <span>{s.userName}</span>
-            <br />
-          </>
-        ))}
+        text={
+          el.peopleInterrested &&
+          el.peopleInterrested.map(s => (
+            <>
+              <span>{s.userName}</span>
+              <br />
+            </>
+          ))
+        }
         header="Personnes intéressées"
       />
     </>
