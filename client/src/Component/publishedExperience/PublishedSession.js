@@ -8,12 +8,15 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Row,
+  Col,
 } from 'reactstrap';
 import {useDispatch} from 'react-redux';
 import PeopleInterested from './PeopleInterested';
 import {updateExperience} from '../../JS/actions';
 import PeopleReserved from '../Reservation/PeopleReserved';
 import emailjs from 'emailjs-com';
+import ReservationDemand from '../reservationDemand/ReservationDemand';
 
 const PublishedSession = ({experience, el, index}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
@@ -148,7 +151,19 @@ const PublishedSession = ({experience, el, index}) => {
             </tr>
           </Table>
           {el.isLaunched ? (
-            <PeopleReserved experience={experience} el={el} index={index} />
+            <Row>
+              <Col xl="4">
+                <PeopleReserved experience={experience} el={el} index={index} />
+              </Col>
+              <Col>
+                <ReservationDemand
+                  el={el}
+                  index={index}
+                  experience={experience}
+                  options={options}
+                />
+              </Col>
+            </Row>
           ) : (
             <PeopleInterested experience={experience} el={el} index={index} />
           )}

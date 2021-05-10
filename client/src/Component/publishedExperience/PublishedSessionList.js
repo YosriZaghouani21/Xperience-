@@ -1,15 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Card, CardHeader, CardBody, Row, Col, Table, CustomInput} from 'reactstrap';
-import {
-  getExperienceDetails,
-  getProfile,
-  getSessionDetails,
-  updateExperience,
-  updateSession,
-} from '../../JS/actions';
+import React, {useEffect} from 'react';
+import {Card, CardBody, Row} from 'reactstrap';
+import {getExperienceDetails} from '../../JS/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../layout/Loader';
-import {Link} from 'react-router-dom';
 import PublishedSession from './PublishedSession';
 import AuthNavbar from '../layout/AuthNavbar';
 
@@ -18,7 +11,6 @@ const PublishedSessionList = ({
     params: {id},
   },
 }) => {
-  const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
   const dispatch = useDispatch();
   const experience = useSelector(state => state.experiencesReducers.experience);
   const isLoading = useSelector(state => state.experiencesReducers.isLoading);

@@ -7,7 +7,7 @@ const PeopleInterested = ({experience, el, index}) => {
   return (
     <>
       <PopOver
-        title="Personnes intéressées"
+        title={`Personnes interessées (${el.peopleInterrested.length})`}
         index={`Popover${index + 1}`}
         text={
           el.peopleInterrested &&

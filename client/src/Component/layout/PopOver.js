@@ -8,7 +8,7 @@ const PopOver = props => {
 
   return (
     <div>
-      <Button className="mt-2" size="sm" id={props.index} type="button">
+      <Button className="mt-4" style={{boxShadow: 'none'}} size="sm" id={props.index} type="button">
         {props.title}
       </Button>
       <Popover placement="bottom" isOpen={popoverOpen} target={props.index} toggle={toggle}>

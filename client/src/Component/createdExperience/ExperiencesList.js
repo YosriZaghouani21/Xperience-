@@ -6,6 +6,8 @@ import ExperienceModel from './ExperienceModel';
 import {Container, Col, Row} from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
 import AuthNavbar from '../layout/AuthNavbar';
+import SideBarTemplate from '../layout/SideBarTemplate';
+import AuthNavbarExperience from '../layout/AuthNavbarExperience';
 const ExperiencesList = () => {
   const dispatch = useDispatch();
   const experiences = useSelector(state => state.experiencesReducers.experiences);
@@ -27,9 +29,10 @@ const ExperiencesList = () => {
       <Loader />
     ) : user && experiences ? (
       <>
-        <AuthNavbar />
-        <Container fluid>
-          <div className="main-content" style={{margin: '1%'}}>
+        <AuthNavbarExperience />
+        <SideBarTemplate />
+        <div className="main-content mt-4">
+          <Container fluid>
             <Col lg="12" md="10">
               <Row>
                 <Col>
@@ -110,8 +113,8 @@ const ExperiencesList = () => {
                   )}
               </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </>
     ) : (
       <p></p>
