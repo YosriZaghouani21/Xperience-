@@ -1,9 +1,6 @@
 import React from 'react';
-import {Row, Col} from 'reactstrap';
-import AuthNavbar from '../layout/AuthNavbar';
 import PopOver from '../layout/PopOver';
-import Loader from '../layout/Loader';
-const PeopleInterested = ({experience, el, index}) => {
+const PeopleInterested = ({el, index}) => {
   return (
     <>
       <PopOver

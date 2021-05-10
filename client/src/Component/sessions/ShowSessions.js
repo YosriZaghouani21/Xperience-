@@ -1,20 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  Row,
-  Col,
-  Modal,
-  ModalBody,
-  ModalHeader,
-  ModalFooter,
-} from 'reactstrap';
+import {Button, Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 import {getProfile, updateExperience} from '../../JS/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../layout/Loader';
-import {Link} from 'react-router-dom';
 import AskForReservation from '../Reservation/AskForReservation';
 
 const ShowSessions = ({experience}) => {

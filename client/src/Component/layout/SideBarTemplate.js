@@ -9,6 +9,11 @@ import {Collapse, Navbar, NavItem, NavLink, Nav, Container, Row, Col} from 'reac
 const SideBarTemplate = props => {
   const [collapseOpen, setCollapseOpen] = useState();
 
+  // verifies if routeName is the one active (in browser input)
+  const activeRoute = routeName => {
+    return props.location.pathname.indexOf(routeName) > -1 ? 'active' : '';
+  };
+
   // toggles collapse between opened and closed (true/false)
   const toggleCollapse = () => {
     setCollapseOpen(data => !data);
@@ -84,15 +89,19 @@ const SideBarTemplate = props => {
           {/* Navigation */}
           <Nav className="mb-md-3" navbar>
             <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=adr-admin-sidebar">
-                <i className="ni ni-spaceship text-success" />
-                Mes expériences{' '}
-              </NavLink>
+              <Link to="/experiences">
+                <NavLink>
+                  <i className="ni ni-spaceship text-success" />
+                  Mes expériences
+                </NavLink>
+              </Link>
             </NavItem>
             <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/colors?ref=adr-admin-sidebar">
-                <i className="fas fa-money-check text-danger" /> Mes réservations
-              </NavLink>
+              <Link to="/reservation">
+                <NavLink>
+                  <i className="fas fa-money-check text-danger" /> Mes réservations
+                </NavLink>
+              </Link>
             </NavItem>
             <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">

@@ -5,7 +5,6 @@ import Loader from '../layout/Loader';
 import ExperienceModel from './ExperienceModel';
 import {Container, Col, Row} from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
-import AuthNavbar from '../layout/AuthNavbar';
 import SideBarTemplate from '../layout/SideBarTemplate';
 import AuthNavbarExperience from '../layout/AuthNavbarExperience';
 const ExperiencesList = () => {
@@ -26,7 +25,11 @@ const ExperiencesList = () => {
 
   return localStorage.getItem('token') ? (
     isLoading && loading ? (
-      <Loader />
+      <>
+        <AuthNavbarExperience />
+        <SideBarTemplate />
+        <Loader />
+      </>
     ) : user && experiences ? (
       <>
         <AuthNavbarExperience />
