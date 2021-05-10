@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getExperiences, getProfile} from '../../JS/actions/index';
 import Loader from '../layout/Loader';
-import {Container, Col, Card, CardBody} from 'reactstrap';
+import {Container} from 'reactstrap';
 import SideBarTemplate from '../layout/SideBarTemplate';
 import AuthNavbarExperience from '../layout/AuthNavbarExperience';
 import ReservationTemplate from './ReservationTemplate';
@@ -13,7 +13,6 @@ const ShowReservation = () => {
   const isLoading = useSelector(state => state.experiencesReducers.isLoading);
   const error = useSelector(state => state.experiences);
   const loading = useSelector(state => state.userReducer.loading);
-  const [arr, setArr] = useState([]);
   useEffect(() => {
     if (error) {
       console.log(error);

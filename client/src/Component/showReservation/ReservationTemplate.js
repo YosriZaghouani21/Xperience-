@@ -3,7 +3,7 @@ import {Card, CardBody, Row, Col} from 'reactstrap';
 import HandleReservation from './HandleReservation';
 import ReservationStatus from './ReservationStatus';
 
-const ReservationTemplate = ({experience, session, reservation}) => {
+const ReservationTemplate = ({experience, session, reservation, user}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
 
   return (
