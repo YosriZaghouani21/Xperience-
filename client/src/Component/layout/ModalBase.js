@@ -3,12 +3,11 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 
 const ModalBase = props => {
   const [modal, setModal] = useState(false);
-
   const toggle = () => setModal(!modal);
 
   return (
     <div>
-      <Button onClick={toggle} style={props.style} size="sm">
+      <Button onClick={toggle} style={props.style} className={props.className} size="sm">
         {props.buttonLabel}
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
