@@ -5,7 +5,7 @@ const numberInput = document.getElementById('number'),
   button = document.getElementById('button'),
   response = document.querySelector('.response');
 
-button.addEventListener('click', send, false);
+// 
 
 // const socket = io();
 // socket.on('smsStatus', function (data) {

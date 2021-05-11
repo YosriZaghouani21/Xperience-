@@ -31,6 +31,10 @@ const userSchema = mongoose.Schema({
   postalCode: {
     type: String,
   },
+  history: {
+    type: Array,
+    default: [],
+  },
   aboutMe: {
     type: String,
   },

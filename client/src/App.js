@@ -35,6 +35,7 @@ import HandleSessions from './Component/sessions/HandleSessions';
 import PeopleInterested from './Component/publishedExperience/PeopleInterested';
 import PublishedSessionList from './Component/publishedExperience/PublishedSessionList';
 import Message from './Component/Message';
+import Payment from './Component/Payment';
 
 // optional configuration
 const options = {
@@ -76,6 +77,7 @@ function App() {
           <Route path="/handle/:id" component={HandleSessions} />
           <Route path="/people/:id" component={PublishedSessionList} />
           <Route path="/message" component={Message} />
+          <Route path="/payment" component={Payment} />
 
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
