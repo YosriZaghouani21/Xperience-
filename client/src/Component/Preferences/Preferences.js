@@ -39,15 +39,12 @@ const Preferences = () => {
       arr = user.myPreferences;
       arr.map(el => {
         if (el.themes) {
-          setUserThemes([...el.themes]);
           setTselected([...el.themes]);
         }
         if (el.difficulty) {
-          setUserDifficulties([...el.difficulty]);
           setDselected([...el.difficulty]);
         }
         if (el.phobies) {
-          setUserPhobies([...el.phobies]);
           setPselected([...el.phobies]);
         }
       });
@@ -77,20 +74,13 @@ const Preferences = () => {
               preferences={preferences}
               tselected={tselected}
               setTselected={setTselected}
-              userThemes={userThemes}
             />
             <Difficulty
               preferences={preferences}
               dselected={dselected}
               setDselected={setDselected}
-              userDifficulties={userDifficulties}
             />
-            <Phobies
-              preferences={preferences}
-              pselected={pselected}
-              setPselected={setPselected}
-              userPhobies={userPhobies}
-            />
+            <Phobies preferences={preferences} pselected={pselected} setPselected={setPselected} />
             <Button
               className="float-right mt-2 btn-info"
               onClick={() => {

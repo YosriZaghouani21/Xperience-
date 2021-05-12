@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 
-const Phobies = ({preferences, pselected, setPselected, userPhobies}) => {
+const Phobies = ({preferences, pselected, setPselected}) => {
   const onCheckboxBtnClick = selected => {
     const index = pselected.indexOf(selected);
     if (index < 0) {
@@ -27,11 +27,7 @@ const Phobies = ({preferences, pselected, setPselected, userPhobies}) => {
                   onClick={() => {
                     onCheckboxBtnClick(phobies.name);
                   }}
-                  style={
-                    pselected.includes(phobies.name) || userPhobies.includes(phobies.name)
-                      ? {border: '2px solid #11cdef'}
-                      : {}
-                  }
+                  style={pselected.includes(phobies.name) ? {border: '2px solid #11cdef'} : {}}
                   type="button"
                 >
                   <div>

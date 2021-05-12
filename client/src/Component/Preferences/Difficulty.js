@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 
-const Difficulty = ({preferences, dselected, setDselected, userDifficulties}) => {
+const Difficulty = ({preferences, dselected, setDselected}) => {
   const onCheckboxBtnClick = selected => {
     const index = dselected.indexOf(selected);
     if (index < 0) {
@@ -27,12 +27,7 @@ const Difficulty = ({preferences, dselected, setDselected, userDifficulties}) =>
                   onClick={() => {
                     onCheckboxBtnClick(difficulties.name);
                   }}
-                  style={
-                    dselected.includes(difficulties.name) ||
-                    userDifficulties.includes(difficulties.name)
-                      ? {border: '2px solid #11cdef'}
-                      : {}
-                  }
+                  style={dselected.includes(difficulties.name) ? {border: '2px solid #11cdef'} : {}}
                   type="button"
                 >
                   <div>

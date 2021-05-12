@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 import User from '../User';
 
-const Themes = ({preferences, tselected, setTselected, userThemes}) => {
+const Themes = ({preferences, tselected, setTselected}) => {
   const onCheckboxBtnClick = selected => {
     const index = tselected.indexOf(selected);
     if (index < 0) {
@@ -29,11 +29,7 @@ const Themes = ({preferences, tselected, setTselected, userThemes}) => {
                     onClick={() => {
                       onCheckboxBtnClick(theme.name);
                     }}
-                    style={
-                      tselected.includes(theme.name) || userThemes.includes(theme.name)
-                        ? {border: '2px solid #11cdef'}
-                        : {}
-                    }
+                    style={tselected.includes(theme.name) ? {border: '2px solid #11cdef'} : {}}
                     type="button"
                   >
                     <i className={theme.icon} />
