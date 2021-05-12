@@ -34,10 +34,7 @@ import PublicationDetails from './Component/publishedExperience/PublicationDetai
 import HandleSessions from './Component/sessions/HandleSessions';
 import PeopleInterested from './Component/publishedExperience/PeopleInterested';
 import PublishedSessionList from './Component/publishedExperience/PublishedSessionList';
-
-// import Payment from './Component/payment/Payment';
-
-import Message from './Component/Message';
+import ShowReservation from './Component/showReservation/ShowReservation';
 
 // optional configuration
 const options = {
@@ -79,8 +76,6 @@ function App() {
           <Route path="/handle/:id" component={HandleSessions} />
           <Route path="/people/:id" component={PublishedSessionList} />
           <Route path="/reservation" component={ShowReservation} />
-          <Route path="/message" component={Message} />
-          <Route path="/payment" component={Payment} />
 
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
