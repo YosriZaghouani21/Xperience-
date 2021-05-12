@@ -1,22 +1,23 @@
 import React from 'react';
 import {Button} from 'reactstrap';
 
-const ReservationStatus = ({reservation}) => {
+const ReservationStatus = ({reservation, session}) => {
   return (
     <>
-      {reservation.status && reservation.status === 'accepted' ? (
+      {reservation.status && reservation.status === 'accepted' && !session.isCanceled ? (
         <Button size="sm" disabled className="float-right text-success">
           acceptée
         </Button>
-      ) : reservation.status && reservation.status === 'refused' ? (
+      ) : reservation.status && reservation.status === 'refused' && !session.isCanceled ? (
         <Button size="sm" disabled className="float-right text-danger">
           refusée
         </Button>
-      ) : reservation.status && reservation.status === 'paid' ? (
+      ) : reservation.status && reservation.status === 'paid' && !session.isCanceled ? (
         <Button size="sm" disabled className="float-right text-info">
           payée
         </Button>
-      ) : reservation.status && reservation.status === 'canceledByParticipant' ? (
+      ) : session.isCanceled ||
+        (reservation.status && reservation.status === 'canceledByParticipant') ? (
         <Button size="sm" disabled className="float-right">
           annulée
         </Button>

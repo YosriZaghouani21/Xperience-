@@ -15,7 +15,6 @@ const HandleReservation = ({experience, reservation, session}) => {
     const arr = session.reservationDemand.filter(r => r.userId !== reservation.userId);
     session.reservationDemand = arr;
     session.reservationDemand.push(reservation);
-    session.reservationDemand.map(e => console.log(e));
   };
   const updateReservation = () => {
     dispatch(updateExperience(experience._id, {...experience}));
@@ -29,7 +28,7 @@ const HandleReservation = ({experience, reservation, session}) => {
           experience_title: experience.title,
           user_name: reservation.userName,
           session_date: new Date(session.sessionDate).toLocaleDateString('fr-EG', options),
-          user_email: reservation.user_email,
+          user_email: reservation.userEmail,
         },
         'user_dsDTlzDCe0SFlhs6QIFv2'
       )
@@ -46,7 +45,7 @@ const HandleReservation = ({experience, reservation, session}) => {
     emailjs
       .send(
         'service_84sbazd',
-        'template_mi99ntw',
+        'template_kyjwdda',
         {
           experience_title: experience.title,
           user_name: experience.user.name,

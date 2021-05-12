@@ -3,7 +3,7 @@ import {Card, CardBody, Row, Col} from 'reactstrap';
 import HandleReservation from './HandleReservation';
 import ReservationStatus from './ReservationStatus';
 
-const ReservationTemplate = ({experience, session, reservation, user}) => {
+const ReservationTemplate = ({experience, session, reservation}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
 
   return (
@@ -15,7 +15,7 @@ const ReservationTemplate = ({experience, session, reservation, user}) => {
               {experience.title}
             </Col>
             <Col xl="4">
-              <ReservationStatus reservation={reservation} />
+              <ReservationStatus reservation={reservation} session={session} />
             </Col>
           </Row>
           <br />
@@ -34,6 +34,11 @@ const ReservationTemplate = ({experience, session, reservation, user}) => {
               Vous avez annuler votre réservation. Nous sommes en cours de traitement du
               remboursement. <br />
               <br />
+            </small>
+          ) : session.isCanceled ? (
+            <small>
+              <span>Cette expérience a été annulé par son créateur le </span>
+              {new Date(session.cancelDate).toLocaleDateString('fr-EG', options)}
             </small>
           ) : (
             <small>
