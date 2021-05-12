@@ -43,8 +43,7 @@ const userSchema = mongoose.Schema({
   },
   myPreferences: [
     {
-      type: ObjectId,
-      ref: 'preferences',
+      type: Object,
     },
   ],
   verif: {type: Boolean, default: false},

@@ -8,7 +8,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 import {positions, Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
-import Preferences from './Component/Preferences';
+import Preferences from './Component/Preferences/Preferences';
 import FirstStep from './Component/createdExperience/FirstStep';
 import FirstStep2 from './Component/createdExperience/FirstStep2';
 import SecondStep from './Component/createdExperience/SecondStep';

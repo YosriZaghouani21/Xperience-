@@ -154,12 +154,10 @@ exports.addPreferences = async (req, res) => {
 exports.addMyPreferences = async (req, res) => {
   const userId = req.params.id;
   const {preferenceId, preferenceName} = req.body;
-  console.log('🚀  preferenceId', preferenceId);
 
   try {
     const searchedUser = await User.findOne({_id: userId});
     console.log(searchedUser);
-    // searchedUser.myPreferences = [];
     searchedUser.myPreferences.push(preferenceId);
     const user = await User.findByIdAndUpdate(userId, searchedUser, {
       new: true,
@@ -183,10 +181,10 @@ exports.getSingleUser = async (req, res) => {
 };
 
 exports.Paymentvalidation = (req, res) => {
-  let history = [];
-  let transactionData = {};
+  const history = [];
+  const transactionData = {};
 
-  //1.Put brief Payment Information inside User Collection
+  // 1.Put brief Payment Information inside User Collection
   req.body.cartDetail.forEach(item => {
     history.push({
       dateOfPurchase: Date.now(),
@@ -198,7 +196,7 @@ exports.Paymentvalidation = (req, res) => {
     });
   });
 
-  //2.Put Payment Information that come from Paypal into Payment Collection
+  // 2.Put Payment Information that come from Paypal into Payment Collection
   transactionData.user = {
     id: req.user._id,
     name: req.user.name,
@@ -210,7 +208,7 @@ exports.Paymentvalidation = (req, res) => {
 
   User.findOneAndUpdate(
     {_id: req.user._id},
-    {$push: {history: history}, $set: {cart: []}},
+    {$push: {history}, $set: {cart: []}},
     {new: true},
     (err, user) => {
       if (err) return res.json({success: false, err});
