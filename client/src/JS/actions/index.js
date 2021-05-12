@@ -25,6 +25,7 @@ import {
   FETCH_USER_DETAILS_SUCCESS,
   FETCH_USER_DETAILS_FAIL,
   ADD_IMAGE_TO_PROFILE,
+  ON_SUCCESS_BUY_USER,
 } from '../constants/action-types';
 import {
   FETCH_ALL_EXPERIENCES,
@@ -374,3 +375,15 @@ export const updateSession = (id, updatedSession) => async dispatch => {
     });
   }
 };
+
+//PaymentSuccess
+export function onSuccessBuy(data) {
+  const request = axios
+    .post(`${process.env.REACT_APP_BASE_URL}/successBuy`, data)
+    .then(response => response.data);
+
+  return {
+    type: ON_SUCCESS_BUY_USER,
+    payload: request,
+  };
+}

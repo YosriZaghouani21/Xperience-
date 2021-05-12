@@ -1,26 +1,41 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
+import Paypal from '../Component/Paypal/Paypal';
 import {useDispatch, useSelector} from 'react-redux';
-import {getProfile} from '../../JS/actions/index';
-import Loader from '../layout/Loader';
+import {onSuccessBuy} from '../JS/actions';
 
 const Payment = () => {
-  const dispatch = useDispatch();
   const user = useSelector(state => state.userReducer.user);
-  const loading = useSelector(state => state.userReducer.loading);
+  const [ShowSuccess, setShowSuccess] = useState(false);
+  const dispatch = useDispatch();
+  const transactionSuccess = data => {
+    dispatch().then(response => {
+      onSuccessBuy({
+        cartDetail: user,
+        paymentData: data,
+      });
+      if (response.payload.success) {
+        setShowSuccess(true);
+        // setShowTotal(false);
+      }
+    });
+  };
 
-  useEffect(() => {
-    dispatch(getProfile());
-  }, [dispatch]);
+  const transactionError = () => {
+    console.log('Paypal error');
+  };
 
-  return loading ? (
-    <Loader />
-  ) : user ? (
-    <>
-      <h1>Payment component</h1>
-      <h>{user.name}</h>
-    </>
-  ) : (
-    <p></p>
+  const transactionCanceled = () => {
+    console.log('Transaction canceled');
+  };
+  return (
+    <div>
+      <Paypal
+        // toPay={Total}
+        onSuccess={transactionSuccess}
+        transactionError={transactionError}
+        transactionCanceled={transactionCanceled}
+      />
+    </div>
   );
 };
 
