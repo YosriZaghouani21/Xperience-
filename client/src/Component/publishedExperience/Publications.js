@@ -8,6 +8,7 @@ import AuthNavbar from '../layout/AuthNavbar';
 import Publication from './Publication';
 import Search from './Search';
 import Header from './Header';
+import PublicationBar from '../layout/PublicationBar';
 
 const Publications = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Publications = () => {
       <AuthNavbar />
       <Search />
       <Header />
+      <PublicationBar />
       <Row className="col-xl-12 justify-content-center m-0 p-0 mb-5">
         {experiences &&
           experiences.map(experience =>
