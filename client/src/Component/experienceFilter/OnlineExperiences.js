@@ -1,23 +1,27 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getExperiences} from '../../JS/actions/index';
-import {Row} from 'reactstrap';
+import {getExperiences, getProfile} from '../../JS/actions/index';
 import Loader from '../layout/Loader';
 import AuthNavbar from '../layout/AuthNavbar';
-import Publication from './Publication';
-import Search from './Search';
-import Header from './Header';
+import Search from '../publishedExperience/Search';
+import Header from '../publishedExperience/Header';
 import PublicationBar from '../layout/PublicationBar';
-
-const Publications = () => {
+import Publication from '../publishedExperience/Publication';
+import {Row} from 'reactstrap';
+const OnlineExperiences = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getExperiences());
+    dispatch(getProfile());
   }, [dispatch]);
+
   const isLoading = useSelector(state => state.experiencesReducers.isLoading);
   const experiences = useSelector(state => state.experiencesReducers.experiences);
 
-  return isLoading ? (
+  const loading = useSelector(state => state.userReducer.loading);
+  const user = useSelector(state => state.userReducer.user);
+
+  return isLoading && loading ? (
     <>
       <AuthNavbar />
       <Header />
@@ -25,7 +29,7 @@ const Publications = () => {
       <PublicationBar />
       <Loader />
     </>
-  ) : (
+  ) : user && experiences ? (
     <>
       <AuthNavbar />
       <Header />
@@ -34,7 +38,7 @@ const Publications = () => {
       <Row className="col-xl-12 justify-content-center m-0 p-0 mb-5">
         {experiences &&
           experiences.map(experience =>
-            experience.status === 'published' ? (
+            experience.status === 'published' && experience.type.title === 'en ligne' ? (
               <Publication experience={experience} key={experience._id} />
             ) : (
               ''
@@ -42,7 +46,9 @@ const Publications = () => {
           )}
       </Row>
     </>
+  ) : (
+    ''
   );
 };
 
-export default Publications;
+export default OnlineExperiences;

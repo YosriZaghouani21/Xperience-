@@ -72,7 +72,7 @@ const PublicationBar = props => {
           <Nav navbar>{createLinks(routes)}</Nav>
           <Nav className="mb-md-3" navbar>
             <NavItem>
-              <Link to="/experiences">
+              <Link to="/explore">
                 <NavLink>
                   <i className="far fa-eye mr-1" />
                   Tous
@@ -80,7 +80,7 @@ const PublicationBar = props => {
               </Link>
             </NavItem>
             <NavItem>
-              <Link to="/reservation">
+              <Link to="/foryou">
                 <NavLink>
                   <i className="fas fa-hand-holding-heart mr-1" />
                   Pour vous
@@ -94,16 +94,18 @@ const PublicationBar = props => {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
-                <i className="fas fa-laptop mr-1" />
-                En ligne
-              </NavLink>
+              <Link to="/online">
+                <NavLink>
+                  <i className="fas fa-laptop mr-1" /> En ligne
+                </NavLink>
+              </Link>
             </NavItem>
             <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
-                <i className="fas fa-users mr-1" />
-                En personne
-              </NavLink>
+              <Link to="/inperson">
+                <NavLink>
+                  <i className="fas fa-users mr-1" /> En personne
+                </NavLink>
+              </Link>
             </NavItem>
           </Nav>
         </Collapse>

@@ -23,9 +23,6 @@ const Preferences = () => {
   const preferences = useSelector(state => state.userReducer.preferences);
 
   const [localPref, setlocalPref] = useState([]);
-  const [userThemes, setUserThemes] = useState([]);
-  const [userDifficulties, setUserDifficulties] = useState([]);
-  const [userPhobies, setUserPhobies] = useState([]);
 
   var arr = [];
   useEffect(() => {

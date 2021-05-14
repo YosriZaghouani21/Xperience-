@@ -35,6 +35,9 @@ import HandleSessions from './Component/sessions/HandleSessions';
 import PeopleInterested from './Component/publishedExperience/PeopleInterested';
 import PublishedSessionList from './Component/publishedExperience/PublishedSessionList';
 import ShowReservation from './Component/showReservation/ShowReservation';
+import Recommandations from './Component/experienceFilter/Recommandations';
+import OnlineExperiences from './Component/experienceFilter/OnlineExperiences';
+import InPersonExperiences from './Component/experienceFilter/InPersonExperiences';
 
 // optional configuration
 const options = {
@@ -76,6 +79,9 @@ function App() {
           <Route path="/handle/:id" component={HandleSessions} />
           <Route path="/people/:id" component={PublishedSessionList} />
           <Route path="/reservation" component={ShowReservation} />
+          <Route path="/foryou" component={Recommandations} />
+          <Route path="/online" component={OnlineExperiences} />
+          <Route path="/inperson" component={InPersonExperiences} />
 
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />

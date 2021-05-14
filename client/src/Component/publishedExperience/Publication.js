@@ -38,6 +38,15 @@ const Publication = ({experience}) => {
                 paddingLeft: '4%',
               }}
             >
+              {experience.type.title === 'en ligne' ? (
+                <small>
+                  <i className="fas fa-laptop mr-1" />
+                </small>
+              ) : (
+                <small>
+                  <i className="fas fa-users mr-1" />
+                </small>
+              )}
               {experience.title}
             </p>
           </Link>
