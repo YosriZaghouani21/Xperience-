@@ -34,8 +34,8 @@ import PublicationDetails from './Component/publishedExperience/PublicationDetai
 import HandleSessions from './Component/sessions/HandleSessions';
 import PeopleInterested from './Component/publishedExperience/PeopleInterested';
 import PublishedSessionList from './Component/publishedExperience/PublishedSessionList';
-
-// import Payment from './Component/payment/Payment';
+import ShowReservation from './Component/showReservation/ShowReservation';
+import Payment from './Component/Payment';
 
 import Message from './Component/Message';
 

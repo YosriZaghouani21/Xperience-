@@ -181,7 +181,7 @@ exports.getSingleUser = async (req, res) => {
     return res.status(500).json({msg: err.message});
   }
 };
-
+//////////////////Payment/////////////////////
 exports.Paymentvalidation = (req, res) => {
   let history = [];
   let transactionData = {};
@@ -200,9 +200,9 @@ exports.Paymentvalidation = (req, res) => {
 
   //2.Put Payment Information that come from Paypal into Payment Collection
   transactionData.user = {
-    id: req.user._id,
-    name: req.user.name,
-    email: req.user.email,
+    id: user._id,
+    name: user.name,
+    email: user.email,
   };
 
   transactionData.data = req.body.paymentData;
