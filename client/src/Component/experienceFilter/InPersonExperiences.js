@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getExperiences, getProfile} from '../../JS/actions/index';
 import Loader from '../layout/Loader';

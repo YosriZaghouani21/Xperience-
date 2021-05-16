@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Row, Card, CardBody, CardTitle} from 'reactstrap';
+import {Col, Row} from 'reactstrap';
 
 const Header = () => {
   return (

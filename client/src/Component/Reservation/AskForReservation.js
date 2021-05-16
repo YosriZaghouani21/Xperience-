@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import Loader from '../layout/Loader';
+import React, {useState} from 'react';
 
-import {useDispatch, useSelector} from 'react-redux';
-import {getExperienceDetails, updateExperience, getExperiences} from '../../JS/actions/index';
+import {useDispatch} from 'react-redux';
+import {updateExperience} from '../../JS/actions/index';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 
 const AskForReservation = ({experience, el, user}) => {

@@ -36,7 +36,7 @@ export default function ImageUploader({image, setImage}) {
     });
 
     xhr.onreadystatechange = e => {
-      if (xhr.readyState == 4 && xhr.status == 200) {
+      if (xhr.readyState === 4 && xhr.status === 200) {
         const response = JSON.parse(xhr.responseText);
 
         setImage(response.secure_url);

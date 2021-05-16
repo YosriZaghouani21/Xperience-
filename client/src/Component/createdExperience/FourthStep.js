@@ -29,7 +29,6 @@ import {
   getExperiences,
   updateExperience,
 } from '../../JS/actions/index';
-import SideBar from '../layout/SideBar';
 import Advice4 from '../layout/Advice4';
 const FourthStep = ({
   match: {

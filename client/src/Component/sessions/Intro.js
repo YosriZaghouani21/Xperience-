@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Button} from 'reactstrap';
+import {Col} from 'reactstrap';
 import AuthNavbar from '../layout/AuthNavbar';
 import {Link} from 'react-router-dom';
 const Intro = ({

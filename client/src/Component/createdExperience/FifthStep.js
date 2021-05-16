@@ -157,7 +157,6 @@ const FifthStep = ({
                       <span> Expérience {experience.type.title} </span>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
-                      {/* global description */}
                       <Col lg="12" md="12">
                         <p
                           for="exampleText"

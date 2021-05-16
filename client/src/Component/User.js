@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Badge, Media, Button } from "reactstrap";
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {Badge, Media} from 'reactstrap';
 
-const User = ({ user }) => {
+const User = ({user}) => {
   return (
     <>
       <tbody>
@@ -12,13 +12,15 @@ const User = ({ user }) => {
               <a
                 className="avatar rounded-circle mr-3"
                 href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              ><img src={user.photo} alt=".."/></a>
+                onClick={e => e.preventDefault()}
+              >
+                <img src={user.photo} alt=".." />
+              </a>
             </Media>
           </th>
           <td>{user.name}</td>
           <td>
-            {user.role === "admin" ? (
+            {user.role === 'admin' ? (
               <Badge className="badge-dot mr-3">
                 <i className="bg-warning" />
               </Badge>

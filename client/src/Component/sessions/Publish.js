@@ -2,12 +2,11 @@ import React, {useEffect, useState} from 'react';
 import Loader from '../layout/Loader';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {getExperienceDetails, updateExperience, getExperiences} from '../../JS/actions/index';
+import {getExperienceDetails, updateExperience} from '../../JS/actions/index';
 import {Row, Col, Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import AuthNavbar from '../layout/AuthNavbar';
 import {Link, Redirect} from 'react-router-dom';
 import Details from './Details';
-import ShowSessions from './ShowSessions';
 import ShowSessionsCreator from './ShowSessionsCreator';
 const Publish = ({
   match: {

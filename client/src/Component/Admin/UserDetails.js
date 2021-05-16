@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserDetails, getExperiences} from '../../JS/actions/index';
-import {Card, CardBody, Row, CardTitle, Col, Button} from 'reactstrap';
+import {Card, CardBody, Row, Col, Button} from 'reactstrap';
 import Loader from '../layout/Loader';
 import AuthNavbar from '../layout/AuthNavbar';
 

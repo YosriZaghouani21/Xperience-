@@ -19,7 +19,6 @@ import {
   Media,
   Row,
   Modal,
-  ModalHeader,
   ModalBody,
   ModalFooter,
 } from 'reactstrap';

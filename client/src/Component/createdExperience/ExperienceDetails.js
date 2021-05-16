@@ -1,20 +1,13 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../App.css';
 import Loader from '../layout/Loader';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  getExperienceDetails,
-  updateExperience,
-  getExperiences,
-  getProfile,
-} from '../../JS/actions/index';
+import {getExperienceDetails, updateExperience, getExperiences} from '../../JS/actions/index';
 import {
   Button,
   Card,
   CardHeader,
-  CardBody,
   Col,
-  Media,
   Row,
   Modal,
   ModalHeader,

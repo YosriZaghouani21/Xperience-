@@ -85,7 +85,7 @@ const ExperiencesList = () => {
                       name="acceptée"
                     />
                     <label className="custom-control-label" htmlFor="accepted">
-                      <small>acceptée</small>{' '}
+                      <small>acceptée</small>
                     </label>
                   </div>
                 </Col>

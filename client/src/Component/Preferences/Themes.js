@@ -1,6 +1,5 @@
 import React from 'react';
 import {Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
-import User from '../User';
 
 const Themes = ({preferences, tselected, setTselected}) => {
   const onCheckboxBtnClick = selected => {

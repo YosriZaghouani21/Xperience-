@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {deleteExperience, getExperiences, updateExperience} from '../../JS/actions/index';
+import {deleteExperience, getExperiences} from '../../JS/actions/index';
 const ExperienceModel = ({experience}) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);

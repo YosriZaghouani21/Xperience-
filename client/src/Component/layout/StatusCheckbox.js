@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Row, Col} from 'reactstrap';
-const StatusCheckbox = props => {
+const StatusCheckbox = () => {
   const status = [
     {id: 1, name: 'créées'},
     {id: 2, name: 'en cours'},
     {id: 3, name: 'refusées'},
     {id: 4, name: 'acceptées'},
   ];
-  const [checked, setChecked] = useState([]);
-  const [created, setCreated] = useState(false);
+  var checked = [];
+  var created = false;
   const handleToggle = value => {
     if (value === 1) {
-      setCreated(true);
+      created = true;
     }
   };
   return (

@@ -9,6 +9,7 @@ import AuthNavbar from '../layout/AuthNavbar';
 import {useDispatch, useSelector} from 'react-redux';
 import {getExperienceDetails, addSession} from '../../JS/actions/index';
 import {Link} from 'react-router-dom';
+import Loader from '../layout/Loader';
 
 const Session = ({
   match: {
@@ -21,6 +22,11 @@ const Session = ({
   const [todayCopy1, setTodayCopy1] = useState(new Date());
   const todayCopy2 = new Date();
   const [selectedSessions, setSelectedSessions] = useState([]);
+  const experience = useSelector(state => state.experiencesReducers.experience);
+  const isLoading = useSelector(state => state.experiencesReducers.isLoading);
+  const [experienceSessions, setExperienceSessions] = useState([]);
+  const [experienceSessionsDate, setExperienceSessionsDate] = useState([]);
+  var arr = [];
   var newSessions = [];
 
   // sevenDays is created to be mapped in modifiers object
@@ -31,7 +37,6 @@ const Session = ({
   const [twoDays2, setTwoDays2] = useState([]);
   // two days is created to be mapped in modfiers object
   const [twoDays3, setTwoDays3] = useState([]);
-  const [sessionDates, setSessionDates] = useState([]);
 
   //dateAfter7Days is created to disable the 7 days of promotion
   const dateAfter7Days = new Date();
@@ -61,6 +66,19 @@ const Session = ({
   useEffect(() => {
     dispatch(getExperienceDetails(id));
   }, [dispatch, id]);
+  useEffect(() => {
+    if (experience) {
+      setExperienceSessions([...experience.sessions]);
+    }
+  }, [experience]);
+  useEffect(() => {
+    if (experience) {
+      experienceSessions.map(session => {
+        arr.push(session.sessionDate);
+        setExperienceSessionsDate(arr);
+      });
+    }
+  }, [experienceSessions]);
 
   //create the 7 days of promotion
   useEffect(() => {
@@ -106,6 +124,7 @@ const Session = ({
       twoDays.some(twoDays => isSameDay(twoDays, date)) ||
       twoDays2.some(twoDays2 => isSameDay(twoDays2, date)) ||
       twoDays3.some(twoDays3 => isSameDay(twoDays3, date)) ||
+      experienceSessionsDate.includes(date.toDateString()) ||
       date < todayCopy2,
     selected: date =>
       isSameDay(sessionOneDay, date) ||
@@ -134,7 +153,18 @@ const Session = ({
     console.log([...newSessions]);
   };
 
-  return (
+  return isLoading ? (
+    <>
+      <AuthNavbar />
+      <div className="col-xl-5 center text-center">
+        <h1 style={{fontSize: 'xx-large'}}>
+          Tout est prêt, il suffit de sélectionner une ou plusieurs sessions
+        </h1>
+        <p>Vous pouvez toujours revenir et ajouter d'autres sessions</p>
+      </div>
+      <Loader />
+    </>
+  ) : (
     <>
       <AuthNavbar />
       <div className="col-xl-5 center text-center">

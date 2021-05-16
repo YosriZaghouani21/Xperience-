@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {Modal, ModalHeader, ModalBody, ModalFooter, Button} from 'reactstrap';
-import {deleteExperience, getExperiences, getUserDetails} from '../../JS/actions/index';
+import {deleteExperience, getExperiences} from '../../JS/actions/index';
 
 const CreatedExperienceAd = ({experience}) => {
   const dispatch = useDispatch();

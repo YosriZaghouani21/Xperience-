@@ -23,7 +23,6 @@ const Recommandations = () => {
   const [userThemes, setUserThemes] = useState([]);
   const [userDifficulties, setUserDifficulties] = useState([]);
   const [userPhobies, setUserPhobies] = useState([]);
-  const [themesArr, setThemesArr] = useState([]);
   var arr = [];
   useEffect(() => {
     if (user) {

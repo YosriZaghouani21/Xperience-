@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {getExperienceDetails} from '../../JS/actions';
-import {Button, Col, Row} from 'reactstrap';
+import {Col, Row} from 'reactstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import Details from '../sessions/Details';
 import Loader from '../layout/Loader';
@@ -26,13 +26,11 @@ const PublicationDetails = ({
   ) : experience ? (
     <>
       <AuthNavbar />
-
       <Row className="col-xl-12" style={{justifyContent: 'center'}}>
         <Col xl="8" className="m-2">
           <Link className="btn btn-secondary m-2" to="/explore">
             <i className="fas fa-arrow-left" /> plus d'expériences
           </Link>
-
           <Details experience={experience} />
         </Col>
         <Col xl="3">

@@ -22,8 +22,6 @@ const Preferences = () => {
   const loading = useSelector(state => state.userReducer.loading);
   const preferences = useSelector(state => state.userReducer.preferences);
 
-  const [localPref, setlocalPref] = useState([]);
-
   var arr = [];
   useEffect(() => {
     dispatch(getProfile());
@@ -32,7 +30,6 @@ const Preferences = () => {
 
   useEffect(() => {
     if (user) {
-      setlocalPref(preferences);
       arr = user.myPreferences;
       arr.map(el => {
         if (el.themes) {

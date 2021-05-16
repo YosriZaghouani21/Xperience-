@@ -11,7 +11,6 @@ import ImageUploader from './ImageUploader';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const isAuth = useSelector(state => state.userReducer.isAuth);
   const user = useSelector(state => state.userReducer.user);
   const loading = useSelector(state => state.userReducer.loading);
   const [edit, setEdit] = useState(false);
@@ -26,7 +25,6 @@ const Profile = () => {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [editDone, setEditDone] = useState(false);
   const alert = useAlert();
-  const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -145,11 +143,15 @@ const Profile = () => {
                       </Col>
                       <Col xs="3">
                         <Link
-                        to="/preferences"
+                          to="/preferences"
                           className="btn btn-primary"
-                          style={{padding:"1.5%"}}
+                          style={{padding: '1.5%'}}
                         >
-<small> <b>Ajouter mes préférences </b> </small>                      </Link>
+                          <small>
+                            {' '}
+                            <b>Ajouter mes préférences </b>{' '}
+                          </small>{' '}
+                        </Link>
                       </Col>
                       <Col text-right>
                         <Button
