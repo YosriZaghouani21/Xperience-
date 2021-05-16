@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Button, Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
 import {getProfile, updateExperience} from '../../JS/actions';
 import {useDispatch, useSelector} from 'react-redux';
@@ -10,8 +10,6 @@ const ShowSessions = ({experience}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.userReducer.user);
   const loading = useSelector(state => state.userReducer.loading);
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
 
   useEffect(() => {
     dispatch(getProfile());
