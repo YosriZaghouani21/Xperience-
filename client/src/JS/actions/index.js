@@ -379,7 +379,7 @@ export const updateSession = (id, updatedSession) => async dispatch => {
 //PaymentSuccess
 export function onSuccessBuy(data) {
   const request = axios
-    .post(`${process.env.REACT_APP_BASE_URL}/successBuy`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/api/successBuy`, data)
     .then(response => response.data);
 
   return {

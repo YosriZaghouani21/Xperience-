@@ -161,7 +161,7 @@ export const experiencesReducers = (state = initialState, {type, payload}) => {
     case UPDATE_SESSION_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
         session: payload,
       };
 

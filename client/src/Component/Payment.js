@@ -7,6 +7,7 @@ const Payment = () => {
   const user = useSelector(state => state.userReducer.user);
   const [ShowSuccess, setShowSuccess] = useState(false);
   const dispatch = useDispatch();
+
   const transactionSuccess = data => {
     dispatch().then(response => {
       onSuccessBuy({
