@@ -39,6 +39,7 @@ import Payment from './Component/Payment';
 
 import Message from './Component/Message';
 import flouci from './Component/Flouci/flouci';
+import Paypal from './Component/Paypal/Paypal';
 
 // optional configuration
 const options = {
@@ -82,7 +83,8 @@ function App() {
           <Route path="/reservation" component={ShowReservation} />
           <Route path="/message" component={Message} />
           <Route path="/payment" component={Payment} />
-          <Route path="/flouci" component={flouci} />
+          <Route path="/paypal/:id" component={props => <Paypal props={props} />} />
+          {/* <Route path="/flouci" component={flouci} /> */}
 
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
