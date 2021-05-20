@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
-import {getExperienceDetails} from '../../JS/actions/index';
+import {getExperienceDetails, updateExperience} from '../../JS/actions/index';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
 import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../layout/Loader';
+import {Redirect} from 'react-router';
 
 const Paypal = props =>
   // props: {
@@ -13,7 +14,7 @@ const Paypal = props =>
     const experience = useSelector(state => state.experiencesReducers.experience);
     const isLoading = useSelector(state => state.experiencesReducers.isLoading);
     const id = props.props.match.params.id;
-    const exp = experience && experience.price;
+    const exp = experience && experience.price * 0.3;
     console.log('🚀 ~ file: Paypal.js ~ line 17 ~ exp', exp);
 
     useEffect(() => {
@@ -23,6 +24,10 @@ const Paypal = props =>
     const onSuccess = payment => {
       // Congratulation, it came here means everything's fine!
       console.log('The payment was succeeded!', payment);
+      if (payment.paid) {
+        dispatch(updateExperience(id, {...experience, status: 'paid'}));
+        <Redirect to="/reservation" />;
+      }
       // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
     };
 
