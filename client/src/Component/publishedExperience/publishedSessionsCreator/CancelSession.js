@@ -9,6 +9,12 @@ import SessionIndex from './SessionIndex';
 const CancelSession = ({experience, el, options, index}) => {
   const dispatch = useDispatch();
   const [justification, setJustification] = useState('');
+  const deleteSession = () => {
+    const arr = experience.sessions.filter(e => e._id !== el._id);
+    experience.sessions = arr;
+    dispatch(updateExperience(experience._id, {...experience}));
+  };
+
   const cancelSession = () => {
     el = {
       ...el,
@@ -81,37 +87,55 @@ const CancelSession = ({experience, el, options, index}) => {
             </h1>
           }
           modalBody={
-            <>
-              <p className="text-center">
-                Vous êtes sûr de vouloir annuler votre session ? Si oui précisez la cause ici.
-              </p>
-              <Input type="textarea" required onChange={e => setJustification(e.target.value)} />
-              <small style={{fontSize: 'x-small'}}>
-                Suite à l'annulation les personnes qui ont payées recevront un mail. Nous traiterons
-                votre annulation dans les brefs délais. Dès que le remboursement sera possible, les
-                personnes qui ont payées recevront un mail et un remboursement complet.
-                <br />
-                <b>
-                  Les annulations fréquentes peuvent conduire à la suppression de l'expérience de la
-                  plate-forme Xperience.
-                </b>
-              </small>
-            </>
+            el.reservationDemand.length === 0 ? (
+              <>
+                <p>Vous êtes sûr de vouloir annuler votre session ?</p>
+                <small>
+                  Vous avez 0 réservations. L'annulation de la session entraînera sa suppression de
+                  la liste des sessions.
+                </small>
+              </>
+            ) : (
+              <>
+                <p className="text-center">
+                  Vous êtes sûr de vouloir annuler votre session ? Si oui précisez la cause ici.
+                </p>
+
+                <Input type="textarea" required onChange={e => setJustification(e.target.value)} />
+                <small style={{fontSize: 'x-small'}}>
+                  Suite à l'annulation les personnes qui ont payées recevront un mail. Nous
+                  traiterons votre annulation dans les brefs délais. Dès que le remboursement sera
+                  possible, les personnes qui ont payées recevront un mail et un remboursement
+                  complet.
+                  <br />
+                  <b>
+                    Les annulations fréquentes peuvent conduire à la suppression de l'expérience de
+                    la plate-forme Xperience.
+                  </b>
+                </small>
+              </>
+            )
           }
           firstButton="Oui"
           secondButton="Non"
           style={{boxShadow: 'none', fontSize: 'medium'}}
           className="btn  bg-transparent border-0"
-          click={() => {
-            cancelSession();
-            updateSession();
-            el.reservationDemand.map(reservation => {
-              if (reservation.status !== 'canceledByParticipant') {
-                sendRefundParticipant(reservation);
-              }
-            });
-            sendRefundCreator();
-          }}
+          click={
+            el.reservationDemand.length !== 0
+              ? () => {
+                  cancelSession();
+                  updateSession();
+                  el.reservationDemand.map(reservation => {
+                    if (reservation.status !== 'canceledByParticipant') {
+                      sendRefundParticipant(reservation);
+                    }
+                  });
+                  sendRefundCreator();
+                }
+              : () => {
+                  deleteSession();
+                }
+          }
           clickDanger={() => {}}
         />
       </div>

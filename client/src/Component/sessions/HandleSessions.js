@@ -128,9 +128,15 @@ const HandleSessions = ({
           </Row>
         </CardBody>
       </Card>
-      <Link to={`/publication/${id}`} className="btn btn-success mb-3 mr-7 float-right">
-        Terminer
-      </Link>
+      {experience.sessions.length === 0 ? (
+        <Link to={`/publication/${id}`} className="btn btn-success mb-3 mr-7 float-right">
+          Terminer
+        </Link>
+      ) : (
+        <Link to={`/people/${id}`} className="btn btn-success mb-3 mr-7 float-right">
+          Terminer
+        </Link>
+      )}
     </>
   ) : (
     <></>

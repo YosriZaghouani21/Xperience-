@@ -181,7 +181,7 @@ const Session = ({
           modifiersClassNames={modifiersClassNames}
         />
         <Link
-          to={`/handle/${id}`}
+          to={experienceSessions.length === 0 ? `/handle/${id}` : `/people/${id}`}
           className="btn btn-success m-2"
           onClick={() => {
             selectedSessions.map(el => {

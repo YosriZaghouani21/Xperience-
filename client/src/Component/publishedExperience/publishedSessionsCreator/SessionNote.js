@@ -16,7 +16,7 @@ const SessionNote = ({experience, el}) => {
         <span>
           Cette session est passée.Vous avez retardé de la lancer avant la date limite de lancement.
         </span>
-      ) : el.isPassed === false && el.isLaunched ? (
+      ) : el.isLaunched ? (
         <span>lancée le {new Date(el.launchDate).toLocaleDateString('fr-EG', options)}</span>
       ) : (
         <LaunchSession experience={experience} el={el} />
