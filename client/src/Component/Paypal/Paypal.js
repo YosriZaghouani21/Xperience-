@@ -13,7 +13,7 @@ const Paypal = props =>
     const experience = useSelector(state => state.experiencesReducers.experience);
     const isLoading = useSelector(state => state.experiencesReducers.isLoading);
     const id = props.props.match.params.id;
-    const exp = experience.price;
+    const exp = experience && experience.price;
     console.log('🚀 ~ file: Paypal.js ~ line 17 ~ exp', exp);
 
     useEffect(() => {

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
-import addUser from "../JS/actions/index";
+import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Link, Redirect} from 'react-router-dom';
+import addUser from '../JS/actions/index';
 //Bootstrap
-import "bootstrap/dist/css/bootstrap.css";
+import 'bootstrap/dist/css/bootstrap.css';
 import {
   Button,
   Card,
@@ -17,24 +17,24 @@ import {
   InputGroup,
   Row,
   Col,
-} from "reactstrap";
-import AuthNavbar from "./layout/AuthNavbar";
-import Loader from "./layout/Loader";
-import { useForm } from "react-hook-form";
-import Footer from "./layout/Footer";
+} from 'reactstrap';
+import AuthNavbar from './layout/AuthNavbar';
+import Loader from './layout/Loader';
+import {useForm} from 'react-hook-form';
+import Footer from './layout/Footer';
 
 const Signup = () => {
-  const loading = useSelector((state) => state.userReducer.loading);
-  const user = useSelector((state) => state.userReducer.user);
-  const error = useSelector((state) => state.userReducer.errors);
+  const loading = useSelector(state => state.userReducer.loading);
+  const user = useSelector(state => state.userReducer.user);
+  const error = useSelector(state => state.userReducer.errors);
 
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [phoneNumber, setPhoneNumber] = useState(null);
-  const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (e) => {
+  const {register, handleSubmit, errors} = useForm();
+  const onSubmit = e => {
     dispatch(
       addUser({
         name,
@@ -48,15 +48,10 @@ const Signup = () => {
     <div className="main-content">
       {loading ? (
         <Loader />
-      )  : (
+      ) : (
         <div className="header bg-white py-7 py-lg-6">
           <AuthNavbar />
-          <Col
-            lg="10"
-            md="8"
-            className="center border"
-            style={{ padding: "1%" }}
-          >
+          <Col lg="10" md="8" className="center border" style={{padding: '1%'}}>
             <Row>
               <Col>
                 <Card className="bg-secondary  border">
@@ -78,18 +73,15 @@ const Signup = () => {
                             type="text"
                             name="name"
                             placeholder="Nom et prénom"
-                            onChange={(e) => setName(e.target.value)}
-                            invalid={errors["name"]}
+                            onChange={e => setName(e.target.value)}
+                            invalid={errors['name']}
                             innerRef={register({
-                              required: "Le champ nom est obligatoire.",
+                              required: 'Le champ nom est obligatoire.',
                             })}
                           />
                         </InputGroup>
                         {errors.name && (
-                          <span
-                            className="mr-2 text-sm"
-                            style={{ color: "#dd3a4a" }}
-                          >
+                          <span className="mr-2 text-sm" style={{color: '#dd3a4a'}}>
                             {errors.name.message}
                           </span>
                         )}
@@ -105,32 +97,26 @@ const Signup = () => {
                             type="email"
                             name="email"
                             placeholder="Email"
-                            onChange={(e) => {
+                            onChange={e => {
                               setEmail(e.target.value);
                             }}
-                            invalid={errors["email"]}
+                            invalid={errors['email']}
                             innerRef={register({
-                              required: "Le champ email est obligatoire.",
+                              required: 'Le champ email est obligatoire.',
                             })}
                           />
                         </InputGroup>
                         {errors.email && (
                           <>
-                            <span
-                              className="mr-2 text-sm"
-                              style={{ color: "#dd3a4a" }}
-                            >
+                            <span className="mr-2 text-sm" style={{color: '#dd3a4a'}}>
                               {errors.email.message}
-                            </span>{" "}
+                            </span>{' '}
                             <br />
                           </>
                         )}
 
                         {error && (
-                          <span
-                            className="mr-2 text-sm"
-                            style={{ color: "#dd3a4a" }}
-                          >
+                          <span className="mr-2 text-sm" style={{color: '#dd3a4a'}}>
                             {error.msg}
                           </span>
                         )}
@@ -146,18 +132,15 @@ const Signup = () => {
                             type="text"
                             name="phonenumber"
                             placeholder="Numéro de téléphone"
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                            invalid={errors["phonenumber"]}
+                            onChange={e => setPhoneNumber(e.target.value)}
+                            invalid={errors['phonenumber']}
                             innerRef={register({
-                              required: "Le champ téléphone est obligatoire.",
+                              required: 'Le champ téléphone est obligatoire.',
                             })}
                           />
                         </InputGroup>
                         {errors.phonenumber && (
-                          <span
-                            className="mr-2 text-sm"
-                            style={{ color: "#dd3a4a" }}
-                          >
+                          <span className="mr-2 text-sm" style={{color: '#dd3a4a'}}>
                             {errors.phonenumber.message}
                           </span>
                         )}
@@ -173,18 +156,15 @@ const Signup = () => {
                             type="Password"
                             name="password"
                             placeholder="Mot de passe"
-                            onChange={(e) => setPassword(e.target.value)}
-                            invalid={errors["password"]}
+                            onChange={e => setPassword(e.target.value)}
+                            invalid={errors['password']}
                             innerRef={register({
-                              required: "Le mot de passe est obligatoire.",
+                              required: 'Le mot de passe est obligatoire.',
                             })}
                           />
                         </InputGroup>
                         {errors.password && (
-                          <span
-                            className="mr-2 text-sm"
-                            style={{ color: "#dd3a4a" }}
-                          >
+                          <span className="mr-2 text-sm" style={{color: '#dd3a4a'}}>
                             {errors.password.message}
                           </span>
                         )}
@@ -212,15 +192,15 @@ const Signup = () => {
               <Col>
                 <img
                   alt="..."
-                  src={require("../Assets/img/brand/register.jpg").default}
-                  style={{ width: "100%", marginTop: "11%" }}
+                  src={require('../Assets/img/brand/register.jpg').default}
+                  style={{width: '100%', marginTop: '11%'}}
                 />
               </Col>
             </Row>
           </Col>
         </div>
       )}
-      <Footer/>
+      <Footer />
     </div>
   );
 };

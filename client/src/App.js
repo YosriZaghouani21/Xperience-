@@ -84,7 +84,7 @@ function App() {
           <Route path="/message" component={Message} />
           <Route path="/payment" component={Payment} />
           <Route path="/paypal/:id" component={props => <Paypal props={props} />} />
-          {/* <Route path="/flouci" component={flouci} /> */}
+          <Route path="/flouci" component={flouci} />
 
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
