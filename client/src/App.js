@@ -36,6 +36,7 @@ import PeopleInterested from './Component/publishedExperience/PeopleInterested';
 import PublishedSessionList from './Component/publishedExperience/PublishedSessionList';
 import ShowReservation from './Component/showReservation/ShowReservation';
 
+
 // optional configuration
 const options = {
   // you can also just use 'bottom center'
@@ -76,7 +77,6 @@ function App() {
           <Route path="/handle/:id" component={HandleSessions} />
           <Route path="/people/:id" component={PublishedSessionList} />
           <Route path="/reservation" component={ShowReservation} />
-
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
           ) : (
