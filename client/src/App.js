@@ -8,7 +8,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 import {positions, Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
-import Preferences from './Component/Preferences';
+import Preferences from './Component/Preferences/Preferences';
 import FirstStep from './Component/createdExperience/FirstStep';
 import FirstStep2 from './Component/createdExperience/FirstStep2';
 import SecondStep from './Component/createdExperience/SecondStep';
@@ -35,7 +35,9 @@ import HandleSessions from './Component/sessions/HandleSessions';
 import PeopleInterested from './Component/publishedExperience/PeopleInterested';
 import PublishedSessionList from './Component/publishedExperience/PublishedSessionList';
 import ShowReservation from './Component/showReservation/ShowReservation';
-import Payment from './Component/payment/Payment';
+import Recommandations from './Component/experienceFilter/Recommandations';
+import OnlineExperiences from './Component/experienceFilter/OnlineExperiences';
+import InPersonExperiences from './Component/experienceFilter/InPersonExperiences';
 
 // optional configuration
 const options = {
@@ -77,7 +79,9 @@ function App() {
           <Route path="/handle/:id" component={HandleSessions} />
           <Route path="/people/:id" component={PublishedSessionList} />
           <Route path="/reservation" component={ShowReservation} />
-          <Route path="/payment/:id" component={Payment} />
+          <Route path="/foryou" component={Recommandations} />
+          <Route path="/online" component={OnlineExperiences} />
+          <Route path="/inperson" component={InPersonExperiences} />
 
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />

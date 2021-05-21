@@ -154,12 +154,10 @@ exports.addPreferences = async (req, res) => {
 exports.addMyPreferences = async (req, res) => {
   const userId = req.params.id;
   const {preferenceId, preferenceName} = req.body;
-  console.log('🚀  preferenceId', preferenceId);
 
   try {
     const searchedUser = await User.findOne({_id: userId});
     console.log(searchedUser);
-    // searchedUser.myPreferences = [];
     searchedUser.myPreferences.push(preferenceId);
     const user = await User.findByIdAndUpdate(userId, searchedUser, {
       new: true,
@@ -180,4 +178,45 @@ exports.getSingleUser = async (req, res) => {
   } catch (err) {
     return res.status(500).json({msg: err.message});
   }
+};
+
+exports.Paymentvalidation = (req, res) => {
+  const history = [];
+  const transactionData = {};
+
+  // 1.Put brief Payment Information inside User Collection
+  req.body.cartDetail.forEach(item => {
+    history.push({
+      dateOfPurchase: Date.now(),
+      name: item.title,
+      id: item._id,
+      price: item.price,
+      quantity: item.quantity,
+      paymentId: req.body.paymentData.paymentID,
+    });
+  });
+
+  // 2.Put Payment Information that come from Paypal into Payment Collection
+  transactionData.user = {
+    id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+  };
+
+  transactionData.data = req.body.paymentData;
+  transactionData.product = history;
+
+  User.findOneAndUpdate(
+    {_id: req.user._id},
+    {$push: {history}, $set: {cart: []}},
+    {new: true},
+    (err, user) => {
+      if (err) return res.json({success: false, err});
+
+      const payment = new Payment(transactionData);
+      payment.save((err, doc) => {
+        if (err) return res.json({success: false, err});
+      });
+    }
+  );
 };

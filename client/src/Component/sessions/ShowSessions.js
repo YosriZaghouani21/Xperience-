@@ -16,7 +16,6 @@ const ShowSessions = ({experience}) => {
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);
-
   return loading ? (
     <Loader />
   ) : user ? (

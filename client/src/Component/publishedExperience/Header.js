@@ -9,11 +9,11 @@ const Header = () => {
           <img
             alt="..."
             src={require('../../Assets/img/brand/World.png').default}
-            style={{width: '100%'}}
+            style={{width: '47%'}}
           />
         </Col>
         <Col xl="6">
-          <h1 className="text-center pt-6" style={{fontSize: 'xxx-large'}}>
+          <h1 className="text-center" style={{fontSize: 'xxx-large'}}>
             Explorons les passions de notre pays !
           </h1>
         </Col>
@@ -21,7 +21,7 @@ const Header = () => {
           <img
             alt="..."
             src={require('../../Assets/img/brand/World-rafiki.png').default}
-            style={{width: '100%'}}
+            style={{width: '50%', float: 'right'}}
           />
         </Col>
       </Row>

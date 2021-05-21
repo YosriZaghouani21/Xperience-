@@ -17,6 +17,7 @@ import {updateExperience} from '../../JS/actions';
 import PeopleReserved from '../Reservation/PeopleReserved';
 import emailjs from 'emailjs-com';
 import ReservationDemand from '../reservationDemand/ReservationDemand';
+import CancelSession from './CancelSession';
 
 const PublishedSession = ({experience, el, index}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
@@ -101,14 +102,27 @@ const PublishedSession = ({experience, el, index}) => {
               Session {index + 1}
             </span>
             <span>
-              <button className="float-right bg-transparent border-0" onClick={toggle2}>
-                <i className="far fa-trash-alt text-danger " />
-              </button>
+              {el.isCanceled ? (
+                <></>
+              ) : el.isLaunched ? (
+                <div className="float-right bg-transparent border-0">
+                  <CancelSession experience={experience} el={el} options={options} />
+                </div>
+              ) : (
+                <button className="float-right bg-transparent border-0" onClick={toggle2}>
+                  <i className="far fa-trash-alt text-danger " />
+                </button>
+              )}
             </span>
           </p>
 
           <p>
-            {el.isLaunched ? (
+            {el.isCanceled ? (
+              <span>
+                Vous avez annulé cette session le
+                {new Date(el.cancelDate).toLocaleDateString('fr-EG', options)}
+              </span>
+            ) : el.isLaunched ? (
               <span>lancée le {new Date(el.launchDate).toLocaleDateString('fr-EG', options)}</span>
             ) : (
               <Button className="text-danger" size="sm" onClick={toggle}>
@@ -150,7 +164,9 @@ const PublishedSession = ({experience, el, index}) => {
               <td>{new Date(el.sessionDate).toLocaleDateString('fr-EG', options)}</td>
             </tr>
           </Table>
-          {el.isLaunched ? (
+          {el.isCanceled ? (
+            <></>
+          ) : el.isLaunched ? (
             <Row>
               <Col xl="4">
                 <PeopleReserved experience={experience} el={el} index={index} />

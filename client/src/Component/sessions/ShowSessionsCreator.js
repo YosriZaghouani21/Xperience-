@@ -1,12 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
-import {
-  getExperienceDetails,
-  getProfile,
-  getSessionDetails,
-  updateExperience,
-  updateSession,
-} from '../../JS/actions';
+import React, {useEffect} from 'react';
+import {Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
+import {getProfile} from '../../JS/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../layout/Loader';
 

@@ -18,6 +18,12 @@ const PublishedSessionList = ({
   useEffect(() => {
     dispatch(getExperienceDetails(id));
   }, [dispatch, id]);
+  useEffect(() => {
+    experience &&
+      experience.sessions.map((el, index) => {
+        if (new Date(el.sessionDate) <= new Date()) console.log(el.sessionDate);
+      });
+  }, [experience]);
 
   return isLoading ? (
     <Loader />

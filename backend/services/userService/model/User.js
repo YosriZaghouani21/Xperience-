@@ -31,6 +31,10 @@ const userSchema = mongoose.Schema({
   postalCode: {
     type: String,
   },
+  history: {
+    type: Array,
+    default: [],
+  },
   aboutMe: {
     type: String,
   },
@@ -39,8 +43,7 @@ const userSchema = mongoose.Schema({
   },
   myPreferences: [
     {
-      type: ObjectId,
-      ref: 'preferences',
+      type: Object,
     },
   ],
   verif: {type: Boolean, default: false},
