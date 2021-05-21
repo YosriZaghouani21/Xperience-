@@ -8,7 +8,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './App.css';
 import {positions, Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
-import Preferences from './Component/Preferences';
+import Preferences from './Component/Preferences/Preferences';
 import FirstStep from './Component/createdExperience/FirstStep';
 import FirstStep2 from './Component/createdExperience/FirstStep2';
 import SecondStep from './Component/createdExperience/SecondStep';
@@ -23,8 +23,19 @@ import UserDetails from './Component/Admin/UserDetails';
 
 import CreatorHome from './Component/CreatorHome';
 import ImagesStep from './Component/createdExperience/ImagesStep';
-import DateRangePickerExample from './Component/Sessions/DateRangePickerExample';
-import Session from './Component/Sessions/Session';
+import ExperienceDetailsAd from './Component/Admin/ExperienceDetailsAd';
+import Form from './Component/Form';
+import PublishIndex from './Component/publishedExperience/PublishIndex';
+import Intro from './Component/sessions/Intro';
+import Session from './Component/sessions/Session';
+import Publish from './Component/sessions/Publish';
+import Publications from './Component/publishedExperience/Publications';
+import PublicationDetails from './Component/publishedExperience/PublicationDetails';
+import HandleSessions from './Component/sessions/HandleSessions';
+import PeopleInterested from './Component/publishedExperience/PeopleInterested';
+import PublishedSessionList from './Component/publishedExperience/PublishedSessionList';
+import ShowReservation from './Component/showReservation/ShowReservation';
+
 
 // optional configuration
 const options = {
@@ -52,11 +63,20 @@ function App() {
           <Route path="/fourth/:id" component={FourthStep} />
           <Route path="/fifth/:id" component={FifthStep} />
           <Route path="/experience/:id" component={ExperienceDetails} />
+          <Route path="/admin/:id" component={ExperienceDetailsAd} />
           <Route path="/experiences" component={ExperiencesList} />
           <Route path="/user/:id" component={UserDetails} />
           <Route path="/image/:id" component={ImagesStep} />
-          <Route path="/Calender" component={DateRangePickerExample} />
-          <Route path="/session" component={Session} />;
+          <Route path="/form" component={Form} />
+          <Route path="/publish/:id" component={PublishIndex} />
+          <Route path="/intro/:id" component={Intro} />
+          <Route path="/session/:id" component={Session} />
+          <Route path="/publication/:id" component={Publish} />
+          <Route path="/explore" component={Publications} />
+          <Route path="/details/:id" component={PublicationDetails} />
+          <Route path="/handle/:id" component={HandleSessions} />
+          <Route path="/people/:id" component={PublishedSessionList} />
+          <Route path="/reservation" component={ShowReservation} />
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
           ) : (
