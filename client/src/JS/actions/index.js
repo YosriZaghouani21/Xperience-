@@ -25,6 +25,7 @@ import {
   FETCH_USER_DETAILS_SUCCESS,
   FETCH_USER_DETAILS_FAIL,
   ADD_IMAGE_TO_PROFILE,
+  ON_SUCCESS_BUY_USER,
 } from '../constants/action-types';
 import {
   FETCH_ALL_EXPERIENCES,
@@ -137,10 +138,7 @@ export const updateProfile = (id, updatedProfile) => async dispatch => {
       `${process.env.REACT_APP_BASE_URL}/user/profile/${id}`,
       updatedProfile
     );
-    dispatch({
-      type: UPDATE_SUCCESS,
-      payload: data,
-    });
+    dispatch(getProfile());
   } catch (error) {
     console.log('🚀 ~ file: index.js ~ line 134 ~ error', error);
     dispatch({
@@ -373,4 +371,27 @@ export const updateSession = (id, updatedSession) => async dispatch => {
       type: UPDATE_SESSION_FAIL,
     });
   }
+};
+//PaymentSuccess
+export function onSuccessBuy(data) {
+  const request = axios
+    .post(`${process.env.REACT_APP_BASE_URL}/api/successBuy`, data)
+    .then(response => response.data);
+
+  return {
+    type: ON_SUCCESS_BUY_USER,
+    payload: request,
+  };
+}
+
+/////////////////Payment with flouci////////////////////
+export const handle_data = async () => {
+  const app_secret = 'cc523472-6ec2-454c-a6c1-9e2e8e608ddb';
+  const app_public = 'f6b5d0a5-e559-4acb-bcbb-a9e6ec9d788d';
+  // const payment_id = 'payment_id';
+  // const flouci_otp = 'flouci_otp';
+  const {payment_id, flouci_otp} = await axios.post('https://developers.flouci.com/api/accept', {
+    app_secret,
+    app_public,
+  });
 };

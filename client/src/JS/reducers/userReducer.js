@@ -23,6 +23,7 @@ import {
   FETCH_USER_DETAILS_SUCCESS,
   FETCH_USER_DETAILS_FAIL,
   ADD_IMAGE_TO_PROFILE,
+  ON_SUCCESS_BUY_USER,
 } from '../constants/action-types';
 
 const initialState = {
@@ -190,6 +191,15 @@ const userReducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         error: payload,
+      };
+    case ON_SUCCESS_BUY_USER:
+      return {
+        ...state,
+        user: {
+          ...state.userData,
+          // cart: action.payload.cart,
+        },
+        //   cartDetail: action.payload.cartDetail,
       };
     default:
       return state;

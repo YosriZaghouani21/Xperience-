@@ -37,6 +37,8 @@ import ShowReservation from './Component/showReservation/ShowReservation';
 import Recommandations from './Component/experienceFilter/Recommandations';
 import OnlineExperiences from './Component/experienceFilter/OnlineExperiences';
 import InPersonExperiences from './Component/experienceFilter/InPersonExperiences';
+import flouci from './Component/Flouci/flouci';
+import Paypal from './Component/Paypal/Paypal';
 
 // optional configuration
 const options = {
@@ -81,7 +83,8 @@ function App() {
           <Route path="/foryou" component={Recommandations} />
           <Route path="/online" component={OnlineExperiences} />
           <Route path="/inperson" component={InPersonExperiences} />
-
+          <Route path="/paypal/:id" component={props => <Paypal props={props} />} />
+          <Route path="/flouci" component={flouci} />
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
           ) : (
