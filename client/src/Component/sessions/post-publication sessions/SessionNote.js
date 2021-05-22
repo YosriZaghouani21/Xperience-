@@ -1,5 +1,5 @@
 import React from 'react';
-import LaunchSession from './LaunchSession';
+import LaunchSession from './SessionsOperations/LaunchSession';
 
 const SessionNote = ({experience, el}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};

@@ -3,13 +3,14 @@ import {enGB} from 'date-fns/locale';
 import {Calendar} from 'react-nice-dates';
 import {isSameDay} from 'date-fns';
 import 'react-nice-dates/build/style.css';
-import './session.css';
+import '../../session.css';
 import {Col} from 'reactstrap';
-import AuthNavbar from '../layout/AuthNavbar';
+import AuthNavbar from '../../../layout/AuthNavbar';
 import {useDispatch, useSelector} from 'react-redux';
-import {getExperienceDetails, addSession} from '../../JS/actions/index';
+import {getExperienceDetails, addSession} from '../../../../JS/actions/index';
 import {Link} from 'react-router-dom';
-import Loader from '../layout/Loader';
+import Loader from '../../../layout/Loader';
+import SessionHeader from './SessionHeader';
 
 const Session = ({
   match: {
@@ -17,15 +18,22 @@ const Session = ({
   },
 }) => {
   const dispatch = useDispatch();
-  const [today, setToday] = useState(new Date());
-  const [todayCopy, setTodayCopy] = useState(new Date());
-  const [todayCopy1, setTodayCopy1] = useState(new Date());
-  const todayCopy2 = new Date();
-  const [selectedSessions, setSelectedSessions] = useState([]);
   const experience = useSelector(state => state.experiencesReducers.experience);
   const isLoading = useSelector(state => state.experiencesReducers.isLoading);
+
+  //to stock the experience's sessions that alreday exists ( the object )
   const [experienceSessions, setExperienceSessions] = useState([]);
+  // to stock sessions's start date (déroulement) only (sessions that already exists in the experience)
   const [experienceSessionsDate, setExperienceSessionsDate] = useState([]);
+
+  //selectedSessions to push the new selected sessions on it
+  const [selectedSessions, setSelectedSessions] = useState([]);
+
+  const today = new Date();
+  const todayCopy = new Date();
+  const todayCopy1 = new Date();
+  const todayCopy2 = new Date();
+
   var arr = [];
   var newSessions = [];
 
@@ -63,14 +71,17 @@ const Session = ({
   const daysBetween = [];
   //initialize an empty array to push on it the 2 days between 2 sessions(second and third session)
   const daysBetween2 = [];
+
   useEffect(() => {
     dispatch(getExperienceDetails(id));
   }, [dispatch, id]);
+
   useEffect(() => {
     if (experience) {
       setExperienceSessions([...experience.sessions]);
     }
   }, [experience]);
+
   useEffect(() => {
     if (experience) {
       experienceSessions.map(session => {
@@ -108,6 +119,7 @@ const Session = ({
     }
     setTwoDays2([...daysBetween2]);
   }, []);
+
   //create the two days between the third and the fourth session
   useEffect(() => {
     new Date(sessionThreeDay.setDate(sessionThreeDay.getDate() + 1));
@@ -134,6 +146,7 @@ const Session = ({
   const modifiersClassNames = {
     selected: '-selected',
   };
+
   const handleDayClick = date => {
     const paymentLimit = new Date(date);
     const lunchLimit = new Date(date);
@@ -156,23 +169,13 @@ const Session = ({
   return isLoading ? (
     <>
       <AuthNavbar />
-      <div className="col-xl-5 center text-center">
-        <h1 style={{fontSize: 'xx-large'}}>
-          Tout est prêt, il suffit de sélectionner une ou plusieurs sessions
-        </h1>
-        <p>Vous pouvez toujours revenir et ajouter d'autres sessions</p>
-      </div>
+      <SessionHeader />
       <Loader />
     </>
   ) : (
     <>
       <AuthNavbar />
-      <div className="col-xl-5 center text-center">
-        <h1 style={{fontSize: 'xx-large'}}>
-          Tout est prêt, il suffit de sélectionner une ou plusieurs sessions
-        </h1>
-        <p>Vous pouvez toujours revenir et ajouter d'autres sessions</p>
-      </div>
+      <SessionHeader />
       <Col xl="6" className="center m-2 mb-5">
         <Calendar
           onDayClick={handleDayClick}
@@ -184,12 +187,12 @@ const Session = ({
           to={experienceSessions.length === 0 ? `/handle/${id}` : `/people/${id}`}
           className="btn btn-success m-2"
           onClick={() => {
-            selectedSessions.map(el => {
+            newSessions.map(el => {
               dispatch(addSession(el));
             });
           }}
         >
-          Continuer
+          {experienceSessions.length === 0 ? 'Continuer' : 'Ajouter la session'}
         </Link>
       </Col>
     </>

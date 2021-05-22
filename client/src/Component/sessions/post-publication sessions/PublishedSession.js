@@ -3,7 +3,7 @@ import {Card, CardBody} from 'reactstrap';
 import SessionHeader from './SessionHeader';
 import SessionNote from './SessionNote';
 import SessionTableDates from './SessionTableDates';
-import SessionHandler from './SessionHandler';
+import PostPublicationSessionHandler from './PostPublicationSessionHandler';
 
 const PublishedSession = ({experience, el, index}) => {
   return (
@@ -13,7 +13,7 @@ const PublishedSession = ({experience, el, index}) => {
           <SessionHeader experience={experience} el={el} index={index} />
           <SessionNote experience={experience} el={el} />
           <SessionTableDates el={el} />
-          <SessionHandler experience={experience} el={el} index={index} />
+          <PostPublicationSessionHandler experience={experience} el={el} index={index} />
         </CardBody>
       </Card>
     </>

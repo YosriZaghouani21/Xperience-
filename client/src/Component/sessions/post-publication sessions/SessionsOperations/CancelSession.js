@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {Input} from 'reactstrap';
 import emailjs from 'emailjs-com';
-import {updateExperience} from '../../../JS/actions';
-import ModalBase from '../../layout/ModalBase';
-import SessionIndex from './SessionIndex';
+import {updateExperience} from '../../../../JS/actions';
+import ModalBase from '../../../layout/ModalBase';
+import SessionIndex from '../SessionIndex';
 
 const CancelSession = ({experience, el, options, index}) => {
   const dispatch = useDispatch();

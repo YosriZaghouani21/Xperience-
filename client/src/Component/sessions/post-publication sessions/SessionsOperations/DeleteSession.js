@@ -1,8 +1,8 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
-import ModalBase from '../../layout/ModalBase';
-import {updateExperience} from '../../../JS/actions';
-import SessionIndex from './SessionIndex';
+import ModalBase from '../../../layout/ModalBase';
+import {updateExperience} from '../../../../JS/actions';
+import SessionIndex from '../SessionIndex';
 
 const DeleteSession = ({experience, el, index}) => {
   const dispatch = useDispatch();

@@ -1,10 +1,10 @@
 import React from 'react';
 import {Row, Col} from 'reactstrap';
-import PeopleInterested from '../PeopleInterested';
+import PeopleInterested from './PeopleInterested';
 import PeopleReserved from '../../Reservation/PeopleReserved';
 import ReservationDemand from '../../reservationDemand/ReservationDemand';
 
-const SessionHandler = ({experience, el, index}) => {
+const PostPublicationSessionHandler = ({experience, el, index}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
 
   return (
@@ -27,4 +27,4 @@ const SessionHandler = ({experience, el, index}) => {
   );
 };
 
-export default SessionHandler;
+export default PostPublicationSessionHandler;

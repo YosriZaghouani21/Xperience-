@@ -16,7 +16,7 @@ import {
 } from 'reactstrap';
 import {Link, Redirect} from 'react-router-dom';
 import AuthNavbar from '../layout/AuthNavbar';
-import Details from '../sessions/Details';
+import Details from '../sessions/publicationStep/Details';
 const ExperienceDetails = ({
   match: {
     params: {id},

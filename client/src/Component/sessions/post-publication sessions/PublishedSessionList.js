@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../../layout/Loader';
 import PublishedSession from './PublishedSession';
 import AuthNavbar from '../../layout/AuthNavbar';
-import AddSession from './AddSession';
+import AddSession from '../post-publication sessions/SessionsOperations/AddSession';
 
 const PublishedSessionList = ({
   match: {

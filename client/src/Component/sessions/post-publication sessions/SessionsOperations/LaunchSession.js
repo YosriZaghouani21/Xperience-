@@ -1,8 +1,8 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import emailjs from 'emailjs-com';
-import ModalBase from '../../layout/ModalBase';
-import {updateExperience} from '../../../JS/actions';
+import ModalBase from '../../../layout/ModalBase';
+import {updateExperience} from '../../../../JS/actions';
 
 const LaunchSession = ({experience, el}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};

@@ -25,21 +25,20 @@ import CreatorHome from './Component/CreatorHome';
 import ImagesStep from './Component/createdExperience/ImagesStep';
 import ExperienceDetailsAd from './Component/Admin/ExperienceDetailsAd';
 import Form from './Component/Form';
-import PublishIndex from './Component/publishedExperience/PublishIndex';
-import Intro from './Component/sessions/Intro';
-import Session from './Component/sessions/Session';
-import Publish from './Component/sessions/Publish';
 import Publications from './Component/publishedExperience/Publications';
 import PublicationDetails from './Component/publishedExperience/PublicationDetails';
-import HandleSessions from './Component/sessions/HandleSessions';
-import PublishedSessionList from './Component/publishedExperience/publishedSessionsCreator/PublishedSessionList';
 import ShowReservation from './Component/showReservation/ShowReservation';
 import Recommandations from './Component/experienceFilter/Recommandations';
 import OnlineExperiences from './Component/experienceFilter/OnlineExperiences';
 import InPersonExperiences from './Component/experienceFilter/InPersonExperiences';
-import flouci from './Component/Flouci/flouci';
+import Flouci from './Component/Flouci/Flouci';
 import Paypal from './Component/Paypal/Paypal';
-
+import Session from './Component/sessions/pre-publication sessions/sessionCalendar/Session';
+import Intro from './Component/sessions/pre-publication sessions/sessionExplication/Intro';
+import HandleSessions from './Component/sessions/pre-publication sessions/sessionHandler/HandleSessions';
+import Publish from './Component/sessions/publicationStep/Publish';
+import PublishIndex from './Component/sessions/pre-publication sessions/sessionExplication/PublishIndex';
+import PublishedSessionList from './Component/sessions/post-publication sessions/PublishedSessionList';
 // optional configuration
 const options = {
   // you can also just use 'bottom center'
@@ -47,7 +46,6 @@ const options = {
   timeout: 5000,
   offset: '30px',
 };
-
 function App() {
   return (
     <Router>
@@ -84,7 +82,7 @@ function App() {
           <Route path="/online" component={OnlineExperiences} />
           <Route path="/inperson" component={InPersonExperiences} />
           <Route path="/paypal/:id" component={props => <Paypal props={props} />} />
-          <Route path="/flouci" component={flouci} />
+          <Route path="/flouci" component={Flouci} />
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
           ) : (

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Row, Col, Button} from 'reactstrap';
-import AuthNavbar from '../layout/AuthNavbar';
+import AuthNavbar from '../../../layout/AuthNavbar';
 import {Link} from 'react-router-dom';
 const PublishIndex = ({
   match: {
@@ -28,7 +28,7 @@ const PublishIndex = ({
           <img
             style={{width: '52%'}}
             alt="..."
-            src={require('../../Assets/img/brand/step1.png').default}
+            src={require('../../../../Assets/img/brand/step1.png').default}
           />
           <p>
             1. Prenez votre temps à vérifier les détails de votre expérience. Il faut que vous soyez
@@ -40,7 +40,7 @@ const PublishIndex = ({
           <img
             style={{width: '80%'}}
             alt="..."
-            src={require('../../Assets/img/brand/step2.png').default}
+            src={require('../../../../Assets/img/brand/step2.png').default}
           />
           <p>2. Sélectionner les sessions de votre expérience sur le calendrier des sessions.</p>
         </Col>
@@ -48,7 +48,7 @@ const PublishIndex = ({
           <img
             style={{width: '61%'}}
             alt="..."
-            src={require('../../Assets/img/brand/step3.png').default}
+            src={require('../../../../Assets/img/brand/step3.png').default}
           />
           <p>3. Publier l'expérience et accueillir vos premiers participants.</p>
         </Col>

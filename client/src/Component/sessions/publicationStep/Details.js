@@ -13,7 +13,7 @@ const Details = ({experience}) => {
                 <i className="ni ni-laptop" />
               ) : (
                 <i className="fas fa-users" />
-              )}{' '}
+              )}
               Expérience {experience.type.title}
             </small>
             <h1 style={{margin: '0%'}}>{experience.title}</h1>

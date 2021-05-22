@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import Loader from '../layout/Loader';
+import Loader from '../../layout/Loader';
 
 import {useDispatch, useSelector} from 'react-redux';
-import {getExperienceDetails, updateExperience} from '../../JS/actions/index';
+import {getExperienceDetails, updateExperience} from '../../../JS/actions/index';
 import {Row, Col, Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
-import AuthNavbar from '../layout/AuthNavbar';
+import AuthNavbar from '../../layout/AuthNavbar';
 import {Link, Redirect} from 'react-router-dom';
 import Details from './Details';
 import ShowSessionsCreator from './ShowSessionsCreator';
@@ -36,7 +36,7 @@ const Publish = ({
           <ModalFooter>
             <Button
               className="btn btn-success"
-              onClick={e => {
+              onClick={() => {
                 toggle();
               }}
             >

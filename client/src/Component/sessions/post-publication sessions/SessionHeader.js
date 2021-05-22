@@ -1,7 +1,7 @@
 import React from 'react';
-import CancelSession from './CancelSession';
+import CancelSession from './SessionsOperations/CancelSession';
 import SessionIndex from './SessionIndex';
-import DeleteSession from './DeleteSession';
+import DeleteSession from './SessionsOperations/DeleteSession';
 
 const SessionHeader = ({experience, el, index}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};

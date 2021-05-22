@@ -2,12 +2,12 @@ import React, {useEffect} from 'react';
 import {getExperienceDetails} from '../../JS/actions';
 import {Col, Row} from 'reactstrap';
 import {useDispatch, useSelector} from 'react-redux';
-import Details from '../sessions/Details';
 import Loader from '../layout/Loader';
 import AuthNavbar from '../layout/AuthNavbar';
 
-import ShowSessions from '../sessions/ShowSessions';
+import ShowSessions from '../sessions/ShowSessionUser/ShowSessions';
 import {Link} from 'react-router-dom';
+import Details from '../sessions/publicationStep/Details';
 const PublicationDetails = ({
   match: {
     params: {id},

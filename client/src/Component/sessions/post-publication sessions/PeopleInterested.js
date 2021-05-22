@@ -1,5 +1,5 @@
 import React from 'react';
-import PopOver from '../layout/PopOver';
+import PopOver from '../../layout/PopOver';
 const PeopleInterested = ({el, index}) => {
   return (
     <>

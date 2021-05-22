@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {Card, CardHeader, CardBody, Row, Col} from 'reactstrap';
-import {getProfile} from '../../JS/actions';
+import {getProfile} from '../../../JS/actions';
 import {useDispatch, useSelector} from 'react-redux';
-import Loader from '../layout/Loader';
+import Loader from '../../layout/Loader';
 
 const ShowSessionsCreator = ({experience}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
