@@ -6,7 +6,7 @@ const Publication = ({experience}) => {
   const [like, setLike] = useState();
   return (
     <>
-      <Card className="shadow-sm col-xl-2 mr-3 border rounded p-0 ">
+      <Card className="shadow-sm col-xl-2 mr-3 mt-2 border rounded p-0 ">
         <CardBody className="p-0">
           <img
             alt="image"

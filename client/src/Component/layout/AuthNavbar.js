@@ -29,7 +29,11 @@ const AuthNavbar = () => {
       <Navbar className="navbar-top navbar-horizontal border " expand="md" style={{padding: '0%'}}>
         <Container className="px-4">
           <NavbarBrand to="/" tag={Link}>
-            <img alt="..." src={require('../../Assets/img/brand/argon-react.png').default} />
+            <img
+              alt="..."
+              src={require('../../Assets/img/brand/argon-react.png').default}
+              style={{height: '42px !important'}}
+            />
           </NavbarBrand>
           <button className="navbar-toggler" id="navbar-collapse-main">
             <span className="navbar-toggler-icon" />
@@ -38,7 +42,11 @@ const AuthNavbar = () => {
             <div className="navbar-collapse-header d-md-none">
               <Row>
                 <Col className="collapse-brand" xs="6">
-                  <img alt="..." src={require('../../Assets/img/brand/argon-react.png').default} />
+                  <img
+                    style={{height: '42px !important'}}
+                    alt="..."
+                    src={require('../../Assets/img/brand/argon-react.png').default}
+                  />
                 </Col>
                 <Col className="collapse-close" xs="6">
                   <button className="navbar-toggler" id="navbar-collapse-main">
@@ -56,7 +64,6 @@ const AuthNavbar = () => {
                       <Media className="align-items-center">
                         <span className="  rounded-circle">
                           <h2>
-                            {' '}
                             <i className="ni ni-circle-08" />
                           </h2>{' '}
                         </span>

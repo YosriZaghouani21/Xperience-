@@ -78,7 +78,7 @@ const HandleReservation = ({experience, reservation, session}) => {
             consulter l'expérience
           </Link>
           <Link
-            to={`paypal/${experience._id}`}
+            to={`payment/${experience._id}/${session._id}`}
             className="col-xl-2 mt-4 btn btn-success"
             style={{boxShadow: 'none', padding: '0.5%', fontSize: 'x-small'}}
           >
