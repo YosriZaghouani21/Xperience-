@@ -9,7 +9,7 @@ const {
   addPreferences,
   addMyPreferences,
   getSingleUser,
-} = require("../controllers/user.controller");
+} = require('../controllers/user.controller');
 
 const {registerRules, validator} = require('../middleware/validator');
 const isAuth = require('../middleware/passport-setup');
@@ -26,11 +26,29 @@ Router.get('/current', isAuth(), (req, res) => {
 
 Router.put('/profile/:id', updateUser);
 
-Router.get("/users", allUsers);
-Router.get("/preferences", seePreferences);
-Router.post("/preferences/add", addPreferences);
-Router.put("/mypreferences/:id", addMyPreferences);
-Router.get("/user/:id", getSingleUser);
-
+Router.get('/users', allUsers);
+Router.get('/preferences', seePreferences);
+Router.post('/preferences/add', addPreferences);
+Router.put('/mypreferences/:id', addMyPreferences);
+Router.get('/user/:id', getSingleUser);
+Router.put('/comment', isAuth(), (req, res) => {
+  const comment = {
+    text: req.body.text,
+    postedBy: req.user._id,
+  };
+  Post.findByIdandUpdate(
+    req.body.postId,
+    {
+      $push: {comments: comment},
+    },
+    {new: true}
+  ).exec((err, result) => {
+    if (err) {
+      return res.status(422).json({error: err});
+    } else {
+      res.json(result);
+    }
+  });
+});
 
 module.exports = Router;

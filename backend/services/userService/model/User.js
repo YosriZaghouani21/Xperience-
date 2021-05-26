@@ -42,6 +42,12 @@ const userSchema = mongoose.Schema({
       ref: 'preferences',
     },
   ],
+  comments: [
+    {
+      text: String,
+      postedBy: {type: ObjectId},
+    },
+  ],
   myExperiences: [
     {
       type: ObjectId,
