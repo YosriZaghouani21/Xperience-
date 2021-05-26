@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router";
-import { login } from "../JS/actions";
-import { useForm } from "react-hook-form";
+import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Redirect} from 'react-router';
+import {login} from '../JS/actions';
+import {useForm} from 'react-hook-form';
 import {
   Button,
   Card,
@@ -16,19 +16,20 @@ import {
   InputGroup,
   Row,
   Col,
-} from "reactstrap";
-import { Link } from "react-router-dom";
-import AuthNavbar from "./layout/AuthNavbar";
-import Loader from "./layout/Loader";
+} from 'reactstrap';
+import {Link} from 'react-router-dom';
+import AuthNavbar from './layout/AuthNavbar';
+import Loader from './layout/Loader';
+import Footer from './layout/Footer';
 
 const Signin = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const loading = useSelector((state) => state.userReducer.loading);
-  const error = useSelector((state) => state.userReducer.errors);
+  const loading = useSelector(state => state.userReducer.loading);
+  const error = useSelector(state => state.userReducer.errors);
 
-  const { register, handleSubmit, errors } = useForm();
+  const {register, handleSubmit, errors} = useForm();
   const onSubmit = () => {
     dispatch(
       login({
@@ -38,16 +39,16 @@ const Signin = () => {
     );
   };
 
-  return localStorage.getItem("token") ? (
+  return localStorage.getItem('token') ? (
     <Redirect to="/" />
   ) : loading ? (
     <Loader />
   ) : (
-    <div className="main-content">
-      <div className="header bg-white py-7 py-lg-6">
+    <div className="main-content bg-white">
+      <div className="header py-lg-6">
         <AuthNavbar />
 
-        <Col lg="5" md="8" className="center " style={{ padding: "1%" }}>
+        <Col lg="5" md="8" className="center " style={{padding: '1%'}}>
           <Card className="bg-secondary border">
             <CardHeader className="bg-transparent">
               <div className="text-center">
@@ -68,17 +69,17 @@ const Signin = () => {
                       name="email"
                       type="email"
                       placeholder="Email"
-                      onChange={(e) => {
+                      onChange={e => {
                         setEmail(e.target.value);
                       }}
-                      invalid={errors["email"]}
+                      invalid={errors['email']}
                       innerRef={register({
-                        required: "Le champ email est obligatoire.",
+                        required: 'Le champ email est obligatoire.',
                       })}
                     />
                   </InputGroup>
                   {errors.email && (
-                    <span className="mr-2 text-sm" style={{ color: "#dd3a4a" }}>
+                    <span className="mr-2 text-sm" style={{color: '#dd3a4a'}}>
                       {errors.email.message}
                     </span>
                   )}
@@ -94,28 +95,25 @@ const Signin = () => {
                       name="password"
                       type="password"
                       placeholder="Password"
-                      onChange={(e) => {
+                      onChange={e => {
                         setPassword(e.target.value);
                       }}
-                      invalid={errors["password"]}
+                      invalid={errors['password']}
                       innerRef={register({
-                        required: "Veuillez saisir votre mot de passe",
+                        required: 'Veuillez saisir votre mot de passe',
                       })}
                     />
                   </InputGroup>
                   {errors.password && (
                     <>
-                      <span
-                        className="mr-2 text-sm"
-                        style={{ color: "#dd3a4a" }}
-                      >
+                      <span className="mr-2 text-sm" style={{color: '#dd3a4a'}}>
                         {errors.password.message}
-                      </span>{" "}
+                      </span>
                       <br />
                     </>
                   )}
                   {error && (
-                    <span className="mr-2 text-sm" style={{ color: "#dd3a4a" }}>
+                    <span className="mr-2 text-sm" style={{color: '#dd3a4a'}}>
                       {error.msg}
                     </span>
                   )}
@@ -131,7 +129,7 @@ const Signin = () => {
                   </Col>
                   <Col>
                     <div className="text-center">
-                      <Button color="primary" type="submit">
+                      <Button color="info" type="submit">
                         Se connecter
                       </Button>
                     </div>
@@ -141,6 +139,7 @@ const Signin = () => {
             </CardBody>
           </Card>
         </Col>
+        <Footer />
       </div>
     </div>
   );

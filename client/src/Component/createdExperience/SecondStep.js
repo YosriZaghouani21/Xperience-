@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import React, {useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Link, Redirect} from 'react-router-dom';
 
 import {
   Button,
@@ -20,50 +20,48 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from "reactstrap";
+} from 'reactstrap';
 import {
   deleteExperience,
   getExperienceDetails,
   getExperiences,
   updateExperience,
-} from "../../JS/actions/index";
-import Advice2 from "../layout/Advice2";
-import Loader from "../layout/Loader";
+} from '../../JS/actions/index';
+import Advice2 from '../layout/Advice2';
+import Loader from '../layout/Loader';
 
 const SecondStep = ({
   match: {
-    params: { id },
+    params: {id},
   },
 }) => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
-  const isLoading = useSelector((state) => state.experiencesReducers.isLoading);
-  const experience = useSelector(
-    (state) => state.experiencesReducers.experience
-  );
+  const isLoading = useSelector(state => state.experiencesReducers.isLoading);
+  const experience = useSelector(state => state.experiencesReducers.experience);
 
-  const addTheme = (e) => {
+  const addTheme = e => {
     if (e.target.checked) {
       setTheme([...new Set([...theme, e.target.name])]);
     } else {
-      const arr = theme.filter((t) => t !== e.target.name);
+      const arr = theme.filter(t => t !== e.target.name);
       setTheme(arr);
     }
   };
   const defaultThemes = [
-    "Nature",
-    "Bien-etre",
-    "Art et culture",
-    "Sport",
-    "Cuisine",
-    "Etude",
-    "Animaux",
-    "Autres",
+    'Nature',
+    'Bien-etre',
+    'Art et culture',
+    'Sport',
+    'Cuisine',
+    'Etude',
+    'Animaux',
+    'Autres',
   ];
-  const [title, setTitle] = useState(" ");
+  const [title, setTitle] = useState(' ');
   const [theme, setTheme] = useState([]);
-  const [activity, setActivity] = useState(" ");
+  const [activity, setActivity] = useState(' ');
   const [price, setPrice] = useState(0);
   useEffect(() => {
     dispatch(getExperienceDetails(id));
@@ -81,7 +79,7 @@ const SecondStep = ({
     }
   }, [experience]);
 
-  return localStorage.getItem("token") ? (
+  return localStorage.getItem('token') ? (
     isLoading ? (
       <Loader />
     ) : experience ? (
@@ -91,17 +89,14 @@ const SecondStep = ({
           <Container fluid>
             {/* Progress bar */}
             <div className="text-center">2 de 6</div>
-            <Progress multi style={{ height: "21px" }}>
+            <Progress multi style={{height: '21px'}}>
               <Progress bar value="20">
                 40%
               </Progress>
             </Progress>
             {/* main  */}
             <Col lg="12" md="12">
-              <div
-                className="header-body border-0"
-                style={{ padding: "2%", margin: "1%" }}
-              >
+              <div className="header-body border-0" style={{padding: '2%', margin: '1%'}}>
                 {/* end button exit */}
 
                 {experience.type &&
@@ -110,7 +105,7 @@ const SecondStep = ({
                 experience.program ? (
                   <Link
                     to="/experiences"
-                    style={{ float: "right" }}
+                    style={{float: 'right'}}
                     className=" btn btn-sm"
                     onClick={() => {
                       dispatch(
@@ -130,8 +125,8 @@ const SecondStep = ({
                   <Button
                     onClick={toggle}
                     style={{
-                      padding: "0.5% 0.5% 0%",
-                      float: "right",
+                      padding: '0.5% 0.5% 0%',
+                      float: 'right',
                     }}
                   >
                     <i className="ni ni-fat-remove" />
@@ -141,12 +136,9 @@ const SecondStep = ({
                 {/* end button exit */}
                 {/* Modal */}
                 <Modal isOpen={modal} toggle={toggle}>
-                  <ModalHeader toggle={toggle}>
-                    Abandonner la création ?
-                  </ModalHeader>
+                  <ModalHeader toggle={toggle}>Abandonner la création ?</ModalHeader>
                   <ModalBody>
-                    Si vous abandonner la création, vous perderz toutes les
-                    informations saisies.
+                    Si vous abandonner la création, vous perderz toutes les informations saisies.
                   </ModalBody>
                   <ModalFooter>
                     <Button color="primary" onClick={toggle}>
@@ -154,7 +146,7 @@ const SecondStep = ({
                     </Button>
                     <Link
                       className="btn"
-                      to={"/experiences"}
+                      to={'/experiences'}
                       color="secondary"
                       onClick={() => {
                         dispatch(deleteExperience(experience._id));
@@ -169,9 +161,9 @@ const SecondStep = ({
                 {/* endModal */}
                 {/* step title  */}
                 <Col lg="6" md="10">
-                  <h2 style={{ color: "#32325d" }}>
-                    <i className="ni ni-collection" style={{ padding: "2%" }} />{" "}
-                    Les informations de base
+                  <h2 style={{color: '#32325d'}}>
+                    <i className="ni ni-collection" style={{padding: '2%'}} /> Les informations de
+                    base
                   </h2>
                 </Col>
                 {/* end step title */}
@@ -179,7 +171,7 @@ const SecondStep = ({
                 <Card className=" shadow border-0">
                   {/* experience type */}
                   <CardHeader className="bg-transparent">
-                    {experience.type.title === "en ligne" ? (
+                    {experience.type.title === 'en ligne' ? (
                       <div className="icon icon-shape bg-secondary text-black rounded-circle shadow">
                         <i className="ni ni-laptop" />
                       </div>
@@ -197,7 +189,7 @@ const SecondStep = ({
                     {/* title */}
                     <FormGroup
                       className="mb-3 border"
-                      style={{ padding: "2%", borderRadius: "0.375rem" }}
+                      style={{padding: '2%', borderRadius: '0.375rem'}}
                     >
                       <div>
                         <small className="font-weight-bold">
@@ -211,7 +203,7 @@ const SecondStep = ({
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          onChange={(e) => setTitle(e.target.value)}
+                          onChange={e => setTitle(e.target.value)}
                           defaultValue={experience ? experience.title : title}
                           placeholder="Titre"
                           type="string"
@@ -224,10 +216,7 @@ const SecondStep = ({
                           // }
                         />
                       </InputGroup>
-                      <span
-                        className="mr-2 text-sm"
-                        style={{ color: "#2dce89" }}
-                      >
+                      <span className="mr-2 text-sm" style={{color: '#2dce89'}}>
                         <i className="ni ni-bulb-61" />
                         Le titre de l'expérience doit etre court et attirant
                       </span>
@@ -245,16 +234,16 @@ const SecondStep = ({
                     {/* themes */}
                     <FormGroup
                       className="mb-3 border"
-                      style={{ padding: "2%", borderRadius: "0.375rem" }}
+                      style={{padding: '2%', borderRadius: '0.375rem'}}
                     >
                       <div>
                         <small className="font-weight-bold">
-                          Choisissez le thème qui décrit le mieux l'activité
-                          principale de votre expérience
+                          Choisissez le thème qui décrit le mieux l'activité principale de votre
+                          expérience
                         </small>
                       </div>
                       <Row className="icon-examples">
-                        {defaultThemes.map((theme) => (
+                        {defaultThemes.map(theme => (
                           <Col lg="6" md="6">
                             <div className="custom-control custom-control-alternative custom-checkbox">
                               {experience.themes == null ? (
@@ -263,39 +252,31 @@ const SecondStep = ({
                                   id={`custom+${theme}`}
                                   type="checkbox"
                                   name={theme}
-                                  onChange={(e) => {
+                                  onChange={e => {
                                     addTheme(e);
                                   }}
                                 />
                               ) : (
                                 <input
-                                  defaultChecked={experience.themes.includes(
-                                    theme
-                                  )}
+                                  defaultChecked={experience.themes.includes(theme)}
                                   className="custom-control-input"
                                   id={`custom+${theme}`}
                                   type="checkbox"
                                   name={theme}
-                                  onChange={(e) => {
+                                  onChange={e => {
                                     addTheme(e);
                                   }}
                                 />
                               )}
 
-                              <label
-                                className="custom-control-label"
-                                htmlFor={`custom+${theme}`}
-                              >
+                              <label className="custom-control-label" htmlFor={`custom+${theme}`}>
                                 <span className="text-muted">{theme} </span>
                               </label>
                             </div>
                           </Col>
                         ))}
                       </Row>
-                      <span
-                        className="mr-2 text-sm"
-                        style={{ color: "#2dce89" }}
-                      >
+                      <span className="mr-2 text-sm" style={{color: '#2dce89'}}>
                         <i className="ni ni-bulb-61" />
                         Les expériences les plus uniques ont plusieurs thèmes
                       </span>
@@ -304,7 +285,7 @@ const SecondStep = ({
                     {/* activite */}
                     <FormGroup
                       className="mb-3 border"
-                      style={{ padding: "2%", borderRadius: "0.375rem" }}
+                      style={{padding: '2%', borderRadius: '0.375rem'}}
                     >
                       <div>
                         <small className="font-weight-bold">
@@ -318,27 +299,22 @@ const SecondStep = ({
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          onChange={(e) => setActivity(e.target.value)}
+                          onChange={e => setActivity(e.target.value)}
                           placeholder="L'activité de l'expérience"
                           type="string"
                           autoComplete="new-password"
                           name="activity"
-                          defaultValue={
-                            experience ? experience.activity : activity
-                          }
+                          defaultValue={experience ? experience.activity : activity}
                           // invalid={errors["activity"]}
                           // innerRef={register({
                           //   required: "L'activité est obligatoire.",
                           // })}
                         />
                       </InputGroup>
-                      <span
-                        className="mr-2 text-sm"
-                        style={{ color: "#2dce89" }}
-                      >
+                      <span className="mr-2 text-sm" style={{color: '#2dce89'}}>
                         <i className="ni ni-bulb-61" />
-                        Une activité réussie a un role de transmission de
-                        savoir, divertissement ou initiation à une discipline
+                        Une activité réussie a un role de transmission de savoir, divertissement ou
+                        initiation à une discipline
                       </span>
                       <br />
                       {/* {errors.activity && (
@@ -354,12 +330,11 @@ const SecondStep = ({
                     {/* price */}
                     <FormGroup
                       className="mb-3 border"
-                      style={{ padding: "2%", borderRadius: "0.375rem" }}
+                      style={{padding: '2%', borderRadius: '0.375rem'}}
                     >
                       <div>
                         <small className="font-weight-bold">
-                          Fixez un prix par personne à votre expérience ( en
-                          dinar tunisien)
+                          Fixez un prix par personne à votre expérience ( en dinar tunisien)
                         </small>
                       </div>
                       <InputGroup className="input-group-alternative">
@@ -369,14 +344,14 @@ const SecondStep = ({
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          onChange={(e) => setPrice(e.target.value)}
+                          onChange={e => setPrice(e.target.value)}
                           placeholder="Le prix de l'expérience"
                           type="number"
                           autoComplete="new-password"
                           name="price"
                           min="5"
                           max="1000"
-                          defaultValue={experience ? experience.price : " "}
+                          defaultValue={experience ? experience.price : 0}
 
                           // invalid={errors["price"]}
                           // innerRef={register({
@@ -384,15 +359,12 @@ const SecondStep = ({
                           // })}
                         />
                       </InputGroup>
-                      <span
-                        className="mr-2 text-sm"
-                        style={{ color: "#2dce89" }}
-                      >
+                      <span className="mr-2 text-sm" style={{color: '#2dce89'}}>
                         <i className="ni ni-bulb-61" />
-                        {price - (price * 5) / 100} est votre gain net par
-                        personne{" "}
+                        {price === 0 ? 0 : price - (price * 5) / 100} est votre gain net par
+                        personne
                         <small>
-                          <Link className="text-muted">en savoir plus</Link>
+                          <Link className="text-muted"> en savoir plus</Link>
                         </small>
                         .
                       </span>
@@ -414,15 +386,15 @@ const SecondStep = ({
                   <Link
                     to={`/first/${experience._id}`}
                     className="btn"
-                    style={{ color: "#5e72e4", backgroundColor: "#fff" }}
+                    style={{color: '#5e72e4', backgroundColor: '#fff'}}
                   >
                     Précédent
                   </Link>
                   {experience &&
-                  title !== " " &&
+                  title !== ' ' &&
                   theme !== [] &&
-                  activity !== " " &&
-                  price !== " " ? (
+                  activity !== ' ' &&
+                  price !== ' ' ? (
                     <Link
                       to={`/third/${experience._id}`}
                       className="btn btn-primary"

@@ -25,6 +25,7 @@ import {
   FETCH_USER_DETAILS_SUCCESS,
   FETCH_USER_DETAILS_FAIL,
   ADD_IMAGE_TO_PROFILE,
+  ON_SUCCESS_BUY_USER,
 } from '../constants/action-types';
 import {
   FETCH_ALL_EXPERIENCES,
@@ -47,6 +48,15 @@ import {
   ADD_IMAGE_TO_EXPERIENCE2,
   ADD_IMAGE_TO_EXPERIENCE3,
   ADD_IMAGE_TO_EXPERIENCE4,
+  ADD_SESSION,
+  ADD_SESSION_FAIL,
+  ADD_SESSION_SUCCESS,
+  FETCH_SESSION_DETAILS,
+  FETCH_SESSION_DETAILS_SUCCESS,
+  FETCH_SESSION_DETAILS_FAIL,
+  UPDATE_SESSION_FAIL,
+  UPDATE_SESSION_SUCCESS,
+  UPDATE_SESSION,
 } from '../constants/experienceConstants';
 
 const addUser = newUser => async dispatch => {
@@ -66,9 +76,7 @@ const addUser = newUser => async dispatch => {
     });
   }
 };
-
 export default addUser;
-
 export const login = cred => async dispatch => {
   console.log('🚀 ~ file: index.js ~ line 74 ~ process.env.REACT_APP_BASE_URL', process.env);
 
@@ -90,7 +98,6 @@ export const login = cred => async dispatch => {
     });
   }
 };
-
 export const getProfile = () => async dispatch => {
   const token = localStorage.getItem('token');
   const config = {
@@ -114,14 +121,12 @@ export const getProfile = () => async dispatch => {
     });
   }
 };
-
 export const logout = () => dispatch => {
   localStorage.removeItem('token');
   dispatch({
     type: LOGOUT,
   });
 };
-
 //Update User
 export const updateProfile = (id, updatedProfile) => async dispatch => {
   try {
@@ -133,10 +138,7 @@ export const updateProfile = (id, updatedProfile) => async dispatch => {
       `${process.env.REACT_APP_BASE_URL}/user/profile/${id}`,
       updatedProfile
     );
-    dispatch({
-      type: UPDATE_SUCCESS,
-      payload: data,
-    });
+    dispatch(getProfile());
   } catch (error) {
     console.log('🚀 ~ file: index.js ~ line 134 ~ error', error);
     dispatch({
@@ -144,7 +146,6 @@ export const updateProfile = (id, updatedProfile) => async dispatch => {
     });
   }
 };
-
 export const getUsers = () => async dispatch => {
   dispatch({type: FETCH_ALL_USERS});
   try {
@@ -160,7 +161,6 @@ export const getUsers = () => async dispatch => {
     });
   }
 };
-
 export const seePreferences = () => async dispatch => {
   try {
     const preferences = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/preferences`);
@@ -172,7 +172,6 @@ export const seePreferences = () => async dispatch => {
     console.error(error);
   }
 };
-
 export const addPreferences = (userId, preferenceId) => async dispatch => {
   dispatch({
     type: ADD_PREFERENCES,
@@ -193,27 +192,22 @@ export const addPreferences = (userId, preferenceId) => async dispatch => {
     });
   }
 };
-export const getUserDetails = (id) => async (dispatch) => {
-  dispatch({ type: FETCH_USER_DETAILS });
+export const getUserDetails = id => async dispatch => {
+  dispatch({type: FETCH_USER_DETAILS});
   try {
-    const { data } = await axios.get(`/user/user/${id}`);
+    const {data} = await axios.get(`/user/user/${id}`);
     dispatch({
       type: FETCH_USER_DETAILS_SUCCESS,
       payload: data.user,
     });
   } catch (error) {
-    console.log(
-      "🚀 ~ file: experienceActions.js ~ line 38 ~ getExperienceDetails ~ error",
-      error
-    );
+    console.log('🚀 ~ file: experienceActions.js ~ line 38 ~ getExperienceDetails ~ error', error);
     dispatch({
       type: FETCH_USER_DETAILS_FAIL,
       payload: error.response.data.message,
     });
   }
 };
-
-
 export const addExperience = newExperience => async dispatch => {
   dispatch({
     type: ADD_EXPERIENCE,
@@ -296,6 +290,7 @@ export const updateExperience = (id, updatedExperience) => async dispatch => {
       type: UPDATE_EXPERIENCE_SUCCESS,
       payload: data,
     });
+    dispatch(getExperienceDetails(id));
   } catch (error) {
     dispatch({
       type: UPDATE_EXPERIENCE_FAIL,
@@ -308,26 +303,95 @@ export const clearErrors = () => async dispatch => {
     type: CLEAR_ERRORS,
   });
 };
-
 export const addImageToProfile = image => ({
   type: ADD_IMAGE_TO_PROFILE,
   payload: image,
 });
 export const addImageToExperience = image => ({
   type: ADD_IMAGE_TO_EXPERIENCE,
-  payload:image,
+  payload: image,
 });
 export const addImageToExperience2 = image2 => ({
   type: ADD_IMAGE_TO_EXPERIENCE2,
-  payload:image2,
+  payload: image2,
 });
-export const addImageToExperience3 = image3=> ({
+export const addImageToExperience3 = image3 => ({
   type: ADD_IMAGE_TO_EXPERIENCE3,
-  payload:image3,
+  payload: image3,
 });
-export const addImageToExperience4 = image4=> ({
+export const addImageToExperience4 = image4 => ({
   type: ADD_IMAGE_TO_EXPERIENCE4,
-  payload:image4,
+  payload: image4,
 });
+export const addSession = newSession => async dispatch => {
+  dispatch({
+    type: ADD_SESSION,
+  });
+  try {
+    const addRes = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/session`, newSession);
+    dispatch({
+      type: ADD_SESSION_SUCCESS,
+      payload: addRes.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_SESSION_FAIL,
+      payload: error,
+    });
+  }
+};
+export const getSessionDetails = id => async dispatch => {
+  dispatch({type: FETCH_SESSION_DETAILS});
+  try {
+    const {data} = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/session`);
+    dispatch({
+      type: FETCH_SESSION_DETAILS_SUCCESS,
+      payload: data.session,
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_SESSION_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+export const updateSession = (id, updatedSession) => async dispatch => {
+  try {
+    dispatch({
+      type: UPDATE_SESSION,
+    });
 
+    const {data} = await axios.put(`${process.env.REACT_APP_BASE_URL}/api/session`, updatedSession);
+    dispatch({
+      type: UPDATE_SESSION_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_SESSION_FAIL,
+    });
+  }
+};
+//PaymentSuccess
+export function onSuccessBuy(data) {
+  const request = axios
+    .post(`${process.env.REACT_APP_BASE_URL}/api/successBuy`, data)
+    .then(response => response.data);
 
+  return {
+    type: ON_SUCCESS_BUY_USER,
+    payload: request,
+  };
+}
+
+/////////////////Payment with flouci////////////////////
+export const handle_data = async () => {
+  const app_secret = 'cc523472-6ec2-454c-a6c1-9e2e8e608ddb';
+  const app_public = 'f6b5d0a5-e559-4acb-bcbb-a9e6ec9d788d';
+  // const payment_id = 'payment_id';
+  // const flouci_otp = 'flouci_otp';
+  const {payment_id, flouci_otp} = await axios.post('https://developers.flouci.com/api/accept', {
+    app_secret,
+    app_public,
+  });
+};

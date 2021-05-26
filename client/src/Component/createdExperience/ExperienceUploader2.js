@@ -1,10 +1,6 @@
-import React, {useRef, useState, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {
-  addImageToExperience2,
-  updateExperience,
-  getExperienceDetails,
-} from '../../JS/actions/index';
+import React, {useRef, useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {addImageToExperience2} from '../../JS/actions/index';
 import {Button} from 'react-bootstrap';
 
 export default function ExperienceUploader2({image2, setImage2, id, exp}) {
@@ -36,7 +32,7 @@ export default function ExperienceUploader2({image2, setImage2, id, exp}) {
     });
 
     xhr.onreadystatechange = e => {
-      if (xhr.readyState == 4 && xhr.status == 200) {
+      if (xhr.readyState === 4 && xhr.status === 200) {
         const response = JSON.parse(xhr.responseText);
 
         setImage2(response.secure_url);

@@ -90,10 +90,7 @@ const FifthStep = ({
                           program: {generalDesc: program.generalDesc},
                           excludedEq: {...excludedEq},
                           includedEq: {...includedEq},
-                          isValidated: false,
-                          isBeingValidated: false,
-                          isPublished: false,
-                          isCreated: true,
+                          status: 'created',
                         })
                       );
                     }}
@@ -160,7 +157,6 @@ const FifthStep = ({
                       <span> Expérience {experience.type.title} </span>
                     </CardHeader>
                     <CardBody className="px-lg-5 py-lg-5">
-                      {/* global description */}
                       <Col lg="12" md="12">
                         <p
                           for="exampleText"
@@ -183,7 +179,7 @@ const FifthStep = ({
                             }
                             onChange={e =>
                               setProgram({
-                                generalDesc: e.target.value
+                                generalDesc: e.target.value,
                               })
                             }
                             placeholder="Rédiger ici.."
@@ -480,10 +476,7 @@ const FifthStep = ({
                               program: {generalDesc: program.generalDesc},
                               excludedEq: {...excludedEq},
                               includedEq: {...includedEq},
-                              isValidated: false,
-                              isBeingValidated: false,
-                              isPublished: false,
-                              isCreated: true,
+                              status: 'created',
                             })
                           );
                         }}

@@ -2,14 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
   Row,
   Col,
   Progress,
@@ -26,13 +18,11 @@ import {
   getExperiences,
 } from '../../JS/actions/index';
 import ExperienceUploader from './ExperienceUploader';
-import Loader from '../layout/Loader';
 import Advice6 from '../layout/Advice6';
 
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import ExperienceUploader2 from './ExperienceUploader2';
 import ExperienceUploader3 from './ExperienceUploader3';
-import ExperienceUploader4 from './ExperienceUploader4';
 
 const ImagesStep = ({
   match: {
@@ -45,12 +35,10 @@ const ImagesStep = ({
   useEffect(() => {
     dispatch(getExperienceDetails(id));
   }, [dispatch, id]);
-  const isLoading = useSelector(state => state.experiencesReducers.isLoading);
   const experience = useSelector(state => state.experiencesReducers.experience);
   const [photo, setphoto] = useState();
   const [photo2, setphoto2] = useState();
   const [photo3, setphoto3] = useState();
-  const [photo4, setphoto4] = useState();
 
   useEffect(() => {
     if (experience) {
@@ -186,11 +174,11 @@ const ImagesStep = ({
                     Précédent
                   </Link>
                   <Link
-                  to="/experiences"
+                    to="/experiences"
                     onClick={() => {
                       dispatch(
                         updateExperience(id, {
-                          ...experience
+                          ...experience,
                         })
                       );
                     }}

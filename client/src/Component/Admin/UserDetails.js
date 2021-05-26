@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserDetails, getExperiences} from '../../JS/actions/index';
-import {Card, CardBody, Row, CardTitle, Col, Button} from 'reactstrap';
+import {Card, CardBody, Row, Col, Button} from 'reactstrap';
 import Loader from '../layout/Loader';
 import AuthNavbar from '../layout/AuthNavbar';
 
@@ -43,7 +43,7 @@ const UserDetails = ({
     <Loader />
   ) : (
     <>
-    <AuthNavbar/>
+      <AuthNavbar />
       <Col lg="7" md="8" className="center mt-2">
         <Card className="card-stats mb-4 mb-xl-0">
           <CardBody className="mb-0">

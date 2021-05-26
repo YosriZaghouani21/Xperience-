@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, {Fragment} from 'react';
 
 const Footer = () => {
   return (
@@ -10,12 +10,10 @@ const Footer = () => {
               <div className="col-12 col-md">
                 <img
                   className="mb-2"
-                  src={
-                    require("../../Assets/img/brand/argon-react.png").default
-                  }
+                  src={require('../../Assets/img/brand/logofooter.png').default}
                   alt=""
-                  width={70}
-                  height={24}
+                  width={50}
+                  height={50}
                 />
                 <small className="d-block mb-3 text-muted">© 2020-2021</small>
               </div>
