@@ -9,8 +9,6 @@ import './App.css';
 import {positions, Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 
-import Preferences from './Component/Preferences';
-
 import Preferences from './Component/Preferences/Preferences';
 
 import FirstStep from './Component/createdExperience/FirstStep';
@@ -29,8 +27,6 @@ import CreatorHome from './Component/CreatorHome';
 import ImagesStep from './Component/createdExperience/ImagesStep';
 import Comment from './Component/Comment';
 
-import CreatorHome from './Component/CreatorHome';
-import ImagesStep from './Component/createdExperience/ImagesStep';
 import ExperienceDetailsAd from './Component/Admin/ExperienceDetailsAd';
 import Form from './Component/Form';
 import Publications from './Component/publishedExperience/Publications';
