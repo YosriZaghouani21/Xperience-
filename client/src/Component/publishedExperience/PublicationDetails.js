@@ -8,6 +8,7 @@ import AuthNavbar from '../layout/AuthNavbar';
 import ShowSessions from '../sessions/ShowSessionUser/ShowSessions';
 import {Link} from 'react-router-dom';
 import Details from '../sessions/publicationStep/Details';
+import Comment from '../Comment';
 const PublicationDetails = ({
   match: {
     params: {id},
@@ -36,6 +37,8 @@ const PublicationDetails = ({
         <Col xl="3">
           <ShowSessions experience={experience} />
         </Col>
+        <h1>Comment</h1>
+        <Comment />
       </Row>
     </>
   ) : (

@@ -11,6 +11,7 @@ const {
   getSingleUser,
 
   Paymentvalidation,
+  comment,
 } = require('../controllers/user.controller');
 
 const {registerRules, validator} = require('../middleware/validator');
@@ -34,26 +35,7 @@ Router.post('/preferences/add', addPreferences);
 Router.put('/mypreferences/:id', addMyPreferences);
 Router.get('/user/:id', getSingleUser);
 
-Router.put('/comment', isAuth(), (req, res) => {
-  const comment = {
-    text: req.body.text,
-    postedBy: req.user._id,
-  };
-  Post.findByIdandUpdate(
-    req.body.postId,
-    {
-      $push: {comments: comment},
-    },
-    {new: true}
-  ).exec((err, result) => {
-    if (err) {
-      return res.status(422).json({error: err});
-    } else {
-      res.json(result);
-    }
-  });
-});
-
+Router.put('/comment/:id', isAuth(), comment);
 Router.post('/successBuy', Paymentvalidation);
 
 module.exports = Router;

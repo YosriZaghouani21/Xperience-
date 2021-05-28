@@ -384,7 +384,7 @@ export function onSuccessBuy(data) {
   };
 }
 
-/////////////////Payment with flouci////////////////////
+//Payment with flouci
 export const handle_data = async () => {
   const app_secret = 'cc523472-6ec2-454c-a6c1-9e2e8e608ddb';
   const app_public = 'f6b5d0a5-e559-4acb-bcbb-a9e6ec9d788d';
@@ -394,4 +394,24 @@ export const handle_data = async () => {
     app_secret,
     app_public,
   });
+};
+
+//Add a comment
+export const comment = (id, newComment) => async dispatch => {
+  const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  try {
+    const addCom = await axios.put(
+      `${process.env.REACT_APP_BASE_URL}/details/${id}`,
+      newComment,
+      config
+    );
+    // dispatch(seeQuestions());
+  } catch (error) {
+    console.error(error);
+  }
 };

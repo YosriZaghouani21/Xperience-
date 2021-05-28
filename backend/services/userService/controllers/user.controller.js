@@ -220,3 +220,18 @@ exports.Paymentvalidation = (req, res) => {
     }
   );
 };
+
+exports.comment = async (req, res) => {
+  const commentId = req.params.id;
+  const commentMod = {text: req.body.text, postedBy: req.user._id};
+  try {
+    const comment = await Question.findByIdAndUpdate(
+      commentId,
+      {$push: {comments: commentMod}},
+      {new: true, useFindAndModify: false}
+    );
+    res.send(comment);
+  } catch (error) {
+    console.error(error);
+  }
+};

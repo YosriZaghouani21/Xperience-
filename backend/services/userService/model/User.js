@@ -47,13 +47,6 @@ const userSchema = mongoose.Schema({
     },
   ],
 
-  comments: [
-    {
-      text: String,
-      postedBy: {type: ObjectId},
-    },
-  ],
-
   verif: {type: Boolean, default: false},
   falseIdentity: {type: Boolean, default: true},
 

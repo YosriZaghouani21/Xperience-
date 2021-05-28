@@ -69,6 +69,7 @@ const experienceSchema = new Schema(
         material: String,
       },
     },
+
     // prix
     price: {
       type: Number,
@@ -90,6 +91,14 @@ const experienceSchema = new Schema(
     photo4: {
       type: String,
     },
+    comments: [
+      {
+        type: ObjectId,
+        text: String,
+        postedBy: {type: ObjectId},
+        ref: 'User',
+      },
+    ],
   },
   {
     timestamps: true,
