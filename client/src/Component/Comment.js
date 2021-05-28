@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {comment} from '../JS/actions';
-import {useDispatch} from 'react-redux';
-const Comment = experience => {
+import {useDispatch, useSelector} from 'react-redux';
+const Comment = () => {
+  const experience = useSelector(state => state.experiencesReducers.experience);
   const dispatch = useDispatch();
   const addCom = (id, item) => {
     dispatch(comment(id, {text: item}));
@@ -43,6 +44,7 @@ const Comment = experience => {
         //   makeComment(e.target[0].value);
         // }}
         onSubmit={e => {
+          console.log(experience._id);
           e.preventDefault();
           addCom(experience._id, e.target[0].value);
           e.target[0].value = '';
