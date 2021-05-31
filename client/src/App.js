@@ -40,6 +40,7 @@ import Publish from './Component/sessions/publicationStep/Publish';
 import PublishIndex from './Component/sessions/pre-publication sessions/sessionExplication/PublishIndex';
 import PublishedSessionList from './Component/sessions/post-publication sessions/PublishedSessionList';
 import Payment from './Component/payment/Payment';
+import Reclamation from './Component/Reclamation/Reclamation';
 // optional configuration
 const options = {
   // you can also just use 'bottom center'
@@ -82,6 +83,7 @@ function App() {
           <Route path="/foryou" component={Recommandations} />
           <Route path="/online" component={OnlineExperiences} />
           <Route path="/inperson" component={InPersonExperiences} />
+          <Route path="/reclamation" component={Reclamation} />
           {/* <Route path="/paypal/:id/:session" component={props => <Paypal props={props} />} /> */}
           <Route path="/payment/:id/:session" component={Payment} />
           <Route path="/flouci" component={Flouci} />

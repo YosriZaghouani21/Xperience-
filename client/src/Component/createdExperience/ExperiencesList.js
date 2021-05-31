@@ -26,13 +26,11 @@ const ExperiencesList = () => {
   return localStorage.getItem('token') ? (
     isLoading && loading ? (
       <>
-        <AuthNavbarExperience />
         <SideBarTemplate />
         <Loader />
       </>
     ) : user && experiences ? (
       <>
-        <AuthNavbarExperience />
         <SideBarTemplate />
         <div className="main-content mt-4">
           <Container fluid>

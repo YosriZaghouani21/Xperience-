@@ -50,7 +50,6 @@ const CreatedExperienceAd = ({experience}) => {
             </>
           ) : experience.status === 'accepted' ? (
             <>
-              {' '}
               <i className="fas fa-circle text-success pr-1" />
               Acceptée
             </>
@@ -67,7 +66,6 @@ const CreatedExperienceAd = ({experience}) => {
           )}
         </td>
         <td>{experience.type.title}</td>
-        <td>{experience.activity}</td>
 
         <td>
           {experience.status === 'beingValidated' ? (
@@ -78,17 +76,23 @@ const CreatedExperienceAd = ({experience}) => {
             <Link style={{margin: '5%', fontSize: 'large'}} to={`admin/${experience._id}`}>
               <i className="fas fa-user-clock text-yellow" />
             </Link>
+          ) : experience.status === 'published' || experience.status === 'accepted' ? (
+            <>
+              <Link style={{margin: '5%', fontSize: 'large'}} to={`admin/${experience._id}`}>
+                <i className="far fa-eye" />
+              </Link>
+              <Link style={{margin: '5%', fontSize: 'large'}} to={`/first/${experience._id}`}>
+                <i className="far fa-edit" />
+              </Link>
+            </>
           ) : (
             <Link style={{margin: '5%', fontSize: 'large'}} to={`admin/${experience._id}`}>
-              <i className="far fa-eye"></i>
+              <i className="far fa-eye" />
             </Link>
           )}
 
-          <Link style={{margin: '5%', fontSize: 'large'}} to={`/first/${experience._id}`}>
-            <i className="far fa-edit"></i>
-          </Link>
           <Link onClick={toggle} style={{margin: '5%', fontSize: 'large'}} to={`admin`}>
-            <i className="far fa-trash-alt text-danger"></i>{' '}
+            <i className="far fa-trash-alt text-danger"></i>
           </Link>
         </td>
       </tr>

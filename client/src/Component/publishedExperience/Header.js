@@ -1,10 +1,19 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {Col, Row} from 'reactstrap';
 
 const Header = () => {
   return (
     <>
-      <Row className="col-xl-12">
+      <p className="text-center justify-content-center row col-xl-12 bold">
+        <Link className="col-xl-2 text-info">
+          <u>Vivre une expérience</u>
+        </Link>
+        <Link className="col-xl-2 text-info" to="/creator">
+          Créer une expérience
+        </Link>
+      </p>
+      <Row className="col-xl-12 mt-5">
         <Col xl="3">
           <img
             alt="..."

@@ -49,7 +49,6 @@ const TableState = ({el, demandAccepted, setDemandAccepted, demandRefused, setDe
                           setStatusVerif(`accepted ${s.userId}`);
                           demandAccepted.push({userEmail: s.userEmail, userName: s.userName});
                           setDemandAccepted(demandAccepted);
-                          console.log(demandAccepted);
                         }}
                       />
                     </div>

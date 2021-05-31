@@ -20,7 +20,7 @@ const UserExperienceModel = ({experience}) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   return (
-    <Row>
+    <>
       {/* Modal */}
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Supprimer l'expérience?</ModalHeader>
@@ -279,7 +279,7 @@ const UserExperienceModel = ({experience}) => {
           </CardBody>
         </Card>
       </Col>
-    </Row>
+    </>
   );
 };
 export default UserExperienceModel;

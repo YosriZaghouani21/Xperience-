@@ -89,16 +89,17 @@ const UserDetails = ({
           </CardBody>
           <hr className="m-0" />
           <CardBody>
-            <h4>L'activité de l'utilisateur</h4>
-
-            {experiences &&
-              experiences.map(experience =>
-                experience.userID === id ? (
-                  <UserExperienceModel key={experience._id} experience={experience} />
-                ) : (
-                  <p></p>
-                )
-              )}
+            <h4>Les expériences de l'utilisateur</h4>
+            <Row>
+              {experiences &&
+                experiences.map(experience =>
+                  experience.userID === id ? (
+                    <UserExperienceModel key={experience._id} experience={experience} />
+                  ) : (
+                    <p></p>
+                  )
+                )}
+            </Row>
           </CardBody>
         </Card>
       </Col>

@@ -28,9 +28,16 @@ const Publications = () => {
   ) : (
     <>
       <AuthNavbar />
-      <Header />
-      <Search />
-      <PublicationBar />
+
+      <div className="mt-5">
+        <Header />
+      </div>
+      <div className="mt-5">
+        <Search />
+      </div>
+      <div className="mt-5">
+        <PublicationBar />
+      </div>
       <Row className="col-xl-12 justify-content-center m-0 p-0 mb-5">
         {experiences &&
           experiences.map(experience =>

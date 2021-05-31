@@ -86,28 +86,15 @@ const Index = props => {
                         <div className="col">
                           <h3 className="mb-0">Les expériences</h3>
                         </div>
-                        <div className="col text-right">
-                          <Button
-                            color="primary"
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                            size="sm"
-                          >
-                            See all
-                          </Button>
-                        </div>
                       </Row>
                     </CardHeader>
                     <Table className="align-items-center table-flush" responsive>
                       <thead className="thead-light">
                         <tr>
-                          <th scope="col">Date</th>
-
                           <th scope="col">Titre</th>
                           <th scope="col">état</th>
 
                           <th scope="col">Type</th>
-                          <th scope="col">Activité</th>
                           <th scope="col"></th>
                         </tr>
                       </thead>

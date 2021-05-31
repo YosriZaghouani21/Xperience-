@@ -1,14 +1,17 @@
 import React from 'react';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
+import {useDispatch} from 'react-redux';
+import {updateExperience} from '../../JS/actions';
 
 const Paypal = ({experience, userReservation}) => {
   const exp = experience && experience.price * 0.3;
-
+  const dispatch = useDispatch();
   const onSuccess = payment => {
     // Congratulation, it came here means everything's fine!
     console.log('The payment was succeeded!', payment);
     if (payment.paid) {
-      console.log(userReservation);
+      userReservation.status = 'paid';
+      dispatch(updateExperience(experience._id, {...experience}));
     }
     // You can bind the "payment" object's value to your state or props or whatever here, please see below for sample returned data
   };

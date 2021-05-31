@@ -24,7 +24,6 @@ const CreatorHome = () => {
             et exploitables.»
           </h1>
           <small>
-            {' '}
             <b>Scott Belsky</b>
           </small>
         </Col>{' '}
@@ -84,41 +83,37 @@ const CreatorHome = () => {
             </Col>
           </Row>
         </Col>
-        <Col lg="12" md="10">
-          <Row>
-            <Col lg="5">
-              <Card className="card-stats mb-4 mb-xl-0 border-0">
-                <CardBody>
-                  <Row>
-                    <div className="col">
-                      <CardTitle tag="h1" className=" mb-0">
-                        Prêt à faire de votre passion un revenu ?
-                      </CardTitle>
-                      {localStorage.getItem('token') ? (
-                        <Link to="/experiences" className="btn btn-secondary">
-                          {' '}
-                          Oui allez-y
-                        </Link>
-                      ) : (
-                        <Link to="/login" className="btn btn-secondary">
-                          {' '}
-                          Oui allez-y
-                        </Link>
-                      )}
-                    </div>
-                  </Row>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col lg="7">
-              <img
-                alt="..."
-                src={require('../Assets/img/brand/home.jpg').default}
-                style={{width: '100%'}}
-              />
-            </Col>
-          </Row>
-        </Col>
+        <Row className="justify-content-center col-xl-12">
+          <Col lg="5">
+            <Card className="card-stats mb-4 mb-xl-0 border-0">
+              <CardBody>
+                <Row>
+                  <div className="col">
+                    <CardTitle tag="h1" className=" mb-0" style={{fontSize: 'xxx-large'}}>
+                      Prêt à faire de votre passion un revenu ?
+                    </CardTitle>
+                    {localStorage.getItem('token') ? (
+                      <Link to="/experiences" className="btn btn-secondary">
+                        Oui allez-y
+                      </Link>
+                    ) : (
+                      <Link to="/login" className="btn btn-secondary">
+                        Oui allez-y
+                      </Link>
+                    )}
+                  </div>
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg="3">
+            <img
+              alt="..."
+              src={require('../Assets/img/brand/home.png').default}
+              style={{width: '100%'}}
+            />
+          </Col>
+        </Row>
       </div>
       <Footer />
     </div>
