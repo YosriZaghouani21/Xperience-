@@ -12,7 +12,7 @@ const sessionSchema = new Schema(
     sessionDate: String,
     isLaunched: Boolean,
     peopleInterrested: [Object],
-    reservationDemand : [Object],
+    reservationDemand: [Object],
     experienceId: {
       type: ObjectId,
       ref: 'Experience',

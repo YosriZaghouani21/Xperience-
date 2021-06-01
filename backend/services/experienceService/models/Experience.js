@@ -93,10 +93,8 @@ const experienceSchema = new Schema(
     },
     comments: [
       {
-        type: ObjectId,
         text: String,
-        postedBy: {type: ObjectId},
-        ref: 'User',
+        postedBy: {type: ObjectId, ref: 'user'},
       },
     ],
   },

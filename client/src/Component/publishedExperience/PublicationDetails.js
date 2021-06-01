@@ -38,7 +38,7 @@ const PublicationDetails = ({
           <ShowSessions experience={experience} />
         </Col>
         <h1>Comment</h1>
-        <Comment />
+        <Comment experience={experience} />
       </Row>
     </>
   ) : (

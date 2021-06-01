@@ -35,7 +35,7 @@ Router.post('/preferences/add', addPreferences);
 Router.put('/mypreferences/:id', addMyPreferences);
 Router.get('/user/:id', getSingleUser);
 
-Router.put('/comment/:id', isAuth(), comment);
+Router.post('/comment/:id', isAuth(), comment);
 Router.post('/successBuy', Paymentvalidation);
 
 module.exports = Router;

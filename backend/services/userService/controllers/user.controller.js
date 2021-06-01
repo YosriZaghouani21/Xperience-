@@ -4,8 +4,10 @@ const config = require('config');
 const cloudinary = require('cloudinary');
 const Preferences = require('../model/Preferences');
 const User = require('../model/User');
+const Experience = require('../../experienceService/models/Experience');
 
 const secretOrkey = config.get('secretOrkey');
+const RefreshToken = config.get('RefreshToken');
 
 // Register User
 exports.register = async (req, res) => {
@@ -50,7 +52,7 @@ exports.login = async (req, res) => {
       email: user.email,
       phoneNumber: user.phoneNumber,
     };
-
+    // const RefreshToken = await jwt.sign(RefreshToken);
     const token = await jwt.sign(payload, secretOrkey);
     return res.status(200).json({token: `Bearer ${token}`, user});
   } catch (error) {
@@ -225,11 +227,11 @@ exports.comment = async (req, res) => {
   const commentId = req.params.id;
   const commentMod = {text: req.body.text, postedBy: req.user._id};
   try {
-    const comment = await Question.findByIdAndUpdate(
+    const comment = await Experience.findByIdAndUpdate(
       commentId,
       {$push: {comments: commentMod}},
       {new: true, useFindAndModify: false}
-    );
+    ).populate('comments.postedBy', 'name');
     res.send(comment);
   } catch (error) {
     console.error(error);

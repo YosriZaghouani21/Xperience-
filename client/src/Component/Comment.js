@@ -7,50 +7,60 @@ const Comment = () => {
   const addCom = (id, item) => {
     dispatch(comment(id, {text: item}));
   };
-  const [data, setData] = useState([]);
-  // const makeComment = (text, postId) => {
-  //   dispatch(comment(postId, {text}));
-  //   fetch('Comment', {
-  //     method: 'put',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({postId, text}),
-  //   })
-  //     .then(res => res.json())
-  //     .then(result => {
-  //       console.log(result);
-  //       const newData = data.map(experience => {
-  //         if (experience._id == result._id) {
-  //           return result;
-  //         } else {
-  //           return experience;
-  //         }
-  //       });
-  //       setData(newData);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
+
   return (
     <div>
-      {/* {comments.map(record => {
-        return <h6>{record.postedBy.name}</h6>;
-      })} */}
       <form
-        // onSubmit={e => {
-        //   e.preventDefault();
-        //   makeComment(e.target[0].value);
-        // }}
         onSubmit={e => {
-          console.log(experience._id);
           e.preventDefault();
           addCom(experience._id, e.target[0].value);
           e.target[0].value = '';
+          console.log(e.target[0].value);
         }}
       >
         <input type="text" placeholder="add a comment" />
+        <div>
+          {experience.comments
+            .filter(comment => experience.comments.indexOf(comment) !== experience.comments.length)
+            .map(comment => (
+              <div
+                style={{
+                  backgroundColor: '#F0F0F0',
+                  margin: '10px 50px 5px 50px',
+                  borderLeft: 'solid rgb(229, 9, 2)',
+                }}
+              >
+                <div className="container">
+                  <div className="row">
+                    <p
+                      className="col-10 "
+                      style={{
+                        fontSize: 'small',
+                        fontStyle: 'italic',
+                      }}
+                    >
+                      {comment.postedBy} :
+                    </p>
+
+                    <p
+                      className="col-2"
+                      style={{
+                        color: 'grey',
+                        fontStyle: 'italic',
+                        fontSize: 'small',
+                      }}
+                    >
+                      {/* {dateFormat(comment.date, 'mediumDate')}{' '}
+                      {dateFormat(comment.date, 'shortTime')} */}
+                    </p>
+                  </div>
+                </div>
+
+                <div style={{marginLeft: '20px'}}>{comment.text}</div>
+              </div>
+            ))}
+        </div>
+        <p>{comment.text}</p>
       </form>
     </div>
   );

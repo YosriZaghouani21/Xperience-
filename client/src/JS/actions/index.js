@@ -405,12 +405,12 @@ export const comment = (id, newComment) => async dispatch => {
     },
   };
   try {
-    const addCom = await axios.put(
-      `${process.env.REACT_APP_BASE_URL}/details/${id}`,
+    const addCom = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/user/comment/${id}`,
       newComment,
       config
     );
-    // dispatch(seeQuestions());
+    dispatch(FETCH_EXPERIENCE_DETAILS());
   } catch (error) {
     console.error(error);
   }
