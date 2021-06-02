@@ -31,7 +31,6 @@ const Publications = () => {
       <AuthNavbar />
 
       <>
-        {' '}
         <div className="mt-5">
           <Header />
         </div>

@@ -44,6 +44,7 @@ import Reclamation from './Component/Reclamation/Reclamation';
 import Historique from './Component/Historique/Historique';
 import ShowPrint from './Component/Historique/ShowPrint';
 import Reclamations from './Component/Reclamation/Reclamations';
+import Guide from './Component/Guide/Guide';
 // optional configuration
 const options = {
   // you can also just use 'bottom center'
@@ -94,6 +95,7 @@ function App() {
           <Route path="/flouci" component={Flouci} />
           <Route path="/historique" component={Historique} />
           <Route path="/print" component={ShowPrint} />
+          <Route path="/guide" component={Guide} />
 
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />

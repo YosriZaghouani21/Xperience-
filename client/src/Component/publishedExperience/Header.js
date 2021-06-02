@@ -1,16 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Col, Row} from 'reactstrap';
+import {Button, Col, Row} from 'reactstrap';
 
 const Header = () => {
   return (
     <>
       <p className="text-center justify-content-center row col-xl-12 bold">
         <Link className="col-xl-2 text-info">
-          <u>Vivre une expérience</u>
+          <Button style={{boxShadow: 'none'}} color="info">
+            <u>Vivre une expérience</u>
+          </Button>
         </Link>
         <Link className="col-xl-2 text-info" to="/creator">
-          Créer une expérience
+          <Button style={{boxShadow: 'none'}} color="info">
+            Créer une expérience
+          </Button>
         </Link>
       </p>
       <Row className="col-xl-12 mt-5">

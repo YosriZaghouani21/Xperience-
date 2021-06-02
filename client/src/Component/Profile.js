@@ -8,6 +8,7 @@ import {Container, Card, CardHeader, CardBody, FormGroup, Form, Input, Row, Col}
 import Loader from './layout/Loader';
 import AuthNavbar from './layout/AuthNavbar';
 import ImageUploader from './ImageUploader';
+import AlertInfo from './layout/AlertInfo';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -83,6 +84,7 @@ const Profile = () => {
           <Container fluid className="mt-6">
             <Row>
               <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
+                {editDone ? <AlertInfo content="Votre profil a été mis à jour" /> : <></>}
                 <Card className="card-profile shadow">
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="5">
@@ -315,7 +317,6 @@ const Profile = () => {
                             onClick={e => {
                               handleSubmit(e);
                               setEdit(false);
-                              alert.show('Votre profil a été mis à jour');
                             }}
                           >
                             Enregistrer
