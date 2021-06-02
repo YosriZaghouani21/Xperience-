@@ -9,6 +9,7 @@ import ShowSessions from '../sessions/ShowSessionUser/ShowSessions';
 import {Link} from 'react-router-dom';
 import Details from '../sessions/publicationStep/Details';
 import Comment from '../Comment';
+import Likes from '../Likes';
 const PublicationDetails = ({
   match: {
     params: {id},
@@ -39,6 +40,7 @@ const PublicationDetails = ({
         </Col>
         <h1>Comment</h1>
         <Comment experience={experience} />
+        <Likes experience={experience} />
       </Row>
     </>
   ) : (

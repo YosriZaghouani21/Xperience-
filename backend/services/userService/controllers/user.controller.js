@@ -237,3 +237,33 @@ exports.comment = async (req, res) => {
     console.error(error);
   }
 };
+
+exports.like = async (req, res) => {
+  const likeId = req.params.id;
+  const likeMod = {postedBy: req.user._id};
+  try {
+    const like = await Experience.findByIdAndUpdate(
+      likeId,
+      {$push: {likes: likeMod}},
+      {new: true, useFindAndModify: false}
+    ).populate('likes.postedBy', 'name');
+    res.send(like);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+exports.unlike = async (req, res) => {
+  const likeId = req.params.id;
+  const likeMod = {postedBy: req.user._id};
+  try {
+    const like = await Experience.findByIdAndUpdate(
+      likeId,
+      {$pull: {likes: likeMod}},
+      {new: true, useFindAndModify: false}
+    ).populate('likes.postedBy', 'name');
+    res.send(like);
+  } catch (error) {
+    console.error(error);
+  }
+};

@@ -97,6 +97,13 @@ const experienceSchema = new Schema(
         postedBy: {type: ObjectId, ref: 'user'},
       },
     ],
+
+    likes: [
+      {
+        Type: ObjectId,
+        postedBy: {type: ObjectId, ref: 'user'},
+      },
+    ],
   },
   {
     timestamps: true,

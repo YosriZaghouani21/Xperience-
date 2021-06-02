@@ -57,6 +57,9 @@ import {
   UPDATE_SESSION_FAIL,
   UPDATE_SESSION_SUCCESS,
   UPDATE_SESSION,
+  DELETE_COMMENT,
+  DELETE_COMMENT_SUCCESS,
+  DELETE_COMMENT_FAIL,
 } from '../constants/experienceConstants';
 
 const addUser = newUser => async dispatch => {
@@ -408,6 +411,64 @@ export const comment = (id, newComment) => async dispatch => {
     const addCom = await axios.post(
       `${process.env.REACT_APP_BASE_URL}/user/comment/${id}`,
       newComment,
+      config
+    );
+    dispatch(FETCH_EXPERIENCE_DETAILS());
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+//Delete a comment
+
+export const deleteComment = id => async dispatch => {
+  dispatch({type: DELETE_COMMENT});
+  try {
+    const {data} = await axios.delete(`${process.env.REACT_APP_BASE_URL}/user/comment/${id}`);
+    dispatch({
+      type: DELETE_COMMENT_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_COMMENT_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//Add a like
+export const like = (id, newLike) => async dispatch => {
+  const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  try {
+    const addLike = await axios.put(
+      `${process.env.REACT_APP_BASE_URL}/user/like/${id}`,
+      newLike,
+      config
+    );
+    dispatch(FETCH_EXPERIENCE_DETAILS());
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+//Add a unlike
+export const unlike = (id, newunLike) => async dispatch => {
+  const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  try {
+    const addunLike = await axios.put(
+      `${process.env.REACT_APP_BASE_URL}/user/unlike/${id}`,
+      newunLike,
       config
     );
     dispatch(FETCH_EXPERIENCE_DETAILS());
