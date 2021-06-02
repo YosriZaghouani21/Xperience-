@@ -42,7 +42,7 @@ const Index = props => {
                 setShowUsers(false);
               }}
             >
-              Les expériences{' '}
+              Les expériences
             </Button>
             <Button
               className="btn-danger p-4"
@@ -50,7 +50,7 @@ const Index = props => {
                 setShowUsers(true);
               }}
             >
-              Les utilisateurs{' '}
+              Les utilisateurs
             </Button>
             {showUsers ? (
               <Row className="mt-4">

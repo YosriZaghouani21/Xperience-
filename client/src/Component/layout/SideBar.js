@@ -233,6 +233,22 @@ const SideBar = props => {
               </NavLink>
             </NavItem>
             <NavItem>
+              <NavLink to="/users" tag={Link}>
+                <i className="fas fa-users" /> <span>Les utilisateurs</span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/experiences" tag={Link}>
+                <i className="fas fa-ellipsis-v" /> <span>Les expériences</span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/reclamations" tag={Link}>
+                <i className="fas fa-exclamation" />
+                <span>Les réclamations</span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink
                 tag={Link}
                 onClick={e => {

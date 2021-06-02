@@ -58,6 +58,17 @@ import {
   UPDATE_SESSION_SUCCESS,
   UPDATE_SESSION,
 } from '../constants/experienceConstants';
+import {
+  FETCH_ALL_RECLAMATIONS,
+  FETCH_ALL_RECLAMATIONS_SUCCESS,
+  FETCH_ALL_RECLAMATIONS_FAIL,
+  FETCH_RECLAMATION_DETAILS,
+  FETCH_RECLAMATION_DETAILS_SUCCESS,
+  FETCH_RECLAMATION_DETAILS_FAIL,
+  ADD_RECLAMATION,
+  ADD_RECLAMATION_SUCCESS,
+  ADD_RECLAMATION_FAIL,
+} from '../constants/reclamationConstants';
 
 const addUser = newUser => async dispatch => {
   dispatch({
@@ -383,7 +394,6 @@ export function onSuccessBuy(data) {
     payload: request,
   };
 }
-
 /////////////////Payment with flouci////////////////////
 export const handle_data = async () => {
   const app_secret = 'cc523472-6ec2-454c-a6c1-9e2e8e608ddb';
@@ -394,4 +404,54 @@ export const handle_data = async () => {
     app_secret,
     app_public,
   });
+};
+export const addReclamation = newReclamation => async dispatch => {
+  dispatch({
+    type: ADD_RECLAMATION,
+  });
+  try {
+    const addRes = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/reclamation`,
+      newReclamation
+    );
+    dispatch({
+      type: ADD_RECLAMATION_SUCCESS,
+      payload: addRes.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_RECLAMATION_FAIL,
+      payload: error,
+    });
+  }
+};
+export const getReclamations = () => async dispatch => {
+  try {
+    dispatch({type: FETCH_ALL_RECLAMATIONS});
+    const {data} = await axios.get(`${process.env.REACT_APP_BASE_URL}/reclamation`);
+    dispatch({
+      type: FETCH_ALL_RECLAMATIONS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_ALL_RECLAMATIONS_FAIL,
+      payload: error.response.data,
+    });
+  }
+};
+export const getReclamationDetails = id => async dispatch => {
+  dispatch({type: FETCH_RECLAMATION_DETAILS});
+  try {
+    const {data} = await axios.get(`${process.env.REACT_APP_BASE_URL}/reclamation/${id}`);
+    dispatch({
+      type: FETCH_RECLAMATION_DETAILS_SUCCESS,
+      payload: data.reclamation,
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_RECLAMATION_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
 };

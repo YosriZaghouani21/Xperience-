@@ -126,6 +126,13 @@ const SideBarTemplate = props => {
               </Link>
             </NavItem>
             <NavItem>
+              <Link to="/historique">
+                <NavLink>
+                  <i className="fas fa-archive" /> <span>Historique</span>
+                </NavLink>
+              </Link>
+            </NavItem>
+            <NavItem>
               <Link to="/reclamation">
                 <NavLink>
                   <i className="fas fa-exclamation" />

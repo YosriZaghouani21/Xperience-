@@ -4,8 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config/dbConnect');
 const user = require('./services/userService/Routes/user');
 const experienceRouter = require('./services/experienceService/Routes/experienceRouter');
-const {cloudinary} = require('./config/cloudinary');
-const {updateUser} = require('./services/userService/controllers/user.controller');
+const reclamationRouter = require('./services/reclamationService/routes/reclamationRouter');
 
 const app = express();
 app.use(cors());
@@ -15,6 +14,8 @@ app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(express.json());
 app.use('/user', user);
 app.use('/api', experienceRouter);
+app.use('/reclamation', reclamationRouter);
+
 app.use(fileUpload());
 
 connectDB();

@@ -41,6 +41,9 @@ import PublishIndex from './Component/sessions/pre-publication sessions/sessionE
 import PublishedSessionList from './Component/sessions/post-publication sessions/PublishedSessionList';
 import Payment from './Component/payment/Payment';
 import Reclamation from './Component/Reclamation/Reclamation';
+import Historique from './Component/Historique/Historique';
+import ShowPrint from './Component/Historique/ShowPrint';
+import Reclamations from './Component/Reclamation/Reclamations';
 // optional configuration
 const options = {
   // you can also just use 'bottom center'
@@ -84,9 +87,14 @@ function App() {
           <Route path="/online" component={OnlineExperiences} />
           <Route path="/inperson" component={InPersonExperiences} />
           <Route path="/reclamation" component={Reclamation} />
+          <Route path="/reclamations" component={Reclamations} />
+
           {/* <Route path="/paypal/:id/:session" component={props => <Paypal props={props} />} /> */}
           <Route path="/payment/:id/:session" component={Payment} />
           <Route path="/flouci" component={Flouci} />
+          <Route path="/historique" component={Historique} />
+          <Route path="/print" component={ShowPrint} />
+
           {localStorage.getItem('token') ? (
             <Route path="/admin" component={Index} />
           ) : (

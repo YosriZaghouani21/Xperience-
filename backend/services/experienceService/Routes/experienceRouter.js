@@ -10,8 +10,6 @@ router
   .get(experienceController.getSingleExperience);
 
 router.route('/experience').post(experienceController.createExperience);
-// router.route("/upload").post(experienceController.uploadImage);
-// router.route("/images").get(experienceController.getUploadImage);
 router.route('/session').post(experienceController.addSession);
 router.route('/session').get(experienceController.getSingleSession);
 router.route('/session').put(experienceController.updateSession);

@@ -107,7 +107,7 @@ const Signup = () => {
                       <>
                         <span className="mr-2 text-sm" style={{color: '#dd3a4a'}}>
                           {errors.email.message}
-                        </span>{' '}
+                        </span>
                         <br />
                       </>
                     )}
