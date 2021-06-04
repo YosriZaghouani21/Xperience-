@@ -451,19 +451,19 @@ const ExperienceDetailsAd = ({
                   alt=""
                   className="border rounded"
                   src={experience.photo}
-                  style={{height: '300px', width: '300px'}}
+                  style={{height: '250px', width: '250px'}}
                 />
                 <img
                   alt=""
                   className="border rounded"
                   src={experience.photo2}
-                  style={{height: '300px', width: '300px'}}
+                  style={{height: '250px', width: '250px'}}
                 />
                 <img
                   alt=""
                   className="border rounded"
                   src={experience.photo3}
-                  style={{height: '300px', width: '300px'}}
+                  style={{height: '250px', width: '250px'}}
                 />
               </div>
               <div></div>

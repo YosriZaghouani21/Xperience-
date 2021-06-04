@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Redirect} from 'react-router';
-import {login} from '../JS/actions';
+import {getProfile, login} from '../JS/actions';
 import {useForm} from 'react-hook-form';
 import {
   Button,
@@ -28,6 +28,10 @@ const Signin = () => {
   const [password, setPassword] = useState();
   const loading = useSelector(state => state.userReducer.loading);
   const error = useSelector(state => state.userReducer.errors);
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
 
   const {register, handleSubmit, errors} = useForm();
   const onSubmit = () => {

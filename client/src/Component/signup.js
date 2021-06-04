@@ -40,6 +40,7 @@ const Signup = props => {
         email,
         password,
         phoneNumber,
+        myPreferences: [],
       })
     );
     props.history.push('/login');

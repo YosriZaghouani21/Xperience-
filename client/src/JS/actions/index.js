@@ -26,6 +26,9 @@ import {
   FETCH_USER_DETAILS_FAIL,
   ADD_IMAGE_TO_PROFILE,
   ON_SUCCESS_BUY_USER,
+  DELETE_USER,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAIL,
 } from '../constants/action-types';
 import {
   FETCH_ALL_EXPERIENCES,
@@ -451,6 +454,22 @@ export const getReclamationDetails = id => async dispatch => {
   } catch (error) {
     dispatch({
       type: FETCH_RECLAMATION_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+//delete user
+export const deleteUser = id => async dispatch => {
+  dispatch({type: DELETE_USER});
+  try {
+    const {data} = await axios.delete(`${process.env.REACT_APP_BASE_URL}/user/delete/${id}`);
+    dispatch({
+      type: DELETE_USER_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_USER_FAIL,
       payload: error.response.data.message,
     });
   }

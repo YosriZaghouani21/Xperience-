@@ -43,7 +43,7 @@ const UserExperienceModel = ({experience}) => {
         </ModalFooter>
       </Modal>
       {/* endModal */}
-      <Col lg="6" xl="4" style={{marginBottom: '1%'}}>
+      <Col xl="4" style={{marginBottom: '1%'}}>
         <Card className="card-stats mb-4 mb-xl-0">
           <CardBody>
             <Row>
@@ -51,7 +51,6 @@ const UserExperienceModel = ({experience}) => {
                 {experience.status === 'created' ? (
                   <>
                     <small>
-                      {' '}
                       <i className="fas fa-circle" style={{paddingRight: '2%'}} />
                       Créée
                     </small>

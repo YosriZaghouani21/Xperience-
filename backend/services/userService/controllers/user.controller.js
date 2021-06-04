@@ -178,7 +178,14 @@ exports.getSingleUser = async (req, res) => {
     return res.status(500).json({msg: err.message});
   }
 };
-
+exports.deleteUser = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.json({msg: 'utilisateur supprimé avec succès'});
+  } catch (err) {
+    return res.status(500).json({msg: err.message});
+  }
+};
 exports.Paymentvalidation = (req, res) => {
   const history = [];
   const transactionData = {};

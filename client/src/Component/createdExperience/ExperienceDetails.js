@@ -90,11 +90,11 @@ const ExperienceDetails = ({
                   <Row style={{float: 'right'}}>
                     <Col>
                       <Button className=" btn-sm btn-success" onClick={toggle}>
-                        Envoyer{' '}
+                        Envoyer
                       </Button>
                     </Col>
                     <Col>
-                      <Link to={`/first/${id}`} className="btn btn-sm btn-info">
+                      <Link to={`/second/${id}`} className="btn btn-sm btn-info">
                         Modifier
                       </Link>
                     </Col>
