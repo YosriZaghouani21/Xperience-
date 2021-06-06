@@ -15,7 +15,7 @@ const ContactReclamation = () => {
         <CardTitle tag="h5">Demander une information</CardTitle>
         <CardText>
           Faites-nous part de vos quetions, nous y répondrons volontiers. Nous sommes également
-          ouvert à toutes remarques ou suppopsition.
+          ouvert à toutes remarques ou supposition.
         </CardText>
       </Card>
       <div className="m-2">

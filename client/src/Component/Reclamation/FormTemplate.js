@@ -99,7 +99,7 @@ const FormTemplate = props => {
               />
             </Col>
           </FormGroup>
-          <Button className="float-right" color="danger" size="sm" type="submit">
+          <Button className="float-right" color="primary" size="sm" type="submit">
             Envoyer
           </Button>
         </Form>

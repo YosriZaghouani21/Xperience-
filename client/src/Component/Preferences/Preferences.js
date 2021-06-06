@@ -90,7 +90,7 @@ const Preferences = () => {
                 setShowAlert(true);
               }}
             >
-              Ajouter mes préferences
+              Mettre à jour mes préferences
             </Button>
           </div>
         </Row>

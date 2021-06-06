@@ -15,8 +15,8 @@ const AskForReservation = ({experience, el, user}) => {
         <ModalHeader toggle={toggle}>Demander une réservation ?</ModalHeader>
         <ModalBody>
           Nous enverrons votre demande de réservation au créateur, elle est en attente jusqu'à ce
-          qu'il accepte ou refuse votre demande. Dans les deux cas, nous vous enverrons un email
-          pour vous informer.
+          qu'il l'accepte ou la refuse. Dans les deux cas, nous vous enverrons un email pour vous
+          informer.
         </ModalBody>
         <ModalFooter>
           <Button
@@ -39,7 +39,7 @@ const AskForReservation = ({experience, el, user}) => {
       {el.reservationDemand.filter(e => e.userId === user._id).length > 0 ? (
         <p className="text-yellow">Demande de réservation envoyée</p>
       ) : (
-        <Button className="text-danger" size="sm" onClick={toggle}>
+        <Button className="text-success" size="sm" onClick={toggle}>
           Réserver
         </Button>
       )}
