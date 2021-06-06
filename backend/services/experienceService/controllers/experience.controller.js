@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const User = require('../../userService/model/User');
 const Experiences = require('../models/Experience');
 const Session = require('../models/Session');
-const Sessions = require('../models/Session');
 
 mongoose.set('useFindAndModify', false);
 

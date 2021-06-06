@@ -1,6 +1,6 @@
 import React from 'react';
 import PopOver from '../layout/PopOver';
-const PeopleReserved = ({experience, el, index}) => {
+const PeopleReserved = ({ el, index}) => {
   return (
     <>
       <PopOver
