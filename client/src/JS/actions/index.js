@@ -401,7 +401,6 @@ export function onSuccessBuy(data) {
   };
 }
 
-
 //Payment with flouci
 
 /////////////////Payment with flouci////////////////////
@@ -416,7 +415,6 @@ export const handle_data = async () => {
     app_public,
   });
 };
-
 
 //Add a comment
 export const comment = (id, newComment) => async dispatch => {
@@ -493,6 +491,8 @@ export const unlike = (id, newunLike) => async dispatch => {
     dispatch(FETCH_EXPERIENCE_DETAILS());
   } catch (error) {
     console.error(error);
+  }
+};
 
 export const addReclamation = newReclamation => async dispatch => {
   dispatch({
@@ -558,6 +558,5 @@ export const deleteUser = id => async dispatch => {
       type: DELETE_USER_FAIL,
       payload: error.response.data.message,
     });
-
   }
 };
