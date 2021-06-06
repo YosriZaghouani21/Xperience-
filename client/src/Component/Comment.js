@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {comment} from '../JS/actions';
+import {comment, deleteComment} from '../JS/actions';
 import {useDispatch, useSelector} from 'react-redux';
-
+var dateFormat = require('dateformat');
+var now = new Date();
 const Comment = () => {
   const experience = useSelector(state => state.experiencesReducers.experience);
+  const comments = useSelector(state => state.experiencesReducers.experience.comments);
   const dispatch = useDispatch();
   const addCom = (id, item) => {
     dispatch(comment(id, {text: item}));
@@ -21,12 +23,20 @@ const Comment = () => {
               console.log(e.target[0].value);
             }}
           >
-            <input
-              type="text"
-              id="typeText"
-              class="form-control col-11 mt-1 ml-5"
-              placeholder="Add a comment"
-            />
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Ajouter votre commentaire"
+                aria-label="Ajouter votre commentaire"
+                aria-describedby="basic-addon2"
+              />
+              <div className="input-group-append">
+                <button className="btn btn-primary" type="submit">
+                  Publier
+                </button>
+              </div>
+            </div>
             <div>
               {experience.comments
                 .filter(
@@ -60,8 +70,15 @@ const Comment = () => {
                             fontSize: 'small',
                           }}
                         >
-                          {/* {dateFormat(comment.date, 'mediumDate')}{' '}
-                      {dateFormat(comment.date, 'shortTime')} */}
+                          {dateFormat(comment.date, 'mediumDate')}{' '}
+                          {dateFormat(comment.date, 'shortTime')}
+                          <i
+                            class="fas fa-trash-alt"
+                            style={{marginLeft: '170px'}}
+                            onClick={() => {
+                              dispatch(deleteComment(comments._id));
+                            }}
+                          ></i>
                         </p>
                       </div>
                     </div>

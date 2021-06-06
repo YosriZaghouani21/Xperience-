@@ -14,7 +14,7 @@ const Likes = () => {
   return (
     <div>
       <h1>Likes</h1>
-      <button
+      {/* <button
         className="bg-transparent border-0"
         onClick={() => {
           setLikeState(!likeState);
@@ -22,8 +22,8 @@ const Likes = () => {
         }}
       >
         {like ? <i className="fas fa-heart text-danger" /> : <i className="far fa-heart" />}
-      </button>
-      {/* <i
+      </button> */}
+      <i
         className="material-icons"
         onClick={() => {
           addLike(experience._id);
@@ -34,11 +34,11 @@ const Likes = () => {
       <i
         className="material-icons"
         onClick={() => {
-          addunLike();
+          addunLike(experience._id);
         }}
-      > */}
-      {/* thumb_down
-      </i> */}
+      >
+        thumb_down
+      </i>
     </div>
   );
 };

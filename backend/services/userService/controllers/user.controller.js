@@ -241,6 +241,7 @@ exports.comment = async (req, res) => {
 exports.like = async (req, res) => {
   const likeId = req.params.id;
   const likeMod = {postedBy: req.user._id};
+
   try {
     const like = await Experience.findByIdAndUpdate(
       likeId,
