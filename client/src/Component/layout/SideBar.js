@@ -25,17 +25,11 @@ import {logout} from '../../JS/actions';
 
 // reactstrap components
 import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
   Collapse,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  FormGroup,
   Form,
   Input,
   InputGroupAddon,
@@ -47,8 +41,6 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Progress,
-  Table,
   Container,
   Row,
   Col,
@@ -111,6 +103,12 @@ const SideBar = props => {
       expand="md"
       id="sidenav-main"
     >
+      <NavbarBrand>
+        <img
+          src={require('../../Assets/img/brand/argon-react.png').default}
+          className="navbar-brand-img"
+        />
+      </NavbarBrand>
       <Container fluid>
         {/* Toggler */}
         <button className="navbar-toggler" type="button" onClick={toggleCollapse}>
@@ -223,14 +221,31 @@ const SideBar = props => {
           {/* Navigation */}
           <Nav navbar>{createLinks(routes)}</Nav>
           {/* Divider */}
-          <hr className="my-3" />
+
           {/* Heading */}
           {/* Navigation */}
+
           <Nav className="mb-md-3" navbar>
             <NavItem>
               <NavLink to="/profile" tag={Link}>
                 <i className="ni ni-single-02" />
                 <span>Mon profile</span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/users" tag={Link}>
+                <i className="fas fa-users" /> <span>Les utilisateurs</span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/experiences" tag={Link}>
+                <i className="fas fa-ellipsis-v" /> <span>Les expériences</span>
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/reclamations" tag={Link}>
+                <i className="fas fa-exclamation" />
+                <span>Les réclamations</span>
               </NavLink>
             </NavItem>
             <NavItem>

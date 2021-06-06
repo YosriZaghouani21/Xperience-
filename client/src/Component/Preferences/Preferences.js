@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {getProfile, seePreferences, updateProfile} from '../../JS/actions';
 import {Redirect} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+import AlertInfo from '../layout/AlertInfo';
 
 // reactstrap components
 import {Container, Row, Button} from 'reactstrap';
@@ -17,6 +18,7 @@ const Preferences = () => {
   const [tselected, setTselected] = useState([]);
   const [dselected, setDselected] = useState([]);
   const [pselected, setPselected] = useState([]);
+  const [showAlert, setShowAlert] = useState(false);
 
   const user = useSelector(state => state.userReducer.user);
   const loading = useSelector(state => state.userReducer.loading);
@@ -62,6 +64,7 @@ const Preferences = () => {
         </b>
         <hr />
         <Row>
+          {showAlert ? <AlertInfo content="Vos préférences ont été mis à jour" /> : <></>}
           <div className="col">
             <Themes
               user={user}
@@ -84,6 +87,7 @@ const Preferences = () => {
                   {phobies: [...pselected]},
                 ];
                 dispatch(updateProfile(user._id, {...user}));
+                setShowAlert(true);
               }}
             >
               Ajouter mes préferences

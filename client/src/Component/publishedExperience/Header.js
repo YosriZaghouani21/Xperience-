@@ -1,10 +1,23 @@
 import React from 'react';
-import {Col, Row} from 'reactstrap';
+import {Link} from 'react-router-dom';
+import {Button, Col, Row} from 'reactstrap';
 
 const Header = () => {
   return (
     <>
-      <Row className="col-xl-12">
+      <p className="text-center justify-content-center row col-xl-12 bold">
+        <Link className="col-xl-2 text-info">
+          <Button style={{boxShadow: 'none'}} color="info">
+            <u>Vivre une expérience</u>
+          </Button>
+        </Link>
+        <Link className="col-xl-2 text-info" to="/creator">
+          <Button style={{boxShadow: 'none'}} color="info">
+            Créer une expérience
+          </Button>
+        </Link>
+      </p>
+      <Row className="col-xl-12 mt-5">
         <Col xl="3">
           <img
             alt="..."

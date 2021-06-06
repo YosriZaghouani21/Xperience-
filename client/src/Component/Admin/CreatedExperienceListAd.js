@@ -65,8 +65,6 @@ const CreatedExperienceListAd = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Date</th>
-
                     <th scope="col">Titre</th>
                     <th scope="col">Type</th>
                     <th scope="col">Activité</th>

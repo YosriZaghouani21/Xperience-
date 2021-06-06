@@ -81,15 +81,25 @@ const AuthNavbarExperience = () => {
                         <i className="ni ni-settings-gear-65" />
                         <span>Gérer les expériences</span>
                       </DropdownItem>
+                      <DropdownItem to="/reservation" tag={Link}>
+                        <i className="fas fa-shopping-cart" />
+                        <span>Mes réservations</span>
+                      </DropdownItem>
+
                       <DropdownItem to="/" tag={Link}>
                         <i className="ni ni-calendar-grid-58" />
                         <span>Activité</span>
+                      </DropdownItem>
+                      <DropdownItem tag={Link} onClick={() => {}} to="/reclamation">
+                        <i className="fas fa-exclamation" />
+                        <span>Réclamation</span>
                       </DropdownItem>
                       <DropdownItem to="/" tag={Link}>
                         <i className="ni ni-support-16" />
                         <span>Aide</span>
                       </DropdownItem>
                       <DropdownItem divider />
+
                       <DropdownItem
                         tag={Link}
                         onClick={e => {
@@ -99,7 +109,7 @@ const AuthNavbarExperience = () => {
                         to="/login"
                       >
                         <i className="ni ni-user-run" />
-                        <span>Logout</span>
+                        <span>Se déconnecter</span>
                       </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>

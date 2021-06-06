@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import addUser from '../JS/actions/index';
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
@@ -23,7 +23,7 @@ import Loader from './layout/Loader';
 import {useForm} from 'react-hook-form';
 import Footer from './layout/Footer';
 
-const Signup = () => {
+const Signup = props => {
   const loading = useSelector(state => state.userReducer.loading);
   const error = useSelector(state => state.userReducer.errors);
 
@@ -40,8 +40,10 @@ const Signup = () => {
         email,
         password,
         phoneNumber,
+        myPreferences: [],
       })
     );
+    props.history.push('/login');
   };
   return loading ? (
     <Loader />
@@ -107,7 +109,7 @@ const Signup = () => {
                       <>
                         <span className="mr-2 text-sm" style={{color: '#dd3a4a'}}>
                           {errors.email.message}
-                        </span>{' '}
+                        </span>
                         <br />
                       </>
                     )}

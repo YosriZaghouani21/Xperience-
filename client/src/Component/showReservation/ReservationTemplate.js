@@ -20,7 +20,7 @@ const ReservationTemplate = ({experience, session, reservation}) => {
           </Row>
           <br />
           <small>
-            La session : {new Date(session.sessionDate).toLocaleDateString('fr-EG', options)}{' '}
+            La session : {new Date(session.sessionDate).toLocaleDateString('fr-EG', options)}
           </small>
 
           <br />

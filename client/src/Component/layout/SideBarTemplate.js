@@ -4,11 +4,23 @@ import {NavLink as NavLinkRRD, Link} from 'react-router-dom';
 import {PropTypes} from 'prop-types';
 
 // reactstrap components
-import {Collapse, Navbar, NavItem, NavLink, Nav, Container, Row, Col} from 'reactstrap';
+import {
+  Collapse,
+  Navbar,
+  NavItem,
+  NavLink,
+  Nav,
+  Container,
+  Row,
+  Col,
+  NavbarBrand,
+} from 'reactstrap';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../JS/actions';
 
 const SideBarTemplate = props => {
+  const dispatch = useDispatch();
   const [collapseOpen, setCollapseOpen] = useState();
-
   // toggles collapse between opened and closed (true/false)
   const toggleCollapse = () => {
     setCollapseOpen(data => !data);
@@ -55,8 +67,13 @@ const SideBarTemplate = props => {
       className="navbar-vertical fixed-left navbar-light bg-white"
       expand="md"
       id="sidenav-main"
-      style={{marginTop: '4.7%'}}
     >
+      <NavbarBrand>
+        <img
+          src={require('../../Assets/img/brand/argon-react.png').default}
+          className="navbar-brand-img"
+        />
+      </NavbarBrand>
       <Container fluid>
         {/* Toggler */}
         <button className="navbar-toggler" type="button" onClick={toggleCollapse}>
@@ -82,26 +99,68 @@ const SideBarTemplate = props => {
           {/* Heading */}
 
           {/* Navigation */}
+
           <Nav className="mb-md-3" navbar>
+            <NavItem>
+              <Link to="/profile">
+                <NavLink>
+                  <i className="ni ni-single-02" />
+                  <span>Mon profile</span>
+                </NavLink>
+              </Link>
+            </NavItem>
             <NavItem>
               <Link to="/experiences">
                 <NavLink>
-                  <i className="ni ni-spaceship text-success" />
-                  Mes expériences
+                  <i className="ni ni-settings-gear-65" />
+                  <span>Gérer les expériences</span>
                 </NavLink>
               </Link>
             </NavItem>
             <NavItem>
               <Link to="/reservation">
                 <NavLink>
-                  <i className="fas fa-money-check text-danger" /> Mes réservations
+                  <i className="fas fa-shopping-cart" />
+                  <span>Mes réservations</span>
                 </NavLink>
               </Link>
             </NavItem>
             <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
-                <i className="fas fa-balance-scale text-info" /> Mon calendrier
-              </NavLink>
+              <Link to="/historique">
+                <NavLink>
+                  <i className="fas fa-archive" /> <span>Historique</span>
+                </NavLink>
+              </Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/reclamation">
+                <NavLink>
+                  <i className="fas fa-exclamation" />
+                  <span>Réclamation</span>
+                </NavLink>
+              </Link>
+            </NavItem>
+            <NavItem>
+              <Link to="/aide">
+                <NavLink>
+                  <i className="ni ni-support-16" />
+                  <span>Aide</span>
+                </NavLink>
+              </Link>
+            </NavItem>
+            <NavItem>
+              <Link
+                to="/login"
+                onClick={e => {
+                  e.preventDefault();
+                  dispatch(logout());
+                }}
+              >
+                <NavLink>
+                  <i className="ni ni-user-run" />
+                  <span>Logout</span>
+                </NavLink>
+              </Link>
             </NavItem>
           </Nav>
         </Collapse>

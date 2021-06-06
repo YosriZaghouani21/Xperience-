@@ -65,7 +65,7 @@ const AuthNavbar = () => {
                         <span className="  rounded-circle">
                           <h2>
                             <i className="ni ni-circle-08" />
-                          </h2>{' '}
+                          </h2>
                         </span>
                         <Media className="ml-2 d-none d-lg-block">
                           <span className="mb-0 text-sm font-weight-bold">
@@ -83,9 +83,17 @@ const AuthNavbar = () => {
                         <i className="ni ni-settings-gear-65" />
                         <span>Gérer les expériences</span>
                       </DropdownItem>
+                      <DropdownItem to="/reservation" tag={Link}>
+                        <i className="fas fa-shopping-cart" />
+                        <span>Mes réservations</span>
+                      </DropdownItem>
                       <DropdownItem to="/" tag={Link}>
                         <i className="ni ni-calendar-grid-58" />
                         <span>Activité</span>
+                      </DropdownItem>
+                      <DropdownItem tag={Link} onClick={() => {}} to="/reclamation">
+                        <i className="fas fa-exclamation" />
+                        <span>Réclamation</span>
                       </DropdownItem>
                       <DropdownItem to="/" tag={Link}>
                         <i className="ni ni-support-16" />

@@ -26,6 +26,9 @@ import {
   FETCH_USER_DETAILS_FAIL,
   ADD_IMAGE_TO_PROFILE,
   ON_SUCCESS_BUY_USER,
+  DELETE_USER,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAIL,
 } from '../constants/action-types';
 import {
   FETCH_ALL_EXPERIENCES,
@@ -61,6 +64,17 @@ import {
   DELETE_COMMENT_SUCCESS,
   DELETE_COMMENT_FAIL,
 } from '../constants/experienceConstants';
+import {
+  FETCH_ALL_RECLAMATIONS,
+  FETCH_ALL_RECLAMATIONS_SUCCESS,
+  FETCH_ALL_RECLAMATIONS_FAIL,
+  FETCH_RECLAMATION_DETAILS,
+  FETCH_RECLAMATION_DETAILS_SUCCESS,
+  FETCH_RECLAMATION_DETAILS_FAIL,
+  ADD_RECLAMATION,
+  ADD_RECLAMATION_SUCCESS,
+  ADD_RECLAMATION_FAIL,
+} from '../constants/reclamationConstants';
 
 const addUser = newUser => async dispatch => {
   dispatch({
@@ -387,7 +401,11 @@ export function onSuccessBuy(data) {
   };
 }
 
+
 //Payment with flouci
+
+/////////////////Payment with flouci////////////////////
+
 export const handle_data = async () => {
   const app_secret = 'cc523472-6ec2-454c-a6c1-9e2e8e608ddb';
   const app_public = 'f6b5d0a5-e559-4acb-bcbb-a9e6ec9d788d';
@@ -398,6 +416,7 @@ export const handle_data = async () => {
     app_public,
   });
 };
+
 
 //Add a comment
 export const comment = (id, newComment) => async dispatch => {
@@ -474,5 +493,71 @@ export const unlike = (id, newunLike) => async dispatch => {
     dispatch(FETCH_EXPERIENCE_DETAILS());
   } catch (error) {
     console.error(error);
+
+export const addReclamation = newReclamation => async dispatch => {
+  dispatch({
+    type: ADD_RECLAMATION,
+  });
+  try {
+    const addRes = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/reclamation`,
+      newReclamation
+    );
+    dispatch({
+      type: ADD_RECLAMATION_SUCCESS,
+      payload: addRes.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ADD_RECLAMATION_FAIL,
+      payload: error,
+    });
+  }
+};
+export const getReclamations = () => async dispatch => {
+  try {
+    dispatch({type: FETCH_ALL_RECLAMATIONS});
+    const {data} = await axios.get(`${process.env.REACT_APP_BASE_URL}/reclamation`);
+    dispatch({
+      type: FETCH_ALL_RECLAMATIONS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_ALL_RECLAMATIONS_FAIL,
+      payload: error.response.data,
+    });
+  }
+};
+export const getReclamationDetails = id => async dispatch => {
+  dispatch({type: FETCH_RECLAMATION_DETAILS});
+  try {
+    const {data} = await axios.get(`${process.env.REACT_APP_BASE_URL}/reclamation/${id}`);
+    dispatch({
+      type: FETCH_RECLAMATION_DETAILS_SUCCESS,
+      payload: data.reclamation,
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_RECLAMATION_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+//delete user
+export const deleteUser = id => async dispatch => {
+  dispatch({type: DELETE_USER});
+  try {
+    const {data} = await axios.delete(`${process.env.REACT_APP_BASE_URL}/user/delete/${id}`);
+    dispatch({
+      type: DELETE_USER_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_USER_FAIL,
+      payload: error.response.data.message,
+    });
+
   }
 };

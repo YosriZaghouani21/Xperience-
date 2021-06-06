@@ -26,13 +26,11 @@ const ExperiencesList = () => {
   return localStorage.getItem('token') ? (
     isLoading && loading ? (
       <>
-        <AuthNavbarExperience />
         <SideBarTemplate />
         <Loader />
       </>
     ) : user && experiences ? (
       <>
-        <AuthNavbarExperience />
         <SideBarTemplate />
         <div className="main-content mt-4">
           <Container fluid>
@@ -98,7 +96,7 @@ const ExperiencesList = () => {
                       name="refusée"
                     />
                     <label className="custom-control-label" htmlFor="refused">
-                      <small>refusée</small>{' '}
+                      <small>refusée</small>
                     </label>
                   </div>
                 </Col>

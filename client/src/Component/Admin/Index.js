@@ -8,7 +8,7 @@ import {Redirect} from 'react-router';
 import {Button, Card, CardHeader, Table, Container, Row, Col} from 'reactstrap';
 import SideBar from '../layout/SideBar';
 import User from '../User';
-import StatusCheckbox from '../layout/StatusCheckbox';
+import ExperienceTab from './ExperienceTab';
 
 // core components
 
@@ -42,7 +42,7 @@ const Index = props => {
                 setShowUsers(false);
               }}
             >
-              Les expériences{' '}
+              Les expériences
             </Button>
             <Button
               className="btn-danger p-4"
@@ -50,7 +50,7 @@ const Index = props => {
                 setShowUsers(true);
               }}
             >
-              Les utilisateurs{' '}
+              Les utilisateurs
             </Button>
             {showUsers ? (
               <Row className="mt-4">
@@ -78,48 +78,127 @@ const Index = props => {
               </Row>
             ) : (
               <Row className="mt-5 mb-5">
-                <StatusCheckbox />
                 <Col className="mb-5 mb-xl-0" xl="12">
-                  <Card className="shadow">
-                    <CardHeader className="border-0">
-                      <Row className="align-items-center">
-                        <div className="col">
-                          <h3 className="mb-0">Les expériences</h3>
-                        </div>
-                        <div className="col text-right">
-                          <Button
-                            color="primary"
-                            href="#pablo"
-                            onClick={e => e.preventDefault()}
-                            size="sm"
-                          >
-                            See all
-                          </Button>
-                        </div>
-                      </Row>
-                    </CardHeader>
-                    <Table className="align-items-center table-flush" responsive>
+                  <h1 className="mb-3">Les expériences</h1>
+                </Col>
+                <ExperienceTab
+                  content1={
+                    <Table>
                       <thead className="thead-light">
                         <tr>
-                          <th scope="col">Date</th>
-
                           <th scope="col">Titre</th>
                           <th scope="col">état</th>
 
                           <th scope="col">Type</th>
-                          <th scope="col">Activité</th>
                           <th scope="col"></th>
                         </tr>
                       </thead>
                       <tbody>
                         {experiences &&
-                          experiences.map(experience => (
-                            <CreatedExperienceAd key={experience._id} experience={experience} />
-                          ))}
+                          experiences.map(experience =>
+                            experience.status === 'created' ? (
+                              <CreatedExperienceAd key={experience._id} experience={experience} />
+                            ) : (
+                              <></>
+                            )
+                          )}
                       </tbody>
                     </Table>
-                  </Card>
-                </Col>
+                  }
+                  content2={
+                    <Table>
+                      <thead className="thead-light">
+                        <tr>
+                          <th scope="col">Titre</th>
+                          <th scope="col">état</th>
+
+                          <th scope="col">Type</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {experiences &&
+                          experiences.map(experience =>
+                            experience.status === 'beingValidated' ||
+                            experience.status === 'contentValidated' ? (
+                              <CreatedExperienceAd key={experience._id} experience={experience} />
+                            ) : (
+                              <></>
+                            )
+                          )}
+                      </tbody>
+                    </Table>
+                  }
+                  content3={
+                    <Table>
+                      <thead className="thead-light">
+                        <tr>
+                          <th scope="col">Titre</th>
+                          <th scope="col">état</th>
+
+                          <th scope="col">Type</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {experiences &&
+                          experiences.map(experience =>
+                            experience.status === 'accepted' ? (
+                              <CreatedExperienceAd key={experience._id} experience={experience} />
+                            ) : (
+                              <></>
+                            )
+                          )}
+                      </tbody>
+                    </Table>
+                  }
+                  content4={
+                    <Table>
+                      <thead className="thead-light">
+                        <tr>
+                          <th scope="col">Titre</th>
+                          <th scope="col">état</th>
+
+                          <th scope="col">Type</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {experiences &&
+                          experiences.map(experience =>
+                            experience.status === 'refused' ? (
+                              <CreatedExperienceAd key={experience._id} experience={experience} />
+                            ) : (
+                              <></>
+                            )
+                          )}
+                      </tbody>
+                    </Table>
+                  }
+                  content5={
+                    <Table>
+                      <thead className="thead-light">
+                        <tr>
+                          <th scope="col">Titre</th>
+                          <th scope="col">état</th>
+
+                          <th scope="col">Type</th>
+                          <th scope="col"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {experiences &&
+                          experiences.map(experience =>
+                            experience.status === 'published' ? (
+                              <CreatedExperienceAd key={experience._id} experience={experience} />
+                            ) : (
+                              <></>
+                            )
+                          )}
+                      </tbody>
+                    </Table>
+                  }
+                />
               </Row>
             )}
           </Container>

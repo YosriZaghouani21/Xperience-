@@ -93,20 +93,20 @@ const Details = ({experience}) => {
                 <Col lg="6" md="6">
                   <p>
                     <i className="fas fa-bolt" style={{paddingRight: '3%'}} />
-                    niveau {experience.difficulty}{' '}
+                    niveau {experience.difficulty}
                   </p>
                 </Col>
                 {experience.phobia.length !== 0 ? (
                   <Col lg="6" md="6">
                     <p>
                       <i className="fas fa-users-slash" style={{paddingRight: '3%'}} />
-                      {experience.phobia}{' '}
+                      {experience.phobia}
                     </p>
                   </Col>
                 ) : (
                   <></>
                 )}
-              </Row>{' '}
+              </Row>
             </CardHeader>
           </Card>
           <Card className="bg-white border-0">
@@ -116,7 +116,7 @@ const Details = ({experience}) => {
                 {experience.themes.map(el => (
                   <span>{el} </span>
                 ))}
-              </small>{' '}
+              </small>
               <br />
               <p>{experience.activity}</p>
             </CardBody>

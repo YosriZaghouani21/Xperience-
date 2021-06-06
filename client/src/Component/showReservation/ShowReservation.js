@@ -4,7 +4,6 @@ import {getExperiences, getProfile} from '../../JS/actions/index';
 import Loader from '../layout/Loader';
 import {Container} from 'reactstrap';
 import SideBarTemplate from '../layout/SideBarTemplate';
-import AuthNavbarExperience from '../layout/AuthNavbarExperience';
 import ReservationTemplate from './ReservationTemplate';
 const ShowReservation = () => {
   const dispatch = useDispatch();
@@ -23,13 +22,11 @@ const ShowReservation = () => {
 
   return isLoading && loading ? (
     <>
-      <AuthNavbarExperience />
       <SideBarTemplate />
       <Loader />
     </>
   ) : user ? (
     <>
-      <AuthNavbarExperience />
       <SideBarTemplate />
       <div className="main-content mt-4">
         <Container fluid>

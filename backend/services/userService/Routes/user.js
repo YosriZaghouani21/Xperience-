@@ -11,7 +11,10 @@ const {
   getSingleUser,
 
   Paymentvalidation,
+
   comment,
+
+  deleteUser,
 } = require('../controllers/user.controller');
 
 const {registerRules, validator} = require('../middleware/validator');
@@ -28,6 +31,7 @@ Router.get('/current', isAuth(), (req, res) => {
 });
 
 Router.put('/profile/:id', updateUser);
+Router.delete('/delete/:id', deleteUser);
 
 Router.get('/users', allUsers);
 Router.get('/preferences', seePreferences);
