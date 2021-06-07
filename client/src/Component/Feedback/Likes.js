@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {like, unlike} from '../JS/actions';
+import {like, unlike} from '../../JS/actions';
 import {useDispatch, useSelector} from 'react-redux';
 const Likes = () => {
   const experience = useSelector(state => state.experiencesReducers.experience);

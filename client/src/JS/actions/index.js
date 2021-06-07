@@ -494,6 +494,26 @@ export const unlike = (id, newunLike) => async dispatch => {
   }
 };
 
+//Add a rate
+export const rating = (id, newRating) => async dispatch => {
+  const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  try {
+    const addCom = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/user/rating/${id}`,
+      newRating,
+      config
+    );
+    dispatch(FETCH_EXPERIENCE_DETAILS());
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const addReclamation = newReclamation => async dispatch => {
   dispatch({
     type: ADD_RECLAMATION,

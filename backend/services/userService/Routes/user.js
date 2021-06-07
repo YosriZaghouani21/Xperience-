@@ -9,12 +9,11 @@ const {
   addPreferences,
   addMyPreferences,
   getSingleUser,
-
   Paymentvalidation,
-
   comment,
-
+  like,
   deleteUser,
+  rating,
 } = require('../controllers/user.controller');
 
 const {registerRules, validator} = require('../middleware/validator');
@@ -40,6 +39,9 @@ Router.put('/mypreferences/:id', addMyPreferences);
 Router.get('/user/:id', getSingleUser);
 
 Router.post('/comment/:id', isAuth(), comment);
+
+Router.put('/like/:id', isAuth(), like);
+Router.post('/rating/:id', isAuth(), rating);
 Router.post('/successBuy', Paymentvalidation);
 
 module.exports = Router;

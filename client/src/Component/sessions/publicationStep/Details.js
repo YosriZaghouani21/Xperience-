@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Card, CardHeader, CardBody, Col, Media, Row} from 'reactstrap';
-import Comment from '../../Comment';
+import Comment from '../../../Component/Feedback/Comment';
 
 const Details = ({experience}) => {
   return (

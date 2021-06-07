@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {comment, deleteComment} from '../JS/actions';
+import {comment, deleteComment} from '../../JS/actions';
 import {useDispatch, useSelector} from 'react-redux';
 var dateFormat = require('dateformat');
 var now = new Date();

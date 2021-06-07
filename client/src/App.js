@@ -25,7 +25,7 @@ import UserDetails from './Component/Admin/UserDetails';
 
 import CreatorHome from './Component/CreatorHome';
 import ImagesStep from './Component/createdExperience/ImagesStep';
-import Comment from './Component/Comment';
+import Comment from '../src/Component/Feedback/Comment';
 
 import ExperienceDetailsAd from './Component/Admin/ExperienceDetailsAd';
 import Form from './Component/Form';
@@ -49,6 +49,7 @@ import Historique from './Component/Historique/Historique';
 import ShowPrint from './Component/Historique/ShowPrint';
 import Reclamations from './Component/Reclamation/Reclamations';
 import Guide from './Component/Guide/Guide';
+import Ratings from './Component/Feedback/Ratings';
 // optional configuration
 const options = {
   // you can also just use 'bottom center'
@@ -96,6 +97,7 @@ function App() {
           <Route path="/inperson" component={InPersonExperiences} />
           <Route path="/reclamation" component={Reclamation} />
           <Route path="/reclamations" component={Reclamations} />
+          <Route path="/rating" component={Ratings} />
 
           {/* <Route path="/paypal/:id/:session" component={props => <Paypal props={props} />} /> */}
           <Route path="/payment/:id/:session" component={Payment} />

@@ -274,3 +274,19 @@ exports.unlike = async (req, res) => {
     console.error(error);
   }
 };
+
+exports.rating = async (req, res) => {
+  const ratingId = req.params.id;
+  const ratingMod = {Number: req.body, postedBy: req.user._id};
+
+  try {
+    const rating = await Experience.findByIdAndUpdate(
+      ratingId,
+      {$push: {ratings: ratingMod}},
+      {new: true, useFindAndModify: false}
+    ).populate('ratings.postedBy', 'name');
+    res.send(rating);
+  } catch (error) {
+    console.error(error);
+  }
+};

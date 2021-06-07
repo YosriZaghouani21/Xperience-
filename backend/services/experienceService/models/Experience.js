@@ -104,6 +104,13 @@ const experienceSchema = new Schema(
         postedBy: {type: ObjectId, ref: 'user'},
       },
     ],
+
+    ratings: [
+      {
+        newRating: Number,
+        postedBy: {type: ObjectId, ref: 'user'},
+      },
+    ],
   },
   {
     timestamps: true,
