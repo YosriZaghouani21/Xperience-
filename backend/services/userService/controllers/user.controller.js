@@ -111,7 +111,6 @@ exports.authorizeRoles = (...roles) => {
     }
   };
 };
-
 // Get all users
 exports.allUsers = async (req, res) => {
   try {
@@ -124,7 +123,6 @@ exports.allUsers = async (req, res) => {
     return res.status(500).json({msg: err.message});
   }
 };
-
 exports.seePreferences = async (req, res) => {
   try {
     const allPreferences = await Preferences.find();
@@ -133,7 +131,6 @@ exports.seePreferences = async (req, res) => {
     res.status(500).json({errors: error.message});
   }
 };
-
 exports.addPreferences = async (req, res) => {
   const {themes, difficulties, phobies} = req.body;
   try {
