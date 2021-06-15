@@ -72,13 +72,14 @@ const Comment = () => {
                         >
                           {dateFormat(comment.date, 'mediumDate')}{' '}
                           {dateFormat(comment.date, 'shortTime')}
-                          <i
-                            class="fas fa-trash-alt"
-                            style={{marginLeft: '170px'}}
+                          <button
                             onClick={() => {
-                              dispatch(deleteComment(comments._id));
+                              console.log(comment);
+                              dispatch(deleteComment(comment._id));
                             }}
-                          ></i>
+                          >
+                            DELETE
+                          </button>
                         </p>
                       </div>
                     </div>

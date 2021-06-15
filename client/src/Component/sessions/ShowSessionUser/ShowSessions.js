@@ -10,18 +10,11 @@ import Interest from './Interest';
 import Disinterest from './Disinterest';
 import SessionsOperationsUser from './SessionsOperationsUser';
 
-const ShowSessions = ({experience}) => {
+const ShowSessions = ({experience, user}) => {
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
   const dispatch = useDispatch();
-  const user = useSelector(state => state.userReducer.user);
-  const loading = useSelector(state => state.userReducer.loading);
 
-  useEffect(() => {
-    dispatch(getProfile());
-  }, [dispatch]);
-  return loading ? (
-    <Loader />
-  ) : user ? (
+  return (
     <>
       <Card className="bg-white shadow border mt-6">
         <CardHeader className="bg-white text-center">
@@ -43,8 +36,6 @@ const ShowSessions = ({experience}) => {
         </CardBody>
       </Card>
     </>
-  ) : (
-    <></>
   );
 };
 

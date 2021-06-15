@@ -244,6 +244,15 @@ exports.comment = async (req, res) => {
   }
 };
 
+exports.deleteComment = async (req, res) => {
+  try {
+    await comment.findByIdAndDelete(req.params.id);
+    res.json({msg: 'commentaire supprimé avec succès'});
+  } catch (err) {
+    return res.status(500).json({msg: err.message});
+  }
+};
+
 exports.like = async (req, res) => {
   const likeId = req.params.id;
   const likeMod = {postedBy: req.user._id};
@@ -277,7 +286,7 @@ exports.unlike = async (req, res) => {
 
 exports.rating = async (req, res) => {
   const ratingId = req.params.id;
-  const ratingMod = {Number: req.body, postedBy: req.user._id};
+  const ratingMod = {newRating: req.body.newRating, postedBy: req.user._id};
 
   try {
     const rating = await Experience.findByIdAndUpdate(

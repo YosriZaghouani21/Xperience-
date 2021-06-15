@@ -41,7 +41,7 @@ Router.get('/user/:id', getSingleUser);
 Router.post('/comment/:id', isAuth(), comment);
 
 Router.put('/like/:id', isAuth(), like);
-Router.post('/rating/:id', isAuth(), rating);
+Router.put('/rating/:id', isAuth(), rating);
 Router.post('/successBuy', Paymentvalidation);
 
 module.exports = Router;

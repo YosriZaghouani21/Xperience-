@@ -503,7 +503,7 @@ export const rating = (id, newRating) => async dispatch => {
     },
   };
   try {
-    const addCom = await axios.post(
+    const addRate = await axios.put(
       `${process.env.REACT_APP_BASE_URL}/user/rating/${id}`,
       newRating,
       config

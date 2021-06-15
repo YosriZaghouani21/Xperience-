@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {getExperienceDetails, rating} from '../../JS/actions';
+import {getExperienceDetails, getProfile, rating} from '../../JS/actions';
 import {Col, Row} from 'reactstrap';
 import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../layout/Loader';
@@ -18,15 +18,20 @@ const PublicationDetails = ({
 }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.experiencesReducers.isLoading);
+  const loading = useSelector(state => state.userReducer.loading);
+  const user = useSelector(state => state.userReducer.user);
   const experience = useSelector(state => state.experiencesReducers.experience);
 
   useEffect(() => {
     dispatch(getExperienceDetails(id));
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
 
-  return isLoading ? (
+  return isLoading && loading ? (
     <Loader />
-  ) : experience ? (
+  ) : experience && user ? (
     <>
       <AuthNavbar />
       <Row className="col-xl-12" style={{justifyContent: 'center'}}>
@@ -37,7 +42,7 @@ const PublicationDetails = ({
           <Details experience={experience} />
         </Col>
         <Col xl="3">
-          <ShowSessions experience={experience} />
+          <ShowSessions experience={experience} user={user} />
         </Col>
         <h1>Comment</h1>
         <Comment experience={experience} />

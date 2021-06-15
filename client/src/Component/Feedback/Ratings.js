@@ -1,15 +1,24 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import ReactStars from 'react-rating-stars-component';
-import {rating} from '../../JS/actions';
+import {rating, updateExperience} from '../../JS/actions';
 
-const Ratings = () => {
+const Ratings = experience => {
   const dispatch = useDispatch();
-  const experience = useSelector(state => state.experiencesReducers.experience);
+  const user = useSelector(state => state.userReducer.user);
 
   const addRate = newRating => {
-    dispatch(rating(experience._id, newRating));
-    console.log(newRating);
+    const exp = experience.experience;
+    var ratings = [...exp.ratings];
+    console.log(exp);
+    console.log('ratings before ', ratings);
+    var arr = ratings.filter(r => r.postedBy !== user._id);
+    console.log('arr :', arr);
+    ratings = [...arr];
+    ratings.push({newRating, postedBy: user._id});
+    console.log(ratings);
+
+    // dispatch(updateExperience(experience.experience._id, {...experience.experience}));
   };
   return (
     <div>

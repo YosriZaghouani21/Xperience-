@@ -95,6 +95,7 @@ const experienceSchema = new Schema(
       {
         text: String,
         postedBy: {type: ObjectId, ref: 'user'},
+        date: {type: Date, default: Date},
       },
     ],
 
