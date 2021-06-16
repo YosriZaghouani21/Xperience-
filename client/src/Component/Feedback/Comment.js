@@ -1,28 +1,27 @@
 import React, {useState} from 'react';
-import {comment, deleteComment} from '../../JS/actions';
+import {comment, deleteComment, getExperienceDetails} from '../../JS/actions';
 import {useDispatch, useSelector} from 'react-redux';
+// import {set} from 'mongoose';
 var dateFormat = require('dateformat');
 var now = new Date();
 const Comment = () => {
+  const [newComment, setNewComment] = useState('');
   const experience = useSelector(state => state.experiencesReducers.experience);
-  const comments = useSelector(state => state.experiencesReducers.experience.comments);
+  const user = useSelector(state => state.userReducer.user);
+
+  // const comments = useSelector(state => state.experiencesReducers.experience.comments);
   const dispatch = useDispatch();
-  const addCom = (id, item) => {
-    dispatch(comment(id, {text: item}));
+  const addCom = e => {
+    e.preventDefault();
+    dispatch(comment(experience._id, {text: newComment, postedBy: user._id}));
+    setNewComment('');
   };
 
   return (
     <div>
       <div className="container">
         <div className="row">
-          <form
-            onSubmit={e => {
-              e.preventDefault();
-              addCom(experience._id, e.target[0].value);
-              e.target[0].value = '';
-              console.log(e.target[0].value);
-            }}
-          >
+          <form>
             <div class="input-group mb-3">
               <input
                 type="text"
@@ -30,9 +29,11 @@ const Comment = () => {
                 placeholder="Ajouter votre commentaire"
                 aria-label="Ajouter votre commentaire"
                 aria-describedby="basic-addon2"
+                value={newComment}
+                onChange={e => setNewComment(e.target.value)}
               />
               <div className="input-group-append">
-                <button className="btn btn-primary" type="submit">
+                <button className="btn btn-primary" onClick={addCom}>
                   Publier
                 </button>
               </div>
@@ -73,9 +74,9 @@ const Comment = () => {
                           {dateFormat(comment.date, 'mediumDate')}{' '}
                           {dateFormat(comment.date, 'shortTime')}
                           <button
-                            onClick={() => {
-                              console.log(comment);
-                              dispatch(deleteComment(comment._id));
+                            onClick={e => {
+                              e.preventDefault();
+                              dispatch(deleteComment(experience._id, comment._id));
                             }}
                           >
                             DELETE

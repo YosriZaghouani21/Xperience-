@@ -14,6 +14,7 @@ const {
   like,
   deleteUser,
   rating,
+  deleteComment,
 } = require('../controllers/user.controller');
 
 const {registerRules, validator} = require('../middleware/validator');
@@ -39,6 +40,7 @@ Router.put('/mypreferences/:id', addMyPreferences);
 Router.get('/user/:id', getSingleUser);
 
 Router.post('/comment/:id', isAuth(), comment);
+Router.put('/deletecomment/:experienceId/:commentId', isAuth(), deleteComment);
 
 Router.put('/like/:id', isAuth(), like);
 Router.put('/rating/:id', isAuth(), rating);

@@ -245,9 +245,16 @@ exports.comment = async (req, res) => {
 };
 
 exports.deleteComment = async (req, res) => {
+  const experienceId = req.params.experienceId;
+  console.log('exp', experienceId);
+  const commentId = req.params.commentId;
+  console.log('comment', commentId);
   try {
-    await comment.findByIdAndDelete(req.params.id);
-    res.json({msg: 'commentaire supprimé avec succès'});
+    await Experience.findByIdAndUpdate(experienceId, {
+      $pull: {comments: {_id: commentId}},
+    });
+    const experience = await Experience.findOne({_id: experienceId});
+    res.json({msg: 'commentaire supprimé avec succès', experience});
   } catch (err) {
     return res.status(500).json({msg: err.message});
   }

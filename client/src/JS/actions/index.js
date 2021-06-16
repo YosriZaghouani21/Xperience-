@@ -425,12 +425,8 @@ export const comment = (id, newComment) => async dispatch => {
     },
   };
   try {
-    const addCom = await axios.post(
-      `${process.env.REACT_APP_BASE_URL}/user/comment/${id}`,
-      newComment,
-      config
-    );
-    dispatch(FETCH_EXPERIENCE_DETAILS());
+    await axios.post(`${process.env.REACT_APP_BASE_URL}/user/comment/${id}`, newComment, config);
+    dispatch(getExperienceDetails(id));
   } catch (error) {
     console.error(error);
   }
@@ -438,14 +434,26 @@ export const comment = (id, newComment) => async dispatch => {
 
 //Delete a comment
 
-export const deleteComment = id => async dispatch => {
+export const deleteComment = (experienceId, commentId) => async dispatch => {
+  const token = localStorage.getItem('token');
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
   dispatch({type: DELETE_COMMENT});
+
   try {
-    const {data} = await axios.delete(`${process.env.REACT_APP_BASE_URL}/user/comment/${id}`);
+    const {data} = await axios.put(
+      `${process.env.REACT_APP_BASE_URL}/user/deletecomment/${experienceId}/${commentId}`,
+      {},
+      config
+    );
     dispatch({
       type: DELETE_COMMENT_SUCCESS,
-      payload: data.success,
+      payload: data,
     });
+    dispatch(getExperienceDetails(experienceId));
   } catch (error) {
     dispatch({
       type: DELETE_COMMENT_FAIL,
