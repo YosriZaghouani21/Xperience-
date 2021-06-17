@@ -31,14 +31,6 @@ const Likes = () => {
       >
         thumb_up
       </i>
-      <i
-        className="material-icons"
-        onClick={() => {
-          addunLike(experience._id);
-        }}
-      >
-        thumb_down
-      </i>
     </div>
   );
 };

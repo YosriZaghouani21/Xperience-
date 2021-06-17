@@ -26,7 +26,7 @@ import {
 
 const initialState = {
   experiences: [],
-  experienceDetails: {},
+  experience: {},
   isLoading: false,
 };
 export const experiencesReducers = (state = initialState, {type, payload}) => {

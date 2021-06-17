@@ -55,7 +55,10 @@ const experienceController = {
   getExperiences: async (req, res) => {
     try {
       // console.log(req.query)
-      const features = new APIfeatures(Experiences.find(), req.query)
+      const features = new APIfeatures(
+        Experiences.find().populate('comments.postedBy', 'name'),
+        req.query
+      )
         .filtering()
         .sorting()
         .paginating();
@@ -209,7 +212,10 @@ const experienceController = {
   },
   getSingleExperience: async (req, res) => {
     try {
-      const experience = await Experiences.findById(req.params.id);
+      const experience = await Experiences.findById(req.params.id).populate(
+        'comments.postedBy',
+        'name , photo'
+      );
       res.json({status: 'success', experience});
     } catch (err) {
       return res.status(500).json({msg: err.message});

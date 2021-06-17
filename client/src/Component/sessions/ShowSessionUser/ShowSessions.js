@@ -10,7 +10,8 @@ import Interest from './Interest';
 import Disinterest from './Disinterest';
 import SessionsOperationsUser from './SessionsOperationsUser';
 
-const ShowSessions = ({experience, user}) => {
+const ShowSessions = ({user}) => {
+  const experience = useSelector(state => state.experiencesReducers.experienceDetails);
   const options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
   const dispatch = useDispatch();
 
@@ -21,17 +22,18 @@ const ShowSessions = ({experience, user}) => {
           <b>Les sessions disponibles</b>
         </CardHeader>
         <span className="mt-2 text-center" style={{fontWeight: 'bold'}}>
-          {experience.price} TND <small>Par personne</small>
+          {experience && experience.experience.price} TND <small>Par personne</small>
         </span>
         <CardBody>
           <Card className="bg-white border-0 rounded overflow-auto">
-            {experience.sessions.map((el, index) => (
-              <CardBody className="bg-white border rounded mb-1">
-                <SessionIndex index={index} />
-                <SessionDates el={el} />
-                <SessionsOperationsUser experience={experience} user={user} el={el} />
-              </CardBody>
-            ))}
+            {experience &&
+              experience.sessions.map((el, index) => (
+                <CardBody className="bg-white border rounded mb-1">
+                  <SessionIndex index={index} />
+                  <SessionDates el={el} />
+                  <SessionsOperationsUser experience={experience} user={user} el={el} />
+                </CardBody>
+              ))}
           </Card>
         </CardBody>
       </Card>

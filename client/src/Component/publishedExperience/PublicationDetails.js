@@ -44,10 +44,13 @@ const PublicationDetails = ({
         <Col xl="3">
           <ShowSessions experience={experience} user={user} />
         </Col>
-        <h1>Comment</h1>
-        <Comment experience={experience} />
+        <Col xl="12" style={{justifyContent: 'left'}}>
+          <h1>Les Feedback de cette expérience</h1>
+          <Ratings experience={experience} />
+          <Comment experience={experience} />
+        </Col>
+
         <Likes experience={experience} />
-        <Ratings experience={experience} />
       </Row>
     </>
   ) : (

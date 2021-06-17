@@ -134,7 +134,7 @@ export const getProfile = () => async dispatch => {
   } catch (error) {
     dispatch({
       type: GET_PROFILE_FAIL,
-      payload: error.response.data,
+      // payload: error.response.data,
     });
   }
 };
@@ -264,15 +264,16 @@ export const getExperienceDetails = id => async dispatch => {
   dispatch({type: FETCH_EXPERIENCE_DETAILS});
   try {
     const {data} = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/experience/${id}`);
+    // console.log('data', data.data.experience);
     dispatch({
       type: FETCH_EXPERIENCE_DETAILS_SUCCESS,
-      payload: data.experience,
+      payload: data,
     });
   } catch (error) {
     console.log('🚀 ~ file: experienceActions.js ~ line 38 ~ getExperienceDetails ~ error', error);
     dispatch({
       type: FETCH_EXPERIENCE_DETAILS_FAIL,
-      payload: error.response.data.message,
+      // payload: error.response.data.message,
     });
   }
 };
