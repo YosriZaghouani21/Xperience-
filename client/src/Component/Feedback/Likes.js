@@ -8,9 +8,7 @@ const Likes = () => {
   const addLike = id => {
     dispatch(like(id));
   };
-  const addunLike = id => {
-    dispatch(unlike(id));
-  };
+
   return (
     <div>
       <h1>Likes</h1>

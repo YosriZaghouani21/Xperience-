@@ -427,7 +427,7 @@ export const comment = (id, newComment) => async dispatch => {
   };
   try {
     await axios.post(`${process.env.REACT_APP_BASE_URL}/user/comment/${id}`, newComment, config);
-    dispatch(getExperienceDetails(id));
+    dispatch(FETCH_EXPERIENCE_DETAILS());
   } catch (error) {
     console.error(error);
   }
@@ -483,26 +483,6 @@ export const like = (id, newLike) => async dispatch => {
   }
 };
 
-//Add a unlike
-export const unlike = (id, newunLike) => async dispatch => {
-  const token = localStorage.getItem('token');
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-  try {
-    const addunLike = await axios.put(
-      `${process.env.REACT_APP_BASE_URL}/user/unlike/${id}`,
-      newunLike,
-      config
-    );
-    dispatch(FETCH_EXPERIENCE_DETAILS());
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 //Add a rate
 export const rating = (id, newRating) => async dispatch => {
   const token = localStorage.getItem('token');
@@ -517,7 +497,7 @@ export const rating = (id, newRating) => async dispatch => {
       newRating,
       config
     );
-    dispatch(FETCH_EXPERIENCE_DETAILS());
+    dispatch(getExperienceDetails(id));
   } catch (error) {
     console.error(error);
   }
