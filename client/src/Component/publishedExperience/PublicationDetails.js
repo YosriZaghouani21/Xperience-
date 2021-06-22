@@ -46,7 +46,7 @@ const PublicationDetails = ({
         </Col>
         <Col xl="12" style={{justifyContent: 'left'}}>
           <h1>Les Feedback de cette expérience</h1>
-          <Ratings experience={experience} />
+
           <Comment experience={experience} />
         </Col>
 

@@ -29,6 +29,7 @@ const Details = () => {
                   Expérience {experience && experience.type && experience.type.title} organisée par{' '}
                   {experience && experience.user && experience.user.name}
                 </h3>
+                <Ratings experience={experience} />
               </Col>
               <Col>
                 <Media className="align-items-center">

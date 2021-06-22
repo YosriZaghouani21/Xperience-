@@ -45,7 +45,7 @@ const Ratings = () => {
         exp.ratings.map(el => (el.postedBy == user._id ? setNewEdit(false) : setNewEdit(true)))} */}
 
       <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">La moyenne</Typography>
+        <Typography component="legend">Notes</Typography>
         <Rating name="simple-controlled" value={newRate} onChange={addRate} />
       </Box>
     </div>
