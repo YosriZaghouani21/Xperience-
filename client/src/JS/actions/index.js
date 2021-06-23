@@ -12,7 +12,6 @@ import {
   REGISTER_SUCCESS,
   REGISTER_USER,
   UPDATE_FAIL,
-  UPDATE_SUCCESS,
   UPDATE_USER,
   FETCH_ALL_USERS,
   FETCH_ALL_USERS_SUCCESS,
@@ -389,7 +388,7 @@ export const updateSession = (id, updatedSession) => async dispatch => {
 //PaymentSuccess
 export function onSuccessBuy(data) {
   const request = axios
-    .post(`${process.env.REACT_APP_BASE_URL}/api/successBuy`, data)
+    .post(`${process.env.REACT_APP_BASE_URL}/user/successBuy`, data)
     .then(response => response.data);
 
   return {
@@ -397,7 +396,7 @@ export function onSuccessBuy(data) {
     payload: request,
   };
 }
-/////////////////Payment with flouci////////////////////
+//Payment with flouci//
 export const handle_data = async () => {
   const app_secret = 'cc523472-6ec2-454c-a6c1-9e2e8e608ddb';
   const app_public = 'f6b5d0a5-e559-4acb-bcbb-a9e6ec9d788d';
@@ -474,3 +473,5 @@ export const deleteUser = id => async dispatch => {
     });
   }
 };
+
+

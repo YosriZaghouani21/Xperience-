@@ -188,7 +188,7 @@ exports.Paymentvalidation = (req, res) => {
   const transactionData = {};
 
   // 1.Put brief Payment Information inside User Collection
-  req.body.cartDetail.forEach(item => {
+  req.body.data.forEach(item => {
     history.push({
       dateOfPurchase: Date.now(),
       name: item.title,
@@ -207,7 +207,7 @@ exports.Paymentvalidation = (req, res) => {
   };
 
   transactionData.data = req.body.paymentData;
-  transactionData.product = history;
+  transactionData.prsessionoduct = history;
 
   User.findOneAndUpdate(
     {_id: req.user._id},

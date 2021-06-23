@@ -4,7 +4,6 @@ const paymentSchema = mongoose.Schema(
   {
     user: {
       type: Array,
-
       default: [],
     },
 
@@ -14,7 +13,7 @@ const paymentSchema = mongoose.Schema(
       default: [],
     },
 
-    product: {
+    session: {
       type: Array,
 
       default: [],

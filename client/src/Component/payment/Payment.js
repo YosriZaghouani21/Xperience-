@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getExperienceDetails, getProfile} from '../../JS/actions/index';
+import {getExperienceDetails, getProfile, onSuccessBuy} from '../../JS/actions/index';
 import Loader from '../layout/Loader';
 import AuthNavbarExperience from '../layout/AuthNavbarExperience';
 import Footer from '../layout/Footer';
@@ -49,6 +49,8 @@ const Payment = ({
     }
   }, [experience, user]);
 
+
+
   return isLoading && loading ? (
     <>
       <AuthNavbarExperience />
@@ -68,7 +70,7 @@ const Payment = ({
               <FlouciComponent client={client} />
             </div>
             Ou avec
-            <Paypal experience={experience} id={id} userReservation={userReservation} />
+            <Paypal experience={experience} id={id} userReservation={userReservation}  />
           </CardBody>
         </Card>
       </Col>

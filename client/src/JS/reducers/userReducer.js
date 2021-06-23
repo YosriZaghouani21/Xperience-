@@ -195,11 +195,13 @@ const userReducer = (state = initialState, {type, payload}) => {
     case ON_SUCCESS_BUY_USER:
       return {
         ...state,
+        loading: false,
         user: {
-          ...state.userData,
-          // cart: action.payload.cart,
+          ...state.user,
+         
         },
-        //   cartDetail: action.payload.cartDetail,
+       
+       
       };
     default:
       return state;
